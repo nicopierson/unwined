@@ -10,7 +10,8 @@ body {
 }
 
 input {
-  font-family: 'Poppins', sans-serif;
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-weight: 300; 
 }
 
 
