@@ -1,4 +1,4 @@
-#modal {
+.modal_container {
   position: fixed;
   top: 0;
   right: 0;
@@ -9,7 +9,7 @@
   align-items: center;
 }
 
-#modal-background {
+.modal_background {
   position: fixed;
   top: 0;
   right: 0;
@@ -18,7 +18,9 @@
   background-color: rgba(0, 0, 0, 0.7);
 }
 
-#modal-content {
+.modal_content {
   position: absolute;
   background-color:white;
+  height: 80%;
+  width: 80%;
 }

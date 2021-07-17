@@ -1,6 +1,8 @@
-import React, { useState } from "react";
-import * as sessionActions from "../../store/session";
-import { useDispatch } from "react-redux";
+import React, { useState } from 'react';
+import * as sessionActions from '../../store/session';
+import { useDispatch } from 'react-redux';
+
+import styles from './LoginFormModal.module.css';
 
 function LoginForm() {
   const dispatch = useDispatch();
@@ -20,31 +22,34 @@ function LoginForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <ul>
+    <form onSubmit={handleSubmit} className={styles.form}>
+      <h2 className={styles.form__title}>Sign In</h2>
+      <ul className={styles.form__errors}>
         {errors.map((error, idx) => (
           <li key={idx}>{error}</li>
         ))}
       </ul>
-      <label>
-        Username or Email
+      <div className={styles.form__input_field}>
+        <i className='fa fa-user'></i>
         <input
-          type="text"
+          type='text'
           value={credential}
           onChange={(e) => setCredential(e.target.value)}
           required
+          placeholder='Username or Email'
         />
-      </label>
-      <label>
-        Password
+      </div>
+      <div className={styles.form__input_field}>
+        <i className='fas fa-lock'></i>
         <input
-          type="password"
+          type='password'
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
+          placeholder='Password'
         />
-      </label>
-      <button type="submit">Log In</button>
+      </div>
+      <button type='submit'>Log In</button>
     </form>
   );
 }

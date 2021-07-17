@@ -1,1 +1,16 @@
-/* TODO Add site wide styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  background: linear-gradient(#ffffff, rgb(208, 206, 206));
+}
+
+input {
+  font-family: 'Poppins', sans-serif;
+}
+
+
