@@ -19,8 +19,23 @@
 }
 
 .modal_content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   position: absolute;
   background-color:white;
   height: 80%;
   width: 80%;
+  overflow: hidden;
+}
+
+.modal_content:before {
+  content: '';
+  position: absolute;
+  width: 1500px;
+  height: 1500px;
+  border-radius: 50%;
+  background: linear-gradient(-50deg, #720325, #980531);
+  top: 10%;
+  right: 60%;
+  transform:translateY(-45%);
 }

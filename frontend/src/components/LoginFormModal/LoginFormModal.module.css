@@ -1,4 +1,5 @@
 .form {
+  grid-column: 2 / 2;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -117,7 +118,6 @@
   outline: none;
   border-radius: 40px;
   cursor: pointer;
-
   background-color: #83677B;
   color: #fff;
   text-transform: uppercase;
@@ -128,4 +128,17 @@
 
 .signup_form__submit_btn:hover {
   background-color: #64485C;
+}
+
+.form_link__signup {
+  display: inline;
+  outline: none;
+  color: #64485C;
+  font-weight: 600;
+}
+
+.form_link__signup:hover {
+  color:#83677B;
+  font-weight: 600;
+  cursor: pointer;
 }

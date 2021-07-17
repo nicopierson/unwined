@@ -22,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/nicopierson/unwined/issues"
   },
-  "homepage": "https://github.com/nicopierson/unwined#readme"
+  "homepage": "https://github.com/nicopierson/unwined#readme",
+  "dependencies": {
+    "react-transition-group": "^4.4.2"
+  }
 }
