@@ -25,14 +25,15 @@ export function ModalProvider({ children }) {
   );
 }
 
-export function Modal({ onClose, children }) {
+export function Modal({ onClose, children, toggle }) {
   const modalNode = useContext(ModalContext);
+  const { toggleSignForm, setToggleSignForm } = toggle;
   if (!modalNode) return null;
 
   return ReactDOM.createPortal(
-    <div className={styles.modal_container}>
-      <div className={styles.modal_background} onClick={onClose} />
-      <div className={styles.modal_content}>
+    <div className={styles.modal__container}>
+      <div className={styles.modal__background} onClick={onClose} />
+      <div className={styles.modal_inner__container}>
         {children}
       </div>
     </div>,

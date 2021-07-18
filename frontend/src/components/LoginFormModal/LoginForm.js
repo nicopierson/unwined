@@ -1,22 +1,15 @@
 import React, { useState } from 'react';
-import { CSSTransition } from 'react-transition-group'
 import * as sessionActions from '../../store/session';
 import { useDispatch } from 'react-redux';
-import { useModal } from '../../context/Modal';
 
-import styles from './LoginFormModal.module.css';
+import styles from './FormModal.module.css';
 
-function LoginForm() {
+function LoginForm({ toggle }) {
+  const { toggleSignForm, setToggleSignForm } = toggle;
   const dispatch = useDispatch();
   const [credential, setCredential] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
-  const { toggleSignForm, setToggleSignForm } = useModal();
-  
-
-  const toggleSignPage = () => {
-    setToggleSignForm(!toggleSignForm);
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -31,91 +24,48 @@ function LoginForm() {
 
   return (
     <>
-      <form onSubmit={handleSubmit} className={styles.form}>
-        <h2 className={styles.form__title}>Sign In</h2>
-        <ul className={styles.form__errors}>
-          {errors.map((error, idx) => (
-            <li key={idx}>{error}</li>
-          ))}
-        </ul>
-        <div className={styles.form__input_field}>
-          <i className='fa fa-user'></i>
-          <input
-            type='text'
-            value={credential}
-            onChange={(e) => setCredential(e.target.value)}
-            required
-            placeholder='Username or Email'
-          />
+        <div className={styles.modal_content__right_container}>
+          <form onSubmit={handleSubmit} className={styles.form_right}>
+            <h2 className={styles.form__title}>Sign In</h2>
+            <ul className={styles.form__errors}>
+              {errors.map((error, idx) => (
+                <li key={idx}>{error}</li>
+              ))}
+            </ul>
+            <div className={styles.form__input_field}>
+              <i className='fa fa-user'></i>
+              <input
+                type='text'
+                value={credential}
+                onChange={(e) => setCredential(e.target.value)}
+                required
+                placeholder='Username or Email'
+              />
+            </div>
+            <div className={styles.form__input_field}>
+              <i className='fas fa-lock'></i>
+              <input
+                type='password'
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                placeholder='Password'
+              />
+            </div>
+            <button 
+              type='submit' 
+              className={styles.form__submit_btn}
+            >
+              Log In
+            </button>
+            <p className={styles.form_text__signup}>
+              Or <li 
+                className={styles.form_link__signup} 
+                onClick={() => setToggleSignForm(!toggleSignForm)}>Sign up
+                </li> if you are not already one of us
+            </p>
+          </form>
         </div>
-        <div className={styles.form__input_field}>
-          <i className='fas fa-lock'></i>
-          <input
-            type='password'
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            placeholder='Password'
-          />
-        </div>
-        <button 
-          type='submit' 
-          className={styles.form__submit_btn}
-        >
-          Log In
-        </button>
-        <p className={styles.form_text__signup}>
-          Or <li 
-            className={styles.form_link__signup} 
-            onClick={toggleSignPage}>Sign up
-            </li> if you are not already one of us
-        </p>
-      </form>
-
-      <form onSubmit={handleSubmit} className={styles.form}>
-        <h2 className={styles.signup_form__title}>Sign Up</h2>
-        <ul className={styles.signup_form__errors}>
-          {errors.map((error, idx) => (
-            <li key={idx}>{error}</li>
-          ))}
-        </ul>
-        <div className={styles.signup_form__input_field}>
-          <i className='fa fa-user'></i>
-          <input
-            type='text'
-            value={credential}
-            onChange={(e) => setCredential(e.target.value)}
-            required
-            placeholder='Username'
-          />
-        </div>
-        <div className={styles.signup_form__input_field}>
-          <i className='fa fa-envelope'></i>
-          <input
-            type='text'
-            value={credential}
-            onChange={(e) => setCredential(e.target.value)}
-            required
-            placeholder='Email'
-          />
-        </div>
-        <div className={styles.signup_form__input_field}>
-          <i className='fas fa-lock'></i>
-          <input
-            type='password'
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            placeholder='Password'
-          />
-        </div>
-        <button 
-          type='submit' 
-          className={styles.signup_form__submit_btn}
-        >
-          Sign Up
-        </button>
-      </form>
     </>
   );
 }
