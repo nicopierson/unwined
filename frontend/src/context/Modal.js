@@ -1,8 +1,11 @@
 import React, { useContext, useRef, useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
-import './Modal.css';
+
+import styles from './Modal.module.css';
 
 const ModalContext = React.createContext();
+
+export const useModal = () => useContext(ModalContext);
 
 export function ModalProvider({ children }) {
   const modalRef = useRef();
@@ -22,14 +25,15 @@ export function ModalProvider({ children }) {
   );
 }
 
-export function Modal({ onClose, children }) {
+export function Modal({ onClose, children, toggle }) {
   const modalNode = useContext(ModalContext);
+  const { toggleSignForm, setToggleSignForm } = toggle;
   if (!modalNode) return null;
 
   return ReactDOM.createPortal(
-    <div id="modal">
-      <div id="modal-background" onClick={onClose} />
-      <div id="modal-content">
+    <div className={styles.modal__container}>
+      <div className={styles.modal__background} onClick={onClose} />
+      <div className={styles.modal_inner__container}>
         {children}
       </div>
     </div>,

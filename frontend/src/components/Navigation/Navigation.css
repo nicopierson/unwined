@@ -1,0 +1,20 @@
+.navlink__home {
+  color: black;
+  background: none;
+  border: none;
+  outline: none;
+}
+
+.navlink__home:hover {
+  color: #64485C;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* fix later for the navbar */
+.navlink__home.active {
+  background: none;
+  border: none;
+  outline: none;
+  text-decoration: none;
+}
