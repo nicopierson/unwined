@@ -1,0 +1,11 @@
+button.modal__link {
+  border: none;
+  outline: none;
+  background: none;
+}
+
+button.modal__link:hover {
+  color: #64485C;
+  font-weight: 600;
+  cursor: pointer;
+}
