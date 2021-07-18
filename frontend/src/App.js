@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import SignupFormPage from './components/SignupFormPage';
+
 import Navigation from './components/Navigation';
 import * as sessionActions from './store/session';
 
@@ -18,9 +18,10 @@ function App() {
   return (
     <>
       <Navigation isLoaded={isLoaded} />
+      {/* isLoaded only shows when the userSession is restored - removes signIn and signUp */}
       { isLoaded && (<Switch>
-        <Route path='/signup'>
-          <SignupFormPage />
+        <Route path='/'>
+
         </Route>
       </Switch>
       )}

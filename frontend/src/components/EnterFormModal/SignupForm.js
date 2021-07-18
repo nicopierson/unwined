@@ -5,8 +5,8 @@ import * as sessionActions from '../../store/session';
 
 import styles from './FormModal.module.css';
 
-function SignupForm({ toggle }) {
-  const { toggleSignForm, setToggleSignForm } = toggle;
+const SignupForm = React.forwardRef((props, ref) => {
+  const { toggleSignForm, setToggleSignForm } = props.toggle;
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
   const [email, setEmail] = useState("");
@@ -32,7 +32,7 @@ function SignupForm({ toggle }) {
 
   return (
     <>
-      <div className={styles.modal_content__left_container}>
+      <div className={styles.modal_content__left_container} ref={ref}>
         <form onSubmit={handleSubmit} className={styles.form_left}>
           <h2 className={styles.form__title}>Sign Up</h2>
           <ul className={styles.form__errors}>
@@ -96,6 +96,6 @@ function SignupForm({ toggle }) {
       </div>
     </>
   );
-}
+});
 
 export default SignupForm;

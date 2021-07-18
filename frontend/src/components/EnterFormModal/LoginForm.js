@@ -4,8 +4,8 @@ import { useDispatch } from 'react-redux';
 
 import styles from './FormModal.module.css';
 
-function LoginForm({ toggle }) {
-  const { toggleSignForm, setToggleSignForm } = toggle;
+const LoginForm = React.forwardRef((props, ref) => {
+  const { toggleSignForm, setToggleSignForm } = props.toggle;
   const dispatch = useDispatch();
   const [credential, setCredential] = useState("");
   const [password, setPassword] = useState("");
@@ -24,7 +24,7 @@ function LoginForm({ toggle }) {
 
   return (
     <>
-        <div className={styles.modal_content__right_container}>
+        <div className={styles.modal_content__right_container} ref={ref}>
           <form onSubmit={handleSubmit} className={styles.form_right}>
             <h2 className={styles.form__title}>Sign In</h2>
             <ul className={styles.form__errors}>
@@ -68,6 +68,6 @@ function LoginForm({ toggle }) {
         </div>
     </>
   );
-}
+});
 
 export default LoginForm;
