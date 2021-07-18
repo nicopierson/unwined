@@ -4,11 +4,25 @@ button.modal__link {
   background: none;
   font-size: inherit;
   font-weight: inherit;
+  padding-right: 8px;
+  color: inherit;
 }
 
 button.modal__link:hover {
-  color: #64485C;
+  color: white;
   font-weight: 600;
   cursor: pointer;
-  text-decoration: underline;
+  text-decoration: underline 3px;
+}
+
+button.nav_link__sign_in {
+
+}
+
+button.nav_link__sign_up {
+
+}
+
+span.nav_link__sign {
+  margin-right: 8px;
 }

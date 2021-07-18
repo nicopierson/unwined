@@ -40,18 +40,20 @@ function LoginFormModal() {
 
   return (
     <>
-      <button 
-        onClick={handleSignIn}
-        className={`${styles.modal__link} ${activeSignInLink}`}
-      >
-        Sign In
-      </button>
-      <button 
-        onClick={handleSignUp}
-        className={`${styles.modal__link} ${activeSignUpLink}`}
-      >
-        Sign Up
-      </button>
+      <span className={styles.nav_link__sign}>
+        <button 
+          onClick={handleSignIn}
+          className={`${styles.nav_link__sign_in} ${styles.modal__link} ${activeSignInLink}`}
+        >
+          Sign In
+        </button>
+        <button 
+          onClick={handleSignUp}
+          className={`${styles.nav_link__sign_up} ${styles.modal__link} ${activeSignUpLink}`}
+        >
+          Sign Up
+        </button>
+      </span>
       {showModal && (
         <Modal onClose={() => setShowModal(false)} toggle={{toggleSignForm, setToggleSignForm}}>
           <EnterForm toggle={{toggleSignForm, setToggleSignForm}}/>

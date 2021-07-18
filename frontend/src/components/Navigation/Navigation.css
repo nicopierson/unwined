@@ -1,10 +1,20 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  background-color: #2E1114;
+  padding: 10px;
+  color: white;
+  font-weight: 600;
+}
+
 .nav_link {
   font-size: inherit;
   font-weight: 600;
 }
 
 .nav_link__home {
-  color: black;
+  display: flex;
+  justify-content: flex-start;
   background: none;
   border: none;
   outline: none;
@@ -14,12 +24,13 @@
   color: white;
   font-weight: 600;
   cursor: pointer;
-  text-decoration: underline overline white 3px;
+  text-decoration: underline white 3px;
 }
 
 .nav_link__home.active {
+  color: inherit;
   background: none;
   border: none;
   outline: none;
-  text-decoration: underline overline 3px;
+  text-decoration: underline 3px;
 }
