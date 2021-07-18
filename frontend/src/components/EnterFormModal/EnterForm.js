@@ -1,7 +1,7 @@
 import React from 'react';
 import { CSSTransition } from 'react-transition-group'
 import LoginForm from './LoginForm';
-import SigninForm from './SigninForm';
+import SignupForm from './SignupForm';
 
 import './EnterForm.css';
 
@@ -24,7 +24,7 @@ function EnterForm({ toggle }) {
         classNames='visible_left'
         unmountOnExit  
       >
-        <SigninForm toggle={toggle}/>
+        <SignupForm toggle={toggle}/>
       </CSSTransition>
     </>
   );

@@ -1,25 +1,33 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { Redirect } from 'react-router';
 import * as sessionActions from '../../store/session';
 
 import styles from './FormModal.module.css';
 
-function SigninForm({ toggle }) {
+function SignupForm({ toggle }) {
   const { toggleSignForm, setToggleSignForm } = toggle;
   const dispatch = useDispatch();
-  const [credential, setCredential] = useState("");
+  const sessionUser = useSelector((state) => state.session.user);
+  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState([]);
+
+  if (sessionUser) return <Redirect to="/" />;
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setErrors([]);
-    // return dispatch(sessionActions.login({ credential, password })).catch(
-    //   async (res) => {
-    //     const data = await res.json();
-    //     if (data && data.errors) setErrors(data.errors);
-    //   }
-    // );
+    if (password === confirmPassword) {
+      setErrors([]);
+      return dispatch(sessionActions.signup({ email, username, password }))
+        .catch(async (res) => {
+          const data = await res.json();
+          if (data && data.errors) setErrors(data.errors);
+        });
+    }
+    return setErrors(['Confirm Password field must be the same as the Password field']);
   };
 
   return (
@@ -36,8 +44,8 @@ function SigninForm({ toggle }) {
             <i className='fa fa-user'></i>
             <input
               type='text'
-              value={credential}
-              onChange={(e) => setCredential(e.target.value)}
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
               required
               placeholder='Username'
             />
@@ -45,9 +53,9 @@ function SigninForm({ toggle }) {
           <div className={styles.form__input_field}>
             <i className='fa fa-envelope'></i>
             <input
-              type='text'
-              value={credential}
-              onChange={(e) => setCredential(e.target.value)}
+              type='email'
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               required
               placeholder='Email'
             />
@@ -60,6 +68,16 @@ function SigninForm({ toggle }) {
               onChange={(e) => setPassword(e.target.value)}
               required
               placeholder='Password'
+            />
+          </div>
+          <div className={styles.form__input_field}>
+            <i className='fas fa-lock'></i>
+            <input
+              type="password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              required
+              placeholder='Confirm Password'
             />
           </div>
           <button 
@@ -80,4 +98,4 @@ function SigninForm({ toggle }) {
   );
 }
 
-export default SigninForm;
+export default SignupForm;

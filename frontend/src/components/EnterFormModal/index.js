@@ -6,9 +6,20 @@ function LoginFormModal() {
   const [showModal, setShowModal] = useState(false);
   const [toggleSignForm, setToggleSignForm] = useState(false);
 
+  const handleSignIn = () => {
+    setShowModal(true);
+    setToggleSignForm(false);
+  };
+
+  const handleSignUp = () => {
+    setShowModal(true);
+    setToggleSignForm(true);
+  };
+
   return (
     <>
-      <button onClick={() => setShowModal(true)}>Log In</button>
+      <button onClick={handleSignIn}>Sign In</button>
+      <button onClick={handleSignUp}>Sign Up</button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)} toggle={{toggleSignForm, setToggleSignForm}}>
           <EnterForm toggle={{toggleSignForm, setToggleSignForm}}/>
