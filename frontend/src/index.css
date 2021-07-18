@@ -7,10 +7,10 @@
 body {
   min-height: 100vh;
   background: linear-gradient(#ffffff, rgb(208, 206, 206));
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 }
 
 input {
-  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-weight: 300; 
 }
 

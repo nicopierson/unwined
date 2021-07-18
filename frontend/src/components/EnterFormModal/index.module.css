@@ -1,8 +1,14 @@
-button.active {
+button.modal__link {
   border: none;
   outline: none;
   background: none;
   font-size: inherit;
+  font-weight: inherit;
+}
+
+button.modal__link:hover {
+  color: #64485C;
   font-weight: 600;
+  cursor: pointer;
   text-decoration: underline;
 }

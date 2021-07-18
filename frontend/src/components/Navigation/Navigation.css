@@ -1,20 +1,25 @@
-.navlink__home {
+.nav_link {
+  font-size: inherit;
+  font-weight: 600;
+}
+
+.nav_link__home {
   color: black;
   background: none;
   border: none;
   outline: none;
 }
 
-.navlink__home:hover {
-  color: #64485C;
+.nav_link__home:hover {
+  color: white;
   font-weight: 600;
   cursor: pointer;
+  text-decoration: underline overline white 3px;
 }
 
-/* fix later for the navbar */
-.navlink__home.active {
+.nav_link__home.active {
   background: none;
   border: none;
   outline: none;
-  text-decoration: none;
+  text-decoration: underline overline 3px;
 }
