@@ -18,7 +18,7 @@ function EnterForm({ toggle }) {
       <CSSTransition
         in={!toggleSignForm}
         timeout={800}
-        classNames='visible_right'
+        classNames='visible_sign_in'
         unmountOnExit 
         nodeRef={ref}
       >
@@ -27,7 +27,7 @@ function EnterForm({ toggle }) {
       <CSSTransition
         in={toggleSignForm}
         timeout={800}
-        classNames='visible_left'
+        classNames='visible_sign_up'
         unmountOnExit  
         nodeRef={ref}
       >

@@ -7,6 +7,31 @@ import './Navigation.css';
 import styled from 'styled-components';
 import { ReactComponent as NavLogo } from '../../assets/unwined_logo_nav.svg';
 
+const StyledNavLogo = styled(NavLogo)`
+  :hover #logo_nav #text path {
+      fill: white;
+    }
+  }
+
+  :hover #logo_nav #bottle path {
+      stroke: white;
+    }
+  }
+
+  :hover #logo_nav path#wine {
+      fill: #EE4C7C;
+    }
+  }
+
+  #logo_nav #text path {
+    fill: #E3E2DF;
+  }
+  
+  #logo_nav #bottle path {
+    stroke: #E3E2DF;
+  }
+`;
+
 function Navigation({ isLoaded }){
   const sessionUser = useSelector(state => state.session.user);
 
@@ -22,33 +47,6 @@ function Navigation({ isLoaded }){
       </>
     );
   }
-
-  const StyledNavLogo = styled(NavLogo)`
-
-    :hover #logo_nav #text path {
-        fill: white;
-      }
-    }
-
-    :hover #logo_nav #bottle path {
-        stroke: white;
-      }
-    }
-
-    :hover #logo_nav path#wine {
-        fill: #501B1D;
-      }
-    }
-
-    #logo_nav #text path {
-      fill: #E3E2DF;
-    }
-    
-    #logo_nav #bottle path {
-      stroke: #E3E2DF;
-    }
-
-  `;
 
   return (
     <div className='navbar'>

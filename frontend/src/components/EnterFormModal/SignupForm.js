@@ -32,8 +32,8 @@ const SignupForm = React.forwardRef((props, ref) => {
 
   return (
     <>
-      <div className={styles.modal_content__left_container} ref={ref}>
-        <form onSubmit={handleSubmit} className={styles.form_left}>
+      <div className={styles.modal_content__sign_up_container} ref={ref}>
+        <form onSubmit={handleSubmit} className={styles.form_sign_up}>
           <h2 className={styles.form__title}>Sign Up</h2>
           <ul className={styles.form__errors}>
             {errors.map((error, idx) => (
@@ -86,9 +86,9 @@ const SignupForm = React.forwardRef((props, ref) => {
           >
             Sign Up
           </button>
-            <p className={styles.form_text__signup}>
+            <p className={styles.form_text__switch}>
             Or <li 
-              className={styles.form_link__signup} 
+              className={styles.form_link__switch} 
               onClick={() => setToggleSignForm(!toggleSignForm)}>Sign in
               </li> if you are already one of us
           </p>

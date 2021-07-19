@@ -22,10 +22,21 @@ const LoginForm = React.forwardRef((props, ref) => {
     );
   };
 
+  const handleDemoLogin = (e) => {
+    e.preventDefault();
+    setErrors([]);
+    return dispatch(sessionActions.login({ credential: 'Demo-lition', password: 'password' })).catch(
+      async (res) => {
+        const data = await res.json();
+        if (data && data.errors) setErrors(data.errors);
+      }
+    );
+  };
+
   return (
     <>
-        <div className={styles.modal_content__right_container} ref={ref}>
-          <form onSubmit={handleSubmit} className={styles.form_right}>
+        <div className={styles.modal_content__sign_in_container} ref={ref}>
+          <form onSubmit={handleSubmit} className={styles.form_sign_in}>
             <h2 className={styles.form__title}>Sign In</h2>
             <ul className={styles.form__errors}>
               {errors.map((error, idx) => (
@@ -52,17 +63,26 @@ const LoginForm = React.forwardRef((props, ref) => {
                 placeholder='Password'
               />
             </div>
-            <button 
-              type='submit' 
-              className={styles.form__submit_btn}
-            >
-              Log In
-            </button>
-            <p className={styles.form_text__signup}>
+            <span>
+              <button 
+                type='submit' 
+                className={styles.form__submit_btn}
+              >
+                Log In
+              </button>
+              <button 
+                type='button' 
+                className={styles.form__submit_btn}
+                onClick={handleDemoLogin}
+              >
+                Demo Login
+              </button>
+            </span>
+            <p className={styles.form_text__switch}>
               Or <li 
-                className={styles.form_link__signup} 
+                className={styles.form_link__switch} 
                 onClick={() => setToggleSignForm(!toggleSignForm)}>Sign up
-                </li> if you are not already one of us
+                </li> if you don't have an account
             </p>
           </form>
         </div>

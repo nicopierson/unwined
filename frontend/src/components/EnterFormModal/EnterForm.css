@@ -1,42 +1,42 @@
-.visible_left-enter {
+.visible_sign_up-enter {
   transform: translateX(-100%);
   opacity: 0;
 }
 
-.visible_left-enter-active {
+.visible_sign_up-enter-active {
   transform: translateX(0%);
   transition: transform .8s ease-in-out;
   opacity: 1;
 }
 
-.visible_left-exit {
+.visible_sign_up-exit {
   transform: translateX(0%);
   opacity: 1;
 }
 
-.visible_left-exit-active {
+.visible_sign_up-exit-active {
   transform: translateX(100%);
   transition: transform .8s ease-in-out;
   opacity: 0;
 }
 
-.visible_right-enter {
+.visible_sign_in-enter {
   transform: translateX(100%);
   opacity: 0;
 }
 
-.visible_right-enter-active {
+.visible_sign_in-enter-active {
   transform: translateX(0%);
   transition: transform .8s ease-in-out;
   opacity: 1;
 }
 
-.visible_right-exit {
+.visible_sign_in-exit {
   transform: translateX(0%);
   opacity: 1;
 }
 
-.visible_right-exit-active {
+.visible_sign_in-exit-active {
   transform: translateX(100%);
   transition: transform .8s ease-in-out;
   opacity: 0;
