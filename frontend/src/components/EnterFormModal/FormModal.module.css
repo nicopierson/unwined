@@ -100,18 +100,17 @@
 }
 
 .form__submit_btn {
-  width: 150px;
+  width: 130px;
   height: 42px;
   border: none;
   outline: none;
   border-radius: 40px;
   cursor: pointer;
-
   background-color: #83677B;
   color: #fff;
   text-transform: uppercase;
   font-weight: 600;
-  margin: 10px 0;
+  margin: 10px 5px;
   transition: .5s;
 }
 

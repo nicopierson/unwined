@@ -30,6 +30,17 @@ const SignupForm = React.forwardRef((props, ref) => {
     return setErrors(['Confirm Password field must be the same as the Password field']);
   };
 
+  const handleDemoLogin = (e) => {
+    e.preventDefault();
+    setErrors([]);
+    return dispatch(sessionActions.login({ credential: 'Demo-lition', password: 'password' })).catch(
+      async (res) => {
+        const data = await res.json();
+        if (data && data.errors) setErrors(data.errors);
+      }
+    );
+  };
+
   return (
     <>
       <div className={styles.modal_content__sign_up_container} ref={ref}>
@@ -80,13 +91,22 @@ const SignupForm = React.forwardRef((props, ref) => {
               placeholder='Confirm Password'
             />
           </div>
-          <button 
-            type='submit' 
-            className={styles.form__submit_btn}
-          >
-            Sign Up
-          </button>
-            <p className={styles.form_text__switch}>
+          <span>
+            <button 
+              type='submit' 
+              className={styles.form__submit_btn}
+            >
+              Sign Up
+            </button>
+            <button 
+                type='button' 
+                className={styles.form__submit_btn}
+                onClick={handleDemoLogin}
+              >
+                Demo Login
+              </button>
+          </span>
+          <p className={styles.form_text__switch}>
             Or <li 
               className={styles.form_link__switch} 
               onClick={() => setToggleSignForm(!toggleSignForm)}>Sign in
