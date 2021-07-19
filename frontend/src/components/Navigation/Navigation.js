@@ -4,7 +4,8 @@ import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import EnterFormModal from '../EnterFormModal';
 import './Navigation.css';
-import { ReactComponent as Logo } from '../../assets/unwined_logo_nav.svg';
+import styled from 'styled-components';
+import { ReactComponent as NavLogo } from '../../assets/unwined_logo_nav.svg';
 
 function Navigation({ isLoaded }){
   const sessionUser = useSelector(state => state.session.user);
@@ -22,12 +23,38 @@ function Navigation({ isLoaded }){
     );
   }
 
+  const StyledNavLogo = styled(NavLogo)`
+
+    :hover #logo_nav #text path {
+        fill: white;
+      }
+    }
+
+    :hover #logo_nav #bottle path {
+        stroke: white;
+      }
+    }
+
+    :hover #logo_nav path#wine {
+        fill: #501B1D;
+      }
+    }
+
+    #logo_nav #text path {
+      fill: #E3E2DF;
+    }
+    
+    #logo_nav #bottle path {
+      stroke: #E3E2DF;
+    }
+
+  `;
+
   return (
     <div className='navbar'>
       
       <NavLink exact to='/' className={`nav_link nav_link__home`}>
-        <Logo />
-        {/* <img alt='unwined-logo' src={logo} /> */}
+        <StyledNavLogo />
       </NavLink>
       {isLoaded && sessionLinks}
     </div>
