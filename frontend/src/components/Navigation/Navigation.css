@@ -1,20 +1,26 @@
-.navlink__home {
-  color: black;
-  background: none;
-  border: none;
-  outline: none;
-}
-
-.navlink__home:hover {
-  color: #64485C;
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  background-color: #2E1114;
+  padding: 10px;
+  color: white;
   font-weight: 600;
-  cursor: pointer;
 }
 
-/* fix later for the navbar */
-.navlink__home.active {
+.nav_link {
+  font-size: inherit;
+  font-weight: 600;
+}
+
+.nav_link__home {
+  display: flex;
+  justify-content: flex-start;
   background: none;
   border: none;
   outline: none;
-  text-decoration: none;
+}
+
+.nav__logo {
+  height: 35px;
+  margin-left: 8px;
 }

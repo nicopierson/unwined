@@ -5,8 +5,8 @@ import * as sessionActions from '../../store/session';
 
 import styles from './FormModal.module.css';
 
-function SignupForm({ toggle }) {
-  const { toggleSignForm, setToggleSignForm } = toggle;
+const SignupForm = React.forwardRef((props, ref) => {
+  const { toggleSignForm, setToggleSignForm } = props.toggle;
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
   const [email, setEmail] = useState("");
@@ -30,10 +30,21 @@ function SignupForm({ toggle }) {
     return setErrors(['Confirm Password field must be the same as the Password field']);
   };
 
+  const handleDemoLogin = (e) => {
+    e.preventDefault();
+    setErrors([]);
+    return dispatch(sessionActions.login({ credential: 'Demo-lition', password: 'password' })).catch(
+      async (res) => {
+        const data = await res.json();
+        if (data && data.errors) setErrors(data.errors);
+      }
+    );
+  };
+
   return (
     <>
-      <div className={styles.modal_content__left_container}>
-        <form onSubmit={handleSubmit} className={styles.form_left}>
+      <div className={styles.modal_content__sign_up_container} ref={ref}>
+        <form onSubmit={handleSubmit} className={styles.form_sign_up}>
           <h2 className={styles.form__title}>Sign Up</h2>
           <ul className={styles.form__errors}>
             {errors.map((error, idx) => (
@@ -80,15 +91,24 @@ function SignupForm({ toggle }) {
               placeholder='Confirm Password'
             />
           </div>
-          <button 
-            type='submit' 
-            className={styles.form__submit_btn}
-          >
-            Sign Up
-          </button>
-            <p className={styles.form_text__signup}>
+          <span>
+            <button 
+              type='submit' 
+              className={styles.form__submit_btn}
+            >
+              Sign Up
+            </button>
+            <button 
+                type='button' 
+                className={styles.form__submit_btn}
+                onClick={handleDemoLogin}
+              >
+                Demo Login
+              </button>
+          </span>
+          <p className={styles.form_text__switch}>
             Or <li 
-              className={styles.form_link__signup} 
+              className={styles.form_link__switch} 
               onClick={() => setToggleSignForm(!toggleSignForm)}>Sign in
               </li> if you are already one of us
           </p>
@@ -96,6 +116,6 @@ function SignupForm({ toggle }) {
       </div>
     </>
   );
-}
+});
 
 export default SignupForm;

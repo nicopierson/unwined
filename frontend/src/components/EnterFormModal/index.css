@@ -1,11 +1,8 @@
-button.modal__link {
+button.active {
   border: none;
   outline: none;
   background: none;
-}
-
-button.modal__link:hover {
-  color: #64485C;
+  font-size: inherit;
   font-weight: 600;
-  cursor: pointer;
+  text-decoration: underline 3px;
 }
