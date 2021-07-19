@@ -20,17 +20,7 @@
   outline: none;
 }
 
-.nav_link__home:hover {
-  color: white;
-  font-weight: 600;
-  cursor: pointer;
-  text-decoration: underline white 3px;
-}
-
-.nav_link__home.active {
-  color: inherit;
-  background: none;
-  border: none;
-  outline: none;
-  text-decoration: underline 3px;
+.nav__logo {
+  height: 50px;
+  margin-left: 8px;
 }

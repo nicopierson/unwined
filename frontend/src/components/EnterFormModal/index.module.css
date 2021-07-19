@@ -1,3 +1,11 @@
+button.nav_link__sign_in {
+  margin-right: 8px;
+}
+
+button.nav_link__sign_up {
+  margin-right: 8px;
+}
+
 button.modal__link {
   border: none;
   outline: none;
@@ -15,14 +23,7 @@ button.modal__link:hover {
   text-decoration: underline 3px;
 }
 
-button.nav_link__sign_in {
-
-}
-
-button.nav_link__sign_up {
-
-}
-
 span.nav_link__sign {
-  margin-right: 8px;
+  display: flex;
+  margin-right: 5px;
 }

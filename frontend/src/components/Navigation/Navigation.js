@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import EnterFormModal from '../EnterFormModal';
 import './Navigation.css';
+import logo from '../../assets/unwined_logo_nav.svg';
 
 function Navigation({ isLoaded }){
   const sessionUser = useSelector(state => state.session.user);
@@ -23,7 +24,10 @@ function Navigation({ isLoaded }){
 
   return (
     <div className='navbar'>
-      <NavLink exact to='/' className={`nav_link nav_link__home`}>Home</NavLink>
+      
+      <NavLink exact to='/' className={`nav_link nav_link__home`}>
+        <img alt='unwined-logo' src={logo} className={`nav__logo`}/>
+      </NavLink>
       {isLoaded && sessionLinks}
     </div>
   );

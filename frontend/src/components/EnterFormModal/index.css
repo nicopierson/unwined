@@ -3,7 +3,6 @@ button.active {
   outline: none;
   background: none;
   font-size: inherit;
-  color: black;
   font-weight: 600;
   text-decoration: underline 3px;
 }
