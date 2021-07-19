@@ -57,7 +57,6 @@ module.exports = {
         references: { model: 'ColorTypes' },
       },
       wineTypeId: {
-        allowNull: false,
         type: Sequelize.INTEGER,
         references: { model: 'WineTypes' },
       },
