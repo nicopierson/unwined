@@ -1,7 +1,7 @@
 import { csrfFetch } from './csrf';
 
 const LOAD = 'wineries/LOAD';
-const REMOVE_WINE = 'wineries/REMOVE_WINE';
+const REMOVE_WINERY = 'wineries/REMOVE_WINERY';
 const ADD_ONE = 'wineries/ADD_ONE';
 
 export const loadWinery = (wineries) => ({
@@ -11,7 +11,7 @@ export const loadWinery = (wineries) => ({
 
 // this does not work - need to fix the associations
 export const removeWinery = (id) => ({
-  type: REMOVE_WINE,
+  type: REMOVE_WINERY,
   wineryId: id,
 });
 
@@ -112,7 +112,7 @@ const wineryReducer = (state = initialState, action) => {
       if (!state[action.winery.id]) {
         const newState = {
           ...state,
-          [action.winery.id]: action.wine
+          [action.winery.id]: action.winery
         };
         const wineryList = newState.list.map(id => newState[id]);
         wineryList.push(action.winery);
@@ -127,7 +127,7 @@ const wineryReducer = (state = initialState, action) => {
         }
       };
     }
-    case REMOVE_WINE: {
+    case REMOVE_WINERY: {
       const newState = { 
         ...state
       };
