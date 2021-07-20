@@ -6,6 +6,7 @@ import wine from './wine';
 import winery from './winery';
 import review from './review';
 import wineType from './wineType';
+import colorType from './colorType';
 
 const rootReducer = combineReducers({
   session,
@@ -13,7 +14,7 @@ const rootReducer = combineReducers({
   winery,
   review,
   wineType,
-  
+  colorType,
 });
 
 let enhancer;
