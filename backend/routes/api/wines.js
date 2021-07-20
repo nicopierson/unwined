@@ -85,8 +85,6 @@ router.get(
 router.get(
   '/:id(\\d+)',
   asyncHandler(async (req, res, next) => {
-    console.log(req.params.id);
-    console.log(typeof req.params.id);
     const wine = await Wine.findByPk(req.params.id);
 
     if (wine) {
@@ -125,39 +123,8 @@ router.post(
   requireAuth,
   validateWine,
   asyncHandler(async (req, res, next) => {
-    const {
-      name,
-      imageUrl,
-      description,
-      province,
-      country,
-      price,
-      rating,
-      designation,
-      region_1,
-      region_2,
-      userId,
-      wineryId,
-      colorTypeId,
-      wineTypeId,
-    } = req.body;
 
-    const wine = await Wine.build({ 
-      name,
-      imageUrl,
-      description,
-      province,
-      country,
-      price,
-      rating,
-      designation,
-      region_1,
-      region_2,
-      userId,
-      wineryId,
-      colorTypeId,
-      wineTypeId,
-    });
+    const wine = await Wine.build(req.body);
 
     if (wine) {
       await wine.save();
