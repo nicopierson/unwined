@@ -20,21 +20,24 @@ export const addOneWine = (wine) => ({
 });
 
 export const getWine = () => async dispatch => {
-  const response = await fetch(`/api/wines`);
+  const res = await fetch(`/api/wines`);
 
-  if (response.ok) {
-    const wines = await response.json();
+  const wines = await res.json();
+  if (res.ok) {
+    console.log(wines);
     dispatch(loadWine(wines));
   }
+  return wines;
 };
 
 export const getOneWine = (id) => async dispatch => {
-  const response = await fetch(`/api/wines/${id}`);
+  const res = await fetch(`/api/wines/${id}`);
 
-  if (response.ok) {
-    const wine = await response.json();
+  const wine = await res.json();
+  if (res.ok) {
     dispatch(addOneWine(wine));
   }
+  return wine;
 };
 
 export const createWine = (payload) => async dispatch =>{
@@ -85,7 +88,7 @@ export const deleteWine = (id) => async dispatch => {
 
 const sortList = (wines) => {
   return wines.sort((a, b) => {
-    return a.name - b.name;
+    return a.name > b.name;
   }).map((wine) => wine.id);
 };
 
@@ -127,7 +130,7 @@ const wineReducer = (state = initialState, action) => {
       const newState = { 
         ...state
       };
-      const wineList = newState.list.filter(wine => wine.id !== action.wineId);
+      const wineList = newState.list.filter(wineId => wineId !== action.wineId);
       newState.list = sortList(wineList);
       delete newState[action.wineId];
 
