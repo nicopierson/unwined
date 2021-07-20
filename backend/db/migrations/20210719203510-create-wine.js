@@ -10,7 +10,7 @@ module.exports = {
       },
       name: {
         allowNull: false,
-        type: Sequelize.STRING(75),
+        type: Sequelize.STRING(150),
       },
       imageUrl: {
         type: Sequelize.STRING,
@@ -20,21 +20,19 @@ module.exports = {
         type: Sequelize.TEXT,
       },
       province: {
-        type: Sequelize.STRING(60),
+        type: Sequelize.STRING(100),
       },
       country: {
-        allowNull: false,
-        type: Sequelize.STRING(60),
+        type: Sequelize.STRING(100),
       },
       price: {
-        allowNull: false,
         type: Sequelize.INTEGER,
       },
       rating: {
         type: Sequelize.INTEGER,
       },
       designation: {
-        type: Sequelize.STRING(60),
+        type: Sequelize.STRING(100),
       },
       region_1: {
         type: Sequelize.STRING(60),

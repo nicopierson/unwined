@@ -37,7 +37,6 @@ function makeWineryJSON (objJSON) {
         name: winery,
         country,
         ownerId: 1,
-        // index: i,
       };
       wineries.push(newObj);
     }
@@ -52,7 +51,8 @@ function makeWineryJSON (objJSON) {
 function normalizeWineryJSON (objJSON) {
   let wineryObj = {};
   const winerySet = new Set();
-  objJSON.forEach(({country, winery}, i) => {
+  let index = 1;
+  objJSON.forEach(({country, winery}) => {
     if (winerySet.has(winery)) {
 
     } else {
@@ -61,8 +61,9 @@ function normalizeWineryJSON (objJSON) {
         name: winery,
         country,
         ownerId: 1,
-        index: i,
+        index,
       };
+      index++;
     }
   });
 
@@ -87,15 +88,17 @@ function makeWineTypesJSON (objJSON) {
 function normalizeWineTypesJSON (objJSON) {
   const wineSet = new Set();
   const wineTypeObj = {};
-  objJSON.forEach(({variety}, i) => {
+  let index = 1; // sequelize starts indexing at 1
+  objJSON.forEach(({variety}) => {
     if (wineSet.has(variety)) {
 
     } else {
       wineSet.add(variety);
       wineTypeObj[variety] = {
         variety,
-        index: i,
+        index,
       }
+      index++;
     }
   });
 
@@ -118,6 +121,7 @@ function makeWineJSON (objJSON, wineries, wineTypes) {
     delete newObj.taster_twitter_handle;
     delete newObj.variety;
     delete newObj.points;
+    delete newObj.winery;
     return newObj;
   });
 
@@ -136,7 +140,7 @@ const winesJSON = require('./wine-data-set.json');
 
 // normalize Wineries
 // const saveFile = './winery-normalized.json';
-// const wineriesNormalized = normalizeWineryJSON(winesJSON); // now normalizes
+const wineriesNormalized = normalizeWineryJSON(winesJSON); // now normalizes
 // writeJSONFile(wineriesNormalized, saveFile);
 
 // make winery data
@@ -152,13 +156,14 @@ const winesJSON = require('./wine-data-set.json');
 
 // normalize wine types
 // const saveFile = './wine-types-normalized.json';
-// const wineTypesNormalized = normalizeWineTypesJSON(winesJSON);
+const wineTypesNormalized = normalizeWineTypesJSON(winesJSON);
 // writeJSONFile(wineTypesNormalized, saveFile);
 
 
 
 
 // reformat array of wine objects
-// const saveFile = './wines-data.json';
-// const wines = makeWineJSON(winesJSON, wineriesNormalized, wineTypesNormalized);
-// writeJSONFile(wines, saveFile);
+// need wineTypesNormalized and wineriesNormalized variables
+const saveFile = './wines-data.json';
+const wines = makeWineJSON(winesJSON, wineriesNormalized, wineTypesNormalized);
+writeJSONFile(wines, saveFile);

@@ -13,12 +13,13 @@ module.exports = {
         type: Sequelize.STRING(75),
       },
       country: {
-        allowNull: false,
+        // allowNull: false,
         type: Sequelize.STRING(60),
       },
       ownerId: {
         allowNull: false,
         type: Sequelize.INTEGER,
+        references: { model: 'Users' },
       },
       createdAt: {
         allowNull: false,
