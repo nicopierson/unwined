@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     type: DataTypes.STRING
   }, {});
   WineType.associate = function(models) {
-    // associations can be defined here
+    WineType.hasMany(models.Wine, { foreignKey: 'wineTypeId' });
   };
   return WineType;
 };
