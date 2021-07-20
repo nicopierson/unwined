@@ -1,11 +1,11 @@
 'use strict';
 
+const wineries = require('../../assets/winery-data.json');
+
 module.exports = {
   up: (queryInterface, Sequelize) => {
 
-    return queryInterface.bulkInsert('Wineries', [
-
-    ], {});
+    return queryInterface.bulkInsert('Wineries', wineries, {});
     
   },
 

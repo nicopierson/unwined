@@ -14,6 +14,7 @@ module.exports = {
       },
       imageUrl: {
         type: Sequelize.STRING,
+        defaultValue: null,
       },
       description: {
         type: Sequelize.TEXT,
@@ -27,7 +28,7 @@ module.exports = {
       },
       price: {
         allowNull: false,
-        type: Sequelize.DECIMAL(6, 2),
+        type: Sequelize.INTEGER,
       },
       rating: {
         type: Sequelize.INTEGER,
@@ -57,6 +58,7 @@ module.exports = {
         references: { model: 'ColorTypes' },
       },
       wineTypeId: {
+        allowNull: false,
         type: Sequelize.INTEGER,
         references: { model: 'WineTypes' },
       },
