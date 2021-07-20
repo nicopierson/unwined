@@ -5,9 +5,20 @@ const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth.j
 
 const sessionRouter = require('./session.js');
 const usersRouter = require('./users.js');
+const winesRouter = require('./wines.js');
+const wineriesRouter = require('./wineries');
+const reviewsRouter = require('./reviews');
+const wineTypesRouter = require('./wine-types');
+const colorTypesRouter = require('./color-types');
 
 router.use('/session', sessionRouter);
 router.use('/users', usersRouter);
+router.use('/wines', winesRouter);
+router.use('/wineries', wineriesRouter);
+router.use('/reviews', reviewsRouter);
+router.use('/wine-types', wineTypesRouter);
+router.use('/color-types', colorTypesRouter);
+
 
 router.get(
   '/restore-user',
@@ -35,5 +46,10 @@ router.get('/set-token-cookie', asyncHandler(async (req, res) => {
   setTokenCookie(res, user);
   return res.json({ user });
 }));
+
+router.get('/hello/world', function(req, res) {
+  res.cookie('XSRF-TOKEN', req.csrfToken());
+  res.send('Hello World!');
+});
 
 module.exports = router;
