@@ -12,27 +12,27 @@ const router = express.Router();
 const wineTypeNotFoundError = (id) => {
   const err = Error("WineType not found");
   if (id !== undefined) {
-    err.errors = [`WineType with id of ${id} could not be found.`];
+    err.errors = [`Wine variety with id of ${id} could not be found.`];
   } else {
-    err.errors = [`wineTypes could not be found.`];
+    err.errors = [`Wine variety could not be found.`];
   }
-  err.title = "WineType not found.";
+  err.title = "Wine variety not found.";
   err.status = 404;
   return err;
 };
 
 const wineTypePostError = () => {
-  const err = Error("WineType could not be added");
-  err.errors = [`WineType could not be added`];
-  err.title = "WineType not added.";
+  const err = Error("Wine variety could not be added");
+  err.errors = [`Wine variety could not be added`];
+  err.title = "Wine variety not added.";
   err.status = 404;
   return err;
 };
 
 const validateWineType = [
-  check('type')
+  check('variety')
     .exists({ checkFalsy: true })
-    .withMessage('Please provide a valid wine type.'),
+    .withMessage('Please provide a valid wine variety.'),
   handleValidationErrors,
 ];
 
