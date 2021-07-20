@@ -38,4 +38,9 @@ router.get('/set-token-cookie', asyncHandler(async (req, res) => {
   return res.json({ user });
 }));
 
+router.get('/hello/world', function(req, res) {
+  res.cookie('XSRF-TOKEN', req.csrfToken());
+  res.send('Hello World!');
+});
+
 module.exports = router;

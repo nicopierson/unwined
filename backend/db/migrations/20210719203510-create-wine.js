@@ -46,7 +46,7 @@ module.exports = {
         references: { model: 'Users' },
       },
       wineryId: {
-        allowNull: false,
+        // allowNull: false,
         type: Sequelize.INTEGER,
         references: { model: 'Wineries' },
       },

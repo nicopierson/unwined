@@ -30,22 +30,40 @@ const winePostError = () => {
 };
 
 const validateWine = [
-  check('email')
+  check('name')
     .exists({ checkFalsy: true })
-    .isEmail()
-    .withMessage('Please provide a valid email.'),
-  check('username')
+    .isLength({ max: 150 })
+    .withMessage('Please provide a valid name.'),
+  check('province')
+    .isLength({ max: 100 })
+    .withMessage('Please provide a province with at most 100 characters.'),
+  check('country')
+    .isLength({ max: 100 })
+    .withMessage('Please provide a country with at most 100 characters.'),
+  check('designation')
+    .isLength({ max: 100 })
+    .withMessage('Please provide a designation with at most 100 characters.'),
+  check('region_1')
+    .isLength({ max: 60 })
+    .withMessage('Please provide a region 1 with at most 60 characters.'),
+  check('region_2')
+    .isLength({ max: 60 })
+    .withMessage('Please provide a region 2 with at most 60 characters.'),
+  check('userId')
     .exists({ checkFalsy: true })
-    .isLength({ min: 4 })
-    .withMessage('Please provide a username with at least 4 characters.'),
-  check('username')
-    .not()
-    .isEmail()
-    .withMessage('Username cannot be an email.'),
-  check('password')
+    .isInt()
+    .withMessage('Please provide valid User.'),
+  check('colorTypeId')
     .exists({ checkFalsy: true })
-    .isLength({ min: 6 })
-    .withMessage('Password must be 6 characters or more.'),
+    .isInt()
+    .withMessage('Please provide valid Color.'),
+  check('wineryId')
+    .isInt()
+    .withMessage('Please provide valid Winery.'),
+  check('wineTypeId')
+    .exists({ checkFalsy: true })
+    .isInt()
+    .withMessage('Please provide valid Wine Type.'),
   handleValidationErrors,
 ];
 
@@ -65,8 +83,10 @@ router.get(
 );
 
 router.get(
-  '/:id(\\id+)',
+  '/:id(\\d+)',
   asyncHandler(async (req, res, next) => {
+    console.log(req.params.id);
+    console.log(typeof req.params.id);
     const wine = await Wine.findByPk(req.params.id);
 
     if (wine) {
@@ -80,46 +100,14 @@ router.get(
 );
 
 router.put(
-  '/:id',
+  '/:id(\\d+)',
   requireAuth,
   validateWine,
   asyncHandler(async (req, res, next) => {
-    const {
-      name,
-      imageUrl,
-      description,
-      province,
-      country,
-      price,
-      rating,
-      designation,
-      region_1,
-      region_2,
-      userId,
-      wineryId,
-      colorTypeId,
-      wineTypeId,
-    } = req.body;
-
     const wine = await Wine.findByPk(req.params.id);
 
     if (wine) {
-      await wine.update({
-        name,
-        imageUrl,
-        description,
-        province,
-        country,
-        price,
-        rating,
-        designation,
-        region_1,
-        region_2,
-        userId,
-        wineryId,
-        colorTypeId,
-        wineTypeId,
-      });
+      await wine.update(req.body);
   
       return res.json({
         wine,
