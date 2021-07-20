@@ -1,0 +1,1354 @@
+{
+    "Cabernet Sauvignon": {
+        "variety": "Cabernet Sauvignon",
+        "index": 0
+    },
+    "Rhône-style Red Blend": {
+        "variety": "Rhône-style Red Blend",
+        "index": 1
+    },
+    "Red Blend": {
+        "variety": "Red Blend",
+        "index": 5
+    },
+    "Bordeaux-style Red Blend": {
+        "variety": "Bordeaux-style Red Blend",
+        "index": 12
+    },
+    "Rhône-style White Blend": {
+        "variety": "Rhône-style White Blend",
+        "index": 15
+    },
+    "Merlot": {
+        "variety": "Merlot",
+        "index": 17
+    },
+    "Syrah": {
+        "variety": "Syrah",
+        "index": 19
+    },
+    "Sauvignon Blanc": {
+        "variety": "Sauvignon Blanc",
+        "index": 22
+    },
+    "Aglianico": {
+        "variety": "Aglianico",
+        "index": 23
+    },
+    "Riesling": {
+        "variety": "Riesling",
+        "index": 24
+    },
+    "Pinot Noir": {
+        "variety": "Pinot Noir",
+        "index": 26
+    },
+    "Chardonnay": {
+        "variety": "Chardonnay",
+        "index": 27
+    },
+    "Fiano": {
+        "variety": "Fiano",
+        "index": 32
+    },
+    "Melon": {
+        "variety": "Melon",
+        "index": 34
+    },
+    "Cabernet Blend": {
+        "variety": "Cabernet Blend",
+        "index": 35
+    },
+    "Shiraz": {
+        "variety": "Shiraz",
+        "index": 36
+    },
+    "Gewürztraminer": {
+        "variety": "Gewürztraminer",
+        "index": 40
+    },
+    "Zinfandel": {
+        "variety": "Zinfandel",
+        "index": 42
+    },
+    "Spätburgunder": {
+        "variety": "Spätburgunder",
+        "index": 47
+    },
+    "Corvina, Rondinella, Molinara": {
+        "variety": "Corvina, Rondinella, Molinara",
+        "index": 48
+    },
+    "Albariño": {
+        "variety": "Albariño",
+        "index": 50
+    },
+    "Pinot Gris": {
+        "variety": "Pinot Gris",
+        "index": 58
+    },
+    "White Blend": {
+        "variety": "White Blend",
+        "index": 65
+    },
+    "St. Vincent": {
+        "variety": "St. Vincent",
+        "index": 78
+    },
+    "Petite Sirah": {
+        "variety": "Petite Sirah",
+        "index": 80
+    },
+    "G-S-M": {
+        "variety": "G-S-M",
+        "index": 85
+    },
+    "Cabernet Franc": {
+        "variety": "Cabernet Franc",
+        "index": 86
+    },
+    "Malbec": {
+        "variety": "Malbec",
+        "index": 87
+    },
+    "Chambourcin": {
+        "variety": "Chambourcin",
+        "index": 93
+    },
+    "Norton": {
+        "variety": "Norton",
+        "index": 96
+    },
+    "Sparkling Blend": {
+        "variety": "Sparkling Blend",
+        "index": 101
+    },
+    "Sauvignon": {
+        "variety": "Sauvignon",
+        "index": 108
+    },
+    "Portuguese Red": {
+        "variety": "Portuguese Red",
+        "index": 109
+    },
+    "Grüner Veltliner": {
+        "variety": "Grüner Veltliner",
+        "index": 110
+    },
+    "Tempranillo": {
+        "variety": "Tempranillo",
+        "index": 123
+    },
+    "Friulano": {
+        "variety": "Friulano",
+        "index": 130
+    },
+    "Sémillon": {
+        "variety": "Sémillon",
+        "index": 135
+    },
+    "Nebbiolo": {
+        "variety": "Nebbiolo",
+        "index": 137
+    },
+    "Cabernet Franc-Cabernet Sauvignon": {
+        "variety": "Cabernet Franc-Cabernet Sauvignon",
+        "index": 141
+    },
+    "Tempranillo Blend": {
+        "variety": "Tempranillo Blend",
+        "index": 146
+    },
+    "Barbera": {
+        "variety": "Barbera",
+        "index": 147
+    },
+    "Mencía": {
+        "variety": "Mencía",
+        "index": 155
+    },
+    "Nerello Mascalese": {
+        "variety": "Nerello Mascalese",
+        "index": 156
+    },
+    "Verdelho": {
+        "variety": "Verdelho",
+        "index": 169
+    },
+    "Rosé": {
+        "variety": "Rosé",
+        "index": 172
+    },
+    "Portuguese White": {
+        "variety": "Portuguese White",
+        "index": 177
+    },
+    "Pinot Grigio": {
+        "variety": "Pinot Grigio",
+        "index": 181
+    },
+    "Tocai Friulano": {
+        "variety": "Tocai Friulano",
+        "index": 185
+    },
+    "Malvasia Istriana": {
+        "variety": "Malvasia Istriana",
+        "index": 190
+    },
+    "Chenin Blanc": {
+        "variety": "Chenin Blanc",
+        "index": 195
+    },
+    "Glera": {
+        "variety": "Glera",
+        "index": 202
+    },
+    "Champagne Blend": {
+        "variety": "Champagne Blend",
+        "index": 205
+    },
+    "Passerina": {
+        "variety": "Passerina",
+        "index": 225
+    },
+    "Montepulciano": {
+        "variety": "Montepulciano",
+        "index": 230
+    },
+    "Pinot Blanc": {
+        "variety": "Pinot Blanc",
+        "index": 237
+    },
+    "Zweigelt": {
+        "variety": "Zweigelt",
+        "index": 243
+    },
+    "Blaufränkisch": {
+        "variety": "Blaufränkisch",
+        "index": 277
+    },
+    "Austrian Red Blend": {
+        "variety": "Austrian Red Blend",
+        "index": 281
+    },
+    "Gamay": {
+        "variety": "Gamay",
+        "index": 285
+    },
+    "Sangiovese": {
+        "variety": "Sangiovese",
+        "index": 288
+    },
+    "Cabernet Sauvignon-Syrah": {
+        "variety": "Cabernet Sauvignon-Syrah",
+        "index": 296
+    },
+    "Picpoul": {
+        "variety": "Picpoul",
+        "index": 310
+    },
+    "Carmenère": {
+        "variety": "Carmenère",
+        "index": 313
+    },
+    "Viognier": {
+        "variety": "Viognier",
+        "index": 322
+    },
+    "Monastrell": {
+        "variety": "Monastrell",
+        "index": 335
+    },
+    "Sagrantino": {
+        "variety": "Sagrantino",
+        "index": 341
+    },
+    "Meritage": {
+        "variety": "Meritage",
+        "index": 368
+    },
+    "Petite Verdot": {
+        "variety": "Petite Verdot",
+        "index": 404
+    },
+    "Cabernet Sauvignon-Shiraz": {
+        "variety": "Cabernet Sauvignon-Shiraz",
+        "index": 407
+    },
+    "Corvina": {
+        "variety": "Corvina",
+        "index": 413
+    },
+    "Provence red blend": {
+        "variety": "Provence red blend",
+        "index": 414
+    },
+    "Teroldego": {
+        "variety": "Teroldego",
+        "index": 436
+    },
+    "Grenache Blanc": {
+        "variety": "Grenache Blanc",
+        "index": 438
+    },
+    "Sherry": {
+        "variety": "Sherry",
+        "index": 458
+    },
+    "Shiraz-Viognier": {
+        "variety": "Shiraz-Viognier",
+        "index": 467
+    },
+    "Shiraz-Cabernet Sauvignon": {
+        "variety": "Shiraz-Cabernet Sauvignon",
+        "index": 469
+    },
+    "Chancellor": {
+        "variety": "Chancellor",
+        "index": 471
+    },
+    "Roussanne": {
+        "variety": "Roussanne",
+        "index": 524
+    },
+    "Palomino": {
+        "variety": "Palomino",
+        "index": 537
+    },
+    "Alvarinho": {
+        "variety": "Alvarinho",
+        "index": 554
+    },
+    "Merlot-Cabernet Franc": {
+        "variety": "Merlot-Cabernet Franc",
+        "index": 555
+    },
+    "Cabernet Sauvignon-Merlot": {
+        "variety": "Cabernet Sauvignon-Merlot",
+        "index": 559
+    },
+    "Catarratto": {
+        "variety": "Catarratto",
+        "index": 587
+    },
+    "Castelão": {
+        "variety": "Castelão",
+        "index": 589
+    },
+    "Malvasia": {
+        "variety": "Malvasia",
+        "index": 591
+    },
+    "Prosecco": {
+        "variety": "Prosecco",
+        "index": 602
+    },
+    "Garnacha": {
+        "variety": "Garnacha",
+        "index": 610
+    },
+    "Muscat": {
+        "variety": "Muscat",
+        "index": 611
+    },
+    "Port": {
+        "variety": "Port",
+        "index": 630
+    },
+    "Bordeaux-style White Blend": {
+        "variety": "Bordeaux-style White Blend",
+        "index": 653
+    },
+    "Malbec-Cabernet Sauvignon": {
+        "variety": "Malbec-Cabernet Sauvignon",
+        "index": 664
+    },
+    "Torrontés": {
+        "variety": "Torrontés",
+        "index": 677
+    },
+    "Mourvèdre": {
+        "variety": "Mourvèdre",
+        "index": 689
+    },
+    "Furmint": {
+        "variety": "Furmint",
+        "index": 706
+    },
+    "Rkatsiteli": {
+        "variety": "Rkatsiteli",
+        "index": 717
+    },
+    "Saperavi": {
+        "variety": "Saperavi",
+        "index": 718
+    },
+    "Bonarda": {
+        "variety": "Bonarda",
+        "index": 721
+    },
+    "Albarossa": {
+        "variety": "Albarossa",
+        "index": 746
+    },
+    "Garganega": {
+        "variety": "Garganega",
+        "index": 753
+    },
+    "Verdicchio": {
+        "variety": "Verdicchio",
+        "index": 759
+    },
+    "Aligoté": {
+        "variety": "Aligoté",
+        "index": 764
+    },
+    "Arneis": {
+        "variety": "Arneis",
+        "index": 765
+    },
+    "Trebbiano di Lugana": {
+        "variety": "Trebbiano di Lugana",
+        "index": 773
+    },
+    "Dolcetto": {
+        "variety": "Dolcetto",
+        "index": 774
+    },
+    "Cortese": {
+        "variety": "Cortese",
+        "index": 775
+    },
+    "Fumé Blanc": {
+        "variety": "Fumé Blanc",
+        "index": 777
+    },
+    "Nero di Troia": {
+        "variety": "Nero di Troia",
+        "index": 780
+    },
+    "Negroamaro": {
+        "variety": "Negroamaro",
+        "index": 786
+    },
+    "Marsanne": {
+        "variety": "Marsanne",
+        "index": 810
+    },
+    "Tempranillo-Garnacha": {
+        "variety": "Tempranillo-Garnacha",
+        "index": 813
+    },
+    "Refosco": {
+        "variety": "Refosco",
+        "index": 822
+    },
+    "Pecorino": {
+        "variety": "Pecorino",
+        "index": 826
+    },
+    "Tempranillo-Cabernet Sauvignon": {
+        "variety": "Tempranillo-Cabernet Sauvignon",
+        "index": 834
+    },
+    "Alicante Bouschet": {
+        "variety": "Alicante Bouschet",
+        "index": 868
+    },
+    "Grenache": {
+        "variety": "Grenache",
+        "index": 878
+    },
+    "Malvasia Bianca": {
+        "variety": "Malvasia Bianca",
+        "index": 902
+    },
+    "Merlot-Tannat": {
+        "variety": "Merlot-Tannat",
+        "index": 924
+    },
+    "Kerner": {
+        "variety": "Kerner",
+        "index": 949
+    },
+    "Weissburgunder": {
+        "variety": "Weissburgunder",
+        "index": 963
+    },
+    "Pinot Nero": {
+        "variety": "Pinot Nero",
+        "index": 972
+    },
+    "Turbiana": {
+        "variety": "Turbiana",
+        "index": 975
+    },
+    "Malbec-Cabernet Franc": {
+        "variety": "Malbec-Cabernet Franc",
+        "index": 979
+    },
+    "Garnacha Blanca": {
+        "variety": "Garnacha Blanca",
+        "index": 990
+    },
+    "Syrah-Tempranillo": {
+        "variety": "Syrah-Tempranillo",
+        "index": 995
+    },
+    "Garnacha Tintorera": {
+        "variety": "Garnacha Tintorera",
+        "index": 1006
+    },
+    "Premsal": {
+        "variety": "Premsal",
+        "index": 1010
+    },
+    "Petit Verdot": {
+        "variety": "Petit Verdot",
+        "index": 1011
+    },
+    "Rosado": {
+        "variety": "Rosado",
+        "index": 1017
+    },
+    "Moscato": {
+        "variety": "Moscato",
+        "index": 1022
+    },
+    "Malbec-Syrah": {
+        "variety": "Malbec-Syrah",
+        "index": 1051
+    },
+    "St. Laurent": {
+        "variety": "St. Laurent",
+        "index": 1076
+    },
+    "Austrian white blend": {
+        "variety": "Austrian white blend",
+        "index": 1104
+    },
+    "Viura": {
+        "variety": "Viura",
+        "index": 1164
+    },
+    "Pinot Bianco": {
+        "variety": "Pinot Bianco",
+        "index": 1173
+    },
+    "Touriga Nacional": {
+        "variety": "Touriga Nacional",
+        "index": 1180
+    },
+    "Lambrusco Grasparossa": {
+        "variety": "Lambrusco Grasparossa",
+        "index": 1191
+    },
+    "Sangiovese Grosso": {
+        "variety": "Sangiovese Grosso",
+        "index": 1207
+    },
+    "Gaglioppo": {
+        "variety": "Gaglioppo",
+        "index": 1209
+    },
+    "Frappato": {
+        "variety": "Frappato",
+        "index": 1221
+    },
+    "Lambrusco": {
+        "variety": "Lambrusco",
+        "index": 1228
+    },
+    "Colombard-Sauvignon Blanc": {
+        "variety": "Colombard-Sauvignon Blanc",
+        "index": 1255
+    },
+    "Grillo": {
+        "variety": "Grillo",
+        "index": 1259
+    },
+    "Grenache Blend": {
+        "variety": "Grenache Blend",
+        "index": 1265
+    },
+    "Negrette": {
+        "variety": "Negrette",
+        "index": 1269
+    },
+    "Arinto": {
+        "variety": "Arinto",
+        "index": 1297
+    },
+    "Verdejo": {
+        "variety": "Verdejo",
+        "index": 1307
+    },
+    "Cabernet Sauvignon-Carmenère": {
+        "variety": "Cabernet Sauvignon-Carmenère",
+        "index": 1352
+    },
+    "Jampal": {
+        "variety": "Jampal",
+        "index": 1362
+    },
+    "Tannat": {
+        "variety": "Tannat",
+        "index": 1370
+    },
+    "Semillon-Sauvignon Blanc": {
+        "variety": "Semillon-Sauvignon Blanc",
+        "index": 1372
+    },
+    "Aragonês": {
+        "variety": "Aragonês",
+        "index": 1400
+    },
+    "Vermentino": {
+        "variety": "Vermentino",
+        "index": 1405
+    },
+    "Durif": {
+        "variety": "Durif",
+        "index": 1408
+    },
+    "Grechetto": {
+        "variety": "Grechetto",
+        "index": 1417
+    },
+    "Garnacha-Syrah": {
+        "variety": "Garnacha-Syrah",
+        "index": 1453
+    },
+    "Robola": {
+        "variety": "Robola",
+        "index": 1465
+    },
+    "Rosato": {
+        "variety": "Rosato",
+        "index": 1472
+    },
+    "Syrah-Cabernet Sauvignon": {
+        "variety": "Syrah-Cabernet Sauvignon",
+        "index": 1495
+    },
+    "Chenin Blanc-Viognier": {
+        "variety": "Chenin Blanc-Viognier",
+        "index": 1516
+    },
+    "Macabeo": {
+        "variety": "Macabeo",
+        "index": 1533
+    },
+    "Trepat": {
+        "variety": "Trepat",
+        "index": 1534
+    },
+    "Cesanese d'Affile": {
+        "variety": "Cesanese d'Affile",
+        "index": 1537
+    },
+    "Sylvaner": {
+        "variety": "Sylvaner",
+        "index": 1544
+    },
+    "Jacquère": {
+        "variety": "Jacquère",
+        "index": 1558
+    },
+    "Merlot-Cabernet Sauvignon": {
+        "variety": "Merlot-Cabernet Sauvignon",
+        "index": 1572
+    },
+    "Malbec-Merlot": {
+        "variety": "Malbec-Merlot",
+        "index": 1621
+    },
+    "Carignan": {
+        "variety": "Carignan",
+        "index": 1626
+    },
+    "Siria": {
+        "variety": "Siria",
+        "index": 1662
+    },
+    "Baga": {
+        "variety": "Baga",
+        "index": 1675
+    },
+    "Moscatel": {
+        "variety": "Moscatel",
+        "index": 1679
+    },
+    "Lagrein": {
+        "variety": "Lagrein",
+        "index": 1717
+    },
+    "Gelber Muskateller": {
+        "variety": "Gelber Muskateller",
+        "index": 1724
+    },
+    "Cinsault": {
+        "variety": "Cinsault",
+        "index": 1746
+    },
+    "Ruché": {
+        "variety": "Ruché",
+        "index": 1807
+    },
+    "Albana": {
+        "variety": "Albana",
+        "index": 1822
+    },
+    "Vernaccia": {
+        "variety": "Vernaccia",
+        "index": 1847
+    },
+    "Roussanne-Viognier": {
+        "variety": "Roussanne-Viognier",
+        "index": 1929
+    },
+    "Alvarinho-Chardonnay": {
+        "variety": "Alvarinho-Chardonnay",
+        "index": 1931
+    },
+    "Touriga Nacional Blend": {
+        "variety": "Touriga Nacional Blend",
+        "index": 1932
+    },
+    "Ribolla Gialla": {
+        "variety": "Ribolla Gialla",
+        "index": 1953
+    },
+    "Chardonnay-Viognier": {
+        "variety": "Chardonnay-Viognier",
+        "index": 1989
+    },
+    "Bical": {
+        "variety": "Bical",
+        "index": 1991
+    },
+    "Moscato Giallo": {
+        "variety": "Moscato Giallo",
+        "index": 2014
+    },
+    "Coda di Volpe": {
+        "variety": "Coda di Volpe",
+        "index": 2015
+    },
+    "Syrah-Cabernet": {
+        "variety": "Syrah-Cabernet",
+        "index": 2019
+    },
+    "Xinomavro": {
+        "variety": "Xinomavro",
+        "index": 2020
+    },
+    "Brachetto": {
+        "variety": "Brachetto",
+        "index": 2058
+    },
+    "Alicante": {
+        "variety": "Alicante",
+        "index": 2076
+    },
+    "Chelois": {
+        "variety": "Chelois",
+        "index": 2079
+    },
+    "Tokay Pinot Gris": {
+        "variety": "Tokay Pinot Gris",
+        "index": 2095
+    },
+    "Greco": {
+        "variety": "Greco",
+        "index": 2138
+    },
+    "Perricone": {
+        "variety": "Perricone",
+        "index": 2139
+    },
+    "Claret": {
+        "variety": "Claret",
+        "index": 2170
+    },
+    "Nero d'Avola": {
+        "variety": "Nero d'Avola",
+        "index": 2266
+    },
+    "Loureiro": {
+        "variety": "Loureiro",
+        "index": 2409
+    },
+    "Dornfelder": {
+        "variety": "Dornfelder",
+        "index": 2442
+    },
+    "Portuguese Rosé": {
+        "variety": "Portuguese Rosé",
+        "index": 2443
+    },
+    "Muscat Blanc": {
+        "variety": "Muscat Blanc",
+        "index": 2479
+    },
+    "Insolia": {
+        "variety": "Insolia",
+        "index": 2551
+    },
+    "Gros Manseng": {
+        "variety": "Gros Manseng",
+        "index": 2552
+    },
+    "Primitivo": {
+        "variety": "Primitivo",
+        "index": 2555
+    },
+    "Pedro Ximénez": {
+        "variety": "Pedro Ximénez",
+        "index": 2684
+    },
+    "Tokaji": {
+        "variety": "Tokaji",
+        "index": 2709
+    },
+    "Inzolia": {
+        "variety": "Inzolia",
+        "index": 2765
+    },
+    "Viura-Chardonnay": {
+        "variety": "Viura-Chardonnay",
+        "index": 2776
+    },
+    "Monastrell-Syrah": {
+        "variety": "Monastrell-Syrah",
+        "index": 2782
+    },
+    "Viognier-Roussanne": {
+        "variety": "Viognier-Roussanne",
+        "index": 2875
+    },
+    "Godello": {
+        "variety": "Godello",
+        "index": 2876
+    },
+    "Syrah-Grenache": {
+        "variety": "Syrah-Grenache",
+        "index": 2887
+    },
+    "Moschofilero": {
+        "variety": "Moschofilero",
+        "index": 2896
+    },
+    "Graciano": {
+        "variety": "Graciano",
+        "index": 2945
+    },
+    "Trebbiano": {
+        "variety": "Trebbiano",
+        "index": 2947
+    },
+    "Trousseau": {
+        "variety": "Trousseau",
+        "index": 3001
+    },
+    "Marsanne-Roussanne": {
+        "variety": "Marsanne-Roussanne",
+        "index": 3097
+    },
+    "Antão Vaz": {
+        "variety": "Antão Vaz",
+        "index": 3108
+    },
+    "Scheurebe": {
+        "variety": "Scheurebe",
+        "index": 3147
+    },
+    "Pinotage": {
+        "variety": "Pinotage",
+        "index": 3159
+    },
+    "Colorino": {
+        "variety": "Colorino",
+        "index": 3230
+    },
+    "Syrah-Mourvèdre": {
+        "variety": "Syrah-Mourvèdre",
+        "index": 3238
+    },
+    "Tinto Fino": {
+        "variety": "Tinto Fino",
+        "index": 3241
+    },
+    "Cabernet Franc-Malbec": {
+        "variety": "Cabernet Franc-Malbec",
+        "index": 3255
+    },
+    "Picapoll": {
+        "variety": "Picapoll",
+        "index": 3326
+    },
+    "Teran": {
+        "variety": "Teran",
+        "index": 3337
+    },
+    "Muskat Ottonel": {
+        "variety": "Muskat Ottonel",
+        "index": 3342
+    },
+    "Xarel-lo": {
+        "variety": "Xarel-lo",
+        "index": 3365
+    },
+    "Provence white blend": {
+        "variety": "Provence white blend",
+        "index": 3366
+    },
+    "Nosiola": {
+        "variety": "Nosiola",
+        "index": 3416
+    },
+    "Schiava": {
+        "variety": "Schiava",
+        "index": 3417
+    },
+    "Falanghina": {
+        "variety": "Falanghina",
+        "index": 3476
+    },
+    "Pallagrello": {
+        "variety": "Pallagrello",
+        "index": 3485
+    },
+    "Casavecchia": {
+        "variety": "Casavecchia",
+        "index": 3486
+    },
+    "Blanc du Bois": {
+        "variety": "Blanc du Bois",
+        "index": 3516
+    },
+    "Traminette": {
+        "variety": "Traminette",
+        "index": 3524
+    },
+    "Petit Manseng": {
+        "variety": "Petit Manseng",
+        "index": 3612
+    },
+    "Tannat-Cabernet": {
+        "variety": "Tannat-Cabernet",
+        "index": 3618
+    },
+    "Tinta de Toro": {
+        "variety": "Tinta de Toro",
+        "index": 3647
+    },
+    "Traminer": {
+        "variety": "Traminer",
+        "index": 3670
+    },
+    "Gamay Noir": {
+        "variety": "Gamay Noir",
+        "index": 3697
+    },
+    "Kalecik Karasi": {
+        "variety": "Kalecik Karasi",
+        "index": 3716
+    },
+    "Grenache-Syrah": {
+        "variety": "Grenache-Syrah",
+        "index": 3732
+    },
+    "Sauvignon Blanc-Semillon": {
+        "variety": "Sauvignon Blanc-Semillon",
+        "index": 3823
+    },
+    "Agiorgitiko": {
+        "variety": "Agiorgitiko",
+        "index": 3885
+    },
+    "Pinot Meunier": {
+        "variety": "Pinot Meunier",
+        "index": 3891
+    },
+    "Blauburger": {
+        "variety": "Blauburger",
+        "index": 3967
+    },
+    "Viosinho": {
+        "variety": "Viosinho",
+        "index": 3969
+    },
+    "Gouveio": {
+        "variety": "Gouveio",
+        "index": 4297
+    },
+    "Fer Servadou": {
+        "variety": "Fer Servadou",
+        "index": 4336
+    },
+    "Seyval Blanc": {
+        "variety": "Seyval Blanc",
+        "index": 4507
+    },
+    "Verdejo-Sauvignon Blanc": {
+        "variety": "Verdejo-Sauvignon Blanc",
+        "index": 4691
+    },
+    "Rotgipfler": {
+        "variety": "Rotgipfler",
+        "index": 4709
+    },
+    "Lemberger": {
+        "variety": "Lemberger",
+        "index": 4780
+    },
+    "Picolit": {
+        "variety": "Picolit",
+        "index": 4821
+    },
+    "Müller-Thurgau": {
+        "variety": "Müller-Thurgau",
+        "index": 4927
+    },
+    "Ansonica": {
+        "variety": "Ansonica",
+        "index": 4929
+    },
+    "Tannat-Cabernet Franc": {
+        "variety": "Tannat-Cabernet Franc",
+        "index": 5028
+    },
+    "Loin de l'Oeil": {
+        "variety": "Loin de l'Oeil",
+        "index": 5036
+    },
+    "Piedirosso": {
+        "variety": "Piedirosso",
+        "index": 5049
+    },
+    "Tinta Madeira": {
+        "variety": "Tinta Madeira",
+        "index": 5081
+    },
+    "Carmenère-Syrah": {
+        "variety": "Carmenère-Syrah",
+        "index": 5126
+    },
+    "Centesimino": {
+        "variety": "Centesimino",
+        "index": 5149
+    },
+    "Zierfandler-Rotgipfler": {
+        "variety": "Zierfandler-Rotgipfler",
+        "index": 5156
+    },
+    "Black Muscat": {
+        "variety": "Black Muscat",
+        "index": 5217
+    },
+    "Ugni Blanc": {
+        "variety": "Ugni Blanc",
+        "index": 5224
+    },
+    "Gros and Petit Manseng": {
+        "variety": "Gros and Petit Manseng",
+        "index": 5229
+    },
+    "Shiraz-Grenache": {
+        "variety": "Shiraz-Grenache",
+        "index": 5285
+    },
+    "Grenache Gris": {
+        "variety": "Grenache Gris",
+        "index": 5349
+    },
+    "Alfrocheiro": {
+        "variety": "Alfrocheiro",
+        "index": 5390
+    },
+    "Nuragus": {
+        "variety": "Nuragus",
+        "index": 5492
+    },
+    "Cabernet Sauvignon-Malbec": {
+        "variety": "Cabernet Sauvignon-Malbec",
+        "index": 5511
+    },
+    "Vidal": {
+        "variety": "Vidal",
+        "index": 5534
+    },
+    "Grenache-Shiraz": {
+        "variety": "Grenache-Shiraz",
+        "index": 5626
+    },
+    "Malbec-Tannat": {
+        "variety": "Malbec-Tannat",
+        "index": 5703
+    },
+    "Vidal Blanc": {
+        "variety": "Vidal Blanc",
+        "index": 5748
+    },
+    "Garnacha-Monastrell": {
+        "variety": "Garnacha-Monastrell",
+        "index": 5749
+    },
+    "Tocai": {
+        "variety": "Tocai",
+        "index": 5840
+    },
+    "Manzoni": {
+        "variety": "Manzoni",
+        "index": 5848
+    },
+    "Sauvignon Gris": {
+        "variety": "Sauvignon Gris",
+        "index": 6159
+    },
+    "Prugnolo Gentile": {
+        "variety": "Prugnolo Gentile",
+        "index": 6371
+    },
+    "Tinta Fina": {
+        "variety": "Tinta Fina",
+        "index": 6412
+    },
+    "Trajadura": {
+        "variety": "Trajadura",
+        "index": 6464
+    },
+    "Macabeo-Chardonnay": {
+        "variety": "Macabeo-Chardonnay",
+        "index": 6476
+    },
+    "Prieto Picudo": {
+        "variety": "Prieto Picudo",
+        "index": 6479
+    },
+    "Merlot-Malbec": {
+        "variety": "Merlot-Malbec",
+        "index": 6495
+    },
+    "Grecanico": {
+        "variety": "Grecanico",
+        "index": 6500
+    },
+    "Chenin Blanc-Chardonnay": {
+        "variety": "Chenin Blanc-Chardonnay",
+        "index": 6596
+    },
+    "Carineña": {
+        "variety": "Carineña",
+        "index": 6681
+    },
+    "Colombard": {
+        "variety": "Colombard",
+        "index": 6697
+    },
+    "Erbaluce": {
+        "variety": "Erbaluce",
+        "index": 6773
+    },
+    "Chenin Blanc-Sauvignon Blanc": {
+        "variety": "Chenin Blanc-Sauvignon Blanc",
+        "index": 6799
+    },
+    "Merlot-Petite Verdot": {
+        "variety": "Merlot-Petite Verdot",
+        "index": 6954
+    },
+    "Syrah-Petite Sirah": {
+        "variety": "Syrah-Petite Sirah",
+        "index": 6957
+    },
+    "Susumaniello": {
+        "variety": "Susumaniello",
+        "index": 6969
+    },
+    "Merlot-Cabernet": {
+        "variety": "Merlot-Cabernet",
+        "index": 7040
+    },
+    "Encruzado": {
+        "variety": "Encruzado",
+        "index": 7079
+    },
+    "Counoise": {
+        "variety": "Counoise",
+        "index": 7412
+    },
+    "Cabernet Moravia": {
+        "variety": "Cabernet Moravia",
+        "index": 7437
+    },
+    "Syrah-Carignan": {
+        "variety": "Syrah-Carignan",
+        "index": 7449
+    },
+    "Touriga": {
+        "variety": "Touriga",
+        "index": 7541
+    },
+    "Portuguese Sparkling": {
+        "variety": "Portuguese Sparkling",
+        "index": 7544
+    },
+    "Orange Muscat": {
+        "variety": "Orange Muscat",
+        "index": 7605
+    },
+    "Assyrtiko": {
+        "variety": "Assyrtiko",
+        "index": 7653
+    },
+    "Pinot Auxerrois": {
+        "variety": "Pinot Auxerrois",
+        "index": 7677
+    },
+    "Ramisco": {
+        "variety": "Ramisco",
+        "index": 7854
+    },
+    "Muscat Canelli": {
+        "variety": "Muscat Canelli",
+        "index": 8018
+    },
+    "Catalanesca": {
+        "variety": "Catalanesca",
+        "index": 8036
+    },
+    "Listán Negro": {
+        "variety": "Listán Negro",
+        "index": 8093
+    },
+    "Portuguiser": {
+        "variety": "Portuguiser",
+        "index": 8102
+    },
+    "Bobal": {
+        "variety": "Bobal",
+        "index": 8131
+    },
+    "Gewürztraminer-Riesling": {
+        "variety": "Gewürztraminer-Riesling",
+        "index": 8158
+    },
+    "Sauvignon Blanc-Verdejo": {
+        "variety": "Sauvignon Blanc-Verdejo",
+        "index": 8178
+    },
+    "Cabernet Franc-Merlot": {
+        "variety": "Cabernet Franc-Merlot",
+        "index": 8200
+    },
+    "Grenache-Mourvèdre": {
+        "variety": "Grenache-Mourvèdre",
+        "index": 8288
+    },
+    "Grauburgunder": {
+        "variety": "Grauburgunder",
+        "index": 8315
+    },
+    "Shiraz-Cabernet": {
+        "variety": "Shiraz-Cabernet",
+        "index": 8390
+    },
+    "Chardonnay-Pinot Blanc": {
+        "variety": "Chardonnay-Pinot Blanc",
+        "index": 8446
+    },
+    "Cabernet Sauvignon-Cabernet Franc": {
+        "variety": "Cabernet Sauvignon-Cabernet Franc",
+        "index": 8514
+    },
+    "Syrah-Viognier": {
+        "variety": "Syrah-Viognier",
+        "index": 8561
+    },
+    "Zierfandler": {
+        "variety": "Zierfandler",
+        "index": 8683
+    },
+    "Carignane": {
+        "variety": "Carignane",
+        "index": 8744
+    },
+    "Garnacha-Cabernet": {
+        "variety": "Garnacha-Cabernet",
+        "index": 8768
+    },
+    "Garnacha-Tempranillo": {
+        "variety": "Garnacha-Tempranillo",
+        "index": 8769
+    },
+    "Pignoletto": {
+        "variety": "Pignoletto",
+        "index": 8922
+    },
+    "Pinot Blanc-Chardonnay": {
+        "variety": "Pinot Blanc-Chardonnay",
+        "index": 8997
+    },
+    "Malvasia di Candia": {
+        "variety": "Malvasia di Candia",
+        "index": 9126
+    },
+    "Pallagrello Nero": {
+        "variety": "Pallagrello Nero",
+        "index": 9250
+    },
+    "Hondarrabi Zuri": {
+        "variety": "Hondarrabi Zuri",
+        "index": 9295
+    },
+    "Touriga Nacional-Cabernet Sauvignon": {
+        "variety": "Touriga Nacional-Cabernet Sauvignon",
+        "index": 9300
+    },
+    "Tempranillo Blanco": {
+        "variety": "Tempranillo Blanco",
+        "index": 9320
+    },
+    "Mataro": {
+        "variety": "Mataro",
+        "index": 9345
+    },
+    "Welschriesling": {
+        "variety": "Welschriesling",
+        "index": 9362
+    },
+    "Muscadelle": {
+        "variety": "Muscadelle",
+        "index": 9427
+    },
+    "Bual": {
+        "variety": "Bual",
+        "index": 9448
+    },
+    "Symphony": {
+        "variety": "Symphony",
+        "index": 9724
+    },
+    "Groppello": {
+        "variety": "Groppello",
+        "index": 9810
+    },
+    "Roter Traminer": {
+        "variety": "Roter Traminer",
+        "index": 9912
+    },
+    "Garnacha-Cariñena": {
+        "variety": "Garnacha-Cariñena",
+        "index": 9917
+    },
+    "Kekfrankos": {
+        "variety": "Kekfrankos",
+        "index": 9981
+    },
+    "Gamza": {
+        "variety": "Gamza",
+        "index": 9985
+    }
+}
