@@ -12,13 +12,18 @@ module.exports = (sequelize, DataTypes) => {
     region_1: DataTypes.STRING,
     region_2: DataTypes.STRING,
     userId: DataTypes.INTEGER,
-    wineryId: DataTypes.INTEGER,
+    wineryId: {
+      type: DataTypes.INTEGER,
+    },
     colorTypeId: DataTypes.INTEGER,
     wineTypeId: DataTypes.INTEGER
   }, {});
   Wine.associate = function(models) {
     Wine.belongsTo(models.User, { foreignKey: 'userId' });
-    Wine.belongsTo(models.Winery, { foreignKey: 'wineryId' });
+    Wine.belongsTo(models.Winery, { 
+      foreignKey: 'wineryId',
+      // constraints: false,
+    });
     Wine.belongsTo(models.ColorType, { foreignKey: 'colorTypeId' });
     Wine.belongsTo(models.WineType, { foreignKey: 'wineTypeId' });
     Wine.hasMany(models.Review, { foreignKey: 'wineId' });

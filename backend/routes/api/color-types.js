@@ -42,9 +42,7 @@ router.get(
     const colorTypes = await ColorType.findAll({ limit: 10 });
 
     if (colorTypes) {
-      return res.json({
-        colorTypes,
-      });
+      return res.json(colorTypes);
     } else {
       next(colorTypeNotFoundError());
     }
@@ -57,9 +55,7 @@ router.get(
     const colorType = await ColorType.findByPk(req.params.id);
 
     if (colorType) {
-      return res.json({
-        colorType,
-      });
+      return res.json(colorType);
     } else {
       next(colorTypeNotFoundError(req.params.id));
     }
@@ -76,9 +72,7 @@ router.put(
     if (colorType) {
       await colorType.update(req.body);
   
-      return res.json({
-        colorType,
-      });
+      return res.json(colorType);
 
     } else {
       next(colorTypeNotFoundError(req.params.id));
@@ -97,9 +91,7 @@ router.post(
     if (colorType) {
       await colorType.save();
 
-      return res.json({
-        colorType,
-      });
+      return res.json(colorType);
     } else {
       next(colorTypePostError());
     }
@@ -116,9 +108,7 @@ router.delete(
     if (colorType) {
       await colorType.destroy();
 
-      return res.json({
-        colorType, // or the id => colorType.id
-      });
+      return res.json(colorType);
     } else {
       next(colorTypeNotFoundError(req.params.id));
     }

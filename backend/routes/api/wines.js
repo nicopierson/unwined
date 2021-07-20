@@ -73,9 +73,7 @@ router.get(
     const wines = await Wine.findAll({ limit: 10 });
 
     if (wines) {
-      return res.json({
-        wines,
-      });
+      return res.json(wines);
     } else {
       next(wineNotFoundError());
     }
@@ -88,9 +86,7 @@ router.get(
     const wine = await Wine.findByPk(req.params.id);
 
     if (wine) {
-      return res.json({
-        wine,
-      });
+      return res.json(wine);
     } else {
       next(wineNotFoundError(req.params.id));
     }
@@ -107,9 +103,7 @@ router.put(
     if (wine) {
       await wine.update(req.body);
   
-      return res.json({
-        wine,
-      });
+      return res.json(wine);
 
     } else {
       next(wineNotFoundError(req.params.id));
@@ -129,9 +123,7 @@ router.post(
     if (wine) {
       await wine.save();
 
-      return res.json({
-        wine,
-      });
+      return res.json(wine);
     } else {
       next(winePostError());
     }
@@ -148,9 +140,7 @@ router.delete(
     if (wine) {
       await wine.destroy();
 
-      return res.json({
-        wine, // or the id => wine.id
-      });
+      return res.json(wine);
     } else {
       next(wineNotFoundError(req.params.id));
     }

@@ -50,9 +50,7 @@ router.get(
     const reviews = await Review.findAll({ limit: 10 });
 
     if (reviews) {
-      return res.json({
-        reviews,
-      });
+      return res.json(reviews);
     } else {
       next(reviewNotFoundError());
     }
@@ -65,9 +63,7 @@ router.get(
     const review = await Review.findByPk(req.params.id);
 
     if (review) {
-      return res.json({
-        review,
-      });
+      return res.json(review);
     } else {
       next(reviewNotFoundError(req.params.id));
     }
@@ -84,9 +80,7 @@ router.put(
     if (review) {
       await review.update(req.body);
   
-      return res.json({
-        review,
-      });
+      return res.json(review);
 
     } else {
       next(reviewNotFoundError(req.params.id));
@@ -105,9 +99,7 @@ router.post(
     if (review) {
       await review.save();
 
-      return res.json({
-        review,
-      });
+      return res.json(review);
     } else {
       next(reviewPostError());
     }
@@ -124,9 +116,7 @@ router.delete(
     if (review) {
       await review.destroy();
 
-      return res.json({
-        review, // or the id => review.id
-      });
+      return res.json(review);
     } else {
       next(reviewNotFoundError(req.params.id));
     }
