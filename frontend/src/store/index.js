@@ -3,10 +3,12 @@ import thunk from 'redux-thunk';
 
 import session from './session';
 import wine from './wine';
+import winery from './winery';
 
 const rootReducer = combineReducers({
   session,
   wine,
+  winery,
 });
 
 let enhancer;
