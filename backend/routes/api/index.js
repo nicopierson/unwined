@@ -5,9 +5,11 @@ const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth.j
 
 const sessionRouter = require('./session.js');
 const usersRouter = require('./users.js');
+const winesRouter = require('./wines.js');
 
 router.use('/session', sessionRouter);
 router.use('/users', usersRouter);
+router.use('/wines', winesRouter);
 
 router.get(
   '/restore-user',
