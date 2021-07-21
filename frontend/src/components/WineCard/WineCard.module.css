@@ -1,3 +1,8 @@
+* {
+  text-decoration: none;
+  color: #333333;
+}
+
 .card_container {
   padding: 20px 15px 20px 40px;
 }

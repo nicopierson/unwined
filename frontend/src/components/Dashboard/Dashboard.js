@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react';
+import { NavLink, Route } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'; 
+
+import WineDetail from '../WineDetail';
 
 import { getOneWine, getWine, deleteWine, createWine, editWine } from '../../store/wine';
 import WineCard from '../WineCard';
@@ -74,6 +77,11 @@ const DashBoard = () => {
     <>
       <h2>Dashboard</h2>
       <h3>{wines[1]?.name}</h3>
+      <div>
+        <NavLink to={`/wines/add`}>
+      
+        </NavLink>
+      </div>
       {/* <h3>{oneWine?.name}</h3> */}
       <div>
         <button
@@ -98,7 +106,9 @@ const DashBoard = () => {
       </div>
       <div className={styles.wine_list}>
         { wines && wines.map(wine => (
-          <WineCard wine={wine}/>
+          <NavLink key={wine.name} to={`/wines/${wine.id}`}>
+            <WineCard wine={wine}/>
+          </NavLink>
         ))}
       </div>
     </>

@@ -1,15 +1,22 @@
-import styles from './CardInfo.module.css';
+import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
-const CardInfo = (props) => {
+import { getOneWine } from '../../store/wine';
 
-  if (!props.wine) {
-    return null;
-  }
+import styles from './WineDetail.module.css';
 
-  const { name, description, wineTypeId, country, rating, price, wineryId } = props.wine;
-
+const WineDetail = () => {
+  const dispatch = useDispatch();
+  const { wineId } = useParams();
+  const wine = useSelector(state => state.wine[wineId]);
+  
+  const { name, country, description, rating, price } = wine;
+  
   return (
-    <div className={styles.info}>
+    <div>
+      <h2>Wine Detail</h2>
+      <div className={styles.info}>
       <div className={styles.name}>
         <div className={styles.name_details}>
           <h1 className={styles.text_big}>{name}</h1>
@@ -44,7 +51,8 @@ const CardInfo = (props) => {
         </div>
       </div>
     </div>
+    </div>
   );
 };
 
-export default CardInfo;
+export default WineDetail;
