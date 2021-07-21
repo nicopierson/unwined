@@ -3,12 +3,12 @@ import CardInfo from "./CardInfo";
 
 import styles from './WineCard.module.css';
 
-const WineCard = () => {
+const WineCard = ({ wine }) => {
   return (
     <div className={styles.card_container}>
       <div className={styles.card}>
         <CardBackground />
-        <CardInfo />
+        <CardInfo wine={wine}/>
       </div>
     </div>
   );

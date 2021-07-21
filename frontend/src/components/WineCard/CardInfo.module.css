@@ -1,5 +1,5 @@
 .info {
-  width: 80%;
+  width: 85%;
   background-color: white;
   z-index: 1;
   padding: 30px 30px;
@@ -10,27 +10,30 @@
 }
 
 .name {
-  padding: 0 0 8px 0;
+  padding: 0 0  8px 0;
 }
 
-.name div {
+.name_details {
   display: flex;
   align-items: center;
 }
 
 .name .text_big {
   font-size: 1.3rem;
-  margin-right: 10px;
   color: #333333;
   line-height: 1;
 }
 
 .name div .country {
+  grid-row: 1 / 2;
+  grid-column: 2 / 2;
   background-color: red;
   text-transform: uppercase;
   color: #FFFFFF;
-  padding: 3px 10px;
   border-radius: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .wine_type,
@@ -38,6 +41,7 @@
   font-weight: 500;
   color: #444444;
   margin-top: 5px;
+  margin-right: 8px;
   text-transform: capitalize;
 }
 
@@ -50,6 +54,22 @@
 .description,
 .points_container {
   padding: 10px 0;
+}
+
+.card_sub_info {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+
+.wine_type {
+  grid-row: 1 / 1;
+  grid-column: 1 / 1;
+}
+
+.winery {
+  grid-row: 2 / 2;
+  grid-column: 1 / 1;
 }
 
 .title_info {

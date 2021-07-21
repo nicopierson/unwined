@@ -9,7 +9,7 @@ const CardBackground = () => {
         <div className={styles.gradient} color='gray'></div>
       </div>
       <div className={styles.logo}></div>
-      <h2 className={styles.logo_text}></h2>
+      {/* <h2 className={styles.logo_text}></h2> */}
       <img alt='wine_bottle' src={redWineBottle} className={styles.background_img}/>
       {/* <WineCardImg className={styles.background_img}/> */}
       {/* <div className={styles.flag}>

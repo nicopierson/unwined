@@ -1,10 +1,8 @@
 .card_container {
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display:inline-flex;
   padding: 40px;
   overflow: hidden;
+  margin-left: 25px;
 }
 
 .card {

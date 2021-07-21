@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { getOneWine, getWine, deleteWine, createWine, editWine } from '../../store/wine';
 import WineCard from '../WineCard';
+import styles from './Dashboard.module.css';
 
 const DashBoard = () => {
   const dispatch = useDispatch();
@@ -49,7 +50,7 @@ const DashBoard = () => {
   }, [dispatch]);
 
   const wines = useSelector((state) => {
-    return state.wine;
+    return state.wine.list.map(wineId => state.wine[wineId]);
   });
 
   const handleDelete = () => {
@@ -91,13 +92,11 @@ const DashBoard = () => {
           Edit
         </button>
       </div>
-      <div>
-        <WineCard />
+      <div className={styles.wine_list}>
+        { wines && wines.map(wine => (
+          <WineCard wine={wine}/>
+        ))}
       </div>
-
-      {/* {wines.length && (wines.map((wine) => (
-        <p>{wine.name}</p>
-      )))} */}
     </>
   );
 };
