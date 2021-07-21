@@ -1,15 +1,15 @@
 .card_container {
-  background-color: aqua;
-  min-height: 100px;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 40px;
+  overflow: hidden;
 }
 
 .card {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 500px;
+  width: 450px;
 }

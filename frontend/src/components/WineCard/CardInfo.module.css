@@ -1,4 +1,93 @@
 .info {
-  background-color: blue;
-  width: 50%;
+  width: 80%;
+  background-color: white;
+  z-index: 1;
+  padding: 30px 30px;
+  box-shadow: 15px 0 30px rgba(0, 0, 0, 0.1),
+  0 -15px 30px rgba(0, 0, 0, 0.1),
+  0 15px 30px rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+}
+
+.name {
+  padding: 0 0 8px 0;
+}
+
+.name div {
+  display: flex;
+  align-items: center;
+}
+
+.name .text_big {
+  font-size: 1.3rem;
+  margin-right: 10px;
+  color: #333333;
+  line-height: 1;
+}
+
+.name div .country {
+  background-color: red;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  padding: 3px 10px;
+  border-radius: 3px;
+}
+
+.wine_type,
+.winery {
+  font-weight: 500;
+  color: #444444;
+  margin-top: 5px;
+  text-transform: capitalize;
+}
+
+.name, .description, .points_container {
+  border-bottom: 1px solid #dadada;
+}
+
+.name,
+.name_details,
+.description,
+.points_container {
+  padding: 10px 0;
+}
+
+.title_info {
+  color: #3a3a3a;
+  font-weight: 600;
+  font-size: 1rem;
+  text-transform: uppercase;
+}
+
+.price_container {
+  padding-top: 15px;
+  display: flex;
+  justify-content: space-between;
+  color: #333333;
+}
+
+.price {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.favorite {
+  padding: .7rem .7rem;
+  background-color: red;
+  text-decoration: none;
+  color: #FFFFFF;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 1;
+  transition: .5s;
+}
+
+.favorite:hover {
+  transform: scale(1.1);
+}
+
+.favorite i {
+  margin-right: 5px;
 }
