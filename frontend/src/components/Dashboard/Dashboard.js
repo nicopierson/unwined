@@ -53,8 +53,12 @@ const DashBoard = () => {
     return state.wine.list.map(wineId => state.wine[wineId]);
   });
 
+  // const getONE = async (id) => {
+  //   const wine = await dispatch(getOneWine(id));
+  // }
+
   const handleDelete = () => {
-    dispatch(deleteWine(1));
+    dispatch(deleteWine(2));
   };
 
   const handlePost = () => {

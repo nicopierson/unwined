@@ -21,8 +21,10 @@ const CardInfo = (props) => {
           <span className={styles.country}>{country}</span>
         </div>
       </div>
-      <div className={styles.description}>
+      <div className={`${styles.description_container}`}>
         <h3 className={`${styles.description_info} ${styles.title_info}`}>Description</h3>
+      </div>
+      <div className={styles.description}>
         <p className={styles.description_text}>{description}</p>
       </div>
       <div className={styles.points_container}>

@@ -27,7 +27,7 @@ export const getWine = () => async dispatch => {
     console.log(wines);
     dispatch(loadWine(wines));
   }
-  return wines;
+  // return wines;
 };
 
 export const getOneWine = (id) => async dispatch => {
@@ -88,11 +88,14 @@ export const deleteWine = (id) => async dispatch => {
 
 const sortList = (wines) => {
   return wines.sort((a, b) => {
-    return a.name > b.name;
+    return a.name > b.name; //! FIX THIS TO SORT ALPHABETICALLY
   }).map((wine) => wine.id);
 };
 
 const initialState = { list: [] };
+// STATE:
+// list - array of keys to order
+// object - key of id and the values are your objects
 
 const wineReducer = (state = initialState, action) => {
   switch(action.type) {
@@ -113,6 +116,7 @@ const wineReducer = (state = initialState, action) => {
           ...state,
           [action.wine.id]: action.wine
         };
+        // Takes care of list
         const wineList = newState.list.map(id => newState[id]);
         wineList.push(action.wine);
         newState.list = sortList(wineList);

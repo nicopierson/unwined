@@ -1,5 +1,9 @@
 .info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   width: 85%;
+  height: 100%;
   background-color: white;
   z-index: 1;
   padding: 30px 30px;
@@ -49,11 +53,12 @@
   border-bottom: 1px solid #dadada;
 }
 
-.name,
+
 .name_details,
 .description,
+.description_title
 .points_container {
-  padding: 10px 0;
+  padding: 6px 0;
 }
 
 .card_sub_info {
@@ -80,9 +85,10 @@
 }
 
 .price_container {
-  padding-top: 15px;
   display: flex;
+  align-items: flex-end;
   justify-content: space-between;
+  padding-top: 15px;
   color: #333333;
 }
 
@@ -110,4 +116,14 @@
 
 .favorite i {
   margin-right: 5px;
+}
+
+.description {
+  overflow-y: auto;
+  flex: 1 1 auto;
+}
+
+.description_container,
+.points_container {
+  padding: 5px 0;
 }
