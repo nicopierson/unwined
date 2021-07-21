@@ -1,13 +1,12 @@
 .card_container {
-  display: inline-flex;
-  padding: 40px;
-  overflow: hidden;
+  padding: 20px 15px 20px 40px;
 }
 
 .card {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 450px;
-  height: 450px;
+  width: 400px;
+  height: 400px;
+  padding: 5px;
 }

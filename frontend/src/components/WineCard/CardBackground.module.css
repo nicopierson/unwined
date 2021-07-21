@@ -1,7 +1,7 @@
 .background {
   position: relative;
   width: 15%;
-  height: 400px;
+  height: 360px;
   box-shadow: -15px 0 30px rgba(0, 0, 0, 0.1),
   0 -15px 30px rgba(0, 0, 0, 0.1),
   0 15px 30px rgba(0, 0, 0, 0.1);
@@ -72,7 +72,7 @@
 
 .background_img {
   position: absolute;
-  width: 200px;
+  width: 185px;
   opacity: 1;
   left: -85px;
   z-index: -1;

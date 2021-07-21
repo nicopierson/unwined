@@ -27,9 +27,12 @@ const CardInfo = (props) => {
       <div className={styles.description}>
         <p className={styles.description_text}>{description}</p>
       </div>
-      <div className={styles.points_container}>
+      <div className={styles.rating_container}>
         <span className={styles.title_info}>Rating</span>
-        <h1 className={styles.points}>{rating}</h1>
+        <div className={styles.rating}>
+          <h1 className={styles.rating_text}>{rating}</h1>
+          <i className={`fas fa-star`}></i>
+        </div>
       </div>
       <div className={styles.price_container}>
         <span className={styles.favorite}>

@@ -11,6 +11,7 @@
   0 -15px 30px rgba(0, 0, 0, 0.1),
   0 15px 30px rgba(0, 0, 0, 0.1);
   font-size: 14px;
+  flex: 1 1 auto;
 }
 
 .name {
@@ -49,7 +50,7 @@
   text-transform: capitalize;
 }
 
-.name, .description, .points_container {
+.name, .description, .rating_container {
   border-bottom: 1px solid #dadada;
 }
 
@@ -57,6 +58,7 @@
 .name_details,
 .description,
 .description_title
+.rating,
 .points_container {
   padding: 6px 0;
 }
@@ -88,7 +90,7 @@
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  padding-top: 15px;
+  padding-top: 10px;
   color: #333333;
 }
 
@@ -123,7 +125,28 @@
   flex: 1 1 auto;
 }
 
+.rating_container,
 .description_container,
-.points_container {
+.rating {
   padding: 5px 0;
+}
+
+.rating_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rating {
+  display: flex;
+}
+
+.rating i {
+  color: rgb(255, 187, 0);
+  font-size: 12px;
+  margin-left: 2px;
+}
+
+.rating_text {
+  font-size: 18px;
 }
