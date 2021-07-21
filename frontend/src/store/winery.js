@@ -132,7 +132,7 @@ const wineryReducer = (state = initialState, action) => {
         ...state
       };
       const wineryList = newState.list.filter(wineryId => wineryId !== action.wineryId);
-      newState.list = sortList(wineryList);
+      newState.list = wineryList;
       delete newState[action.wineryId];
 
       return newState;
