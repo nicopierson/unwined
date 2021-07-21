@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'; 
 
 import { getOneWine, getWine, deleteWine, createWine, editWine } from '../../store/wine';
+import WineCard from '../WineCard';
 
 const DashBoard = () => {
   const dispatch = useDispatch();
@@ -89,6 +90,9 @@ const DashBoard = () => {
         >
           Edit
         </button>
+      </div>
+      <div>
+        <WineCard />
       </div>
 
       {/* {wines.length && (wines.map((wine) => (

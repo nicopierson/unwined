@@ -1,0 +1,25 @@
+.background {
+  position: relative;
+  width: 50%;
+  height: 400px;
+  box-shadow: -15px 0 30px rgba(0, 0, 0, 0.1),
+  0 -15px 30px rgba(0, 0, 0, 0.1),
+  0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.gradients {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+}
+
+.gradient {
+  
+}
+
+.background_img {
+  height: 80px;
+  display: none;
+}
