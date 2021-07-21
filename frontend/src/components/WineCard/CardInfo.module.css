@@ -1,0 +1,153 @@
+.info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 85%;
+  height: 100%;
+  background-color: white;
+  z-index: 1;
+  padding: 30px 30px;
+  box-shadow: 15px 0 30px rgba(0, 0, 0, 0.1),
+  0 -15px 30px rgba(0, 0, 0, 0.1),
+  0 15px 30px rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+  flex: 1 1 auto;
+}
+
+.name {
+  padding: 0 0  8px 0;
+}
+
+.name_details {
+  display: flex;
+  align-items: center;
+}
+
+.name .text_big {
+  font-size: 1.3rem;
+  color: #333333;
+  line-height: 1;
+}
+
+.name div .country {
+  grid-row: 1 / 2;
+  grid-column: 2 / 2;
+  background-color: red;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  border-radius: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wine_type,
+.winery {
+  font-weight: 500;
+  color: #444444;
+  margin-top: 5px;
+  margin-right: 8px;
+  text-transform: capitalize;
+}
+
+.name, .description, .rating_container {
+  border-bottom: 1px solid #dadada;
+}
+
+
+.name_details,
+.description,
+.description_title
+.rating,
+.points_container {
+  padding: 6px 0;
+}
+
+.card_sub_info {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+
+.wine_type {
+  grid-row: 1 / 1;
+  grid-column: 1 / 1;
+}
+
+.winery {
+  grid-row: 2 / 2;
+  grid-column: 1 / 1;
+}
+
+.title_info {
+  color: #3a3a3a;
+  font-weight: 600;
+  font-size: 1rem;
+  text-transform: uppercase;
+}
+
+.price_container {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding-top: 10px;
+  color: #333333;
+}
+
+.price {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.favorite {
+  padding: .7rem .7rem;
+  background-color: red;
+  text-decoration: none;
+  color: #FFFFFF;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 1;
+  transition: .5s;
+}
+
+.favorite:hover {
+  transform: scale(1.05);
+}
+
+.favorite i {
+  margin-right: 5px;
+  color: #ffffff;
+}
+
+.description {
+  overflow-y: auto;
+  flex: 1 1 auto;
+}
+
+.rating_container,
+.description_container,
+.rating {
+  padding: 5px 0;
+}
+
+.rating_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rating {
+  display: flex;
+}
+
+.rating i {
+  color: rgb(255, 187, 0);
+  font-size: 12px;
+  margin-left: 2px;
+}
+
+.rating_text {
+  font-size: 18px;
+}

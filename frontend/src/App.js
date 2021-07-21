@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import Navigation from './components/Navigation';
 import * as sessionActions from './store/session';
 import DashBoard from './components/Dashboard';
+import WineDetail from './components/WineDetail';
 
 function App() {
   const dispatch = useDispatch();
@@ -19,16 +20,22 @@ function App() {
   return (
     <>
       <Navigation isLoaded={isLoaded} />
-      <DashBoard />
-      {/* isLoaded only shows when the userSession is restored - removes signIn and signUp */}
-      { isLoaded && (<Switch>
-        <Route path='/'>
+      <Route exact path='/'> {/* Splash Page */}
 
-        </Route>
-        <Route path='/dashboard'>
-          <DashBoard />
-        </Route>
-      </Switch>
+      </Route>
+      {/* isLoaded only shows when the userSession is restored - removes signIn and signUp */}
+      { isLoaded && (
+        <Switch>
+          <Route path='/dashboard'> {/* After login */}
+            <DashBoard />
+          </Route>
+          <Route path='/wines/add'>
+            {/* <WineAddForm /> */}
+          </Route>
+          <Route path='/wines/:wineId'>
+            <WineDetail />
+          </Route>
+        </Switch>
       )}
     </>
   );

@@ -1,0 +1,79 @@
+.background {
+  position: relative;
+  width: 15%;
+  height: 360px;
+  box-shadow: -15px 0 30px rgba(0, 0, 0, 0.1),
+  0 -15px 30px rgba(0, 0, 0, 0.1),
+  0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.gradients {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+}
+
+.gradient {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  z-index: -5;
+}
+
+.gradient[color='gray'] {
+  background-image: linear-gradient(45deg, white, rgb(56, 55, 58));
+}
+
+.logo {
+  position: absolute;
+  width: 100px;
+  left: 20px;
+  top: 20px;
+}
+
+.logo_text {
+  position: absolute;
+  top: 90px;
+  left: 50px;
+  font-size: 4rem;
+  text-transform: uppercase;
+  line-height: .9;
+  color: #ffffff;
+  opacity: .2;
+}
+
+.flag {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background-color: #ffffff;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  text-align: center;
+  font-size:  1.2rem;
+  text-decoration: none;
+  transition: .5s;
+  z-index: -3;
+}
+
+.flag:hover {
+  transform: scale(1.1);
+}
+
+.flag i {
+  line-height: 50px;
+  z-index: -2;
+}
+
+.background_img {
+  position: absolute;
+  width: 185px;
+  opacity: 1;
+  left: -85px;
+  z-index: -1;
+}

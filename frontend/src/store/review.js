@@ -132,7 +132,7 @@ const reviewReducer = (state = initialState, action) => {
         ...state
       };
       const reviewList = newState.list.filter(reviewId => reviewId !== action.reviewId);
-      newState.list = sortList(reviewList);
+      newState.list = reviewList;
       delete newState[action.reviewId];
 
       return newState;
