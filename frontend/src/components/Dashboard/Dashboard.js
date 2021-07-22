@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getWine, deleteWine, createWine, editWine } from '../../store/wine';
 import { getWinery } from '../../store/winery';
 import { getWineType } from '../../store/wineType';
+import { getColorType } from '../../store/colorType';
 
 import WineCard from '../WineCard';
 import styles from './Dashboard.module.css';
@@ -52,6 +53,7 @@ const DashBoard = () => {
     dispatch(getWine());
     dispatch(getWinery());
     dispatch(getWineType());
+    dispatch(getColorType());
   }, [dispatch]);
 
   const wines = useSelector((state) => {

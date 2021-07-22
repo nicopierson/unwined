@@ -14,7 +14,7 @@ const EditWineForm = React.forwardRef(({ setToggleEditPage }, ref) => {
   const wineTypes = useSelector(state => state.wineType);
   const colorTypes = useSelector(state => state.colorType);
   const wineType = wineTypes[wineId];
-  const colorType = colorTypes[wineId];
+  const colorType = colorTypes[wine.colorTypeId];
 
   const [name, setName] = useState(wine.name);
   const [wineryState, setWinery] = useState(winery);
@@ -23,8 +23,8 @@ const EditWineForm = React.forwardRef(({ setToggleEditPage }, ref) => {
   const [country, setCountry] = useState(wine.country);
   const [province, setProvince] = useState(wine.province);
   const [rating, setRating] = useState(wine.rating);
-  const [colorTypeState, setColorType] = useState(colorType);
-  const [wineTypeState, setWineType] = useState(wineType);
+  const [colorTypeState, setColorType] = useState(colorType.color);
+  const [wineTypeState, setWineType] = useState(wineType.variety);
   const [region_1, setRegion_1] = useState(wine.region_1);
   const [region_2, setRegion_2] = useState(wine.region_2);
   const [designation, setDesignation] = useState(wine.designation);
@@ -74,16 +74,12 @@ const EditWineForm = React.forwardRef(({ setToggleEditPage }, ref) => {
     setImageUrl('');
   };
 
-  const handleCancel = () => {
-    setToggleEditPage(true);
-  };
-
   useEffect(() => {
     const errors = [];
     if (name?.length < 2) errors.push('Name must have at least 2 characters.');
     if (winery?.length < 2) errors.push('Winery must have at least 2 characters.');
     if (description?.length > 280) errors.push('Description has a character limit of 280 characters.');
-    console.log(errors);
+
     setErrorsArray(errors);
 
   }, [name, winery, description]);
@@ -134,22 +130,14 @@ const EditWineForm = React.forwardRef(({ setToggleEditPage }, ref) => {
             />
           </div>
           <div>
-            <p>Select Wine Type</p>
             <label htmlFor='wineType'>Wine Type</label>
             <input 
-              onChange={(event) => setWineType('Instructor')}
-              value={wineType}
-              type='radio' 
+              onChange={(event) => setWineType(event.target.value)}
+              value={wineTypeState}
+              type='text' 
               id='wineType' 
-              name='staff' 
-            />
-            <label htmlFor='student'>Student</label>
-            <input 
-              onChange={(event) => setWineType('Student')}
-              value={wineType}
-              type='radio' 
-              id='student' 
-              name='staff'
+              name='wineType' 
+              placeholder='Wine Type'
             />
           </div>
           <div>
@@ -171,6 +159,7 @@ const EditWineForm = React.forwardRef(({ setToggleEditPage }, ref) => {
               type='textarea' 
               id='description' 
               name='description'
+              placeholder='Description'
             ></textarea>
           </div>
           <div>
@@ -188,7 +177,7 @@ const EditWineForm = React.forwardRef(({ setToggleEditPage }, ref) => {
             <label htmlFor='color'>Color</label>
             <input 
               onChange={(event) => setColorType(event.target.value)}
-              value={colorType}
+              value={colorTypeState}
               type='text' 
               id='colorType' 
               name='colorType' 

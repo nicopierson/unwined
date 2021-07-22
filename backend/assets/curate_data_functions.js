@@ -114,7 +114,7 @@ function makeWineJSON (objJSON, wineries, wineTypes) {
       userId: 1,
       wineryId: wineries[obj.winery].index,
       wineTypeId: wineTypes[obj.variety].index,
-      colorTypeId: 1,
+      colorTypeId: 2,
     };
     delete newObj.title;
     delete newObj.taster_name;
