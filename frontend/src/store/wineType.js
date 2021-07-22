@@ -16,7 +16,6 @@ export const getWineType = () => async dispatch => {
 
   const wineTypes = await res.json();
   if (res.ok) {
-    console.log(wineTypes);
     dispatch(loadWineType(wineTypes));
   }
   return wineTypes;

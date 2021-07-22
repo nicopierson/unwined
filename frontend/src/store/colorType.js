@@ -16,7 +16,6 @@ export const getColorType = () => async dispatch => {
 
   const colorTypes = await res.json();
   if (res.ok) {
-    console.log(colorTypes);
     dispatch(loadColorType(colorTypes));
   }
   return colorTypes;

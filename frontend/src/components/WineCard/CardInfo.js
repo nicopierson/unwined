@@ -7,7 +7,6 @@ const CardInfo = ({ wineId }) => {
   const wine = useSelector(state => state.wine[wineId])
   const winery = useSelector(state => state.winery[wine.wineryId]);
   const wineType = useSelector(state => state.wineType[wine.wineTypeId]);
-  console.log(wineType);
 
   return (
     <div className={styles.info}>

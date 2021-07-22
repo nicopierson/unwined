@@ -10,9 +10,8 @@ const WineDetail = () => {
   const dispatch = useDispatch();
   const { wineId } = useParams();
   const wine = useSelector(state => state.wine[wineId]);
-  
-  const winery = useSelector(state => state.winery[wine?.wineryId]);
-  console.log(winery);
+  const winery = useSelector(state => state.winery[wine.wineryId]);
+  const wineType = useSelector(state => state.wineType[wine.wineTypeId]);
   
   return (
     <div>
@@ -23,8 +22,8 @@ const WineDetail = () => {
           <h1 className={styles.text_big}>{wine?.name}</h1>
         </div>
         <div className={styles.card_sub_info}>
-          <h3 className={styles.wine_type}>Cabernet Sauvignon</h3>
-          <h3 className={styles.winery}>{wine?.winery}</h3>
+          <h3 className={styles.wine_type}>{wineType?.variety}</h3>
+          <h3 className={styles.winery}>{winery?.name}</h3>
           <span className={styles.country}>{wine?.country}</span>
         </div>
       </div>

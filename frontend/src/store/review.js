@@ -25,7 +25,6 @@ export const getReview = () => async dispatch => {
 
   const reviews = await res.json();
   if (res.ok) {
-    console.log(reviews);
     dispatch(loadReview(reviews));
   }
   return reviews;
