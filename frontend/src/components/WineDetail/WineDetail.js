@@ -7,6 +7,7 @@ import WineDetailPage from './WineDetailPage';
 import WineForm from '../WineForm';
 
 import { deleteWine } from '../../store/wine';
+import CheckIn from '../CheckIn';
 
 const WineDetail = () => {
   const history = useHistory();
@@ -29,45 +30,50 @@ const WineDetail = () => {
   
   return (
     <>
-      <CSSTransition
-        in={!togglePage}
-        timeout={800}
-        classNames='wine_detail'
-        nodeRef={ref}
-        unmountOnExit
-      >
-        <WineDetailPage 
-          ref={ref}
-        />
-      </CSSTransition>
-      <CSSTransition
-        in={togglePage}
-        timeout={800}
-        classNames='wine_edit_form'
-        unmountOnExit  
-        nodeRef={ref}
-      >
-        <WineForm 
-          ref={ref} 
-          setTogglePage={setTogglePage}
-          method={method}
-        />
-      </CSSTransition>
-      <button
-        onClick={() => setTogglePage(true)}
-      > 
-        Edit 
-      </button>
-      <button
-        onClick={() => setTogglePage(false)}
-      >
-        Cancel
-      </button>
-      <button
-        onClick={handleDelete}
-      > 
-        Delete
-      </button>
+      <div>
+        <CSSTransition
+          in={!togglePage}
+          timeout={800}
+          classNames='wine_detail'
+          nodeRef={ref}
+          unmountOnExit
+        >
+          <WineDetailPage 
+            ref={ref}
+          />
+        </CSSTransition>
+        <CSSTransition
+          in={togglePage}
+          timeout={800}
+          classNames='wine_edit_form'
+          unmountOnExit  
+          nodeRef={ref}
+        >
+          <WineForm 
+            ref={ref} 
+            setTogglePage={setTogglePage}
+            method={method}
+          />
+        </CSSTransition>
+        <button
+          onClick={() => setTogglePage(true)}
+        > 
+          Edit 
+        </button>
+        <button
+          onClick={() => setTogglePage(false)}
+        >
+          Cancel
+        </button>
+        <button
+          onClick={handleDelete}
+        > 
+          Delete
+        </button>
+      </div>
+      <div>
+        <CheckIn />
+      </div>
     </>
   );
 };

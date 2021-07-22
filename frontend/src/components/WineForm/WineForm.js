@@ -82,7 +82,7 @@ const WineForm = React.forwardRef(({ setTogglePage, method }, ref) => {
     // check if response shows errors
     // setRegistrationArray((prevState) => [ ...prevState, registration ]);
     if (newWine?.errors || newWine?.errors?.length > 0) {
-      console.error('wineryId', winery.id ,'ed wine: ', newWine, newWine.errors, newWine.errors.length);
+      console.error(newWine.errors);
     } else {
         if (method === 'post') {
           // push to new wine page after created

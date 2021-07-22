@@ -1,11 +1,12 @@
-import { useState, useEffect } from 'react';
-import { NavLink, Route } from 'react-router-dom';
+import { useEffect } from 'react';
+import { NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'; 
 
-import { getWine, deleteWine, createWine, editWine } from '../../store/wine';
+import { getWine } from '../../store/wine';
 import { getWinery } from '../../store/winery';
 import { getWineType } from '../../store/wineType';
 import { getColorType } from '../../store/colorType';
+import { getReview } from '../../store/review';
 
 import WineCard from '../WineCard';
 import styles from './Dashboard.module.css';
@@ -18,12 +19,12 @@ const DashBoard = () => {
     dispatch(getWinery());
     dispatch(getWineType());
     dispatch(getColorType());
+    dispatch(getReview());
   }, [dispatch]);
 
   const wines = useSelector((state) => {
     return state.wine.list.map(wineId => state.wine[wineId]);
   });
-  // const wineries = useSelector(state => state.winery.list.map(wineId => state.winery[wineId]));
 
   return (
     <>
