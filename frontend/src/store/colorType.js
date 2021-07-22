@@ -32,9 +32,18 @@ export const getOneColorType = (id) => async dispatch => {
 };
 
 const sortList = (colorTypes) => {
-  return colorTypes.sort((a, b) => {
-    return a.name > b.name;
-  }).map((colorType) => colorType.id);
+
+  colorTypes.sort((a, b) => {
+    if (a.color > b.color) {
+      return 1;
+    }
+    if (a.color < b.color) {
+      return -1;
+    }
+    return 0;
+  });
+
+  return colorTypes.map(colorType => colorType.id);
 };
 
 const initialState = { list: [] };

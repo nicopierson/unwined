@@ -2,8 +2,6 @@ import { useState, useEffect } from 'react';
 import { NavLink, Route } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'; 
 
-import WineDetail from '../WineDetail';
-
 import { getWine, deleteWine, createWine, editWine } from '../../store/wine';
 import { getWinery } from '../../store/winery';
 import { getWineType } from '../../store/wineType';
@@ -13,7 +11,6 @@ import styles from './Dashboard.module.css';
 
 const DashBoard = () => {
   const dispatch = useDispatch();
-  const [oneWine, setOneWine] = useState('hellow');
 
   const testPost = {
     name: "Tester wine",
