@@ -1,23 +1,25 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import { editWine } from '../../store/wine';
 
 import styles from './EditWineForm.module.css';
 
 const EditWineForm = React.forwardRef(({ setToggleEditPage }, ref) => {
   const { wineId } = useParams();
+  const dispatch = useDispatch();
   const sessionUser = useSelector(state => state.session.user);
   const wine = useSelector(state => state.wine[wineId]);
   const wineries = useSelector(state => state.winery);
-  const winery = wineries[wineId];
+  const winery = wineries[wineId] ? wineries[wineId] : '';
   const wineTypes = useSelector(state => state.wineType);
   const colorTypes = useSelector(state => state.colorType);
-  const wineType = wineTypes[wineId];
+  const wineType = wineTypes[wineId] ? wineTypes[wineId] : '';
   const colorType = colorTypes[wine.colorTypeId];
 
   const [name, setName] = useState(wine.name);
-  const [wineryState, setWinery] = useState(winery);
+  const [wineryState, setWinery] = useState(winery.name);
   const [price, setPrice] = useState(wine.price);
   const [description, setDescription] = useState(wine.description);
   const [country, setCountry] = useState(wine.country);
@@ -30,32 +32,48 @@ const EditWineForm = React.forwardRef(({ setToggleEditPage }, ref) => {
   const [designation, setDesignation] = useState(wine.designation);
   const [imageUrl, setImageUrl] = useState(wine.imageUrl ? wine.imageUrl : '');
   const [errorsArray, setErrorsArray] = useState([]);
-  const [registrationArray, setRegistrationArray] = useState([]);
+  // const [registrationArray, setRegistrationArray] = useState([]);
 
 
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async (e) => {
     // handle the submit
     e.preventDefault();
 
     const registration = {
-      id: sessionUser.id,
+      id: wineId,
+      userId: sessionUser.id,
       name,
-      winery: wineryState,
       price,
       description,
       country,
       province,
-      rating,
-      wineType: +wineTypeState,
-      colorType: +colorTypeState,
+      rating, 
+      wineTypeId: 1, 
+      colorTypeId: 2,
+      wineryId: winery.id, 
+      
+      //TODO dynamic search for choosing wineries and wintypes and colortypes 
+      // change to the chosen winery when input
+      // wineryId: +wineryState,
+      // wineTypeId: +wineTypeState,
+      // colorTypeId: +colorTypeState,
       region_1,
       region_2,
       designation,
       imageUrl,
     };
 
-    setRegistrationArray((prevState) => [ ...prevState, registration ]);
-    reset();
+    console.log('registration: ', registration);
+    const editedWine = await dispatch(editWine(registration));
+    // setRegistrationArray((prevState) => [ ...prevState, registration ]);
+    console.log('Edited wine: ', editedWine);
+    if (editedWine?.errors?.length > 0) {
+      reset();
+    } else {
+
+      
+    }
   };
 
   const reset = () => {
@@ -77,7 +95,7 @@ const EditWineForm = React.forwardRef(({ setToggleEditPage }, ref) => {
   useEffect(() => {
     const errors = [];
     if (name?.length < 2) errors.push('Name must have at least 2 characters.');
-    if (winery?.length < 2) errors.push('Winery must have at least 2 characters.');
+    // if (winery?.length < 2) errors.push('Winery must have at least 2 characters.');
     if (description?.length > 280) errors.push('Description has a character limit of 280 characters.');
 
     setErrorsArray(errors);
@@ -111,7 +129,7 @@ const EditWineForm = React.forwardRef(({ setToggleEditPage }, ref) => {
             <label htmlFor='winery'>Winery</label>
             <input 
               onChange={(event) => setWinery(event.target.value)}
-              value={winery}
+              value={wineryState}
               type='winery' 
               id='winery' 
               name='winery' 
