@@ -55,6 +55,11 @@ const WineDetailPage = React.forwardRef((props, ref) => {
             </div>
           </div>
         </div>
+        <button
+          onClick={() => history.push('/dashboard')}
+        >
+          Back
+        </button>
     </div>
   );
 });

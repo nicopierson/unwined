@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { editWine } from '../../store/wine';
 
 import styles from './EditWineForm.module.css';
@@ -9,6 +9,8 @@ import styles from './EditWineForm.module.css';
 const EditWineForm = React.forwardRef(({ setToggleEditPage }, ref) => {
   const { wineId } = useParams();
   const dispatch = useDispatch();
+  const history = useHistory();
+
   const sessionUser = useSelector(state => state.session.user);
   const wine = useSelector(state => state.wine[wineId]);
   const wineries = useSelector(state => state.winery);
@@ -18,18 +20,18 @@ const EditWineForm = React.forwardRef(({ setToggleEditPage }, ref) => {
   const wineType = wineTypes[wineId] ? wineTypes[wineId] : '';
   const colorType = colorTypes[wine.colorTypeId];
 
-  const [name, setName] = useState(wine.name);
-  const [wineryState, setWinery] = useState(winery.name);
-  const [price, setPrice] = useState(wine.price);
-  const [description, setDescription] = useState(wine.description);
-  const [country, setCountry] = useState(wine.country);
-  const [province, setProvince] = useState(wine.province);
-  const [rating, setRating] = useState(wine.rating);
-  const [colorTypeState, setColorType] = useState(colorType.color);
-  const [wineTypeState, setWineType] = useState(wineType.variety);
-  const [region_1, setRegion_1] = useState(wine.region_1);
-  const [region_2, setRegion_2] = useState(wine.region_2);
-  const [designation, setDesignation] = useState(wine.designation);
+  const [name, setName] = useState(wine.name ? wine.name : '');
+  const [wineryState, setWinery] = useState(winery ? winery.name : '');
+  const [price, setPrice] = useState(wine.price ? wine.price : '');
+  const [description, setDescription] = useState(wine.description ? wine.description : '');
+  const [country, setCountry] = useState(wine.country ? wine.country : '');
+  const [province, setProvince] = useState(wine.province ? wine.province : '');
+  const [rating, setRating] = useState(wine.rating ? wine.rating : '');
+  const [colorTypeState, setColorType] = useState(colorType ? colorType.color : '');
+  const [wineTypeState, setWineType] = useState(wineType ? wineType.variety : '');
+  const [region_1, setRegion_1] = useState(wine.region_1 ? wine.region_1 : '');
+  const [region_2, setRegion_2] = useState(wine.region_2 ? wine.region_2 : '');
+  const [designation, setDesignation] = useState(wine.designation ? wine.designation : '');
   const [imageUrl, setImageUrl] = useState(wine.imageUrl ? wine.imageUrl : '');
   const [errorsArray, setErrorsArray] = useState([]);
   // const [registrationArray, setRegistrationArray] = useState([]);
@@ -51,7 +53,10 @@ const EditWineForm = React.forwardRef(({ setToggleEditPage }, ref) => {
       rating, 
       wineTypeId: 1, 
       colorTypeId: 2,
-      wineryId: winery.id, 
+
+      wineryId: 3,
+      //TODO will error if no winery id
+      // wineryId: winery.id, 
       
       //TODO dynamic search for choosing wineries and wintypes and colortypes 
       // change to the chosen winery when input
@@ -64,15 +69,15 @@ const EditWineForm = React.forwardRef(({ setToggleEditPage }, ref) => {
       imageUrl,
     };
 
-    console.log('registration: ', registration);
     const editedWine = await dispatch(editWine(registration));
     // setRegistrationArray((prevState) => [ ...prevState, registration ]);
-    console.log('Edited wine: ', editedWine);
-    if (editedWine?.errors?.length > 0) {
-      reset();
+    if (editedWine?.errors || editedWine?.errors?.length > 0) {
+      console.log('wineryId', winery.id ,'Edited wine: ', editedWine, editWine.errors, editedWine.errors.length);
+      // show errors
     } else {
-
-      
+      // don not necessarily need a reset
+      // reset();
+      setToggleEditPage(false);
     }
   };
 
@@ -96,7 +101,7 @@ const EditWineForm = React.forwardRef(({ setToggleEditPage }, ref) => {
     const errors = [];
     if (name?.length < 2) errors.push('Name must have at least 2 characters.');
     // if (winery?.length < 2) errors.push('Winery must have at least 2 characters.');
-    if (description?.length > 280) errors.push('Description has a character limit of 280 characters.');
+    if (description?.length > 500) errors.push('Description has a character limit of 500 characters.');
 
     setErrorsArray(errors);
 

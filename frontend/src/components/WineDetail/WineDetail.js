@@ -38,6 +38,7 @@ const WineDetail = () => {
       >
         <EditWineForm 
           ref={ref} 
+          setToggleEditPage={setToggleEditPage}
         />
       </CSSTransition>
       <button
@@ -49,11 +50,6 @@ const WineDetail = () => {
         onClick={() => setToggleEditPage(false)}
       >
         Cancel
-      </button>
-      <button
-        onClick={() => history.push('/dashboard')}
-      >
-        Back
       </button>
     </>
   );
