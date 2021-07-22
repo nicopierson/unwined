@@ -111,6 +111,7 @@ const DashBoard = () => {
       </div>
       <div className={styles.wine_list}>
         { wines && wines.map(wine => (
+          wine &&
           <NavLink key={wine.name} to={`/wines/${wine.id}`}>
             <WineCard wineId={wine.id} />
           </NavLink>

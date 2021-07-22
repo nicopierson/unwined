@@ -2,19 +2,29 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { CSSTransition } from 'react-transition-group'
+
 import WineDetailPage from './WineDetailPage';
 import EditWineForm from '../EditWineForm/EditWineForm';
 
+import { deleteWine } from '../../store/wine';
 
 const WineDetail = () => {
   const history = useHistory();
+  const dispatch = useDispatch();
+  const { wineId } = useParams();
   
   const [toggleEditPage, setToggleEditPage] = useState(false);
   const [ref, setRef] = useState(React.createRef());
 
   useEffect(() => {
     setRef(React.createRef())
-  }, [toggleEditPage])
+  }, [toggleEditPage]);
+
+  const handleDelete = (event) => {
+    event.preventDefault();
+    dispatch(deleteWine(wineId));
+    history.push('/dashboard');
+  };
   
   return (
     <>
@@ -50,6 +60,11 @@ const WineDetail = () => {
         onClick={() => setToggleEditPage(false)}
       >
         Cancel
+      </button>
+      <button
+        onClick={handleDelete}
+      > 
+        Delete
       </button>
     </>
   );

@@ -34,9 +34,7 @@ const EditWineForm = React.forwardRef(({ setToggleEditPage }, ref) => {
   const [designation, setDesignation] = useState(wine.designation ? wine.designation : '');
   const [imageUrl, setImageUrl] = useState(wine.imageUrl ? wine.imageUrl : '');
   const [errorsArray, setErrorsArray] = useState([]);
-  // const [registrationArray, setRegistrationArray] = useState([]);
-
-
+  
 
   const handleSubmit = async (e) => {
     // handle the submit
