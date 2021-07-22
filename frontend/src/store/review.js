@@ -86,11 +86,19 @@ export const deleteReview = (id) => async dispatch => {
 
 };
 
-
 const sortList = (reviews) => {
-  return reviews.sort((a, b) => {
-    return a.name > b.name;
-  }).map((review) => review.id);
+
+  reviews.sort((a, b) => {
+    if (a.name > b.name) {
+      return 1;
+    }
+    if (a.name < b.name) {
+      return -1;
+    }
+    return 0;
+  });
+
+  return reviews.map(review => review.id);
 };
 
 const initialState = { list: [] };

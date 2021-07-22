@@ -4,7 +4,10 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import WineDetail from '../WineDetail';
 
-import { getOneWine, getWine, deleteWine, createWine, editWine } from '../../store/wine';
+import { getWine, deleteWine, createWine, editWine } from '../../store/wine';
+import { getWinery } from '../../store/winery';
+import { getWineType } from '../../store/wineType';
+
 import WineCard from '../WineCard';
 import styles from './Dashboard.module.css';
 
@@ -50,11 +53,14 @@ const DashBoard = () => {
 
   useEffect(() => {
     dispatch(getWine());
+    dispatch(getWinery());
+    dispatch(getWineType());
   }, [dispatch]);
 
   const wines = useSelector((state) => {
     return state.wine.list.map(wineId => state.wine[wineId]);
   });
+  const wineries = useSelector(state => state.winery.list.map(wineId => state.winery[wineId]));
 
   // const getONE = async (id) => {
   //   const wine = await dispatch(getOneWine(id));
@@ -107,7 +113,7 @@ const DashBoard = () => {
       <div className={styles.wine_list}>
         { wines && wines.map(wine => (
           <NavLink key={wine.name} to={`/wines/${wine.id}`}>
-            <WineCard wine={wine}/>
+            <WineCard wineId={wine.id} />
           </NavLink>
         ))}
       </div>

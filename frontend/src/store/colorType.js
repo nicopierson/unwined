@@ -12,7 +12,7 @@ export const addOneColorType = (colorType) => ({
 });
 
 export const getColorType = () => async dispatch => {
-  const res = await fetch(`/api/colorTypes`);
+  const res = await fetch(`/api/color-types`);
 
   const colorTypes = await res.json();
   if (res.ok) {
@@ -23,7 +23,7 @@ export const getColorType = () => async dispatch => {
 };
 
 export const getOneColorType = (id) => async dispatch => {
-  const res = await fetch(`/api/colorTypes/${id}`);
+  const res = await fetch(`/api/color-types/${id}`);
 
   const colorType = await res.json();
   if (res.ok) {
