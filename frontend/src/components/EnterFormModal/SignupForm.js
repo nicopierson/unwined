@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import * as sessionActions from '../../store/session';
 
 import styles from './FormModal.module.css';
 
 const SignupForm = React.forwardRef((props, ref) => {
+  const history = useHistory();
   const { toggleSignForm, setToggleSignForm } = props.toggle;
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
@@ -22,6 +24,7 @@ const SignupForm = React.forwardRef((props, ref) => {
     if (password === confirmPassword) {
       setErrors([]);
       return dispatch(sessionActions.signup({ email, username, password }))
+        .then(() => history.push('/dashboard'))
         .catch(async (res) => {
           const data = await res.json();
           if (data && data.errors) setErrors(data.errors);
@@ -33,12 +36,14 @@ const SignupForm = React.forwardRef((props, ref) => {
   const handleDemoLogin = (e) => {
     e.preventDefault();
     setErrors([]);
-    return dispatch(sessionActions.login({ credential: 'Demo-lition', password: 'password' })).catch(
-      async (res) => {
-        const data = await res.json();
-        if (data && data.errors) setErrors(data.errors);
-      }
-    );
+    return dispatch(sessionActions.login({ credential: 'Demo-lition', password: 'password' }))
+      .then(() => history.push('/dashboard'))
+      .catch(
+        async (res) => {
+          const data = await res.json();
+          if (data && data.errors) setErrors(data.errors);
+        }
+      );
   };
 
   return (

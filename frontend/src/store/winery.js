@@ -25,7 +25,6 @@ export const getWinery = () => async dispatch => {
 
   const wineries = await res.json();
   if (res.ok) {
-    console.log(wineries);
     dispatch(loadWinery(wineries));
   }
   return wineries;
@@ -88,9 +87,18 @@ export const deleteWinery = (id) => async dispatch => {
 
 
 const sortList = (wineries) => {
-  return wineries.sort((a, b) => {
-    return a.name > b.name;
-  }).map((winery) => winery.id);
+
+  wineries.sort((a, b) => {
+    if (a.name > b.name) {
+      return 1;
+    }
+    if (a.name < b.name) {
+      return -1;
+    }
+    return 0;
+  });
+
+  return wineries.map(wine => wine.id);
 };
 
 const initialState = { list: [] };

@@ -86,9 +86,18 @@ export const deleteWine = (id) => async dispatch => {
 
 
 const sortList = (wines) => {
-  return wines.sort((a, b) => {
-    return a.name > b.name; //! FIX THIS TO SORT ALPHABETICALLY
-  }).map((wine) => wine.id);
+
+  wines.sort((a, b) => {
+    if (a.name > b.name) {
+      return 1;
+    }
+    if (a.name < b.name) {
+      return -1;
+    }
+    return 0;
+  });
+
+  return wines.map(wine => wine.id);
 };
 
 const initialState = { list: [] };

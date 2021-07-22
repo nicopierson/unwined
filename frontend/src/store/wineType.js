@@ -12,18 +12,17 @@ export const addOneWineType = (wineType) => ({
 });
 
 export const getWineType = () => async dispatch => {
-  const res = await fetch(`/api/wineTypes`);
+  const res = await fetch(`/api/wine-types`);
 
   const wineTypes = await res.json();
   if (res.ok) {
-    console.log(wineTypes);
     dispatch(loadWineType(wineTypes));
   }
   return wineTypes;
 };
 
 export const getOneWineType = (id) => async dispatch => {
-  const res = await fetch(`/api/wineTypes/${id}`);
+  const res = await fetch(`/api/wine-types/${id}`);
 
   const wineType = await res.json();
   if (res.ok) {
@@ -33,9 +32,18 @@ export const getOneWineType = (id) => async dispatch => {
 };
 
 const sortList = (wineTypes) => {
-  return wineTypes.sort((a, b) => {
-    return a.name > b.name;
-  }).map((wineType) => wineType.id);
+
+  wineTypes.sort((a, b) => {
+    if (a.variety > b.variety) {
+      return 1;
+    }
+    if (a.variety < b.variety) {
+      return -1;
+    }
+    return 0;
+  });
+
+  return wineTypes.map(wineType => wineType.id);
 };
 
 const initialState = { list: [] };

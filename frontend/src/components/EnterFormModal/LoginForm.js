@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import * as sessionActions from '../../store/session';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import styles from './FormModal.module.css';
 
 const LoginForm = React.forwardRef((props, ref) => {
+  const history = useHistory();
   const { toggleSignForm, setToggleSignForm } = props.toggle;
   const dispatch = useDispatch();
   const [credential, setCredential] = useState("");
@@ -14,23 +16,27 @@ const LoginForm = React.forwardRef((props, ref) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors([]);
-    return dispatch(sessionActions.login({ credential, password })).catch(
-      async (res) => {
-        const data = await res.json();
-        if (data && data.errors) setErrors(data.errors);
-      }
-    );
+    return dispatch(sessionActions.login({ credential, password }))
+      .then(() => history.push('/dashboard'))
+      .catch(
+        async (res) => {
+          const data = await res.json();
+          if (data && data.errors) setErrors(data.errors);
+        }
+      );
   };
 
   const handleDemoLogin = (e) => {
     e.preventDefault();
     setErrors([]);
-    return dispatch(sessionActions.login({ credential: 'Demo-lition', password: 'password' })).catch(
-      async (res) => {
-        const data = await res.json();
-        if (data && data.errors) setErrors(data.errors);
-      }
-    );
+    return dispatch(sessionActions.login({ credential: 'Demo-lition', password: 'password' }))
+      .then(() => history.push('/dashboard'))
+      .catch(
+        async (res) => {
+          const data = await res.json();
+          if (data && data.errors) setErrors(data.errors);
+        }
+      );
   };
 
   return (

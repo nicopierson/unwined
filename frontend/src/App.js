@@ -20,12 +20,12 @@ function App() {
   return (
     <>
       <Navigation isLoaded={isLoaded} />
-      <Route exact path='/'> {/* Splash Page */}
-
-      </Route>
       {/* isLoaded only shows when the userSession is restored - removes signIn and signUp */}
       { isLoaded && (
         <Switch>
+          <Route exact path='/'> {/* Splash Page */}
+            <h2>Splash</h2>
+          </Route>
           <Route path='/dashboard'> {/* After login */}
             <DashBoard />
           </Route>

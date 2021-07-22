@@ -2,15 +2,16 @@ import { useState, useEffect } from 'react';
 import { NavLink, Route } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'; 
 
-import WineDetail from '../WineDetail';
+import { getWine, deleteWine, createWine, editWine } from '../../store/wine';
+import { getWinery } from '../../store/winery';
+import { getWineType } from '../../store/wineType';
+import { getColorType } from '../../store/colorType';
 
-import { getOneWine, getWine, deleteWine, createWine, editWine } from '../../store/wine';
 import WineCard from '../WineCard';
 import styles from './Dashboard.module.css';
 
 const DashBoard = () => {
   const dispatch = useDispatch();
-  const [oneWine, setOneWine] = useState('hellow');
 
   const testPost = {
     name: "Tester wine",
@@ -50,11 +51,15 @@ const DashBoard = () => {
 
   useEffect(() => {
     dispatch(getWine());
+    dispatch(getWinery());
+    dispatch(getWineType());
+    dispatch(getColorType());
   }, [dispatch]);
 
   const wines = useSelector((state) => {
     return state.wine.list.map(wineId => state.wine[wineId]);
   });
+  const wineries = useSelector(state => state.winery.list.map(wineId => state.winery[wineId]));
 
   // const getONE = async (id) => {
   //   const wine = await dispatch(getOneWine(id));
@@ -106,8 +111,9 @@ const DashBoard = () => {
       </div>
       <div className={styles.wine_list}>
         { wines && wines.map(wine => (
+          wine &&
           <NavLink key={wine.name} to={`/wines/${wine.id}`}>
-            <WineCard wine={wine}/>
+            <WineCard wineId={wine.id} />
           </NavLink>
         ))}
       </div>

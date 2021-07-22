@@ -12,18 +12,17 @@ export const addOneColorType = (colorType) => ({
 });
 
 export const getColorType = () => async dispatch => {
-  const res = await fetch(`/api/colorTypes`);
+  const res = await fetch(`/api/color-types`);
 
   const colorTypes = await res.json();
   if (res.ok) {
-    console.log(colorTypes);
     dispatch(loadColorType(colorTypes));
   }
   return colorTypes;
 };
 
 export const getOneColorType = (id) => async dispatch => {
-  const res = await fetch(`/api/colorTypes/${id}`);
+  const res = await fetch(`/api/color-types/${id}`);
 
   const colorType = await res.json();
   if (res.ok) {
@@ -33,9 +32,18 @@ export const getOneColorType = (id) => async dispatch => {
 };
 
 const sortList = (colorTypes) => {
-  return colorTypes.sort((a, b) => {
-    return a.name > b.name;
-  }).map((colorType) => colorType.id);
+
+  colorTypes.sort((a, b) => {
+    if (a.color > b.color) {
+      return 1;
+    }
+    if (a.color < b.color) {
+      return -1;
+    }
+    return 0;
+  });
+
+  return colorTypes.map(colorType => colorType.id);
 };
 
 const initialState = { list: [] };
