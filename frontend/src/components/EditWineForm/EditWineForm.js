@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 
 import styles from './EditWineForm.module.css';
 
-const EditWineForm = () => {
+const EditWineForm = React.forwardRef(({ setToggleEditPage }, ref) => {
   const { wineId } = useParams();
   const sessionUser = useSelector(state => state.session.user);
   const wine = useSelector(state => state.wine[wineId]);
@@ -16,7 +16,6 @@ const EditWineForm = () => {
   const wineType = wineTypes[wineId];
   const colorType = colorTypes[wineId];
 
-  console.log(sessionUser);
   const [name, setName] = useState(wine.name);
   const [wineryState, setWinery] = useState(winery);
   const [price, setPrice] = useState(wine.price);
@@ -29,7 +28,7 @@ const EditWineForm = () => {
   const [region_1, setRegion_1] = useState(wine.region_1);
   const [region_2, setRegion_2] = useState(wine.region_2);
   const [designation, setDesignation] = useState(wine.designation);
-  const [imageUrl, setImageUrl] = useState(wine.imageUrl);
+  const [imageUrl, setImageUrl] = useState(wine.imageUrl ? wine.imageUrl : '');
   const [errorsArray, setErrorsArray] = useState([]);
   const [registrationArray, setRegistrationArray] = useState([]);
 
@@ -75,13 +74,16 @@ const EditWineForm = () => {
     setImageUrl('');
   };
 
+  const handleCancel = () => {
+    setToggleEditPage(true);
+  };
+
   useEffect(() => {
     const errors = [];
-    if (name.length < 2) errors.push('Name must have at least 2 characters.');
-    if (winery.length < 2) errors.push('Winery must have at least 2 characters.');
-    if (!winery.includes('@') || !winery.includes('.')) errors.push('Enter a valid winery address.');
-    if (description.length > 280) errors.push('Description has a character limit of 280 characters.');
-    
+    if (name?.length < 2) errors.push('Name must have at least 2 characters.');
+    if (winery?.length < 2) errors.push('Winery must have at least 2 characters.');
+    if (description?.length > 280) errors.push('Description has a character limit of 280 characters.');
+    console.log(errors);
     setErrorsArray(errors);
 
   }, [name, winery, description]);
@@ -91,7 +93,7 @@ const EditWineForm = () => {
       <div>
         <h2>Edit Wine</h2>
         <div className={styles.errors_container}>
-          { errorsArray.length && errorsArray.map((error) => (
+          { errorsArray.length > 0 && errorsArray.map((error) => (
             <p className='errors' key={error}>
               {error}
             </p>
@@ -249,12 +251,18 @@ const EditWineForm = () => {
             />
           </div>
           <div>
-            <button type='submit' disabled={errorsArray.length} onClick={handleSubmit}>Submit</button>
+            <button 
+              type='submit' 
+              disabled={errorsArray.length} 
+              onClick={handleSubmit}
+            >
+              Submit
+            </button>
           </div>
         </form>
       </div>
     </>
   );
-};
+});
 
 export default EditWineForm;
