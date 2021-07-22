@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
-import { CSSTransition } from 'react-transition-group'
+import { CSSTransition } from 'react-transition-group';
 
 import WineDetailPage from './WineDetailPage';
-import EditWineForm from '../EditWineForm/EditWineForm';
+import WineForm from '../WineForm';
 
 import { deleteWine } from '../../store/wine';
 
@@ -13,12 +13,13 @@ const WineDetail = () => {
   const dispatch = useDispatch();
   const { wineId } = useParams();
   
-  const [toggleEditPage, setToggleEditPage] = useState(false);
+  const method = 'put';
+  const [togglePage, setTogglePage] = useState(false);
   const [ref, setRef] = useState(React.createRef());
 
   useEffect(() => {
     setRef(React.createRef())
-  }, [toggleEditPage]);
+  }, [togglePage]);
 
   const handleDelete = (event) => {
     event.preventDefault();
@@ -29,7 +30,7 @@ const WineDetail = () => {
   return (
     <>
       <CSSTransition
-        in={!toggleEditPage}
+        in={!togglePage}
         timeout={800}
         classNames='wine_detail'
         nodeRef={ref}
@@ -40,24 +41,25 @@ const WineDetail = () => {
         />
       </CSSTransition>
       <CSSTransition
-        in={toggleEditPage}
+        in={togglePage}
         timeout={800}
         classNames='wine_edit_form'
         unmountOnExit  
         nodeRef={ref}
       >
-        <EditWineForm 
+        <WineForm 
           ref={ref} 
-          setToggleEditPage={setToggleEditPage}
+          setTogglePage={setTogglePage}
+          method={method}
         />
       </CSSTransition>
       <button
-        onClick={() => setToggleEditPage(true)}
+        onClick={() => setTogglePage(true)}
       > 
         Edit 
       </button>
       <button
-        onClick={() => setToggleEditPage(false)}
+        onClick={() => setTogglePage(false)}
       >
         Cancel
       </button>
