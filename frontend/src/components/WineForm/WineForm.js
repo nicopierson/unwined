@@ -1,38 +1,39 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { useParams, useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { editWine } from '../../store/wine';
+import { createWine } from '../../store/wine';
 
-import styles from './EditWineForm.module.css';
+import styles from './WineForm.module.css';
 
-const EditWineForm = React.forwardRef(({ setToggleEditPage }, ref) => {
+const WineForm = React.forwardRef(({ setTogglePage, method }, ref) => {
   const { wineId } = useParams();
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const sessionUser = useSelector(state => state.session.user);
-  const wine = useSelector(state => state.wine[wineId]);
-  const wineries = useSelector(state => state.winery);
+  const sessionUser = useSelector(state => state?.session.user);
+  const wine = useSelector(state => state?.wine[wineId]);
+  const wineries = useSelector(state => state?.winery);
   const winery = wineries[wineId] ? wineries[wineId] : '';
-  const wineTypes = useSelector(state => state.wineType);
-  const colorTypes = useSelector(state => state.colorType);
+  const wineTypes = useSelector(state => state?.wineType);
+  const colorTypes = useSelector(state => state?.colorType);
   const wineType = wineTypes[wineId] ? wineTypes[wineId] : '';
-  const colorType = colorTypes[wine.colorTypeId];
+  const colorType = colorTypes && wine ? colorTypes[wine.colorTypeId] : '';
 
-  const [name, setName] = useState(wine.name ? wine.name : '');
+  const [name, setName] = useState(wine?.name ? wine.name : '');
   const [wineryState, setWinery] = useState(winery ? winery.name : '');
-  const [price, setPrice] = useState(wine.price ? wine.price : '');
-  const [description, setDescription] = useState(wine.description ? wine.description : '');
-  const [country, setCountry] = useState(wine.country ? wine.country : '');
-  const [province, setProvince] = useState(wine.province ? wine.province : '');
-  const [rating, setRating] = useState(wine.rating ? wine.rating : '');
+  const [price, setPrice] = useState(wine?.price ? wine.price : '');
+  const [description, setDescription] = useState(wine?.description ? wine.description : '');
+  const [country, setCountry] = useState(wine?.country ? wine.country : '');
+  const [province, setProvince] = useState(wine?.province ? wine.province : '');
+  const [rating, setRating] = useState(wine?.rating ? wine.rating : '');
   const [colorTypeState, setColorType] = useState(colorType ? colorType.color : '');
   const [wineTypeState, setWineType] = useState(wineType ? wineType.variety : '');
-  const [region_1, setRegion_1] = useState(wine.region_1 ? wine.region_1 : '');
-  const [region_2, setRegion_2] = useState(wine.region_2 ? wine.region_2 : '');
-  const [designation, setDesignation] = useState(wine.designation ? wine.designation : '');
-  const [imageUrl, setImageUrl] = useState(wine.imageUrl ? wine.imageUrl : '');
+  const [region_1, setRegion_1] = useState(wine?.region_1 ? wine.region_1 : '');
+  const [region_2, setRegion_2] = useState(wine?.region_2 ? wine.region_2 : '');
+  const [designation, setDesignation] = useState(wine?.designation ? wine.designation : '');
+  const [imageUrl, setImageUrl] = useState(wine?.imageUrl ? wine.imageUrl : '');
   const [errorsArray, setErrorsArray] = useState([]);
   
 
@@ -40,7 +41,7 @@ const EditWineForm = React.forwardRef(({ setToggleEditPage }, ref) => {
     // handle the submit
     e.preventDefault();
 
-    const registration = {
+    const payload = {
       id: wineId,
       userId: sessionUser.id,
       name,
@@ -67,32 +68,30 @@ const EditWineForm = React.forwardRef(({ setToggleEditPage }, ref) => {
       imageUrl,
     };
 
-    const editedWine = await dispatch(editWine(registration));
-    // setRegistrationArray((prevState) => [ ...prevState, registration ]);
-    if (editedWine?.errors || editedWine?.errors?.length > 0) {
-      console.log('wineryId', winery.id ,'Edited wine: ', editedWine, editWine.errors, editedWine.errors.length);
-      // show errors
-    } else {
-      // don not necessarily need a reset
-      // reset();
-      setToggleEditPage(false);
-    }
-  };
+    if (!wineId) delete payload.id;
 
-  const reset = () => {
-    setName('');
-    setWinery('');
-    setPrice('');
-    setDescription('');
-    setCountry('');
-    setProvince('');
-    setRating('');
-    setWineType('');
-    setColorType('');
-    setRegion_1('');
-    setRegion_2('');
-    setDesignation('');
-    setImageUrl('');
+    // put or post
+    let newWine;
+    if (method === 'put') {
+      newWine = await dispatch(editWine(payload));
+
+    } else if (method === 'post') {
+      newWine = await dispatch(createWine(payload));
+    }
+
+    // check if response shows errors
+    // setRegistrationArray((prevState) => [ ...prevState, registration ]);
+    if (newWine?.errors || newWine?.errors?.length > 0) {
+      console.error('wineryId', winery.id ,'ed wine: ', newWine, newWine.errors, newWine.errors.length);
+    } else {
+        if (method === 'post') {
+          // push to new wine page after created
+          history.push(`/wines/${newWine.id}`)
+        } else {
+          // otherwise set toggle off for edit page
+          setTogglePage(false);
+        }
+    }
   };
 
   useEffect(() => {
@@ -108,7 +107,7 @@ const EditWineForm = React.forwardRef(({ setToggleEditPage }, ref) => {
   return (
     <>
       <div>
-        <h2>Edit Wine</h2>
+        <h2> Wine</h2>
         <div className={styles.errors_container}>
           { errorsArray.length > 0 && errorsArray.map((error) => (
             <p className='errors' key={error}>
@@ -164,7 +163,7 @@ const EditWineForm = React.forwardRef(({ setToggleEditPage }, ref) => {
           <div>
             <label htmlFor='country'>Country</label>
             <input 
-              onChange={(event) => setPrice(event.target.value)}
+              onChange={(event) => setCountry(event.target.value)}
               value={country}
               type='text' 
               id='country' 
@@ -186,7 +185,7 @@ const EditWineForm = React.forwardRef(({ setToggleEditPage }, ref) => {
           <div>
             <label htmlFor='rating'>Rating</label>
             <input 
-              onChange={(event) => setPrice(event.target.value)}
+              onChange={(event) => setRating(event.target.value)}
               value={rating}
               type='number' 
               id='rating' 
@@ -275,4 +274,4 @@ const EditWineForm = React.forwardRef(({ setToggleEditPage }, ref) => {
   );
 });
 
-export default EditWineForm;
+export default WineForm;

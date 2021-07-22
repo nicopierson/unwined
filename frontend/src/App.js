@@ -6,6 +6,7 @@ import Navigation from './components/Navigation';
 import * as sessionActions from './store/session';
 import DashBoard from './components/Dashboard';
 import WineDetail from './components/WineDetail';
+import AddWineForm from './components/WineForm/AddWineForm';
 
 function App() {
   const dispatch = useDispatch();
@@ -30,7 +31,7 @@ function App() {
             <DashBoard />
           </Route>
           <Route path='/wines/add'>
-            {/* <WineAddForm /> */}
+            <AddWineForm /> 
           </Route>
           <Route path='/wines/:wineId'>
             <WineDetail />
