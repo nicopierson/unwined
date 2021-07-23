@@ -6,75 +6,48 @@ import { CSSTransition } from 'react-transition-group';
 import WineDetailPage from './WineDetailPage';
 import WineForm from '../WineForm';
 
-import { deleteWine } from '../../store/wine';
 import CheckIn from '../CheckIn';
 
 const WineDetail = () => {
-  const history = useHistory();
-  const dispatch = useDispatch();
-  const { wineId } = useParams();
-  
-  const method = 'put';
-  const [togglePage, setTogglePage] = useState(false);
+  const [toggleDetails, setToggleDetails] = useState(false);
   const [ref, setRef] = useState(React.createRef());
 
   useEffect(() => {
     setRef(React.createRef())
-  }, [togglePage]);
-
-  const handleDelete = (event) => {
-    event.preventDefault();
-    dispatch(deleteWine(wineId));
-    history.push('/dashboard');
-  };
+  }, [toggleDetails]);
   
   return (
-    <>
-      <div>
-        <CSSTransition
-          in={!togglePage}
-          timeout={800}
-          classNames='wine_detail'
-          nodeRef={ref}
-          unmountOnExit
-        >
+    <div>
+      <h2>CHanges</h2>
+      <CSSTransition
+        in={!toggleDetails}
+        timeout={800}
+        classNames='wine_detail'
+        nodeRef={ref}
+        unmountOnExit
+      >
+        <>
           <WineDetailPage 
             ref={ref}
+            setToggleDetails={setToggleDetails}
           />
-        </CSSTransition>
-        <CSSTransition
-          in={togglePage}
-          timeout={800}
-          classNames='wine_edit_form'
-          unmountOnExit  
-          nodeRef={ref}
-        >
-          <WineForm 
-            ref={ref} 
-            setTogglePage={setTogglePage}
-            method={method}
-          />
-        </CSSTransition>
-        <button
-          onClick={() => setTogglePage(true)}
-        > 
-          Edit 
-        </button>
-        <button
-          onClick={() => setTogglePage(false)}
-        >
-          Cancel
-        </button>
-        <button
-          onClick={handleDelete}
-        > 
-          Delete
-        </button>
-      </div>
-      <div>
-        <CheckIn />
-      </div>
-    </>
+          <CheckIn />
+        </>
+      </CSSTransition>
+      <CSSTransition
+        in={toggleDetails}
+        timeout={800}
+        classNames='wine_edit_form'
+        unmountOnExit  
+        nodeRef={ref}
+      >
+        <WineForm 
+          ref={ref} 
+          setToggleDetails={setToggleDetails}
+          method={'PUT'}
+        />
+      </CSSTransition>
+    </div>
   );
 };
 

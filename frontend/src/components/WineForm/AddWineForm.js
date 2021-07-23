@@ -11,7 +11,7 @@ const AddWineForm = () => {
   const [togglePage, setTogglePage] = useState(true);
   const [ref, setRef] = useState(React.createRef());
 
-  const method = 'post';
+  const method = 'POST';
   console.log(togglePage);
   if (!togglePage) {
     history.push('/dashboard');

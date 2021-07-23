@@ -7,7 +7,7 @@ import { createWine } from '../../store/wine';
 
 import styles from './WineForm.module.css';
 
-const WineForm = React.forwardRef(({ setTogglePage, method }, ref) => {
+const WineForm = React.forwardRef(({ setToggleDetails, method }, ref) => {
   const { wineId } = useParams();
   const dispatch = useDispatch();
   const history = useHistory();
@@ -72,10 +72,10 @@ const WineForm = React.forwardRef(({ setTogglePage, method }, ref) => {
 
     // put or post
     let newWine;
-    if (method === 'put') {
+    if (method === 'PUT') {
       newWine = await dispatch(editWine(payload));
 
-    } else if (method === 'post') {
+    } else if (method === 'POST') {
       newWine = await dispatch(createWine(payload));
     }
 
@@ -84,14 +84,19 @@ const WineForm = React.forwardRef(({ setTogglePage, method }, ref) => {
     if (newWine.errors) {
       console.error(newWine.errors);
     } else {
-      if (method === 'post') {
+      if (method === 'POST') {
         // push to new wine page after created
         history.push(`/wines/${newWine.id}`)
       } else {
         // otherwise set toggle off for edit page
-        setTogglePage(false);
+        setToggleDetails(false);
       }
     }
+  };
+
+  const handleCancel = (e) => {
+    e.preventDefault();
+    setToggleDetails(false);
   };
 
   useEffect(() => {
@@ -266,6 +271,11 @@ const WineForm = React.forwardRef(({ setTogglePage, method }, ref) => {
               onClick={handleSubmit}
             >
               Submit
+            </button>
+            <button
+              onClick={handleCancel}
+            >
+              Cancel
             </button>
           </div>
         </form>

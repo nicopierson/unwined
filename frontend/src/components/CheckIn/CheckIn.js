@@ -12,9 +12,8 @@ import styles from './CheckIn.module.css';
 const CheckIn = () => {
   const { wineId } = useParams();
   const dispatch = useDispatch();
-  const [toggleComponent, setToggleComponent] = useState(false);
+  const [toggleForm, setToggleForm] = useState(false);
   const [ref, setRef] = useState(React.createRef());
-
 
   const wineReviews = useSelector((state) => {
     const reviewIds = state.wines[wineId]?.reviews;
@@ -28,14 +27,13 @@ const CheckIn = () => {
   }, [dispatch, wineId]);
 
   useEffect(() => {
-    setRef(React.createRef())
-  }, [toggleComponent]);
+    setRef(React.createRef());
+  }, [toggleForm]);
 
   return (
-    <>
       <div>
         <CSSTransition
-          in={toggleComponent}
+          in={toggleForm}
           timeout={400}
           classNames='check_in_add'
           nodeRef={ref}
@@ -43,40 +41,40 @@ const CheckIn = () => {
         >
           <FormCheckIn 
             ref={ref}
-            setToggleComponent={setToggleComponent}
+            toggleForm={setToggleForm}
             title={`Check In`}
             label={`comment`}
             method={`POST`}
           />
         </CSSTransition>
         <CSSTransition
-          in={!toggleComponent}
+          in={!toggleForm}
           timeout={400}
           classNames='open_comment'
           nodeRef={ref}
           unmountOnExit
         >
-          
-          <button
-            onClick={() => setToggleComponent(true)}
-          >
-            Add Comment
-          </button>
+          <div>
+            <button
+              onClick={() => setToggleForm(true)}
+            >
+              Add Comment
+            </button>
+          </div>
         </CSSTransition>
         <h2>Comments</h2>
         <div>
           {wineReviews &&
-            wineReviews.map(review => (
+            wineReviews?.map(review => (
               <Comment 
-                review={review}
-                username={users[review.userId].username}
-                key={review.id}
+              review={review}
+              username={users[review.userId].username}
+              key={review.id}
               />
-            ))
-          }
+              ))
+            }
         </div>
       </div>
-    </>
   );
 };
 

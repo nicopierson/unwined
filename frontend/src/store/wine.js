@@ -76,6 +76,8 @@ export const deleteWine = (id) => async dispatch => {
     method: 'DELETE',
   });
 
+  // can test delete when there is no oncascade delete for reviews
+  // same for wines
   const deletedWine = await res.json();
   if (res.ok) {
     dispatch(removeWine(id));

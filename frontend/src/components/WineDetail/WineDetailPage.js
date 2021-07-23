@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
+
+import { deleteWine } from '../../store/wine';
 
 import styles from './WineDetailPage.module.css';
 
-const WineDetailPage = React.forwardRef((props, ref) => {
+const WineDetailPage = React.forwardRef(({ setToggleDetails }, ref) => {
   const history = useHistory();
+  const dispatch = useDispatch();
   const { wineId } = useParams();
   const wine = useSelector(state => state.wines[wineId]);
 
@@ -13,9 +16,20 @@ const WineDetailPage = React.forwardRef((props, ref) => {
     history.push('/dashboard');
   } 
 
-  const winery = useSelector(state => state.wineries[wine.wineryId]);
-  const wineType = useSelector(state => state.wineTypes[wine.wineTypeId]);
+  const winery = useSelector(state => state?.wineries[wine?.wineryId]);
+  const wineType = useSelector(state => state?.wineTypes[wine?.wineTypeId]);
 
+  const handleDelete = async (event) => {
+    event.preventDefault();
+    const deletedWine = await dispatch(deleteWine(wineId));
+    console.log('Deleted Wine', deletedWine);
+    history.push('/dashboard');
+  };
+
+  const handleEdit = (event) => {
+    event.preventDefault();
+    setToggleDetails(true);
+  };
 
   return (
     <div>
@@ -56,9 +70,14 @@ const WineDetailPage = React.forwardRef((props, ref) => {
           </div>
         </div>
         <button
-          onClick={() => history.push('/dashboard')}
-        >
-          Back
+          onClick={handleEdit}
+        > 
+          Edit 
+        </button>
+        <button
+          onClick={handleDelete}
+        > 
+          Delete
         </button>
     </div>
   );
