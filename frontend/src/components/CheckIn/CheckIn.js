@@ -3,7 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { CSSTransition } from 'react-transition-group';
 
-import AddCheckIn from './AddCheckIn';
+import FormCheckIn from './FormCheckIn';
+import Comment from './Comment';
 import { getReviews } from '../../store/review';
 
 import styles from './CheckIn.module.css';
@@ -11,7 +12,7 @@ import styles from './CheckIn.module.css';
 const CheckIn = () => {
   const { wineId } = useParams();
   const dispatch = useDispatch();
-  const [togglePage, setTogglePage] = useState(false);
+  const [toggleComponent, setToggleComponent] = useState(false);
   const [ref, setRef] = useState(React.createRef());
 
 
@@ -28,25 +29,28 @@ const CheckIn = () => {
 
   useEffect(() => {
     setRef(React.createRef())
-  }, [togglePage]);
+  }, [toggleComponent]);
 
   return (
     <>
       <div>
         <CSSTransition
-          in={togglePage}
+          in={toggleComponent}
           timeout={400}
           classNames='check_in_add'
           nodeRef={ref}
           unmountOnExit
         >
-          <AddCheckIn 
+          <FormCheckIn 
             ref={ref}
-            setTogglePage={setTogglePage}
+            setToggleComponent={setToggleComponent}
+            title={`Check In`}
+            label={`comment`}
+            method={`POST`}
           />
         </CSSTransition>
         <CSSTransition
-          in={!togglePage}
+          in={!toggleComponent}
           timeout={400}
           classNames='open_comment'
           nodeRef={ref}
@@ -54,7 +58,7 @@ const CheckIn = () => {
         >
           
           <button
-            onClick={() => setTogglePage(true)}
+            onClick={() => setToggleComponent(true)}
           >
             Add Comment
           </button>
@@ -63,10 +67,11 @@ const CheckIn = () => {
         <div>
           {wineReviews &&
             wineReviews.map(review => (
-              <div key={review.id}>
-                <h3>{users[review.userId].username}</h3>
-                <h3>{review.comments}</h3>
-              </div>
+              <Comment 
+                review={review}
+                username={users[review.userId].username}
+                key={review.id}
+              />
             ))
           }
         </div>

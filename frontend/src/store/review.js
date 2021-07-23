@@ -10,7 +10,6 @@ export const loadReview = (reviews, wineId) => ({
   wineId,
 });
 
-// this does not work - need to fix the associations
 export const removeReview = (reviewId, wineId) => ({
   type: REMOVE_REVIEW,
   reviewId,
@@ -43,7 +42,7 @@ export const getOneReview = (id) => async dispatch => {
   return review;
 };
 
-export const createReview = (payload) => async dispatch =>{
+export const createReview = (payload) => async dispatch => {
   const res = await csrfFetch('/api/reviews', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -51,7 +50,7 @@ export const createReview = (payload) => async dispatch =>{
   });
 
   const newReview = await res.json();
-    console.log(newReview);
+
   if(res.ok){
     dispatch(addOneReview(newReview))
   }
@@ -67,6 +66,7 @@ export const editReview = (payload) => async dispatch => {
   });
 
   const editedReview = await res.json();
+
   if (res.ok) {
     dispatch(addOneReview(editedReview));
   }
@@ -81,8 +81,9 @@ export const deleteReview = (reviewId) => async dispatch => {
   });
 
   const deletedReview = await res.json();
+
   if (res.ok) {
-    dispatch(removeReview(reviewId, deleteReview.wineId));
+    dispatch(removeReview(reviewId, deletedReview.wineId));
   }
 
   return deletedReview;
@@ -147,9 +148,7 @@ const reviewReducer = (state = initialState, action) => {
       const newState = { 
         ...state
       };
-      const reviewList = newState.list.filter(reviewId => reviewId !== action.reviewId);
-      newState.list = reviewList;
-      newState.list = newState.list.filter(userId => userId !== action.reviewId)
+      newState.list = newState.list.filter(reviewId => reviewId !== action.reviewId)
       delete newState[action.reviewId];
 
       return newState;

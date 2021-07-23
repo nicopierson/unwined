@@ -163,22 +163,35 @@ const wineReducer = (state = initialState, action) => {
         ...state,
         [action.wineId]: {
           ...state[action.wineId],
-          reviews: state[action.reviewId].filter(
-            (review) => review.id !== action.reviewId
+          reviews: state[action.wineId].reviews.filter(
+            (id) => id !== action.reviewId
           ),
         },
       };
     }
     case ADD_REVIEW: {
-      console.log(state[action.review.wineId].reviews);
-      const reviewsList = [...state[action.review.wineId].reviews];
-      reviewsList.push(action.review.id);
+      //const reviewsList = [...state[action.review.wineId].reviews];
+      //reviewsList.push(action.review.id); // push will always add, so edit won't work
+
+      //TODO set the action.review.wineId into another variable to understand the code
+
+      // if exists add new reviewId to array
+      if (!state[action.review.wineId].reviews.includes(action.review.id)) {
+        return {
+          ...state,
+          [action.review.wineId]: {
+            ...state[action.review.wineId],
+            // reviews: reviewsList,
+            reviews: [...state[action.review.wineId].reviews, action.review.id],
+          },
+        };
+      }
+      // make a copy of state and return
       return {
         ...state,
         [action.review.wineId]: {
           ...state[action.review.wineId],
-          reviews: reviewsList,
-          // [...state[action.review.wineId], action.review.id],
+          reviews: [...state[action.review.wineId].reviews],
         },
       };
     }
