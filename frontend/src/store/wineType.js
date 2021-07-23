@@ -11,7 +11,7 @@ export const addOneWineType = (wineType) => ({
   wineType,
 });
 
-export const getWineType = () => async dispatch => {
+export const getWineTypes = () => async dispatch => {
   const res = await fetch(`/api/wine-types`);
 
   const wineTypes = await res.json();

@@ -20,7 +20,7 @@ export const addOneWinery = (winery) => ({
   winery,
 });
 
-export const getWinery = () => async dispatch => {
+export const getWineries = () => async dispatch => {
   const res = await fetch(`/api/wineries`);
 
   const wineries = await res.json();

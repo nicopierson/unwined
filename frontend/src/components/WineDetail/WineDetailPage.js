@@ -7,14 +7,14 @@ import styles from './WineDetailPage.module.css';
 const WineDetailPage = React.forwardRef((props, ref) => {
   const history = useHistory();
   const { wineId } = useParams();
-  const wine = useSelector(state => state.wine[wineId]);
+  const wine = useSelector(state => state.wines[wineId]);
 
   if (!wine) {
     history.push('/dashboard');
   } 
 
-  const winery = useSelector(state => state.winery[wine.wineryId]);
-  const wineType = useSelector(state => state.wineType[wine.wineTypeId]);
+  const winery = useSelector(state => state.wineries[wine.wineryId]);
+  const wineType = useSelector(state => state.wineTypes[wine.wineTypeId]);
 
 
   return (

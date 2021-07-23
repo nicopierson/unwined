@@ -1,11 +1,13 @@
-import { useState, useEffect } from 'react';
-import { NavLink, Route } from 'react-router-dom';
+import { useEffect } from 'react';
+import { NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'; 
 
-import { getWine, deleteWine, createWine, editWine } from '../../store/wine';
-import { getWinery } from '../../store/winery';
-import { getWineType } from '../../store/wineType';
-import { getColorType } from '../../store/colorType';
+import { getWines } from '../../store/wine';
+import { getWineries } from '../../store/winery';
+import { getWineTypes } from '../../store/wineType';
+import { getColorTypes } from '../../store/colorType';
+// import { getReviews, loadReviews } from '../../store/review';
+import { getUsers } from '../../store/user';
 
 import WineCard from '../WineCard';
 import styles from './Dashboard.module.css';
@@ -14,16 +16,24 @@ const DashBoard = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getWine());
-    dispatch(getWinery());
-    dispatch(getWineType());
-    dispatch(getColorType());
+    dispatch(getWines());
+    dispatch(getWineries());
+    dispatch(getWineTypes());
+    dispatch(getColorTypes());
+    dispatch(getUsers());
   }, [dispatch]);
 
   const wines = useSelector((state) => {
-    return state.wine.list.map(wineId => state.wine[wineId]);
+    return state.wines.list.map(wineId => state.wines[wineId]);
   });
-  // const wineries = useSelector(state => state.winery.list.map(wineId => state.winery[wineId]));
+
+  // get the wine reviews
+  // const wineId = 4;
+  // const wineReviews = useSelector((state) => {
+  //   const reviewIds = state.wine[wineId].reviews;
+  //   return reviewIds.map(id => state.review[id])
+  // });
+  // console.log(wineReviews);
 
   return (
     <>

@@ -11,7 +11,7 @@ export const addOneColorType = (colorType) => ({
   colorType,
 });
 
-export const getColorType = () => async dispatch => {
+export const getColorTypes = () => async dispatch => {
   const res = await fetch(`/api/color-types`);
 
   const colorTypes = await res.json();
