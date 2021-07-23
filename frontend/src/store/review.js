@@ -1,31 +1,33 @@
 import { csrfFetch } from './csrf';
 
-const LOAD = 'reviews/LOAD';
-const REMOVE_REVIEW = 'reviews/REMOVE_REVIEW';
-const ADD_ONE = 'reviews/ADD_ONE';
+export const LOAD_REVIEW = 'reviews/LOAD_REVIEW';
+export const REMOVE_REVIEW = 'reviews/REMOVE_REVIEW';
+export const ADD_REVIEW = 'reviews/ADD_REVIEW';
 
-export const loadReview = (reviews) => ({
-  type: LOAD,
+export const loadReview = (reviews, wineId) => ({
+  type: LOAD_REVIEW,
   reviews,
+  wineId,
 });
 
 // this does not work - need to fix the associations
-export const removeReview = (id) => ({
+export const removeReview = (reviewId, wineId) => ({
   type: REMOVE_REVIEW,
-  reviewId: id,
+  reviewId,
+  wineId,
 });
 
 export const addOneReview = (review) => ({
-  type: ADD_ONE,
+  type: ADD_REVIEW,
   review,
 });
 
-export const getReview = () => async dispatch => {
-  const res = await fetch(`/api/reviews`);
+export const getReviews = (wineId) => async dispatch => {
+  const res = await fetch(`/api/wines/${wineId}/reviews`);
 
   const reviews = await res.json();
   if (res.ok) {
-    dispatch(loadReview(reviews));
+    dispatch(loadReview(reviews, wineId));
   }
   return reviews;
 };
@@ -71,14 +73,14 @@ export const editReview = (payload) => async dispatch => {
 
 };
 
-export const deleteReview = (id) => async dispatch => {
-  const res = await csrfFetch(`/api/reviews/${id}`, {
+export const deleteReview = (reviewId) => async dispatch => {
+  const res = await csrfFetch(`/api/reviews/${reviewId}`, {
     method: 'DELETE',
   });
 
   const deletedReview = await res.json();
   if (res.ok) {
-    dispatch(removeReview(id));
+    dispatch(removeReview(reviewId, deleteReview.wineId));
   }
 
   return deletedReview;
@@ -104,7 +106,7 @@ const initialState = { list: [], userId: [] };
 
 const reviewReducer = (state = initialState, action) => {
   switch(action.type) {
-    case LOAD: {
+    case LOAD_REVIEW: {
       const allReview = {};
       action.reviews.forEach((review) => {
         allReview[review.id] = review;
@@ -119,7 +121,7 @@ const reviewReducer = (state = initialState, action) => {
         userId: newUserId,
       };
     }
-    case ADD_ONE: {
+    case ADD_REVIEW: {
       if (!state[action.review.id]) {
         const newState = {
           ...state,

@@ -1,4 +1,5 @@
 import { csrfFetch } from './csrf';
+import { LOAD_REVIEW, REMOVE_REVIEW, ADD_REVIEW } from './review';
 
 const LOAD = 'wines/LOAD';
 const REMOVE_WINE = 'wines/REMOVE_WINE';
@@ -19,14 +20,14 @@ export const addOneWine = (wine) => ({
   wine,
 });
 
-export const getWine = () => async dispatch => {
+export const getWines = () => async dispatch => {
   const res = await fetch(`/api/wines`);
 
   const wines = await res.json();
   if (res.ok) {
     dispatch(loadWine(wines));
   }
-  // return wines;
+  return wines;
 };
 
 export const getOneWine = (id) => async dispatch => {
@@ -115,7 +116,7 @@ const wineReducer = (state = initialState, action) => {
       return { 
         ...allWine, 
         ...state,
-        list: sortList(action.wines) 
+        list: sortList(action.wines),
       };
     }
     case ADD_ONE: {
@@ -147,6 +148,35 @@ const wineReducer = (state = initialState, action) => {
       delete newState[action.wineId];
 
       return newState;
+    }
+    case LOAD_REVIEW: {
+      return {
+        ...state,
+        [action.wineId]: {
+          ...state[action.wineId],
+          reviews: action.reviews.map(review => review.id),
+        }
+      };
+    }
+    case REMOVE_REVIEW: {
+      return {
+        ...state,
+        [action.wineId]: {
+          ...state[action.wineId],
+          reviews: state[action.reviewId].filter(
+            (review) => review.id !== action.reviewId
+          ),
+        },
+      };
+    }
+    case ADD_REVIEW: {
+      return {
+        ...state,
+        [action.review.wineId]: {
+          ...state[action.review.wineId],
+          reviews: [...state[action.review.wineId], action.review.id],
+        },
+      };
     }
     default:
       return state;

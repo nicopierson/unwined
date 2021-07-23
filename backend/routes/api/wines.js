@@ -2,7 +2,7 @@ const express = require('express');
 const asyncHandler = require('express-async-handler');
 
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
-const { Wine } = require('../../db/models');
+const { Wine, Review } = require('../../db/models');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
@@ -88,6 +88,21 @@ router.get(
 
     if (wine) {
       return res.json(wine);
+    } else {
+      next(wineNotFoundError(req.params.id));
+    }
+  })
+);
+
+router.get(
+  '/:id(\\d+)/reviews',
+  asyncHandler(async (req, res, next) => {
+    const wine = await Wine.findByPk(req.params.id, {
+      include: Review,
+    });
+
+    if (wine) {
+      return res.json(wine.Reviews);
     } else {
       next(wineNotFoundError(req.params.id));
     }
