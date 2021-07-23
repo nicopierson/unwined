@@ -81,16 +81,16 @@ const WineForm = React.forwardRef(({ setTogglePage, method }, ref) => {
 
     // check if response shows errors
     // setRegistrationArray((prevState) => [ ...prevState, registration ]);
-    if (newWine?.errors || newWine?.errors?.length > 0) {
+    if (newWine.errors) {
       console.error(newWine.errors);
     } else {
-        if (method === 'post') {
-          // push to new wine page after created
-          history.push(`/wines/${newWine.id}`)
-        } else {
-          // otherwise set toggle off for edit page
-          setTogglePage(false);
-        }
+      if (method === 'post') {
+        // push to new wine page after created
+        history.push(`/wines/${newWine.id}`)
+      } else {
+        // otherwise set toggle off for edit page
+        setTogglePage(false);
+      }
     }
   };
 

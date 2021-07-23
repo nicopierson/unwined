@@ -14,15 +14,17 @@ const FormCheckIn = React.forwardRef(({ setToggleComponent, title, label, userna
   const [errorsArray, setErrorsArray] = useState([]);
 
   // use later to disable edit buttons for users who didn't make comment
-  // const sessionUser = useSelector(state => state?.session.user);
+  const sessionUser = useSelector(state => state?.session.user);
 
   const handleFormCheckIn = async (e) => {
     e.preventDefault();
+    const id = review ? review.id : null;
+    const userId = review ? review.userId : sessionUser.id; 
 
     const payload = {
-      id: review.id,
+      id,
       comments,
-      userId: review.userId,
+      userId,
       wineId: +wineId, 
     };
     
@@ -34,11 +36,11 @@ const FormCheckIn = React.forwardRef(({ setToggleComponent, title, label, userna
       newComment = await dispatch(createReview(payload));
     }
 
-    if (newComment?.errors || newComment?.errors?.length > 0) {
-      console.error(newComment.errors)
+    if (newComment.errors) {
+      console.error(newComment.errors);
     } else {
-        // console.log('Successfully added comment to the db: ', newComment);
-        setToggleComponent(false);
+      // console.log('Successfully added comment to the db: ', newComment);
+      setToggleComponent(false);
     }
 
   };
