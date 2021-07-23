@@ -100,7 +100,7 @@ const sortList = (reviews) => {
   return reviews.map(review => review.id);
 };
 
-const initialState = { list: [] };
+const initialState = { list: [], userId: [] };
 
 const reviewReducer = (state = initialState, action) => {
   switch(action.type) {
@@ -109,10 +109,14 @@ const reviewReducer = (state = initialState, action) => {
       action.reviews.forEach((review) => {
         allReview[review.id] = review;
       });
+      const newUserId = action.reviews.map((review) => {
+        return review.userId;
+      });
       return { 
         ...allReview, 
         ...state,
-        list: sortList(action.reviews) 
+        list: sortList(action.reviews),
+        userId: newUserId,
       };
     }
     case ADD_ONE: {
@@ -124,6 +128,7 @@ const reviewReducer = (state = initialState, action) => {
         const reviewList = newState.list.map(id => newState[id]);
         reviewList.push(action.review);
         newState.list = sortList(reviewList);
+        newState.userId = newState.userId.map(userId => userId);
         return newState;
       }
       return {
@@ -140,6 +145,7 @@ const reviewReducer = (state = initialState, action) => {
       };
       const reviewList = newState.list.filter(reviewId => reviewId !== action.reviewId);
       newState.list = reviewList;
+      newState.list = newState.list.filter(userId => userId !== action.reviewId)
       delete newState[action.reviewId];
 
       return newState;

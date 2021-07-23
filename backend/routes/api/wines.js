@@ -69,6 +69,7 @@ const validateWine = [
 
 router.get(
   '/',
+  // requireAuth,
   asyncHandler(async (req, res, next) => {
     const wines = await Wine.findAll({ limit: 10 });
 

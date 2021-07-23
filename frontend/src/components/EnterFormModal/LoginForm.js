@@ -13,22 +13,23 @@ const LoginForm = React.forwardRef((props, ref) => {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setErrors([]);
-    return dispatch(sessionActions.login({ credential, password }))
-      .then(() => history.push('/dashboard'))
-      .catch(
-        async (res) => {
-          const data = await res.json();
-          if (data && data.errors) setErrors(data.errors);
-        }
-      );
+
+    const data = await dispatch(sessionActions.login({ credential, password }));
+
+    if (data.errors && data.errors.length > 0) {
+      setErrors(data.errors);
+    } else {
+      history.push('/dashboard');
+    }
   };
 
   const handleDemoLogin = (e) => {
     e.preventDefault();
     setErrors([]);
+
     return dispatch(sessionActions.login({ credential: 'Demo-lition', password: 'password' }))
       .then(() => history.push('/dashboard'))
       .catch(
@@ -45,7 +46,7 @@ const LoginForm = React.forwardRef((props, ref) => {
           <form onSubmit={handleSubmit} className={styles.form_sign_in}>
             <h2 className={styles.form__title}>Sign In</h2>
             <ul className={styles.form__errors}>
-              {errors.map((error, idx) => (
+              {errors.length > 0 && errors.map((error, idx) => (
                 <li key={idx}>{error}</li>
               ))}
             </ul>

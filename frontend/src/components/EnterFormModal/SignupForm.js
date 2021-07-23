@@ -19,16 +19,18 @@ const SignupForm = React.forwardRef((props, ref) => {
 
   if (sessionUser) return <Redirect to="/" />;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(password, confirmPassword);
     if (password === confirmPassword) {
       setErrors([]);
-      return dispatch(sessionActions.signup({ email, username, password }))
-        .then(() => history.push('/dashboard'))
-        .catch(async (res) => {
-          const data = await res.json();
-          if (data && data.errors) setErrors(data.errors);
-        });
+      const data = await dispatch(sessionActions.signup({ email, username, password }));
+
+      if (data.errors && data.errors.length > 0) {
+        return setErrors(data.errors);
+      } else {
+        history.push('/dashboard');
+      }
     }
     return setErrors(['Confirm Password field must be the same as the Password field']);
   };
@@ -52,7 +54,7 @@ const SignupForm = React.forwardRef((props, ref) => {
         <form onSubmit={handleSubmit} className={styles.form_sign_up}>
           <h2 className={styles.form__title}>Sign Up</h2>
           <ul className={styles.form__errors}>
-            {errors.map((error, idx) => (
+            {errors.length > 0 && errors.map((error, idx) => (
               <li key={idx}>{error}</li>
             ))}
           </ul>
