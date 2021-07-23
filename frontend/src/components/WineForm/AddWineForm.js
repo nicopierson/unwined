@@ -16,7 +16,6 @@ const AddWineForm = () => {
   }
 
   return (
-    <div className={styles.wine_form_container}>
       <CSSTransition
         in={toggleForm}
         timeout={800}
@@ -28,7 +27,6 @@ const AddWineForm = () => {
           method={'POST'}
         />
       </CSSTransition>
-    </div>
   );
 };
 
