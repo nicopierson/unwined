@@ -6,7 +6,8 @@ import { getWines } from '../../store/wine';
 import { getWineries } from '../../store/winery';
 import { getWineTypes } from '../../store/wineType';
 import { getColorTypes } from '../../store/colorType';
-import { getReviews, loadReviews } from '../../store/review';
+// import { getReviews, loadReviews } from '../../store/review';
+import { getUsers } from '../../store/user';
 
 import WineCard from '../WineCard';
 import styles from './Dashboard.module.css';
@@ -19,11 +20,11 @@ const DashBoard = () => {
     dispatch(getWineries());
     dispatch(getWineTypes());
     dispatch(getColorTypes());
-    dispatch(getReviews(4))
+    dispatch(getUsers());
   }, [dispatch]);
 
   const wines = useSelector((state) => {
-    return state.wine.list.map(wineId => state.wine[wineId]);
+    return state.wines.list.map(wineId => state.wines[wineId]);
   });
 
   // get the wine reviews

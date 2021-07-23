@@ -94,12 +94,13 @@ router.put(
   })
 );
 
+//TODO test the error handlers, are they necessary?
 // router.post(
 //   '/',
 //   // requireAuth,
 //   validateSignup,
 //   asyncHandler(async (req, res, next) => {
-//     const user = await User.build(req.body);
+//     const user = await User.signup(req.body);
 
 //     if (user) {
 //       await user.save();
@@ -112,6 +113,7 @@ router.put(
 //   }),
 // );
 
+
 router.post(
   '/',
   validateSignup,
@@ -119,17 +121,13 @@ router.post(
     const { email, password, username } = req.body;
     const user = await User.signup({ email, username, password });
 
-    if (user) {
+    await setTokenCookie(res, user);
 
-      await setTokenCookie(res, user);
-  
-      
-      return res.json({
-        user,
-      });
-    } else {
-      next(userPostError());
-    }
+    console.log(user);
+    return res.json({
+      user,
+    });
+
   }),
 );
 
@@ -148,3 +146,5 @@ router.delete(
     }
   }
 ));
+
+module.exports = router;

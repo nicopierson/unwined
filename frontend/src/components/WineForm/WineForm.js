@@ -13,11 +13,11 @@ const WineForm = React.forwardRef(({ setTogglePage, method }, ref) => {
   const history = useHistory();
 
   const sessionUser = useSelector(state => state?.session.user);
-  const wine = useSelector(state => state?.wine[wineId]);
-  const wineries = useSelector(state => state?.winery);
+  const wine = useSelector(state => state?.wines[wineId]);
+  const wineries = useSelector(state => state?.wineries);
   const winery = wineries[wineId] ? wineries[wineId] : '';
-  const wineTypes = useSelector(state => state?.wineType);
-  const colorTypes = useSelector(state => state?.colorType);
+  const wineTypes = useSelector(state => state?.wineTypes);
+  const colorTypes = useSelector(state => state?.colorTypes);
   const wineType = wineTypes[wineId] ? wineTypes[wineId] : '';
   const colorType = colorTypes && wine ? colorTypes[wine.colorTypeId] : '';
 

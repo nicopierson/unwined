@@ -36,6 +36,7 @@ export const getOneReview = (id) => async dispatch => {
   const res = await fetch(`/api/reviews/${id}`);
 
   const review = await res.json();
+
   if (res.ok) {
     dispatch(addOneReview(review));
   }
@@ -50,6 +51,7 @@ export const createReview = (payload) => async dispatch =>{
   });
 
   const newReview = await res.json();
+    console.log(newReview);
   if(res.ok){
     dispatch(addOneReview(newReview))
   }

@@ -170,11 +170,15 @@ const wineReducer = (state = initialState, action) => {
       };
     }
     case ADD_REVIEW: {
+      console.log(state[action.review.wineId].reviews);
+      const reviewsList = [...state[action.review.wineId].reviews];
+      reviewsList.push(action.review.id);
       return {
         ...state,
         [action.review.wineId]: {
           ...state[action.review.wineId],
-          reviews: [...state[action.review.wineId], action.review.id],
+          reviews: reviewsList,
+          // [...state[action.review.wineId], action.review.id],
         },
       };
     }
