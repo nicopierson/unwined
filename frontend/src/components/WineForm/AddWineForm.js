@@ -8,34 +8,25 @@ import WineForm from './WineForm';
 
 const AddWineForm = () => {
   const history = useHistory();
-  const [togglePage, setTogglePage] = useState(true);
+  const [toggleForm, setToggleForm] = useState(true);
   const [ref, setRef] = useState(React.createRef());
 
-  const method = 'POST';
-  console.log(togglePage);
-  if (!togglePage) {
+  if (!toggleForm) {
     history.push('/dashboard');
   }
 
   return (
     <div>
       <CSSTransition
-        in={togglePage}
+        in={toggleForm}
         timeout={800}
         classNames='wine_add_form' 
         nodeRef={ref}
       >
-        <>
         <WineForm 
-          setTogglePage={setTogglePage}
-          method={method}
+          setToggleForm={setToggleForm}
+          method={'POST'}
         />
-        <button
-          onClick={() => history.push('/dashboard')}
-        >
-          Cancel
-        </button>
-        </>
       </CSSTransition>
     </div>
   );

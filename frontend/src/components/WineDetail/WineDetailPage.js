@@ -6,7 +6,7 @@ import { deleteWine } from '../../store/wine';
 
 import styles from './WineDetailPage.module.css';
 
-const WineDetailPage = React.forwardRef(({ setToggleDetails }, ref) => {
+const WineDetailPage = React.forwardRef(({ setToggleForm }, ref) => {
   const history = useHistory();
   const dispatch = useDispatch();
   const { wineId } = useParams();
@@ -28,7 +28,7 @@ const WineDetailPage = React.forwardRef(({ setToggleDetails }, ref) => {
 
   const handleEdit = (event) => {
     event.preventDefault();
-    setToggleDetails(true);
+    setToggleForm(true);
   };
 
   return (
@@ -73,6 +73,11 @@ const WineDetailPage = React.forwardRef(({ setToggleDetails }, ref) => {
           onClick={handleEdit}
         > 
           Edit 
+        </button>
+        <button
+          onClick={() => history.push('/dashboard')}
+        > 
+          Back
         </button>
         <button
           onClick={handleDelete}

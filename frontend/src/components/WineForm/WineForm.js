@@ -7,7 +7,7 @@ import { createWine } from '../../store/wine';
 
 import styles from './WineForm.module.css';
 
-const WineForm = React.forwardRef(({ setToggleDetails, method }, ref) => {
+const WineForm = React.forwardRef(({ setToggleForm, method }, ref) => {
   const { wineId } = useParams();
   const dispatch = useDispatch();
   const history = useHistory();
@@ -89,14 +89,14 @@ const WineForm = React.forwardRef(({ setToggleDetails, method }, ref) => {
         history.push(`/wines/${newWine.id}`)
       } else {
         // otherwise set toggle off for edit page
-        setToggleDetails(false);
+        setToggleForm(false);
       }
     }
   };
 
   const handleCancel = (e) => {
     e.preventDefault();
-    setToggleDetails(false);
+    setToggleForm(false);
   };
 
   useEffect(() => {

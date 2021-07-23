@@ -41,7 +41,7 @@ const CheckIn = () => {
         >
           <FormCheckIn 
             ref={ref}
-            toggleForm={setToggleForm}
+            setToggleForm={setToggleForm}
             title={`Check In`}
             label={`comment`}
             method={`POST`}
