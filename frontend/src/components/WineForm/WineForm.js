@@ -16,22 +16,22 @@ const WineForm = React.forwardRef(({ setToggleForm, method }, ref) => {
   const sessionUser = useSelector(state => state.session.user);
   const wine = useSelector(state => state.wines[wineId]);
   const wineries = useSelector(state => state.wineries);
-  const winery = wineries[wine.wineryId] ? wineries[wine.wineryId] : '';
+  const winery = wine && wineries[wine.wineryId] ? wineries[wine.wineryId] : '';
   const wineTypes = useSelector(state => state.wineTypes);
   const colorTypes = useSelector(state => state.colorTypes);
-  const wineType = wineTypes[wine.wineTypeId] ? wineTypes[wine.wineTypeId] : '';
+  const wineType = wine && wineTypes[wine.wineTypeId] ? wineTypes[wine.wineTypeId] : '';
   const colorType = wine ? colorTypes[wine.colorTypeId] : '';
 
   // State
   const [name, setName] = useState(wine?.name ? wine.name : '');
-  const [wineryName, setWinery] = useState(winery ? winery.name : '');
+  const [wineryId, setWinery] = useState(winery ? winery.id : '');
   const [price, setPrice] = useState(wine?.price ? wine.price : '');
   const [description, setDescription] = useState(wine?.description ? wine.description : '');
   const [country, setCountry] = useState(wine?.country ? wine.country : '');
   const [province, setProvince] = useState(wine?.province ? wine.province : '');
   const [rating, setRating] = useState(wine?.rating ? wine.rating : '');
-  const [colorTypeColor, setColorType] = useState(colorType ? colorType.color : '');
-  const [wineTypeVariety, setWineType] = useState(wineType ? wineType.variety : '');
+  const [colorTypeId, setColorType] = useState(colorType ? colorType.id : '');
+  const [wineTypeId, setWineType] = useState(wineType ? wineType.id : '');
   const [region_1, setRegion1] = useState(wine?.region_1 ? wine.region_1 : '');
   const [region_2, setRegion2] = useState(wine?.region_2 ? wine.region_2 : '');
   const [designation, setDesignation] = useState(wine?.designation ? wine.designation : '');
@@ -45,9 +45,9 @@ const WineForm = React.forwardRef(({ setToggleForm, method }, ref) => {
   const descriptionOnChange = (e) => setDescription(e.target.value);
   const countryOnChange = (e) => setCountry(e.target.value);
   const provinceOnChange = (e) => setProvince(e.target.value);
-  const ratingOnChange = (e) => setRating(+e.target.value);
-  const colorOnChange = (e) => setColorType(+e.target.value);
-  const wineTypeOnChange = (e) => setWineType(+e.target.value);
+  const ratingOnChange = (e) => setRating(e.target.value);
+  const colorOnChange = (e) => setColorType(e.target.value);
+  const wineTypeOnChange = (e) => setWineType(e.target.value);
   const region1OnChange = (e) => setRegion1(e.target.value);
   const region2OnChange = (e) => setRegion2(e.target.value);
   const designationOnChange = (e) => setDesignation(e.target.value);
@@ -58,6 +58,9 @@ const WineForm = React.forwardRef(({ setToggleForm, method }, ref) => {
     // handle the submit
     e.preventDefault();
 
+    let imageUrlData = imageUrl;
+    if (!imageUrl) imageUrlData = null;
+
     const payload = {
       id: wineId,
       userId: sessionUser.id,
@@ -67,22 +70,13 @@ const WineForm = React.forwardRef(({ setToggleForm, method }, ref) => {
       country,
       province,
       rating, 
-      wineTypeId: 1, 
-      colorTypeId: 2,
-
-      wineryId: 3,
-      //TODO will error if no winery id
-      // wineryId: winery.id, 
-      
-      //TODO dynamic search for choosing wineries and wintypes and colortypes 
-      // change to the chosen winery when input
-      // wineryId: +wineryState,
-      // wineTypeId: +wineTypeState,
-      // colorTypeId: +colorTypeState,
+      wineTypeId, 
+      colorTypeId,
+      wineryId,
       region_1,
       region_2,
       designation,
-      imageUrl,
+      imageUrl: imageUrlData,
     };
 
     if (!wineId) delete payload.id;
@@ -97,7 +91,6 @@ const WineForm = React.forwardRef(({ setToggleForm, method }, ref) => {
     }
 
     // check if response shows errors
-    // setRegistrationArray((prevState) => [ ...prevState, registration ]);
     if (newWine.errors) {
       console.error(newWine.errors);
     } else {
@@ -162,9 +155,10 @@ const WineForm = React.forwardRef(({ setToggleForm, method }, ref) => {
               id='winery' 
               name='winery' 
               required
+              value={!!wineryId ? wineryId : ''}
             >
-              <option value='' 
-                selected={winery ? '' : 'selected'}
+              <option
+                value=''
               >
                 Select a Winery
               </option>
@@ -172,7 +166,6 @@ const WineForm = React.forwardRef(({ setToggleForm, method }, ref) => {
                   <option 
                     key={wineryId} 
                     value={wineryId}
-                    selected={winery && winery.id === wineryId ? 'selected' : ''}
                   > 
                     {wineries[wineryId].name}
                   </option>
@@ -199,17 +192,15 @@ const WineForm = React.forwardRef(({ setToggleForm, method }, ref) => {
               id='wineType' 
               name='wineType' 
               required
+              value={!!wineTypeId ? wineTypeId : ''}
             >
-              <option value=''
-                selected={wineType ? '' : 'selected'}
-              >
+              <option value=''>
                 Select Wine Type
               </option>
               { wineTypes && wineTypes.list.map(wineTypeId => 
                   <option 
                     key={wineTypeId}
                     value={wineTypeId}
-                    selected={wineType.id === wineTypeId ? 'selected' : ''}
                   > 
                     {wineTypes[wineTypeId].variety}
                   </option>
@@ -259,17 +250,15 @@ const WineForm = React.forwardRef(({ setToggleForm, method }, ref) => {
               id='color' 
               name='color' 
               required
+              value={!!colorTypeId ? colorTypeId : ''}
             >
-              <option value=''
-                selected={wineId ? '' : 'selected'}
-              >
+              <option value=''>
                 Select Wine Color
               </option>
               { colorTypes && colorTypes.list.map(colorId => 
                   <option 
                     key={colorId}
                     value={colorId}
-                    selected={colorType.id === colorId ? 'selected' : ''}
                   > 
                     {colorTypes[colorId].color}
                   </option>
