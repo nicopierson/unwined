@@ -15,6 +15,8 @@ const CheckIn = () => {
   const [toggleForm, setToggleForm] = useState(false);
   const [ref, setRef] = useState(React.createRef());
 
+
+  //? What is the best way to retrieve the all reviews by a wine id?
   const wineReviews = useSelector((state) => {
     const reviewIds = state.wines[wineId]?.reviews;
     return reviewIds?.map(id => state.reviews[id])

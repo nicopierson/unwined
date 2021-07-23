@@ -45,6 +45,12 @@ const FormCheckIn = React.forwardRef(({ setToggleForm, title, label, username, r
 
   };
 
+  const handleCancel = (event) => {
+    event.preventDefault();
+
+    setToggleForm(false);
+  };
+
   useEffect(() => {
     const errors = [];
 
@@ -79,6 +85,11 @@ const FormCheckIn = React.forwardRef(({ setToggleForm, title, label, username, r
         onClick={handleFormCheckIn}
       >
         Check In
+      </button>
+      <button
+        onClick={handleCancel}
+      >
+        Cancel
       </button>
     </div>
   );

@@ -12,30 +12,47 @@ const WineForm = React.forwardRef(({ setToggleForm, method }, ref) => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const sessionUser = useSelector(state => state?.session.user);
-  const wine = useSelector(state => state?.wines[wineId]);
-  const wineries = useSelector(state => state?.wineries);
-  const winery = wineries[wineId] ? wineries[wineId] : '';
-  const wineTypes = useSelector(state => state?.wineTypes);
-  const colorTypes = useSelector(state => state?.colorTypes);
-  const wineType = wineTypes[wineId] ? wineTypes[wineId] : '';
-  const colorType = colorTypes && wine ? colorTypes[wine.colorTypeId] : '';
+  // Store
+  const sessionUser = useSelector(state => state.session.user);
+  const wine = useSelector(state => state.wines[wineId]);
+  const wineries = useSelector(state => state.wineries);
+  const winery = wineries[wine.wineryId] ? wineries[wine.wineryId] : '';
+  const wineTypes = useSelector(state => state.wineTypes);
+  const colorTypes = useSelector(state => state.colorTypes);
+  const wineType = wineTypes[wine.wineTypeId] ? wineTypes[wine.wineTypeId] : '';
+  const colorType = wine ? colorTypes[wine.colorTypeId] : '';
 
+  // State
   const [name, setName] = useState(wine?.name ? wine.name : '');
-  const [wineryState, setWinery] = useState(winery ? winery.name : '');
+  const [wineryName, setWinery] = useState(winery ? winery.name : '');
   const [price, setPrice] = useState(wine?.price ? wine.price : '');
   const [description, setDescription] = useState(wine?.description ? wine.description : '');
   const [country, setCountry] = useState(wine?.country ? wine.country : '');
   const [province, setProvince] = useState(wine?.province ? wine.province : '');
   const [rating, setRating] = useState(wine?.rating ? wine.rating : '');
-  const [colorTypeState, setColorType] = useState(colorType ? colorType.color : '');
-  const [wineTypeState, setWineType] = useState(wineType ? wineType.variety : '');
-  const [region_1, setRegion_1] = useState(wine?.region_1 ? wine.region_1 : '');
-  const [region_2, setRegion_2] = useState(wine?.region_2 ? wine.region_2 : '');
+  const [colorTypeColor, setColorType] = useState(colorType ? colorType.color : '');
+  const [wineTypeVariety, setWineType] = useState(wineType ? wineType.variety : '');
+  const [region_1, setRegion1] = useState(wine?.region_1 ? wine.region_1 : '');
+  const [region_2, setRegion2] = useState(wine?.region_2 ? wine.region_2 : '');
   const [designation, setDesignation] = useState(wine?.designation ? wine.designation : '');
   const [imageUrl, setImageUrl] = useState(wine?.imageUrl ? wine.imageUrl : '');
   const [errorsArray, setErrorsArray] = useState([]);
   
+  // handle state onChange events
+  const nameOnChange = (e) => setName(e.target.value);
+  const wineryOnChange = (e) => setWinery(e.target.value);
+  const priceOnChange = (e) => setPrice(+e.target.value);
+  const descriptionOnChange = (e) => setDescription(e.target.value);
+  const countryOnChange = (e) => setCountry(e.target.value);
+  const provinceOnChange = (e) => setProvince(e.target.value);
+  const ratingOnChange = (e) => setRating(+e.target.value);
+  const colorOnChange = (e) => setColorType(+e.target.value);
+  const wineTypeOnChange = (e) => setWineType(+e.target.value);
+  const region1OnChange = (e) => setRegion1(e.target.value);
+  const region2OnChange = (e) => setRegion2(e.target.value);
+  const designationOnChange = (e) => setDesignation(e.target.value);
+  const imageUrlOnChange = (e) => setImageUrl(e.target.value);
+
 
   const handleSubmit = async (e) => {
     // handle the submit
@@ -101,13 +118,17 @@ const WineForm = React.forwardRef(({ setToggleForm, method }, ref) => {
 
   useEffect(() => {
     const errors = [];
-    if (name?.length < 2) errors.push('Name must have at least 2 characters.');
+    if (name.length < 2) errors.push('Name must have at least 2 characters.');
+    if (rating < 0) errors.push('Rating must be positive');
+    if (rating > 100) errors.push('Rating must be less than or equal to 100');
+    if (price < 0) errors.push('Rating must be positive');
+    if (price > 10_000) errors.push('Rating must be reasonably priced');
     // if (winery?.length < 2) errors.push('Winery must have at least 2 characters.');
-    if (description?.length > 500) errors.push('Description has a character limit of 500 characters.');
+    if (description.length > 500) errors.push('Description has a character limit of 500 characters.');
 
     setErrorsArray(errors);
 
-  }, [name, winery, description]);
+  }, [name, winery, description, rating, price]);
 
   return (
     <>
@@ -124,62 +145,95 @@ const WineForm = React.forwardRef(({ setToggleForm, method }, ref) => {
           <div>
             <label htmlFor='name'>Name</label>
             <input 
-              onChange={(event) => setName(event.target.value)}
+              onChange={nameOnChange}
               value={name}
               type='text' 
               name='name' 
               id='name' 
               placeholder='name'
+              required
             />
           </div>
           <div>
             <label htmlFor='winery'>Winery</label>
-            <input 
-              onChange={(event) => setWinery(event.target.value)}
-              value={wineryState}
-              type='winery' 
+            <select
+              onChange={wineryOnChange}
+              placeholder='Select a Winery'
               id='winery' 
               name='winery' 
-              placeholder='Winery'
-            />
+              required
+            >
+              <option value='' 
+                selected={winery ? '' : 'selected'}
+              >
+                Select a Winery
+              </option>
+              { wineries && wineries.list.map(wineryId => 
+                  <option 
+                    key={wineryId} 
+                    value={wineryId}
+                    selected={winery && winery.id === wineryId ? 'selected' : ''}
+                  > 
+                    {wineries[wineryId].name}
+                  </option>
+                )
+              }
+            </select>
           </div>
           <div>
             <label htmlFor='price'>Price</label>
             <input 
-              onChange={(event) => setPrice(event.target.value)}
+              onChange={priceOnChange}
               value={price}
               type='number' 
               id='price' 
               name='price' 
               placeholder='Price'
+              required
             />
           </div>
           <div>
             <label htmlFor='wineType'>Wine Type</label>
-            <input 
-              onChange={(event) => setWineType(event.target.value)}
-              value={wineTypeState}
-              type='text' 
+            <select
+              onChange={wineTypeOnChange}
               id='wineType' 
               name='wineType' 
-              placeholder='Wine Type'
-            />
+              required
+            >
+              <option value=''
+                selected={wineType ? '' : 'selected'}
+              >
+                Select Wine Type
+              </option>
+              { wineTypes && wineTypes.list.map(wineTypeId => 
+                  <option 
+                    key={wineTypeId}
+                    value={wineTypeId}
+                    selected={wineType.id === wineTypeId ? 'selected' : ''}
+                  > 
+                    {wineTypes[wineTypeId].variety}
+                  </option>
+                )
+              }
+            </select>
           </div>
           <div>
             <label htmlFor='country'>Country</label>
             <input 
-              onChange={(event) => setCountry(event.target.value)}
+              onChange={countryOnChange}
               value={country}
               type='text' 
               id='country' 
               name='country' 
               placeholder='Country'
+              autoComplete='country'
+              required
             />
           </div>
           <div>
             <label htmlFor='description'>Description</label>
             <textarea 
-              onChange={(event) => setDescription(event.target.value)}
+              onChange={descriptionOnChange}
               value={description}
               type='textarea' 
               id='description' 
@@ -190,7 +244,7 @@ const WineForm = React.forwardRef(({ setToggleForm, method }, ref) => {
           <div>
             <label htmlFor='rating'>Rating</label>
             <input 
-              onChange={(event) => setRating(event.target.value)}
+              onChange={ratingOnChange}
               value={rating}
               type='number' 
               id='rating' 
@@ -198,21 +252,35 @@ const WineForm = React.forwardRef(({ setToggleForm, method }, ref) => {
               placeholder='Rating'
             />
           </div>
-          <div>
+          <div>   
             <label htmlFor='color'>Color</label>
-            <input 
-              onChange={(event) => setColorType(event.target.value)}
-              value={colorTypeState}
-              type='text' 
-              id='colorType' 
-              name='colorType' 
-              placeholder='Color'
-            />
+            <select
+              onChange={colorOnChange}
+              id='color' 
+              name='color' 
+              required
+            >
+              <option value=''
+                selected={wineId ? '' : 'selected'}
+              >
+                Select Wine Color
+              </option>
+              { colorTypes && colorTypes.list.map(colorId => 
+                  <option 
+                    key={colorId}
+                    value={colorId}
+                    selected={colorType.id === colorId ? 'selected' : ''}
+                  > 
+                    {colorTypes[colorId].color}
+                  </option>
+                )
+              }
+            </select>
           </div>
           <div>
             <label htmlFor='province'>Province</label>
             <input 
-              onChange={(event) => setProvince(event.target.value)}
+              onChange={provinceOnChange}
               value={province}
               type='text' 
               id='province' 
@@ -221,20 +289,20 @@ const WineForm = React.forwardRef(({ setToggleForm, method }, ref) => {
             />
           </div>
           <div>
-            <label htmlFor='region_1'>Region 1</label>
+            <label htmlFor='region1'>Region 1</label>
             <input 
-              onChange={(event) => setRegion_1(event.target.value)}
+              onChange={region1OnChange}
               value={region_1}
               type='text' 
-              id='region_1' 
-              name='region_1' 
+              id='region1' 
+              name='region1' 
               placeholder='Region 1'
             />
           </div>
           <div>
             <label htmlFor='region_2'>Region 2</label>
             <input 
-              onChange={(event) => setRegion_2(event.target.value)}
+              onChange={region2OnChange}
               value={region_2}
               type='text' 
               id='region_2' 
@@ -245,7 +313,7 @@ const WineForm = React.forwardRef(({ setToggleForm, method }, ref) => {
           <div>
             <label htmlFor='designation'>Designation</label>
             <input 
-              onChange={(event) => setDesignation(event.target.value)}
+              onChange={designationOnChange}
               value={designation}
               type='text' 
               id='designation' 
@@ -256,7 +324,7 @@ const WineForm = React.forwardRef(({ setToggleForm, method }, ref) => {
           <div>
             <label htmlFor='imageUrl'>Image URL</label>
             <input 
-              onChange={(event) => setImageUrl(event.target.value)}
+              onChange={imageUrlOnChange}
               value={imageUrl}
               type='text' 
               id='imageUrl' 

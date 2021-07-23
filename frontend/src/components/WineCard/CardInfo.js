@@ -3,9 +3,9 @@ import { useSelector } from 'react-redux';
 import styles from './CardInfo.module.css';
 
 const CardInfo = ({ wineId }) => {
-  const wine = useSelector(state => state?.wines[wineId])
-  const winery = useSelector(state => state?.wineries[wine?.wineryId]);
-  const wineType = useSelector(state => state?.wineTypes[wine?.wineTypeId]);
+  const wine = useSelector(state => state.wines[wineId])
+  const winery = useSelector(state => state.wineries[wine.wineryId]);
+  const wineType = useSelector(state => state.wineTypes[wine.wineTypeId]);
 
   return (
     <div className={styles.info}>

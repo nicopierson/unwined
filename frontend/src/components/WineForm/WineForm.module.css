@@ -1,0 +1,13 @@
+.wine_form_container {
+  display: grid;
+  padding: 20px;
+}
+
+/* required fields: name, variety, color, price, rating, wineryId
+
+wine info: name, description, 
+image: imageUrl
+types of wine: variety, designation, color
+location: country, province, region_1, region_2
+price: price
+rating: rating */

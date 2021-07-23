@@ -4,7 +4,7 @@ import { CSSTransition } from 'react-transition-group';
 
 import WineForm from './WineForm';
 
-// import styles from './AddWineForm.module.css';
+import styles from './WineForm.module.css';
 
 const AddWineForm = () => {
   const history = useHistory();
@@ -16,7 +16,7 @@ const AddWineForm = () => {
   }
 
   return (
-    <div>
+    <div className={styles.wine_form_container}>
       <CSSTransition
         in={toggleForm}
         timeout={800}

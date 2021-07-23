@@ -16,8 +16,8 @@ const WineDetailPage = React.forwardRef(({ setToggleForm }, ref) => {
     history.push('/dashboard');
   } 
 
-  const winery = useSelector(state => state?.wineries[wine?.wineryId]);
-  const wineType = useSelector(state => state?.wineTypes[wine?.wineTypeId]);
+  const winery = useSelector(state => state.wineries[wine.wineryId]);
+  const wineType = useSelector(state => state.wineTypes[wine.wineTypeId]);
 
   const handleDelete = async (event) => {
     event.preventDefault();
@@ -54,7 +54,7 @@ const WineDetailPage = React.forwardRef(({ setToggleForm }, ref) => {
           <div className={styles.rating_container}>
             <span className={styles.title_info}>Rating</span>
             <div className={styles.rating}>
-              <h1 className={styles.rating_text}>{wine?.rating}</h1>
+              <h1 className={styles.rating_text}>{wine.rating}</h1>
               <i className={`fas fa-star`}></i>
             </div>
           </div>
@@ -65,7 +65,7 @@ const WineDetailPage = React.forwardRef(({ setToggleForm }, ref) => {
             </span>
             <div className={styles.price}>
               <i className={`fas fa-dollar-sign`}></i>
-              <h1>{wine?.price}</h1>
+              <h1>{wine.price}</h1>
             </div>
           </div>
         </div>

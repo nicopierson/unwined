@@ -16,7 +16,6 @@ const WineDetail = () => {
   
   return (
     <div>
-      <h2>CHanges</h2>
       <CSSTransition
         in={!toggleForm}
         timeout={800}
