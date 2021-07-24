@@ -46,7 +46,7 @@ const WineForm = React.forwardRef(({ setToggleForm, method }, ref) => {
   const countryOnChange = (e) => setCountry(e.target.value);
   const provinceOnChange = (e) => setProvince(e.target.value);
   const ratingOnChange = (e) => setRating(e.target.value);
-  const colorOnChange = (e) => setColorType(e.target.value);
+  // const colorOnChange = (e) => setColorType(e.target.value);
   const wineTypeOnChange = (e) => setWineType(e.target.value);
   const region1OnChange = (e) => setRegion1(e.target.value);
   const region2OnChange = (e) => setRegion2(e.target.value);
@@ -71,7 +71,7 @@ const WineForm = React.forwardRef(({ setToggleForm, method }, ref) => {
       province,
       rating, 
       wineTypeId, 
-      colorTypeId,
+      colorTypeId: 2, // hard code to red wine //TODO implement later
       wineryId,
       region_1,
       region_2,
@@ -116,7 +116,6 @@ const WineForm = React.forwardRef(({ setToggleForm, method }, ref) => {
     if (rating > 100) errors.push('Rating must be less than or equal to 100');
     if (price < 0) errors.push('Price must be positive');
     if (price > 10_000) errors.push('Price must be reasonably priced');
-    // if (winery?.length < 2) errors.push('Winery must have at least 2 characters.');
     if (description.length > 500) errors.push('Description has a character limit of 500 characters.');
 
     setErrorsArray(errors);
@@ -128,8 +127,8 @@ const WineForm = React.forwardRef(({ setToggleForm, method }, ref) => {
       <form className={styles.form_container}>
         <div className={`${styles.header} ${styles.form_input}`}>
           <h2>Add a Wine</h2>
-          <p>* Indicates required field.</p>
-          <div className={styles.errors}>
+          <p className={styles.required_text}>* Indicates required field.</p>
+          <div className={styles.errors_container}>
             { errorsArray.length > 0 && errorsArray.map((error) => (
               <p className='errors' key={error}>
                 {error}
@@ -343,6 +342,12 @@ const WineForm = React.forwardRef(({ setToggleForm, method }, ref) => {
         </div>
         
         <div className={`${styles.form_input} ${styles.form_submit}`}>
+          <button
+            onClick={handleCancel}
+            className={styles.cancel}
+          >
+            Cancel
+          </button>
           <button 
             type='submit' 
             disabled={errorsArray.length} 
@@ -350,12 +355,6 @@ const WineForm = React.forwardRef(({ setToggleForm, method }, ref) => {
             className={styles.submit}
           >
             Submit
-          </button>
-          <button
-            onClick={handleCancel}
-            className={styles.cancel}
-          >
-            Cancel
           </button>
         </div>
       </form>

@@ -18,14 +18,15 @@
   text-transform: uppercase;
 }
 
-.errors {
+.required_text {
+  text-transform: none;
   font-size: 12px;
-  color: rgb(179, 84, 84);
 }
 
-.header p {
+.errors_container p {
   font-size: 12px;
   text-transform: none;
+  color: rgb(179, 84, 84);
 }
 
 .wrapper {
@@ -45,7 +46,8 @@
 }
 
 .wrapper .form_input input,
-.wrapper .form_input textarea {
+.wrapper .form_input textarea 
+{
   position: absolute;
   width: 100%;
   font-size: 18px;
@@ -58,7 +60,8 @@
   padding: 5px 5px 5px 5px;
 }
 
-.wrapper .form_input select {
+.wrapper .form_input select 
+{
   position: absolute;
   width: 100%;
   height: 35px;
@@ -82,7 +85,8 @@
 }
 
 .required.form_input input:focus ~ label,
-.required.form_input input:valid ~ label {
+.required.form_input input:valid ~ label 
+{
   font-size: 12px;
   top: -15px;
   color: rgb(45, 45, 255);
@@ -101,7 +105,8 @@
 }
 
 .form_input input:focus,
-.form_input textarea:focus {
+.form_input textarea:focus 
+{
   border-bottom: 2px solid rgb(45, 45, 255);
 }
 
@@ -110,7 +115,8 @@
 }
 
 .form_input select:focus ~ label,
-.form_input select:valid ~ label {
+.form_input select:valid ~ label 
+{
   font-size: 12px;
   top: -15px;
   color: rgb(45, 45, 255);
@@ -120,6 +126,7 @@
 .wrapper .form_input textarea {
   position: absolute;
   height: 100px;
+  resize: none;
 }
 
 .wrapper .form_input textarea::placeholder {
