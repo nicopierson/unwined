@@ -128,6 +128,7 @@ const WineForm = React.forwardRef(({ setToggleForm, method }, ref) => {
       <form className={styles.form_container}>
         <div className={`${styles.header} ${styles.form_input}`}>
           <h2>Add a Wine</h2>
+          <p>* Indicates required field.</p>
           <div className={styles.errors}>
             { errorsArray.length > 0 && errorsArray.map((error) => (
               <p className='errors' key={error}>
@@ -138,18 +139,30 @@ const WineForm = React.forwardRef(({ setToggleForm, method }, ref) => {
         </div>
 
         <div className={styles.wrapper}>
-          <div className={`${styles.name} ${styles.form_input}`}>
+          <div className={`${styles.form_input} ${styles.required}`}>
             <input 
               onChange={nameOnChange}
               value={name}
               type='text' 
               name='name' 
               id='name' 
-              placeholder='Name'
               required
             />
-            <label htmlFor='name'>Name</label>
+            <label htmlFor='name'>Name*</label>
           </div>
+          <div className={`${styles.form_input} ${styles.not_required}`}>
+            <input 
+              onChange={designationOnChange}
+              value={designation}
+              type='text' 
+              id='designation' 
+              name='designation' 
+              placeholder=' '
+            />
+            <label htmlFor='designation'>Designation</label>
+          </div>
+        </div>
+        <div className={styles.wrapper}>
           <div className={styles.form_input}>
             <select
               onChange={wineryOnChange}
@@ -173,7 +186,7 @@ const WineForm = React.forwardRef(({ setToggleForm, method }, ref) => {
                 )
               }
             </select>
-            <label htmlFor='winery'>Winery</label>
+            <label htmlFor='winery'>Winery*</label>
           </div>
           <div className={styles.form_input}>
             <select
@@ -195,33 +208,37 @@ const WineForm = React.forwardRef(({ setToggleForm, method }, ref) => {
                   </option>
                 )
               }
-              <label htmlFor='wineType'>Wine Type</label>
             </select>
+            <label htmlFor='wineType'>Wine Type*</label>
           </div>
-          <div className={styles.form_input}>
+        </div>
+        <div className={styles.wrapper}>
+          <div className={`${styles.form_input} ${styles.required}`}>
             <input 
               onChange={priceOnChange}
               value={price}
               type='number' 
               id='price' 
               name='price' 
-              placeholder='Price'
               required
             />
-            <label htmlFor='price'>Price</label>
+            <label htmlFor='price'>Price*</label>
           </div>
-          <div className={styles.form_input}>
+          <div className={`${styles.form_input} ${styles.required}`}>
             <input 
               onChange={ratingOnChange}
               value={rating}
               type='number' 
               id='rating' 
-              name='rating' 
-              placeholder='Rating'
+              name='rating'
+              required
             />
             <label htmlFor='rating'>Rating</label>
           </div>
-          <div className={styles.form_input}>   
+          
+          {/* 
+          //TODO implement color later   
+          <div className={styles.form_input}> 
             <select
               onChange={colorOnChange}
               id='color' 
@@ -243,106 +260,102 @@ const WineForm = React.forwardRef(({ setToggleForm, method }, ref) => {
               }
             </select>
             <label htmlFor='color'>Color</label>
-          </div>
+          </div> */}
         </div>
         
         <div className={styles.wrapper}>
-        <div className={styles.form_input}>
+           <div className={`${styles.form_input} ${styles.required}`}>
             <input 
               onChange={countryOnChange}
               value={country}
               type='text' 
               id='country' 
               name='country' 
-              placeholder='Country'
               autoComplete='country'
               required
             />
-            <label htmlFor='country'>Country</label>
+            <label htmlFor='country'>Country*</label>
           </div>
-          <div className={styles.form_input}>
-            <input 
-              onChange={designationOnChange}
-              value={designation}
-              type='text' 
-              id='designation' 
-              name='designation' 
-              placeholder='Designation'
-            />
-            <label htmlFor='designation'>Designation</label>
-          </div>
-          <div className={styles.form_input}>
+          
+          <div className={`${styles.form_input} ${styles.not_required}`}>
             <input 
               onChange={provinceOnChange}
               value={province}
               type='text' 
               id='province' 
               name='province' 
-              placeholder='Province'
+              placeholder=' '
             />
             <label htmlFor='province'>Province</label>
           </div>
-          <div className={styles.form_input}>
+        </div>
+        <div className={styles.wrapper}>
+          <div className={`${styles.form_input} ${styles.not_required}`}>
             <input 
               onChange={region1OnChange}
               value={region_1}
               type='text' 
               id='region1' 
-              name='region1' 
-              placeholder='Region 1'
+              name='region1'
+              placeholder=' '
             />
             <label htmlFor='region1'>Region 1</label>
           </div>
-          <div className={styles.form_input}>
-            <label htmlFor='region_2'>Region 2</label>
+          <div className={`${styles.form_input} ${styles.not_required}`}>
             <input 
               onChange={region2OnChange}
               value={region_2}
               type='text' 
-              id='region_2' 
-              name='region_2' 
-              placeholder='Region 2'
+              id='region2' 
+              name='region2' 
+              placeholder=' '
             />
+            <label htmlFor='region2'>Region 2</label>
           </div>
-          <div className={styles.form_input}>
-            <label htmlFor='imageUrl'>imageUrl</label>
+        </div>
+        <div className={styles.wrapper}>
+          <div className={`${styles.form_input} ${styles.not_required}`}>
             <input 
               onChange={imageUrlOnChange}
               value={imageUrl}
               type='text' 
               id='imageUrl' 
               name='imageUrl' 
-              placeholder='Image URL'
+              placeholder=' '
             />
+            <label htmlFor='imageUrl'>imageUrl</label>
           </div>
         </div>
 
         <div className={styles.wrapper}>
-          <div className={styles.form_input}>
-            <label htmlFor='description'>Description</label>
+          <div className={`${styles.form_input} ${styles.not_required} ${styles.description}`}>
             <textarea 
               onChange={descriptionOnChange}
               value={description}
               type='textarea' 
               id='description' 
               name='description'
-              placeholder='Description'
+              placeholder=' '
             ></textarea>
+            <label htmlFor='description'>Description</label>
           </div>
         </div>
         
-        <div className={styles.form_submit}>
+        <div className={`${styles.form_input} ${styles.form_submit}`}>
           <button 
             type='submit' 
             disabled={errorsArray.length} 
             onClick={handleSubmit}
+            className={styles.submit}
           >
             Submit
           </button>
           <button
             onClick={handleCancel}
+            className={styles.cancel}
           >
-            Cancel
+            Cancel+
+            
           </button>
         </div>
       </form>

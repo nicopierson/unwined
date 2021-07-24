@@ -5,17 +5,17 @@
 }
 
 .form_container {
-  width: 80%;
+  width: 50%;
   padding: 20px;
   display: grid;
   grid-template-columns: auto;
-
 }
 
 .header {
   font-size: 1.8em;
   text-align: center;
   margin-bottom: 30px;
+  text-transform: uppercase;
 }
 
 .errors {
@@ -23,24 +23,30 @@
   color: rgb(179, 84, 84);
 }
 
+.header p {
+  font-size: 12px;
+  text-transform: none;
+}
+
 .wrapper {
   width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  grid-gap: 30px;
-  gap: 30px;
-  padding: 5px 0px;
-
+  grid-gap: 1rem;
+  gap: 20px;
+  padding: 10px;
 }
 
 .wrapper .form_input {
   width: 100%;
-  padding: 5px 20px;
   position: relative;
+  height: 50px;
+  padding: 5px;
 }
 
 .wrapper .form_input input,
 .wrapper .form_input textarea {
+  position: absolute;
   width: 100%;
   font-size: 18px;
   box-sizing: border-box;
@@ -49,11 +55,18 @@
   outline: none;
   border-radius: 5px;
   border-bottom: 2px solid rgb(21, 22, 22);
-  padding: 5px 5px 5px 10px;
+  padding: 5px 5px 5px 5px;
 }
 
 .wrapper .form_input select {
+  position: absolute;
   width: 100%;
+  height: 35px;
+  transition: 0.3s;
+}
+
+.form_input #wineType {
+  height: 35px;
 }
 
 .wrapper .form_input input::placeholder {
@@ -62,28 +75,83 @@
 }
 
 .wrapper .form_input label {
-  /* position: absolute; */
-  top: 4px;
-  font-size: 12px;
-  /* pointer-events: none; */
-  padding: 0px 0px 0px 10px;
+  position: absolute;
+  font-size: 16px;
+  pointer-events: none;
+  padding: 5px 5px 5px 5px;
 }
 
-.wrapper .form_input label ~ input:focus,
-.wrapper .form_input label ~ textarea:focus {
-  top: 13px;
+.required.form_input input:focus ~ label,
+.required.form_input input:valid ~ label {
+  font-size: 12px;
+  top: -15px;
   color: blue;
+  transition: 0.3s;
+}
+
+.wrapper .not_required.form_input input:focus ~ label,
+.wrapper .not_required.form_input input:not(:placeholder-shown) ~ label,
+.wrapper .not_required.form_input textarea:focus ~ label,
+.wrapper .not_required.form_input textarea:not(:placeholder-shown) ~ label
+{
+  font-size: 12px;
+  top: -15px;
+  color: blue;
+  transition: 0.3s;
+}
+
+.form_input input:focus,
+.form_input textarea:focus {
+  border-bottom: 2px solid blue;
+}
+
+.form_input select:invalid ~ label {
+  opacity: 0;
+}
+
+.form_input select:focus ~ label,
+.form_input select:valid ~ label {
+  font-size: 12px;
+  top: -15px;
+  color: blue;
+  transition: 0.3s;
 }
 
 .wrapper .form_input textarea {
+  position: absolute;
   height: 100px;
-  margin-bottom: 15px;
 }
 
 .wrapper .form_input textarea::placeholder {
   padding: 8px;
   text-transform: capitalize;
   font-size: 14px;
+}
+
+.description {
+  height: 100px;
+  margin-bottom: 20px;
+}
+
+.form_submit {
+  font-size: 1.8em;
+  text-align: center;
+  margin-top: 30px;
+}
+
+.form_submit button {
+  border: none;
+  padding: 5px;
+  margin: 5px;
+}
+
+.form_submit button:hover {
+  transform: scale(1.05);
+  transition: .3s;
+}
+
+.submit {
+  background-color: blue;
 }
 
 /* required fields: name, color, price, rating, wineryId, colorId, wineTypeId
