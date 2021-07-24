@@ -5,123 +5,85 @@
 }
 
 .form_container {
+  width: 80%;
+  padding: 20px;
   display: grid;
   grid-template-columns: auto;
-  grid-template-rows: 1fr;
-  grid-template-areas: 
-    "header"
-    "name"
-    "price"
-    "rating"
-    "winery"
-    "wineType"
-    "description"
-    "description"
-    "description"
-    "designation"
-    "colorType"
-    "country"
-    "province"
-    "region1"
-    "region2"
-    "imageUrl"
-  ;
-  row-gap: 10px;
-  /* grid-template-rows: repeat(5, 1fr [info]) 3fr [info] 
-    repeat(2, 1fr [type]) repeat(4, 1fr [location]) 1fr [image]; */
-  padding: 20px;
+
 }
 
 .header {
-  grid-area: header;
+  font-size: 1.8em;
+  text-align: center;
+  margin-bottom: 30px;
 }
 
-.name {
-  grid-area: name;
+.errors {
+  font-size: 12px;
+  color: rgb(179, 84, 84);
 }
 
-.price {
-  grid-area: price;
-}
-
-.rating {
-  grid-area: rating;
-}
-
-.winery {
-  grid-area: winery;
-}
-
-.wineType {
-  grid-area: wineType;
-}
-
-.description {
-  grid-area: description;
-}
-
-.description input {
-  height: 400px;
-}
-
-.designation {
-  grid-area: designation;
-}
-
-.colorType {
-  grid-area: colorType;
-}
-
-.country {
-  grid-area: country;
-}
-
-.province {
-  grid-area: province;
-}
-
-.region1 {
-  grid-area: region1;
-}
-
-.region2 {
-  grid-area: region2;
-}
-
-.imageUrl {
-  grid-area: imageUrl;
-}
-
-.form_input {
-  max-width: 500px;
+.wrapper {
   width: 100%;
-  height: 40px;
-  background-color: #f0f0f0;
-  margin: 10px 10px;
-  border-radius: 10px;
-  /* display: grid; */
-  /* grid-template-columns: 15% 85%; */
-  padding: 0 .4rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-gap: 30px;
+  gap: 30px;
+  padding: 5px 0px;
+
 }
 
-.form_input label {
-  display: flex;
-  /* align-items: center; */
+.wrapper .form_input {
+  width: 100%;
+  padding: 5px 20px;
+  position: relative;
 }
 
-.form_input input {
-  background: none;
-  outline: none;
+.wrapper .form_input input,
+.wrapper .form_input textarea {
+  width: 100%;
+  font-size: 18px;
+  box-sizing: border-box;
+  box-shadow: none;
   border: none;
-  line-height: 1;
-  font-weight: 600;
-  font-size: 1rem;
-  color: #333;
+  outline: none;
+  border-radius: 5px;
+  border-bottom: 2px solid rgb(21, 22, 22);
+  padding: 5px 5px 5px 10px;
 }
 
-.form_input input::placeholder {
-  color: #aaa;
-  font-weight: 500;
+.wrapper .form_input select {
+  width: 100%;
+}
+
+.wrapper .form_input input::placeholder {
+  text-transform: capitalize;
+  font-size: 14px;
+}
+
+.wrapper .form_input label {
+  /* position: absolute; */
+  top: 4px;
+  font-size: 12px;
+  /* pointer-events: none; */
+  padding: 0px 0px 0px 10px;
+}
+
+.wrapper .form_input label ~ input:focus,
+.wrapper .form_input label ~ textarea:focus {
+  top: 13px;
+  color: blue;
+}
+
+.wrapper .form_input textarea {
+  height: 100px;
+  margin-bottom: 15px;
+}
+
+.wrapper .form_input textarea::placeholder {
+  padding: 8px;
+  text-transform: capitalize;
+  font-size: 14px;
 }
 
 /* required fields: name, color, price, rating, wineryId, colorId, wineTypeId

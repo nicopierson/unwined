@@ -47,7 +47,7 @@ const validateWinery = [
 router.get(
   '/',
   asyncHandler(async (req, res, next) => {
-    const wineries = await Winery.findAll({ limit: 500 });
+    const wineries = await Winery.findAll({ limit: 100 });
 
     if (wineries) {
       return res.json(wineries);
