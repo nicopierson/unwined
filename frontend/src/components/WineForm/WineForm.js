@@ -7,39 +7,59 @@ import { createWine } from '../../store/wine';
 
 import styles from './WineForm.module.css';
 
-const WineForm = React.forwardRef(({ setTogglePage, method }, ref) => {
+const WineForm = React.forwardRef(({ setToggleForm, method }, ref) => {
   const { wineId } = useParams();
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const sessionUser = useSelector(state => state?.session.user);
-  const wine = useSelector(state => state?.wines[wineId]);
-  const wineries = useSelector(state => state?.wineries);
-  const winery = wineries[wineId] ? wineries[wineId] : '';
-  const wineTypes = useSelector(state => state?.wineTypes);
-  const colorTypes = useSelector(state => state?.colorTypes);
-  const wineType = wineTypes[wineId] ? wineTypes[wineId] : '';
-  const colorType = colorTypes && wine ? colorTypes[wine.colorTypeId] : '';
+  // Store
+  const sessionUser = useSelector(state => state.session.user);
+  const wine = useSelector(state => state.wines[wineId]);
+  const wineries = useSelector(state => state.wineries);
+  const winery = wine && wineries[wine.wineryId] ? wineries[wine.wineryId] : '';
+  const wineTypes = useSelector(state => state.wineTypes);
+  const colorTypes = useSelector(state => state.colorTypes);
+  const wineType = wine && wineTypes[wine.wineTypeId] ? wineTypes[wine.wineTypeId] : '';
+  const colorType = wine ? colorTypes[wine.colorTypeId] : '';
 
+  // State
   const [name, setName] = useState(wine?.name ? wine.name : '');
-  const [wineryState, setWinery] = useState(winery ? winery.name : '');
+  const [wineryId, setWinery] = useState(winery ? winery.id : '');
   const [price, setPrice] = useState(wine?.price ? wine.price : '');
   const [description, setDescription] = useState(wine?.description ? wine.description : '');
   const [country, setCountry] = useState(wine?.country ? wine.country : '');
   const [province, setProvince] = useState(wine?.province ? wine.province : '');
   const [rating, setRating] = useState(wine?.rating ? wine.rating : '');
-  const [colorTypeState, setColorType] = useState(colorType ? colorType.color : '');
-  const [wineTypeState, setWineType] = useState(wineType ? wineType.variety : '');
-  const [region_1, setRegion_1] = useState(wine?.region_1 ? wine.region_1 : '');
-  const [region_2, setRegion_2] = useState(wine?.region_2 ? wine.region_2 : '');
+  const [colorTypeId, setColorType] = useState(colorType ? colorType.id : '');
+  const [wineTypeId, setWineType] = useState(wineType ? wineType.id : '');
+  const [region_1, setRegion1] = useState(wine?.region_1 ? wine.region_1 : '');
+  const [region_2, setRegion2] = useState(wine?.region_2 ? wine.region_2 : '');
   const [designation, setDesignation] = useState(wine?.designation ? wine.designation : '');
   const [imageUrl, setImageUrl] = useState(wine?.imageUrl ? wine.imageUrl : '');
   const [errorsArray, setErrorsArray] = useState([]);
   
+  // handle state onChange events
+  const nameOnChange = (e) => setName(e.target.value);
+  const wineryOnChange = (e) => setWinery(e.target.value);
+  const priceOnChange = (e) => setPrice(+e.target.value);
+  const descriptionOnChange = (e) => setDescription(e.target.value);
+  const countryOnChange = (e) => setCountry(e.target.value);
+  const provinceOnChange = (e) => setProvince(e.target.value);
+  const ratingOnChange = (e) => setRating(e.target.value);
+  // const colorOnChange = (e) => setColorType(e.target.value);
+  const wineTypeOnChange = (e) => setWineType(e.target.value);
+  const region1OnChange = (e) => setRegion1(e.target.value);
+  const region2OnChange = (e) => setRegion2(e.target.value);
+  const designationOnChange = (e) => setDesignation(e.target.value);
+  const imageUrlOnChange = (e) => setImageUrl(e.target.value);
+
 
   const handleSubmit = async (e) => {
     // handle the submit
     e.preventDefault();
+
+    let imageUrlData = imageUrl;
+    if (!imageUrl) imageUrlData = null;
 
     const payload = {
       id: wineId,
@@ -50,227 +70,295 @@ const WineForm = React.forwardRef(({ setTogglePage, method }, ref) => {
       country,
       province,
       rating, 
-      wineTypeId: 1, 
-      colorTypeId: 2,
-
-      wineryId: 3,
-      //TODO will error if no winery id
-      // wineryId: winery.id, 
-      
-      //TODO dynamic search for choosing wineries and wintypes and colortypes 
-      // change to the chosen winery when input
-      // wineryId: +wineryState,
-      // wineTypeId: +wineTypeState,
-      // colorTypeId: +colorTypeState,
+      wineTypeId, 
+      colorTypeId: 2, // hard code to red wine //TODO implement later
+      wineryId,
       region_1,
       region_2,
       designation,
-      imageUrl,
+      imageUrl: imageUrlData,
     };
 
     if (!wineId) delete payload.id;
 
     // put or post
     let newWine;
-    if (method === 'put') {
+    if (method === 'PUT') {
       newWine = await dispatch(editWine(payload));
 
-    } else if (method === 'post') {
+    } else if (method === 'POST') {
       newWine = await dispatch(createWine(payload));
     }
 
     // check if response shows errors
-    // setRegistrationArray((prevState) => [ ...prevState, registration ]);
     if (newWine.errors) {
       console.error(newWine.errors);
     } else {
-      if (method === 'post') {
+      if (method === 'POST') {
         // push to new wine page after created
         history.push(`/wines/${newWine.id}`)
       } else {
         // otherwise set toggle off for edit page
-        setTogglePage(false);
+        setToggleForm(false);
       }
     }
   };
 
+  const handleCancel = (e) => {
+    e.preventDefault();
+    setToggleForm(false);
+  };
+
   useEffect(() => {
     const errors = [];
-    if (name?.length < 2) errors.push('Name must have at least 2 characters.');
-    // if (winery?.length < 2) errors.push('Winery must have at least 2 characters.');
-    if (description?.length > 500) errors.push('Description has a character limit of 500 characters.');
+    if (name.length < 2) errors.push('Name must have at least 2 characters.');
+    if (rating < 0) errors.push('Rating must be positive');
+    if (rating > 100) errors.push('Rating must be less than or equal to 100');
+    if (price < 0) errors.push('Price must be positive');
+    if (price > 10_000) errors.push('Price must be reasonably priced');
+    if (description.length > 500) errors.push('Description has a character limit of 500 characters.');
 
     setErrorsArray(errors);
 
-  }, [name, winery, description]);
+  }, [name, winery, description, rating, price]);
 
   return (
-    <>
-      <div>
-        <h2> Wine</h2>
-        <div className={styles.errors_container}>
-          { errorsArray.length > 0 && errorsArray.map((error) => (
-            <p className='errors' key={error}>
-              {error}
-            </p>
-          ))}
+    <div className={styles.wine_form_container}>
+      <form className={styles.form_container}>
+        <div className={`${styles.header} ${styles.form_input}`}>
+          <h2>Add a Wine</h2>
+          <p className={styles.required_text}>* Indicates required field.</p>
+          <div className={styles.errors_container}>
+            { errorsArray.length > 0 && errorsArray.map((error) => (
+              <p className='errors' key={error}>
+                {error}
+              </p>
+            ))}
+          </div>
         </div>
-        <form className={styles.form}>
-          <div>
-            <label htmlFor='name'>Name</label>
+
+        <div className={styles.wrapper}>
+          <div className={`${styles.form_input} ${styles.required}`}>
+          {/* <h4>General Info</h4> */}
             <input 
-              onChange={(event) => setName(event.target.value)}
+              onChange={nameOnChange}
               value={name}
               type='text' 
               name='name' 
               id='name' 
-              placeholder='name'
+              required
             />
+            <label htmlFor='name'>Name*</label>
           </div>
-          <div>
-            <label htmlFor='winery'>Winery</label>
+          <div className={`${styles.form_input} ${styles.not_required}`}>
             <input 
-              onChange={(event) => setWinery(event.target.value)}
-              value={wineryState}
-              type='winery' 
-              id='winery' 
-              name='winery' 
-              placeholder='Winery'
-            />
-          </div>
-          <div>
-            <label htmlFor='price'>Price</label>
-            <input 
-              onChange={(event) => setPrice(event.target.value)}
-              value={price}
-              type='number' 
-              id='price' 
-              name='price' 
-              placeholder='Price'
-            />
-          </div>
-          <div>
-            <label htmlFor='wineType'>Wine Type</label>
-            <input 
-              onChange={(event) => setWineType(event.target.value)}
-              value={wineTypeState}
-              type='text' 
-              id='wineType' 
-              name='wineType' 
-              placeholder='Wine Type'
-            />
-          </div>
-          <div>
-            <label htmlFor='country'>Country</label>
-            <input 
-              onChange={(event) => setCountry(event.target.value)}
-              value={country}
-              type='text' 
-              id='country' 
-              name='country' 
-              placeholder='Country'
-            />
-          </div>
-          <div>
-            <label htmlFor='description'>Description</label>
-            <textarea 
-              onChange={(event) => setDescription(event.target.value)}
-              value={description}
-              type='textarea' 
-              id='description' 
-              name='description'
-              placeholder='Description'
-            ></textarea>
-          </div>
-          <div>
-            <label htmlFor='rating'>Rating</label>
-            <input 
-              onChange={(event) => setRating(event.target.value)}
-              value={rating}
-              type='number' 
-              id='rating' 
-              name='rating' 
-              placeholder='Rating'
-            />
-          </div>
-          <div>
-            <label htmlFor='color'>Color</label>
-            <input 
-              onChange={(event) => setColorType(event.target.value)}
-              value={colorTypeState}
-              type='text' 
-              id='colorType' 
-              name='colorType' 
-              placeholder='Color'
-            />
-          </div>
-          <div>
-            <label htmlFor='province'>Province</label>
-            <input 
-              onChange={(event) => setProvince(event.target.value)}
-              value={province}
-              type='text' 
-              id='province' 
-              name='province' 
-              placeholder='Province'
-            />
-          </div>
-          <div>
-            <label htmlFor='region_1'>Region 1</label>
-            <input 
-              onChange={(event) => setRegion_1(event.target.value)}
-              value={region_1}
-              type='text' 
-              id='region_1' 
-              name='region_1' 
-              placeholder='Region 1'
-            />
-          </div>
-          <div>
-            <label htmlFor='region_2'>Region 2</label>
-            <input 
-              onChange={(event) => setRegion_2(event.target.value)}
-              value={region_2}
-              type='text' 
-              id='region_2' 
-              name='region_2' 
-              placeholder='Region 2'
-            />
-          </div>
-          <div>
-            <label htmlFor='designation'>Designation</label>
-            <input 
-              onChange={(event) => setDesignation(event.target.value)}
+              onChange={designationOnChange}
               value={designation}
               type='text' 
               id='designation' 
               name='designation' 
-              placeholder='Designation'
+              placeholder=' '
             />
+            <label htmlFor='designation'>Designation</label>
           </div>
-          <div>
-            <label htmlFor='imageUrl'>Image URL</label>
+        </div>
+        <div className={styles.wrapper}>
+          <div className={styles.form_input}>
+            <select
+              onChange={wineryOnChange}
+              id='winery' 
+              name='winery' 
+              required
+              value={!!wineryId ? wineryId : ''}
+            >
+              <option
+                value=''
+              >
+                Select a Winery
+              </option>
+              { wineries && wineries.list.map(wineryId => 
+                  <option 
+                  key={wineryId} 
+                  value={wineryId}
+                  > 
+                    {wineries[wineryId].name}
+                  </option>
+                )
+              }
+            </select>
+            <label htmlFor='winery'>Winery*</label>
+          </div>
+          <div className={styles.form_input}>
+            <select
+              onChange={wineTypeOnChange}
+              id='wineType' 
+              name='wineType' 
+              required
+              value={!!wineTypeId ? wineTypeId : ''}
+            >
+              <option value=''>
+                Select Wine Type
+              </option>
+              { wineTypes && wineTypes.list.map(wineTypeId => 
+                  <option 
+                  key={wineTypeId}
+                  value={wineTypeId}
+                  > 
+                    {wineTypes[wineTypeId].variety}
+                  </option>
+                )
+              }
+            </select>
+            <label htmlFor='wineType'>Wine Type*</label>
+          </div>
+        </div>
+        <div className={styles.wrapper}>
+          <div className={`${styles.form_input} ${styles.required}`}>
             <input 
-              onChange={(event) => setImageUrl(event.target.value)}
+              onChange={priceOnChange}
+              value={price}
+              type='number' 
+              id='price' 
+              name='price' 
+              required
+            />
+            <label htmlFor='price'>Price*</label>
+          </div>
+          <div className={`${styles.form_input} ${styles.required}`}>
+            <input 
+              onChange={ratingOnChange}
+              value={rating}
+              type='number' 
+              id='rating' 
+              name='rating'
+              required
+            />
+            <label htmlFor='rating'>Rating</label>
+          </div>
+          
+          {/* 
+          //TODO implement color later   
+          <div className={styles.form_input}> 
+            <select
+              onChange={colorOnChange}
+              id='color' 
+              name='color' 
+              required
+              value={!!colorTypeId ? colorTypeId : ''}
+            >
+              <option value=''>
+                Select Wine Color
+              </option>
+              { colorTypes && colorTypes.list.map(colorId => 
+                  <option 
+                  key={colorId}
+                  value={colorId}
+                  > 
+                    {colorTypes[colorId].color}
+                  </option>
+                )
+              }
+            </select>
+            <label htmlFor='color'>Color</label>
+          </div> */}
+        </div>
+        
+        <div className={styles.wrapper}>
+           <div className={`${styles.form_input} ${styles.required}`}>
+            <input 
+              onChange={countryOnChange}
+              value={country}
+              type='text' 
+              id='country' 
+              name='country' 
+              autoComplete='country'
+              required
+            />
+            <label htmlFor='country'>Country*</label>
+          </div>
+          
+          <div className={`${styles.form_input} ${styles.not_required}`}>
+            <input 
+              onChange={provinceOnChange}
+              value={province}
+              type='text' 
+              id='province' 
+              name='province' 
+              placeholder=' '
+            />
+            <label htmlFor='province'>Province</label>
+          </div>
+        </div>
+        <div className={styles.wrapper}>
+          <div className={`${styles.form_input} ${styles.not_required}`}>
+            <input 
+              onChange={region1OnChange}
+              value={region_1}
+              type='text' 
+              id='region1' 
+              name='region1'
+              placeholder=' '
+            />
+            <label htmlFor='region1'>Region 1</label>
+          </div>
+          <div className={`${styles.form_input} ${styles.not_required}`}>
+            <input 
+              onChange={region2OnChange}
+              value={region_2}
+              type='text' 
+              id='region2' 
+              name='region2' 
+              placeholder=' '
+            />
+            <label htmlFor='region2'>Region 2</label>
+          </div>
+        </div>
+        <div className={styles.wrapper}>
+          <div className={`${styles.form_input} ${styles.not_required}`}>
+            <input 
+              onChange={imageUrlOnChange}
               value={imageUrl}
               type='text' 
               id='imageUrl' 
               name='imageUrl' 
-              placeholder='Image URL'
+              placeholder=' '
             />
+            <label htmlFor='imageUrl'>imageUrl</label>
           </div>
-          <div>
-            <button 
-              type='submit' 
-              disabled={errorsArray.length} 
-              onClick={handleSubmit}
-            >
-              Submit
-            </button>
+        </div>
+
+        <div className={styles.wrapper}>
+          <div className={`${styles.form_input} ${styles.not_required} ${styles.description}`}>
+            <textarea 
+              onChange={descriptionOnChange}
+              value={description}
+              type='textarea' 
+              id='description' 
+              name='description'
+              placeholder=' '
+            ></textarea>
+            <label htmlFor='description'>Description</label>
           </div>
-        </form>
-      </div>
-    </>
+        </div>
+        
+        <div className={`${styles.form_input} ${styles.form_submit}`}>
+          <button
+            onClick={handleCancel}
+            className={styles.cancel}
+          >
+            Cancel
+          </button>
+          <button 
+            type='submit' 
+            disabled={errorsArray.length} 
+            onClick={handleSubmit}
+            className={styles.submit}
+          >
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
   );
 });
 

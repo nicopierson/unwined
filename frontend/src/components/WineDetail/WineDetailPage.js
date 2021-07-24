@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
+
+import { deleteWine } from '../../store/wine';
 
 import styles from './WineDetailPage.module.css';
 
-const WineDetailPage = React.forwardRef((props, ref) => {
+const WineDetailPage = React.forwardRef(({ setToggleForm }, ref) => {
   const history = useHistory();
+  const dispatch = useDispatch();
   const { wineId } = useParams();
   const wine = useSelector(state => state.wines[wineId]);
 
@@ -16,6 +19,17 @@ const WineDetailPage = React.forwardRef((props, ref) => {
   const winery = useSelector(state => state.wineries[wine.wineryId]);
   const wineType = useSelector(state => state.wineTypes[wine.wineTypeId]);
 
+  const handleDelete = async (event) => {
+    event.preventDefault();
+    const deletedWine = await dispatch(deleteWine(wineId));
+    console.log('Deleted Wine', deletedWine);
+    history.push('/dashboard');
+  };
+
+  const handleEdit = (event) => {
+    event.preventDefault();
+    setToggleForm(true);
+  };
 
   return (
     <div>
@@ -40,7 +54,7 @@ const WineDetailPage = React.forwardRef((props, ref) => {
           <div className={styles.rating_container}>
             <span className={styles.title_info}>Rating</span>
             <div className={styles.rating}>
-              <h1 className={styles.rating_text}>{wine?.rating}</h1>
+              <h1 className={styles.rating_text}>{wine.rating}</h1>
               <i className={`fas fa-star`}></i>
             </div>
           </div>
@@ -51,14 +65,24 @@ const WineDetailPage = React.forwardRef((props, ref) => {
             </span>
             <div className={styles.price}>
               <i className={`fas fa-dollar-sign`}></i>
-              <h1>{wine?.price}</h1>
+              <h1>{wine.price}</h1>
             </div>
           </div>
         </div>
         <button
+          onClick={handleEdit}
+        > 
+          Edit 
+        </button>
+        <button
           onClick={() => history.push('/dashboard')}
-        >
+        > 
           Back
+        </button>
+        <button
+          onClick={handleDelete}
+        > 
+          Delete
         </button>
     </div>
   );

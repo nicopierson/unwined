@@ -1,0 +1,174 @@
+.wine_form_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form_container {
+  width: 50%;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: auto;
+}
+
+.header {
+  font-size: 1.8em;
+  text-align: center;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+}
+
+.required_text {
+  text-transform: none;
+  font-size: 12px;
+}
+
+.errors_container p {
+  font-size: 12px;
+  text-transform: none;
+  color: rgb(179, 84, 84);
+}
+
+.wrapper {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-gap: 1rem;
+  gap: 20px;
+  padding: 10px;
+}
+
+.wrapper .form_input {
+  width: 100%;
+  position: relative;
+  height: 50px;
+  padding: 5px;
+}
+
+.wrapper .form_input input,
+.wrapper .form_input textarea 
+{
+  position: absolute;
+  width: 100%;
+  font-size: 18px;
+  box-sizing: border-box;
+  box-shadow: none;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  border-bottom: 2px solid rgb(21, 22, 22);
+  padding: 5px 5px 5px 5px;
+}
+
+.wrapper .form_input select 
+{
+  position: absolute;
+  width: 100%;
+  height: 35px;
+  transition: 0.3s;
+}
+
+.form_input #wineType {
+  height: 35px;
+}
+
+.wrapper .form_input input::placeholder {
+  text-transform: capitalize;
+  font-size: 14px;
+}
+
+.wrapper .form_input label {
+  position: absolute;
+  font-size: 16px;
+  pointer-events: none;
+  padding: 5px 5px 5px 5px;
+}
+
+.required.form_input input:focus ~ label,
+.required.form_input input:valid ~ label 
+{
+  font-size: 12px;
+  top: -15px;
+  color: rgb(45, 45, 255);
+  transition: 0.3s;
+}
+
+.wrapper .not_required.form_input input:focus ~ label,
+.wrapper .not_required.form_input input:not(:placeholder-shown) ~ label,
+.wrapper .not_required.form_input textarea:focus ~ label,
+.wrapper .not_required.form_input textarea:not(:placeholder-shown) ~ label
+{
+  font-size: 12px;
+  top: -15px;
+  color: rgb(45, 45, 255);
+  transition: 0.3s;
+}
+
+.form_input input:focus,
+.form_input textarea:focus 
+{
+  border-bottom: 2px solid rgb(45, 45, 255);
+}
+
+.form_input select:invalid ~ label {
+  opacity: 0;
+}
+
+.form_input select:focus ~ label,
+.form_input select:valid ~ label 
+{
+  font-size: 12px;
+  top: -15px;
+  color: rgb(45, 45, 255);
+  transition: 0.3s;
+}
+
+.wrapper .form_input textarea {
+  position: absolute;
+  height: 100px;
+  resize: none;
+}
+
+.wrapper .form_input textarea::placeholder {
+  padding: 8px;
+  text-transform: capitalize;
+  font-size: 14px;
+}
+
+.description {
+  height: 100px;
+  margin-bottom: 20px;
+}
+
+.form_submit {
+  font-size: 1.8em;
+  text-align: center;
+  margin-top: 40px;
+}
+
+.form_submit button {
+  padding: 10px 20px 10px 20px;
+  margin: 5px;
+  border-radius: 30px;
+}
+
+.submit {
+  background-color: #0071e3;
+  color: rgb(240, 240, 240);
+}
+
+.submit:hover {
+  background-color: #1b82e8;
+  color: #ffffff;
+}
+
+.cancel {
+  background-color: rgb(227, 227, 227);
+  color: rgb(77, 77, 77);
+  border: 1px rgb(154, 154, 154) solid;
+}
+
+.cancel:hover {
+  background-color: rgb(157, 157, 157);
+  color: rgb(60, 60, 60);
+}

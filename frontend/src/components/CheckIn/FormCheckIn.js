@@ -6,7 +6,7 @@ import { createReview, editReview } from '../../store/review';
 
 import styles from './FormCheckIn.module.css';
 
-const FormCheckIn = React.forwardRef(({ setToggleComponent, title, label, username, review, method }, ref) => {
+const FormCheckIn = React.forwardRef(({ setToggleForm, title, label, username, review, method }, ref) => {
   const dispatch = useDispatch();
   const { wineId } = useParams();
 
@@ -40,9 +40,15 @@ const FormCheckIn = React.forwardRef(({ setToggleComponent, title, label, userna
       console.error(newComment.errors);
     } else {
       // console.log('Successfully added comment to the db: ', newComment);
-      setToggleComponent(false);
+      setToggleForm(false);
     }
 
+  };
+
+  const handleCancel = (event) => {
+    event.preventDefault();
+
+    setToggleForm(false);
   };
 
   useEffect(() => {
@@ -79,6 +85,11 @@ const FormCheckIn = React.forwardRef(({ setToggleComponent, title, label, userna
         onClick={handleFormCheckIn}
       >
         Check In
+      </button>
+      <button
+        onClick={handleCancel}
+      >
+        Cancel
       </button>
     </div>
   );
