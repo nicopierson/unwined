@@ -6,8 +6,62 @@
 }
 
 .info {
-  width: 60%;
+  width: 65%;
   padding: 20px;
   display: grid;
   grid-template-columns: 1fr;
+  background-color: #f5f5f5;
+  box-shadow: 5px 0 10px rgba(0, 0, 0, 0.1),
+  0 -5px 10px rgba(0, 0, 0, 0.1),
+  0 5px 10px rgba(0, 0, 0, 0.1);
+  margin-top: 10px;
+}
+
+.details_wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px;
+  font-size: 14px;
+}
+
+.wine_name {
+  font-size: 1.4rem;
+  padding: 5px;
+}
+
+.winery {
+  display: flex;
+  align-items: center;
+  font-size: inherit;
+  text-align: center;
+}
+
+.wine_type {
+  display: flex;
+  align-items: center;
+  font-size: inherit;
+}
+
+
+.card_sub_info {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.country {
+  padding: 5px;
+}
+
+.rating {
+  display: flex;
+}
+
+.price {
+  display: flex;
+}
+
+.description_container {
+  padding: 10px;
 }
