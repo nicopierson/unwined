@@ -32,8 +32,7 @@ const WineDetailPage = React.forwardRef(({ setToggleForm }, ref) => {
   };
 
   return (
-    <div>
-      <h2>Wine Detail</h2>
+      <>
         <div className={styles.info}>
           <div className={styles.name}>
             <div className={styles.name_details}>
@@ -68,7 +67,6 @@ const WineDetailPage = React.forwardRef(({ setToggleForm }, ref) => {
               <h1>{wine.price}</h1>
             </div>
           </div>
-        </div>
         <button
           onClick={handleEdit}
         > 
@@ -84,7 +82,8 @@ const WineDetailPage = React.forwardRef(({ setToggleForm }, ref) => {
         > 
           Delete
         </button>
-    </div>
+      </div>
+    </>
   );
 });
 

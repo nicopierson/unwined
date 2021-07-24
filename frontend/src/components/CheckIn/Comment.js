@@ -11,12 +11,12 @@ import FormCheckIn from './FormCheckIn';
 const Comment = ({ review, username }) => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const [toggleComponent, setToggleComponent] = useState(false);
+  const [toggleComment, setToggleComment] = useState(false);
   const [ref, setRef] = useState(React.createRef());
 
   useEffect(() => {
     setRef(React.createRef())
-  }, [toggleComponent]);
+  }, [toggleComment]);
 
   const handleDelete = (e) => {
     e.preventDefault();
@@ -27,7 +27,7 @@ const Comment = ({ review, username }) => {
   return (
     <div key={review.id}>
       <CSSTransition
-        in={!toggleComponent}
+        in={!toggleComment}
         timeout={400}
         classNames='show_comment'
         unmountOnExit
@@ -37,7 +37,7 @@ const Comment = ({ review, username }) => {
           <h3>{username}</h3>
           <h3>{review.comments}</h3>
           <button
-            onClick={() => setToggleComponent(true)}
+            onClick={() => setToggleComment(true)}
           >
             Edit
           </button>
@@ -49,7 +49,7 @@ const Comment = ({ review, username }) => {
         </div>
       </CSSTransition>
       <CSSTransition
-        in={toggleComponent}
+        in={toggleComment}
         timeout={400}
         classNames='edit_comment'
         unmountOnExit
@@ -57,7 +57,7 @@ const Comment = ({ review, username }) => {
       >
         <div>
           <FormCheckIn 
-            setToggleComponent={setToggleComponent}
+            setToggleForm={setToggleComment}
             username={username}
             review={review}
             method={`PUT`}
