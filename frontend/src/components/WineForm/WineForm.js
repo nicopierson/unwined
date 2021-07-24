@@ -140,6 +140,7 @@ const WineForm = React.forwardRef(({ setToggleForm, method }, ref) => {
 
         <div className={styles.wrapper}>
           <div className={`${styles.form_input} ${styles.required}`}>
+          {/* <h4>General Info</h4> */}
             <input 
               onChange={nameOnChange}
               value={name}
@@ -354,8 +355,7 @@ const WineForm = React.forwardRef(({ setToggleForm, method }, ref) => {
             onClick={handleCancel}
             className={styles.cancel}
           >
-            Cancel+
-            
+            Cancel
           </button>
         </div>
       </form>

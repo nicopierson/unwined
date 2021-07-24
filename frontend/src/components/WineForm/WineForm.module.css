@@ -85,7 +85,7 @@
 .required.form_input input:valid ~ label {
   font-size: 12px;
   top: -15px;
-  color: blue;
+  color: rgb(45, 45, 255);
   transition: 0.3s;
 }
 
@@ -96,13 +96,13 @@
 {
   font-size: 12px;
   top: -15px;
-  color: blue;
+  color: rgb(45, 45, 255);
   transition: 0.3s;
 }
 
 .form_input input:focus,
 .form_input textarea:focus {
-  border-bottom: 2px solid blue;
+  border-bottom: 2px solid rgb(45, 45, 255);
 }
 
 .form_input select:invalid ~ label {
@@ -113,7 +113,7 @@
 .form_input select:valid ~ label {
   font-size: 12px;
   top: -15px;
-  color: blue;
+  color: rgb(45, 45, 255);
   transition: 0.3s;
 }
 
@@ -136,30 +136,32 @@
 .form_submit {
   font-size: 1.8em;
   text-align: center;
-  margin-top: 30px;
+  margin-top: 40px;
 }
 
 .form_submit button {
-  border: none;
-  padding: 5px;
+  padding: 10px 20px 10px 20px;
   margin: 5px;
-}
-
-.form_submit button:hover {
-  transform: scale(1.05);
-  transition: .3s;
+  border-radius: 30px;
 }
 
 .submit {
-  background-color: blue;
+  background-color: #0071e3;
+  color: rgb(240, 240, 240);
 }
 
-/* required fields: name, color, price, rating, wineryId, colorId, wineTypeId
+.submit:hover {
+  background-color: #1b82e8;
+  color: #ffffff;
+}
 
-color should be associated with a wine type
+.cancel {
+  background-color: rgb(227, 227, 227);
+  color: rgb(77, 77, 77);
+  border: 1px rgb(154, 154, 154) solid;
+}
 
-wine info: name, wineTypeId, wineryId, rating, price, description
-types of wine: designation, color
-location: country, province, region_1, region_2
-image: imageUrl
-*/
+.cancel:hover {
+  background-color: rgb(157, 157, 157);
+  color: rgb(60, 60, 60);
+}
