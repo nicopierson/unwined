@@ -7,7 +7,7 @@ import { createWine } from '../../store/wine';
 
 import styles from './WineForm.module.css';
 
-const WineForm = React.forwardRef(({ setToggleForm, method }, ref) => {
+const WineForm = React.forwardRef(({ setToggleForm, method, title }, ref) => {
   const { wineId } = useParams();
   const dispatch = useDispatch();
   const history = useHistory();
@@ -126,7 +126,7 @@ const WineForm = React.forwardRef(({ setToggleForm, method }, ref) => {
     <div className={styles.wine_form_container}>
       <form className={styles.form_container}>
         <div className={`${styles.header} ${styles.form_input}`}>
-          <h2>Add a Wine</h2>
+          <h2>{title}</h2>
           <p className={styles.required_text}>* Indicates required field.</p>
           <div className={styles.errors_container}>
             { errorsArray.length > 0 && errorsArray.map((error) => (

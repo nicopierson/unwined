@@ -16,7 +16,7 @@ const WineDetail = () => {
   }, [toggleForm]);
   
   return (
-    <div className={styles.details_container}>
+    <>
       <CSSTransition
         in={!toggleForm}
         timeout={800}
@@ -43,9 +43,10 @@ const WineDetail = () => {
           ref={ref} 
           setToggleForm={setToggleForm}
           method={'PUT'}
+          title='Edit Wine'
         />
       </CSSTransition>
-    </div>
+    </>
   );
 };
 

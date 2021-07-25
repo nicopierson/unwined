@@ -32,8 +32,26 @@ const WineDetailPage = React.forwardRef(({ setToggleForm }, ref) => {
   };
 
   return (
-    <>
+    <div className={styles.details_container}>
       <div className={styles.info}>
+        <div className={styles.navigation}>
+          <i
+            onClick={handleEdit}
+            className={`fas fa-edit ${styles.edit}`}
+          > 
+          </i>
+          {/* <span
+            className={styles.back}
+            onClick={() => history.push('/dashboard')}
+          > 
+            Back
+          </span> */}
+          <i
+            className={`fas fa-minus-circle ${styles.delete}`}
+            onClick={handleDelete}
+          > 
+          </i>
+        </div>
         <div className={styles.name}>
           <div className={styles.name_details}>
             <h1 className={styles.wine_name}>{wine.name}</h1>
@@ -54,18 +72,18 @@ const WineDetailPage = React.forwardRef(({ setToggleForm }, ref) => {
           </div>
         </div>
         <div className={styles.details_wrapper}>
+          <div className={styles.favorite_container}>
+            <i className={`far fa-heart`}></i>
+            <span className={styles.favorite}>
+              Favorite
+            </span>
+          </div>
           <div className={styles.rating_container}>
             <div className={styles.rating}>
-              <h1 className={styles.rating_text}>{wine.rating}</h1>
               <i className={`fas fa-star`}></i>
+              <h1 className={styles.rating_text}>{wine.rating}</h1>
               <span className={styles.title_info}>Rating</span>
             </div>
-          </div>
-          <div className={styles.favorite_container}>
-            <span className={styles.favorite}>
-              <i className={`fab fa-gratipay`}></i>
-              Add to Favorites
-            </span>
           </div>
           <div className={styles.price_container}>
             <div className={styles.price}>
@@ -74,25 +92,8 @@ const WineDetailPage = React.forwardRef(({ setToggleForm }, ref) => {
             </div>
           </div>
         </div>
-        <div className={'styles.buttons'}>
-          <button
-            onClick={handleEdit}
-          > 
-            Edit 
-          </button>
-          <button
-            onClick={() => history.push('/dashboard')}
-          > 
-            Back
-          </button>
-          <button
-            onClick={handleDelete}
-          > 
-            Delete
-          </button>
-        </div>
       </div>
-    </>
+    </div>
   );
 });
 
