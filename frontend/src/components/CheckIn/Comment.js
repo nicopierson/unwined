@@ -2,21 +2,21 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import { CSSTransition } from 'react-transition-group';
-
-
 import { deleteReview } from '../../store/review';
 
 import FormCheckIn from './FormCheckIn';
 
+import styles from './CheckIn.module.css';
+
 const Comment = ({ review, username }) => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const [toggleComponent, setToggleComponent] = useState(false);
+  const [toggleComment, setToggleComment] = useState(false);
   const [ref, setRef] = useState(React.createRef());
 
   useEffect(() => {
     setRef(React.createRef())
-  }, [toggleComponent]);
+  }, [toggleComment]);
 
   const handleDelete = (e) => {
     e.preventDefault();
@@ -27,29 +27,33 @@ const Comment = ({ review, username }) => {
   return (
     <div key={review.id}>
       <CSSTransition
-        in={!toggleComponent}
+        in={!toggleComment}
         timeout={400}
         classNames='show_comment'
         unmountOnExit
         nodeRef={ref}
       >
-        <div>
-          <h3>{username}</h3>
-          <h3>{review.comments}</h3>
-          <button
-            onClick={() => setToggleComponent(true)}
-          >
-            Edit
-          </button>
-          <button
-            onClick={handleDelete}
-          >
-            Delete
-          </button>
+        <div className={styles.comment}>
+          <div className={styles.comment_header}>
+            <h4>{username}</h4>
+            <div>
+              <i
+                className={`fas fa-edit ${styles.comment_edit}`}
+                onClick={() => setToggleComment(true)}
+              >
+              </i>
+              <i
+                className={`fas fa-minus-circle ${styles.comment_delete}`}
+                onClick={handleDelete}
+              >
+              </i>
+            </div>
+          </div>
+          <p>{review.comments}</p>
         </div>
       </CSSTransition>
       <CSSTransition
-        in={toggleComponent}
+        in={toggleComment}
         timeout={400}
         classNames='edit_comment'
         unmountOnExit
@@ -57,11 +61,10 @@ const Comment = ({ review, username }) => {
       >
         <div>
           <FormCheckIn 
-            setToggleComponent={setToggleComponent}
+            setToggleForm={setToggleComment}
             username={username}
             review={review}
             method={`PUT`}
-            title={`Edit Comment`}
             ref={ref}
           />
         </div>

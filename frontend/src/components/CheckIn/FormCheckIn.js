@@ -6,7 +6,7 @@ import { createReview, editReview } from '../../store/review';
 
 import styles from './FormCheckIn.module.css';
 
-const FormCheckIn = React.forwardRef(({ setToggleForm, title, label, username, review, method }, ref) => {
+const FormCheckIn = React.forwardRef(({ setToggleForm, label, username, review, method }, ref) => {
   const dispatch = useDispatch();
   const { wineId } = useParams();
 
@@ -61,36 +61,40 @@ const FormCheckIn = React.forwardRef(({ setToggleForm, title, label, username, r
   }, [dispatch, comments]);
   
   return (
-    <div>
-      <h2>{title && title}</h2>
-      <div className={styles.errors_container}>
-        { errorsArray.length > 0 && errorsArray.map((error) => (
-          <p className='errors' key={error}>
-            {error}
-          </p>
-        ))}
-      </div>
-      <div> 
-        <label htmlFor='comments'>{username ? username : label}</label>
-        <textarea
-          onChange={(event) => setComments(event.target.value)}
-          value={comments}
-          id='comments'
-          name='comments'
-          placeholder='Check In'
+    <div className={styles.form_container}>
+      <div className={styles.form}>
+        {/* <div className={styles.errors_container}>
+          { errorsArray.length > 0 && errorsArray.map((error) => (
+            <p className='errors' key={error}>
+              {error}
+            </p>
+          ))}
+        </div> */}
+        <div> 
+          <h4>{username ? username : label}</h4>
+          <label htmlFor='comments'></label>
+          <textarea
+            onChange={(event) => setComments(event.target.value)}
+            value={comments}
+            id='comments'
+            name='comments'
+            placeholder='Check In'
+          >
+          </textarea>
+        </div>
+        <button
+          className={styles.cancel}
+          onClick={handleCancel}
         >
-        </textarea>
+          Cancel
+        </button>
+        <button
+          className={styles.check_in}
+          onClick={handleFormCheckIn}
+        >
+          Check In
+        </button>
       </div>
-      <button
-        onClick={handleFormCheckIn}
-      >
-        Check In
-      </button>
-      <button
-        onClick={handleCancel}
-      >
-        Cancel
-      </button>
     </div>
   );
 });

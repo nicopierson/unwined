@@ -25,6 +25,7 @@ const AddWineForm = () => {
         <WineForm 
           setToggleForm={setToggleForm}
           method={'POST'}
+          title='Add Wine'
         />
       </CSSTransition>
   );

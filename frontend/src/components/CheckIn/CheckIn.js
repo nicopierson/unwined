@@ -33,7 +33,25 @@ const CheckIn = () => {
   }, [toggleForm]);
 
   return (
-      <div>
+    <div className={styles.checkin_background}>
+      <div className={styles.checkin_container}>
+        <div className={styles.header}>
+          <CSSTransition
+            in={!toggleForm}
+            timeout={400}
+            classNames='open_comment'
+            nodeRef={ref}
+          >
+            <div className={styles.checkin_add}>
+              <i
+                className='fas fa-plus-circle'
+                onClick={() => setToggleForm(true)}
+              >
+              </i>
+            </div>
+          </CSSTransition>
+          <h2>Check in Activity</h2>
+        </div>
         <CSSTransition
           in={toggleForm}
           timeout={400}
@@ -44,27 +62,10 @@ const CheckIn = () => {
           <FormCheckIn 
             ref={ref}
             setToggleForm={setToggleForm}
-            title={`Check In`}
-            label={`comment`}
+            label={`Add a Check In`}
             method={`POST`}
           />
         </CSSTransition>
-        <CSSTransition
-          in={!toggleForm}
-          timeout={400}
-          classNames='open_comment'
-          nodeRef={ref}
-          unmountOnExit
-        >
-          <div>
-            <button
-              onClick={() => setToggleForm(true)}
-            >
-              Add Comment
-            </button>
-          </div>
-        </CSSTransition>
-        <h2>Comments</h2>
         <div>
           {wineReviews &&
             wineReviews?.map(review => (
@@ -77,6 +78,7 @@ const CheckIn = () => {
             }
         </div>
       </div>
+    </div>
   );
 };
 

@@ -1,0 +1,70 @@
+.checkin_background {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #f5f5f5
+}
+
+.checkin_container {
+  width: 65%;
+  background-color: #fff;
+  padding: 20px;
+}
+
+.header {
+  display: flex;
+  border-bottom: 1px solid #d8d8d8;
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+}
+
+.header h2 {
+  font-size: 18px;
+  margin: 0px 0px 0px 20px;
+}
+
+.checkin_add i {
+  color: rgb(0, 184, 0);
+}
+
+.checkin_add i:hover {
+  cursor: pointer;
+  color: rgb(1, 218, 1);
+}
+
+.comment {
+  padding: 20px;
+}
+
+.comment p {
+  padding-bottom: 5px;
+  border-bottom: 1px solid #d8d8d8;
+}
+
+.comment_header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.comment i:hover {
+  cursor: pointer;
+}
+
+.comment_edit {
+  margin: 0px 5px 0px 0px;
+}
+
+.comment_edit:hover {
+  color: #787878;
+}
+
+.comment_delete {
+  color: red;
+  background-color: #fff;
+}
+
+.comment_delete:hover {
+  color: rgb(250, 107, 107);
+}

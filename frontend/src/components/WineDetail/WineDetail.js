@@ -3,8 +3,9 @@ import { CSSTransition } from 'react-transition-group';
 
 import WineDetailPage from './WineDetailPage';
 import WineForm from '../WineForm';
-
 import CheckIn from '../CheckIn';
+
+import styles from './WineDetailPage.module.css'
 
 const WineDetail = () => {
   const [toggleForm, setToggleForm] = useState(false);
@@ -15,7 +16,7 @@ const WineDetail = () => {
   }, [toggleForm]);
   
   return (
-    <div>
+    <>
       <CSSTransition
         in={!toggleForm}
         timeout={800}
@@ -42,9 +43,10 @@ const WineDetail = () => {
           ref={ref} 
           setToggleForm={setToggleForm}
           method={'PUT'}
+          title='Edit Wine'
         />
       </CSSTransition>
-    </div>
+    </>
   );
 };
 
