@@ -3,32 +3,37 @@ import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import EnterFormModal from '../EnterFormModal';
-import './Navigation.css';
 import styled from 'styled-components';
 import { ReactComponent as NavLogo } from '../../assets/unwined_logo_nav.svg';
 
+import './Navigation.css';
+
 const StyledNavLogo = styled(NavLogo)`
+  height: 50px;
+  width: 100px;
+  margin-left: 10px;
+
   :hover #logo_nav #text path {
-      fill: white;
-    }
+    fill: white;
+    transition: 0.5s linear;
   }
 
   :hover #logo_nav #bottle path {
-      stroke: white;
-    }
+    stroke: white;
+    transition: 0.5s linear;
   }
 
   :hover #logo_nav path#wine {
-      fill: #EE4C7C;
-    }
+    fill: #EE4C7C;
+    transition: 0.5s linear;
   }
 
   #logo_nav #text path {
-    fill: #E3E2DF;
+    fill: #b8b8b8;
   }
   
   #logo_nav #bottle path {
-    stroke: #E3E2DF;
+    stroke: #b8b8b8;
   }
 `;
 
@@ -42,9 +47,7 @@ function Navigation({ isLoaded }){
     );
   } else {
     sessionLinks = (
-      <>
         <EnterFormModal />
-      </>
     );
   }
 

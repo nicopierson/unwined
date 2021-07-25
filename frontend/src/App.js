@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
+import Splash from './components/Splash';
 import Navigation from './components/Navigation';
 import * as sessionActions from './store/session';
 import DashBoard from './components/Dashboard';
@@ -25,7 +26,7 @@ function App() {
       { isLoaded && (
         <Switch>
           <Route exact path='/'> {/* Splash Page */}
-            <h2>Splash</h2>
+            <Splash />
           </Route>
           <Route path='/dashboard'> {/* After login */}
             <DashBoard />

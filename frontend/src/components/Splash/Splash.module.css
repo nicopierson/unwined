@@ -1,0 +1,48 @@
+.splash_background {
+  /* background-color: #501B1D; */
+}
+
+.splash_main_container {
+  height: 85vh;
+}
+
+.splash_main {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.splash_left {
+  height: inherit;
+  width: 35%;
+}
+
+.splash_right {
+  height: inherit;
+  width: 65%;
+  background-color: palegreen;
+}
+
+.find_wine_container {
+  width: 100%;
+  height: 40vh;
+  background-color: purple;
+}
+
+.check_ins_container {
+  width: 100%;
+  height: 40vh;
+  background-color: aqua;
+}
+
+.footer_container {
+  width: 100%;
+  height: 60px;
+  background-color: brown;
+}
+
+.splash_left img {
+  height: 500px;
+  width: 300px;
+}
