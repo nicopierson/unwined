@@ -61,7 +61,7 @@ const FormCheckIn = React.forwardRef(({ setToggleForm, title, label, username, r
   }, [dispatch, comments]);
   
   return (
-    <div>
+    <div className={styles.form}>
       <h2>{title && title}</h2>
       <div className={styles.errors_container}>
         { errorsArray.length > 0 && errorsArray.map((error) => (

@@ -33,48 +33,52 @@ const CheckIn = () => {
   }, [toggleForm]);
 
   return (
-      <div>
-        <CSSTransition
-          in={toggleForm}
-          timeout={400}
-          classNames='check_in_add'
-          nodeRef={ref}
-          unmountOnExit
-        >
-          <FormCheckIn 
-            ref={ref}
-            setToggleForm={setToggleForm}
-            title={`Check In`}
-            label={`comment`}
-            method={`POST`}
-          />
-        </CSSTransition>
-        <CSSTransition
-          in={!toggleForm}
-          timeout={400}
-          classNames='open_comment'
-          nodeRef={ref}
-          unmountOnExit
-        >
-          <div>
-            <button
-              onClick={() => setToggleForm(true)}
-            >
-              Add Comment
-            </button>
+      <div className={styles.checkin_background}>
+        <div className={styles.checkin_container}>
+          <CSSTransition
+            in={toggleForm}
+            timeout={400}
+            classNames='check_in_add'
+            nodeRef={ref}
+            unmountOnExit
+          >
+            <FormCheckIn 
+              ref={ref}
+              setToggleForm={setToggleForm}
+              title={`Check In`}
+              label={`comment`}
+              method={`POST`}
+            />
+          </CSSTransition>
+          <div className={styles.header}>
+          <CSSTransition
+            in={!toggleForm}
+            timeout={400}
+            classNames='open_comment'
+            nodeRef={ref}
+            unmountOnExit
+          >
+            <div className={styles.checkin_add}>
+              <i
+                className='fas fa-plus-circle'
+                onClick={() => setToggleForm(true)}
+              >
+              </i>
+            </div>
+          </CSSTransition>
+            <h2>Check in Activity</h2>
           </div>
-        </CSSTransition>
-        <h2>Comments</h2>
-        <div>
-          {wineReviews &&
-            wineReviews?.map(review => (
-              <Comment 
-              review={review}
-              username={users[review.userId].username}
-              key={review.id}
-              />
-              ))
-            }
+          <div>
+            {wineReviews &&
+              wineReviews?.map(review => (
+                <Comment 
+                review={review}
+                username={users[review.userId].username}
+                key={review.id}
+                />
+                ))
+              }
+          </div>
         </div>
       </div>
   );
