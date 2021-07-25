@@ -33,30 +33,14 @@ const CheckIn = () => {
   }, [toggleForm]);
 
   return (
-      <div className={styles.checkin_background}>
-        <div className={styles.checkin_container}>
-          <CSSTransition
-            in={toggleForm}
-            timeout={400}
-            classNames='check_in_add'
-            nodeRef={ref}
-            unmountOnExit
-          >
-            <FormCheckIn 
-              ref={ref}
-              setToggleForm={setToggleForm}
-              title={`Check In`}
-              label={`comment`}
-              method={`POST`}
-            />
-          </CSSTransition>
-          <div className={styles.header}>
+    <div className={styles.checkin_background}>
+      <div className={styles.checkin_container}>
+        <div className={styles.header}>
           <CSSTransition
             in={!toggleForm}
             timeout={400}
             classNames='open_comment'
             nodeRef={ref}
-            unmountOnExit
           >
             <div className={styles.checkin_add}>
               <i
@@ -66,21 +50,35 @@ const CheckIn = () => {
               </i>
             </div>
           </CSSTransition>
-            <h2>Check in Activity</h2>
-          </div>
-          <div>
-            {wineReviews &&
-              wineReviews?.map(review => (
-                <Comment 
-                review={review}
-                username={users[review.userId].username}
-                key={review.id}
-                />
-                ))
-              }
-          </div>
+          <h2>Check in Activity</h2>
+        </div>
+        <CSSTransition
+          in={toggleForm}
+          timeout={400}
+          classNames='check_in_add'
+          nodeRef={ref}
+          unmountOnExit
+        >
+          <FormCheckIn 
+            ref={ref}
+            setToggleForm={setToggleForm}
+            label={`Add a Check In`}
+            method={`POST`}
+          />
+        </CSSTransition>
+        <div>
+          {wineReviews &&
+            wineReviews?.map(review => (
+              <Comment 
+              review={review}
+              username={users[review.userId].username}
+              key={review.id}
+              />
+              ))
+            }
         </div>
       </div>
+    </div>
   );
 };
 

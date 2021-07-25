@@ -65,7 +65,6 @@ const Comment = ({ review, username }) => {
             username={username}
             review={review}
             method={`PUT`}
-            title={`Edit Comment`}
             ref={ref}
           />
         </div>
