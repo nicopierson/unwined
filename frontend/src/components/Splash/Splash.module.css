@@ -50,7 +50,12 @@
 .logo h2 {
   margin-left: 25px;
   font-size: 4vw;
-  text-align: center;
+  margin-bottom: 5px;
+}
+
+.logo p {
+  margin-left: 25px;
+  font-size: 2vw;
 }
 
 .find_wine_container {
@@ -62,10 +67,12 @@
 
 .find_wine_container h2 {
   font-size: 3vw;
+  margin-left: 25px;
 }
 
 .find_wine_container p {
   font-size: 2vw;
+  margin-left: 25px;
 }
 
 .find_wine_container img {

@@ -16,6 +16,7 @@ const Splash = () => {
             <div className={styles.logo}>
               <img alt='unwined_logo' src={unWinedLogo} />
               <h2>Sit back and share your favorite wine</h2>
+              <p>Expand your palate by trying new & different wine.</p>
             </div>
             <img alt='main_wine_image' className={styles.wine_img} src={mainImgUrl} />
           </div>
@@ -26,7 +27,7 @@ const Splash = () => {
           <img alt='find_wine_image' src={findWineUrl} />
           <div className={styles.find_wine_text}>
             <h2>Discover new wines we think you’ll like</h2>
-            <p>Join us on the endless pursuit of great wine.</p>
+            <p>Keep track of what you’ve tried and what you thought of it by checking in a wine and rating it.</p>
           </div>
         </div>
       </div>
