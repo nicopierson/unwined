@@ -3,8 +3,9 @@
 </p>
 
 # Unwined
-Unwined is a platform for wine enthusiasts to discover and share their favorite wine. It is modeled after the Untappd app.
+Find the perfect wine whether you're just getting started or if you are a wine enthusiast.
 
+* Unwined is a platform for wine enthusiasts to discover and share their favorite wine. It is modeled after the Untappd app.
 * Reference to the <a href='https://www.github.com/nicopierson/unwined/wiki'>Unwined wiki docs</a>
 * View the <a href='https://unwined-wine-app.herokuapp.com/'>Unwined App</a> Live
 
