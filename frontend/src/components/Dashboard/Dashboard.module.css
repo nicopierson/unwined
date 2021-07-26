@@ -35,6 +35,7 @@
 .dashboard_add i {
   margin-right: 5px;
   color: rgb(0, 184, 0);
+  font-size: 20px;
 }
 
 .dashboard_add:hover > i
