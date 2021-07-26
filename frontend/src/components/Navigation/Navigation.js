@@ -9,9 +9,9 @@ import { ReactComponent as NavLogo } from '../../assets/unwined_logo_nav.svg';
 import './Navigation.css';
 
 const StyledNavLogo = styled(NavLogo)`
-  height: 50px;
-  width: 100px;
-  margin-left: 10px;
+  height: 55px;
+  width: 120px;
+  margin-left: 20px;
 
   :hover #logo_nav #text path {
     fill: white;

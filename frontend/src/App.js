@@ -21,7 +21,7 @@ function App() {
   }, [dispatch]);
 
   return (
-    <>
+    <div className='app_container'>
       <Navigation isLoaded={isLoaded} />
       {/* isLoaded only shows when the userSession is restored - removes signIn and signUp */}
       { isLoaded && (
@@ -41,7 +41,7 @@ function App() {
         </Switch>
       )}
       <Footer />
-    </>
+    </div>
   );
 }
 
