@@ -4,13 +4,6 @@
   align-items: center;
 }
 
-.form_container {
-  width: 50%; 
-  padding: 20px;
-  display: grid;
-  grid-template-columns: auto;
-}
-
 .header {
   font-size: 1.8em;
   text-align: center;
@@ -21,6 +14,13 @@
 .required_text {
   text-transform: none;
   font-size: 12px;
+}
+
+.form_container {
+  width: 50%; 
+  padding: 20px;
+  display: grid;
+  grid-template-columns: auto;
 }
 
 .errors_container p {
