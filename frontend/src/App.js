@@ -8,6 +8,7 @@ import * as sessionActions from './store/session';
 import DashBoard from './components/Dashboard';
 import WineDetail from './components/WineDetail';
 import AddWineForm from './components/WineForm/AddWineForm';
+import Footer from './components/Footer/Footer';
 
 function App() {
   const dispatch = useDispatch();
@@ -39,6 +40,7 @@ function App() {
           </Route>
         </Switch>
       )}
+      <Footer />
     </>
   );
 }

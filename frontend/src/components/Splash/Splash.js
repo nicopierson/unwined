@@ -39,9 +39,6 @@ const Splash = () => {
           <img alt='check_in_image' src={reviewUrl} />
         </div>
       </div>
-      <div className={styles.footer_container}>
-
-      </div>
     </div>
   );
 };
