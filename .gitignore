@@ -2,3 +2,7 @@ node_modules
 .env
 build
 .DS_Store
+
+backend/assets/wine-data-set.json
+backend/assets/wine-types-data.json
+backend/assets/winery-data.json
