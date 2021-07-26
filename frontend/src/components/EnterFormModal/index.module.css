@@ -1,9 +1,9 @@
 button.nav_link__sign_in {
-  margin-right: 8px;
+  margin-right: 15px;
 }
 
 button.nav_link__sign_up {
-  margin-right: 8px;
+  margin-right: 15px;
 }
 
 button.modal__link {
@@ -11,16 +11,13 @@ button.modal__link {
   outline: none;
   background: none;
   font-size: inherit;
-  font-weight: inherit;
-  padding-right: 8px;
-  color: inherit;
+  color: #b8b8b8;
 }
 
 button.modal__link:hover {
-  color: white;
-  font-weight: 600;
+  color: #FFFFFF;
   cursor: pointer;
-  text-decoration: underline 3px;
+  transition: 0.5s linear;
 }
 
 span.nav_link__sign {

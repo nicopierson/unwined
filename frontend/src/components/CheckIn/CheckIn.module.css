@@ -1,4 +1,4 @@
-.checkin_background {
+.check_in_background {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -6,7 +6,7 @@
   background: #f5f5f5
 }
 
-.checkin_container {
+.check_in_container {
   width: 65%;
   background-color: #fff;
   padding: 20px;
@@ -24,11 +24,11 @@
   margin: 0px 0px 0px 20px;
 }
 
-.checkin_add i {
+.check_in_add i {
   color: rgb(0, 184, 0);
 }
 
-.checkin_add i:hover {
+.check_in_add i:hover {
   cursor: pointer;
   color: rgb(1, 218, 1);
 }

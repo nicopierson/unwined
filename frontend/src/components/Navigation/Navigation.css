@@ -1,9 +1,9 @@
 .navbar {
   display: flex;
   justify-content: space-between;
-  background-color: #2E1114;
-  padding: 10px;
-  color: white;
+  background-color: #501B1D;
+  padding: 5px;
+  color: #fff;
   font-weight: 600;
 }
 
@@ -18,9 +18,4 @@
   background: none;
   border: none;
   outline: none;
-}
-
-.nav__logo {
-  height: 35px;
-  margin-left: 8px;
 }

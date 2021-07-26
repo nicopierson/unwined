@@ -33,8 +33,8 @@ const CheckIn = () => {
   }, [toggleForm]);
 
   return (
-    <div className={styles.checkin_background}>
-      <div className={styles.checkin_container}>
+    <div className={styles.check_in_background}>
+      <div className={styles.check_in_container}>
         <div className={styles.header}>
           <CSSTransition
             in={!toggleForm}
@@ -42,7 +42,7 @@ const CheckIn = () => {
             classNames='open_comment'
             nodeRef={ref}
           >
-            <div className={styles.checkin_add}>
+            <div className={styles.check_in_add}>
               <i
                 className='fas fa-plus-circle'
                 onClick={() => setToggleForm(true)}
