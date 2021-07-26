@@ -164,6 +164,7 @@
 }
 
 .submit {
+  cursor: pointer;
   background-color: #0071e3;
   color: rgb(240, 240, 240);
 }
@@ -174,6 +175,7 @@
 }
 
 .cancel {
+  cursor: pointer;
   background-color: rgb(227, 227, 227);
   color: rgb(77, 77, 77);
   border: 1px rgb(154, 154, 154) solid;
