@@ -11,6 +11,12 @@ body {
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 }
 
+.app_container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 input {
   font-weight: 300; 
 }
