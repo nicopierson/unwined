@@ -26,7 +26,11 @@ module.exports = (sequelize, DataTypes) => {
     });
     Wine.belongsTo(models.ColorType, { foreignKey: 'colorTypeId' });
     Wine.belongsTo(models.WineType, { foreignKey: 'wineTypeId' });
-    Wine.hasMany(models.Review, { foreignKey: 'wineId' });
+    Wine.hasMany(models.Review, { 
+      foreignKey: 'wineId', 
+      onDelete: 'CASCADE',
+      hooks: true,
+    });
   };
   return Wine;
 };
