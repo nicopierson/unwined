@@ -27,15 +27,15 @@ const Splash = () => {
           <img alt='find_wine_image' src={findWineUrl} />
           <div className={styles.find_wine_text}>
             <h2>Discover new wines we think you’ll like</h2>
-            <p>Keep track of what you’ve tried and what you thought of it by checking in a wine and rating it.</p>
+            <p>Expand your palate and learn by trying different wine.</p>
           </div>
         </div>
       </div>
       <div className={styles.grid_wrapper_inline}>
         <div className={styles.check_ins_container}>
           <div className={styles.check_ins_text}>
-            <h2>Find recommendations from fellow wine connoisseurs</h2>
-            <p>Expand your palate and learn by trying different wine.</p>
+            <h2>Find recommendations from fellow friends and wine connoisseurs</h2>
+            <p>Keep track of what you’ve tried and what you thought of it by checking in a wine and rating it.</p>
           </div>
           <img alt='check_in_image' src={reviewUrl} />
         </div>

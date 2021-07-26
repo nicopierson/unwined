@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Modal } from '../../context/Modal';
+import { ModalSignup } from '../../context/Modal';
 import EnterForm from './EnterForm';
 
 import styles from './index.module.css';
@@ -55,9 +55,9 @@ function LoginFormModal() {
         </button>
       </span>
       {showModal && (
-        <Modal onClose={() => setShowModal(false)} toggle={{toggleSignForm, setToggleSignForm}}>
+        <ModalSignup onClose={() => setShowModal(false)} toggle={{toggleSignForm, setToggleSignForm}}>
           <EnterForm toggle={{toggleSignForm, setToggleSignForm}}/>
-        </Modal>
+        </ModalSignup>
       )}
     </>
   );
