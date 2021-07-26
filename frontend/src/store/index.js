@@ -1,10 +1,22 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 
-import session from "./session";
+import session from './session';
+import wines from './wine';
+import wineries from './winery';
+import reviews from './review';
+import wineTypes from './wineType';
+import colorTypes from './colorType';
+import users from './user';
 
 const rootReducer = combineReducers({
   session,
+  wines,
+  wineries,
+  reviews,
+  wineTypes,
+  colorTypes,
+  users,
 });
 
 let enhancer;

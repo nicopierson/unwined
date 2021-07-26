@@ -1,0 +1,20 @@
+.profile_dropdown p {
+  width: 100%;
+  font-size: 14px;
+  margin-bottom: 5px;
+  border-bottom: 1px solid #d8d8d8;
+}
+
+.profile_dropdown button {
+  border: 1px solid #c1c1c1;
+  outline: none;
+  padding: 5px 5px 5px 5px;
+  color: black;
+  cursor: pointer;
+}
+
+.profile_dropdown button:hover {
+  border: 1px solid rgb(36, 36, 36);
+  background-color: black;
+  color: #fff;
+}

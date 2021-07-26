@@ -1,0 +1,8 @@
+button.active {
+  border: none;
+  outline: none;
+  background: none;
+  font-size: inherit;
+  font-weight: 600;
+  text-decoration: underline 3px;
+}

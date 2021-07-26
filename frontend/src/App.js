@@ -1,9 +1,14 @@
 import { useEffect, useState } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import SignupFormPage from './components/SignupFormPage';
+
+import Splash from './components/Splash';
 import Navigation from './components/Navigation';
 import * as sessionActions from './store/session';
+import DashBoard from './components/Dashboard';
+import WineDetail from './components/WineDetail';
+import AddWineForm from './components/WineForm/AddWineForm';
+import Footer from './components/Footer/Footer';
 
 function App() {
   const dispatch = useDispatch();
@@ -16,15 +21,27 @@ function App() {
   }, [dispatch]);
 
   return (
-    <>
+    <div className='app_container'>
       <Navigation isLoaded={isLoaded} />
-      { isLoaded && (<Switch>
-        <Route path='/signup'>
-          <SignupFormPage />
-        </Route>
-      </Switch>
+      {/* isLoaded only shows when the userSession is restored - removes signIn and signUp */}
+      { isLoaded && (
+        <Switch>
+          <Route exact path='/'> {/* Splash Page */}
+            <Splash />
+          </Route>
+          <Route path='/dashboard'> {/* After login */}
+            <DashBoard />
+          </Route>
+          <Route path='/wines/add'>
+            <AddWineForm /> 
+          </Route>
+          <Route path='/wines/:wineId'>
+            <WineDetail />
+          </Route>
+        </Switch>
       )}
-    </>
+      <Footer />
+    </div>
   );
 }
 

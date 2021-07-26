@@ -1,0 +1,158 @@
+.details_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  margin: 15px 0px 15px 0px;
+  box-shadow: 0 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+.info {
+  width: 65%;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr;
+  
+}
+
+.details_wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px;
+  font-size: 14px;
+}
+
+.wine_name {
+  font-size: 1.3rem;
+  padding: 10px;
+  border-bottom: 1px solid #d8d8d8;
+}
+
+.winery {
+  display: flex;
+  align-items: center;
+  font-size: inherit;
+}
+
+.wine_type {
+  display: flex;
+  align-items: center;
+  font-size: inherit;
+  text-align: center;
+}
+
+
+.card_sub_info {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid #d8d8d8;
+}
+
+.country {
+  padding: 5px;
+}
+
+.rating {
+  display: flex;
+}
+
+.price {
+  display: flex;
+}
+
+.description_container {
+  font-size: 15px;
+  padding: 10px;
+  border-bottom: 1px solid #d8d8d8;
+}
+
+.navigation {
+  display: flex;
+  justify-content: flex-end;
+  font-weight: 600;
+}
+
+.navigation i:hover {
+  cursor: pointer;
+}
+
+.edit {
+  margin: 0px 5px 0px 0px;
+}
+
+.edit:hover {
+  color: #787878;
+}
+
+.delete {
+  color: red;
+  background-color: #fff;
+}
+
+.delete:hover {
+  color: rgb(250, 107, 107);
+}
+
+.rating {
+  line-height: 1;
+}
+
+.rating span {
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  margin: 0px 0px 0px 10px;
+  font-weight: 500;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+.rating i {
+  color:rgb(255, 174, 0);
+  align-items: flex-start;
+}
+
+.favorite_container {
+  display: flex;
+  align-items: center;
+}
+
+.favorite_container i {
+  font-size: 24px;
+  color: red;
+  margin: 0px 5px 0px 0px;
+}
+
+.favorite {
+  font-size: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+
+/* .edit {
+  padding: inherit;
+  color: rgb(143, 143, 143);
+  text-decoration: underline;
+  text-decoration-color: #f5f5f5;
+  font-weight: inherit;
+} */
+
+/* .delete {
+  padding: inherit;
+  color: rgb(250, 0, 0);
+  text-decoration: underline;
+  text-decoration-color: #f5f5f5;
+}
+
+.delete:hover {
+  text-decoration-color: rgb(250, 0, 0);
+  text-decoration-thickness: 3px;
+}
+
+.edit:hover {
+  text-decoration-color: rgb(143, 143, 143);
+  text-decoration-thickness: 3px;
+} */

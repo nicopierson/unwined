@@ -23,11 +23,13 @@ export const login = (user) => async dispatch => {
   });
 
   const data = await res.json();
+
   if (res.ok) {
     dispatch(setUser(data.user));
   }
 
-  return res;
+  // data will hold the errors
+  return data;
 };
 
 export const logout = () => async dispatch => {
@@ -54,7 +56,7 @@ export const signup = (user) => async dispatch => {
   if (res.ok) {
     dispatch(setUser(data.user));
   }
-  return res;
+  return data;
 };
 
 export const restoreUser = () => async dispatch => {
@@ -78,21 +80,5 @@ const sessionReducer = (state = initialState, action) => {
   }
 };
 
-// EXAMPLE SYNTAX
-// const sessionReducer = (state = initialState, action) => {
-//   let newState;
-//   switch (action.type) {
-//     case SET_USER:
-//       newState = Object.assign({}, state);
-//       newState.user = action.payload;
-//       return newState;
-//     case REMOVE_USER:
-//       newState = Object.assign({}, state);
-//       newState.user = null;
-//       return newState;
-//     default:
-//       return state;
-//   }
-// };
 
 export default sessionReducer;
