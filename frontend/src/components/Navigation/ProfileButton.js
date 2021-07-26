@@ -34,13 +34,15 @@ function ProfileButton({ user }) {
   };
 
   return (
-    <>
-      <NavLink to='/dashboard'>
+    <div className='nav_bar___right_links'>
+      <NavLink to='/dashboard' className='nav_bar__dashboard_link'>
         Dashboard
       </NavLink>
-      <button onClick={openMenu}>
-        <i className="fas fa-user-circle" />
-      </button>
+      <i 
+      className='fas fa-user-circle nav_bar__profile_modal'
+      onClick={openMenu}
+      >
+      </i>
       {showMenu && (
         <ul className="profile-dropdown">
           <li>{user.username}</li>
@@ -50,7 +52,7 @@ function ProfileButton({ user }) {
           </li>
         </ul>
       )}
-    </>
+    </div>
   );
 }
 

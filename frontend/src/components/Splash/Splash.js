@@ -16,7 +16,7 @@ const Splash = () => {
             <div className={styles.logo}>
               <img alt='unwined_logo' src={unWinedLogo} />
               <h2>Sit back and share your favorite wine</h2>
-              <p>Expand your palate by trying new & different wine.</p>
+              <p>Find the perfect wine whether you're just getting started or if you are a wine enthusiast.</p>
             </div>
             <img alt='main_wine_image' className={styles.wine_img} src={mainImgUrl} />
           </div>
@@ -35,7 +35,7 @@ const Splash = () => {
         <div className={styles.check_ins_container}>
           <div className={styles.check_ins_text}>
             <h2>Find recommendations from fellow wine connoisseurs</h2>
-            <p>Learn about different types of wines from every part of the world.</p>
+            <p>Expand your palate and learn by trying different wine.</p>
           </div>
           <img alt='check_in_image' src={reviewUrl} />
         </div>
