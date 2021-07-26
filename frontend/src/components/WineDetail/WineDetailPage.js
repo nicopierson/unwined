@@ -22,7 +22,7 @@ const WineDetailPage = React.forwardRef(({ setToggleForm }, ref) => {
   const handleDelete = async (event) => {
     event.preventDefault();
     const deletedWine = await dispatch(deleteWine(wineId));
-    console.log('Deleted Wine', deletedWine);
+
     history.push('/dashboard');
   };
 

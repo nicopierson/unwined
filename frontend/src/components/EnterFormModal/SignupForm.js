@@ -21,7 +21,7 @@ const SignupForm = React.forwardRef((props, ref) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(password, confirmPassword);
+
     if (password === confirmPassword) {
       setErrors([]);
       const data = await dispatch(sessionActions.signup({ email, username, password }));
