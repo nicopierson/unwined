@@ -3,7 +3,6 @@ import styles from './Splash.module.css';
 import mainImgUrl from '../../assets/serge-esteve-unsplash.jpg';
 import unWinedLogo from '../../assets/unwined_logo_large.png';
 import findWineUrl from '../../assets/oscar-nord-unsplash.jpg';
-import checkInUrl from '../../assets/oscar-nord-unsplash.jpg';
 import reviewUrl from '../../assets/undraw_reviews.png';
 
 const Splash = () => {

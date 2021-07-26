@@ -18,9 +18,9 @@ const WineForm = React.forwardRef(({ setToggleForm, method, title }, ref) => {
   const wineries = useSelector(state => state.wineries);
   const winery = wine && wineries[wine.wineryId] ? wineries[wine.wineryId] : '';
   const wineTypes = useSelector(state => state.wineTypes);
-  const colorTypes = useSelector(state => state.colorTypes);
+  // const colorTypes = useSelector(state => state.colorTypes);
   const wineType = wine && wineTypes[wine.wineTypeId] ? wineTypes[wine.wineTypeId] : '';
-  const colorType = wine ? colorTypes[wine.colorTypeId] : '';
+  // const colorType = wine ? colorTypes[wine.colorTypeId] : '';
 
   // State
   const [name, setName] = useState(wine?.name ? wine.name : '');
@@ -30,7 +30,7 @@ const WineForm = React.forwardRef(({ setToggleForm, method, title }, ref) => {
   const [country, setCountry] = useState(wine?.country ? wine.country : '');
   const [province, setProvince] = useState(wine?.province ? wine.province : '');
   const [rating, setRating] = useState(wine?.rating ? wine.rating : '');
-  const [colorTypeId, setColorType] = useState(colorType ? colorType.id : '');
+  // const [colorTypeId, setColorType] = useState(colorType ? colorType.id : '');
   const [wineTypeId, setWineType] = useState(wineType ? wineType.id : '');
   const [region_1, setRegion1] = useState(wine?.region_1 ? wine.region_1 : '');
   const [region_2, setRegion2] = useState(wine?.region_2 ? wine.region_2 : '');

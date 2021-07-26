@@ -5,8 +5,6 @@ import WineDetailPage from './WineDetailPage';
 import WineForm from '../WineForm';
 import CheckIn from '../CheckIn';
 
-import styles from './WineDetailPage.module.css'
-
 const WineDetail = () => {
   const [toggleForm, setToggleForm] = useState(false);
   const [ref, setRef] = useState(React.createRef());

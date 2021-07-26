@@ -4,8 +4,6 @@ import { CSSTransition } from 'react-transition-group';
 
 import WineForm from './WineForm';
 
-import styles from './WineForm.module.css';
-
 const AddWineForm = () => {
   const history = useHistory();
   const [toggleForm, setToggleForm] = useState(true);
