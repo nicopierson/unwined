@@ -1,3 +1,53 @@
+.dashboard_background {
+
+}
+
+.dashboard_container {
+  margin-top: 15px;
+  width: 100%;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dashboard_inner_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 65%;
+  margin: 15px;
+  border-bottom: 1px solid #d5d5d5;
+}
+
+.header {
+  display: flex;
+}
+
+.header h2 {
+  font-size: 24px;
+  margin: 0px 0px 0px 20px;
+}
+.dashboard_add {
+  margin: 0px 20px 0px 0px;
+}
+
+.dashboard_add i {
+  margin-right: 5px;
+  color: rgb(0, 184, 0);
+  font-size: 20px;
+}
+
+.dashboard_add:hover > i
+{
+  cursor: pointer;
+  color: rgb(1, 218, 1);
+}
+
+.dashboard_add span {
+  font-size: 20px;
+}
+
 .wine_list {
   padding: 15px;
   display: flex; 

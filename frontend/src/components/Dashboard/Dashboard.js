@@ -33,15 +33,22 @@ const DashBoard = () => {
   //   const reviewIds = state.wine[wineId].reviews;
   //   return reviewIds.map(id => state.review[id])
   // });
-  // console.log(wineReviews);
 
   return (
-    <>
-      <h2>Dashboard</h2>
-      <div>
-        <NavLink to={`/wines/add`}>
-          Add Wine
-        </NavLink>
+    <div className={styles.dashboard_background}>
+      <div className={styles.dashboard_container}>
+        <div className={styles.dashboard_inner_container}>
+          <div className={styles.header}>
+            <h2>Dashboard</h2>
+          </div>
+          <NavLink to={`/wines/add`} className={styles.dashboard_add}>
+            <i
+              className='fas fa-plus-circle'
+            >
+            </i>
+            <span>Add Wine</span>
+          </NavLink>
+        </div>
       </div>
       <div className={styles.wine_list}>
         { wines && wines.map(wine => (
@@ -51,7 +58,7 @@ const DashBoard = () => {
           </NavLink>
         ))}
       </div>
-    </>
+    </div>
   );
 };
 

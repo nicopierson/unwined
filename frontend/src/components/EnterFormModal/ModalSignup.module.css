@@ -1,0 +1,26 @@
+button.nav_link__sign_in {
+  margin-right: 18px;
+}
+
+button.nav_link__sign_up {
+  margin-right: 18px;
+}
+
+button.modal__link {
+  border: none;
+  outline: none;
+  background: none;
+  font-size: inherit;
+  color: #b8b8b8;
+}
+
+button.modal__link:hover {
+  color: #FFFFFF;
+  cursor: pointer;
+  transition: 0.5s linear;
+}
+
+span.nav_link__sign {
+  display: flex;
+  margin-right: 5px;
+}

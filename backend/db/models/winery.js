@@ -9,6 +9,8 @@ module.exports = (sequelize, DataTypes) => {
     Winery.belongsTo(models.User, { foreignKey: 'ownerId' });
     Winery.hasMany(models.Wine, { 
       foreignKey: 'wineryId',
+      onDelete: 'CASCADE',
+      hooks: true,
       // constraints: false, // cant delete winery and make wineryId null in Wines Table
     });
   };

@@ -21,8 +21,8 @@
 .signup_modal_inner__container {
   position: absolute;
   background-color:white;
-  height: 70%;
-  width: 70%;
+  height: 60%;
+  width: 60%;
   overflow: hidden;
 }
 
