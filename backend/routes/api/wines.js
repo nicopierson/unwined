@@ -167,20 +167,20 @@ router.delete(
 
 // Search route to get wines by name
 router.get(
-  '/search/:resource/:string',
+  '/search/:attribute/:string',
   asyncHandler(async (req, res, next) => {
     const limit = 8; // only grab 8 at a time
-    const resource = req.params.resource;
+    const attribute = req.params.attribute;
     let string = req.params.string;
 
     const wines = await Wine.findAll({
       where: {
-        [resource]: {
+        [attribute]: {
           [Op.iLike]: `%${string}%`
         }
       },
       limit: limit,
-      //order: [[resource, 'DESC']],
+      //order: [[attribute, 'DESC']],
     });
 
     if (wines) {
@@ -193,14 +193,21 @@ router.get(
 
 // order other attributes
 router.get(
-  '/search-order/:resource',
+  '/search-order/:attribute',
   asyncHandler(async (req, res, next) => {
     const limit = 8; // only grab 8 at a time
-    const resource = req.params.resource;
+    const attribute = req.params.attribute;
 
     const wines = await Wine.findAll({
+      where: {
+        [Op.and]: [{
+          [attribute]: { [Op.not]: '' }
+        }, {
+          [attribute]: { [Op.not]: null }
+        }],
+      },
       limit: limit,
-      order: [[resource]],
+      order: [[attribute]],
     });
 
     if (wines) {
@@ -211,26 +218,44 @@ router.get(
   })
 );
 
-// order resource by asc or desc
+// order attribute by asc or desc
 router.get(
-  '/search-order/:resource/:operation',
+  '/search-order/:attribute/:operation',
   asyncHandler(async (req, res, next) => {
     const limit = 8; // only grab 8 at a time
-    const resource = req.params.resource;
+    const attribute = req.params.attribute;
     const operation = req.params.operation;
-
+    // console.log('===============================');
     let wines;
-    if (operation === 'asc') {
+    if (operation === 'asc' && (attribute !== 'price' && attribute !== 'rating')) {
       wines = await Wine.findAll({
+        // !TODO rating is an empty string but the db doesn't allow this
+        where: {
+          [Op.and]: [{
+            [attribute]: { [Op.not]: null }
+          }, {
+            [attribute]: { [Op.not]: '' }
+          }],
+        },
         limit: limit,
-        order: [[resource]],
+        order: [[attribute]],
+      });
+    } else if (operation === 'asc') {
+      wines = await Wine.findAll({
+        where: {
+            [attribute]: { [Op.not]: null },
+        },
+        limit: limit,
+        order: [[attribute]],
       });
     } else if (operation === 'desc') {
       wines = await Wine.findAll({
         limit: limit,
-        order: [[resource, 'DESC']],
+        order: [[attribute, 'DESC']],
       });
     }
+
+    // console.log('ADDAFASFAFAWFWFWFWEFWE: $$$$$$$', typeof attribute);
 
     if (wines) {
       return res.json(wines);
@@ -242,10 +267,10 @@ router.get(
 
 // order price or rating
 router.get(
-  '/search-order/:resource/:operation/:value(\\d+)',
+  '/search-order/:attribute/:operation/:value(\\d+)',
   asyncHandler(async (req, res, next) => {
     const limit = 8; // only grab 8 at a time
-    const resource = req.params.resource;
+    const attribute = req.params.attribute;
     const operation = req.params.operation;
     const value = req.params.value;
 
@@ -253,33 +278,28 @@ router.get(
     if (operation === 'more') { 
       wines = await Wine.findAll({
         where: {
-          [resource]: {
-            [Op.gte]: value,
-          },
+          [Op.and]: [{
+            [attribute]: { [Op.not]: '' }
+          }, {
+            [attribute]: { [Op.not]: null }
+          }],
         },
         limit: limit,
-        order: [[resource, 'DESC']],
+        order: [[attribute, 'DESC']],
         // attributes: ['id', 'name', 'updated_at'] // if only want certain columns
       });
     } else if (operation === 'less') {
       wines = await Wine.findAll({
         where: {
-          [resource]: {
-            [Op.lte]: value,
-          }
+          [attribute]: {
+            [Op.and]: {
+              [Op.gte]: value,
+              [Op.not]: null,
+            },
+          },
         },
         limit: limit,
-        order: [[resource, 'DESC']],
-      });
-    } else if (operation === 'asc') {
-      wines = await Wine.findAll({
-        limit: limit,
-        order: [[resource]],
-      });
-    } else if (operation === 'desc') {
-      wines = await Wine.findAll({
-        limit: limit,
-        order: [[resource, 'DESC']],
+        order: [[attribute, 'DESC']],
       });
     }
 

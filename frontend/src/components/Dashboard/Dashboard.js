@@ -17,7 +17,8 @@ const DashBoard = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getWines());
+    dispatch(getSortedWines('name', 'asc'));
+    // dispatch(getWines());
     dispatch(getWineries());
     dispatch(getWineTypes());
     dispatch(getColorTypes());
@@ -35,11 +36,18 @@ const DashBoard = () => {
   //   return reviewIds.map(id => state.review[id])
   // });
 
-  const sortDashboard = (e, attribute) => {
+  const sortDashboard = (e, attribute, order) => {
     e.preventDefault();
 
-    dispatch(getSortedWines(attribute, ))
+    dispatch(getSortedWines(attribute, order))
   };
+
+  // const sortDashboardByScore = (e, attribute) => {
+  //   e.preventDefault();
+    // const operation = ['more', 'less']
+  //   const value = [0, 100];
+  //   dispatch(getSortedWines(attribute, operation, value))
+  // };
 
   return (
     <div className={styles.dashboard_background}>
@@ -58,20 +66,20 @@ const DashBoard = () => {
         <div className={styles.dashboard_inner_container}>
           <SearchBar />
         </div>
-        <div className={styles.dashboard_inner_container}>
+        <div className={`${styles.sort_links} ${styles.dashboard_inner_container}`}>
           <span>Sort By:</span>
           <span
-            onClick={(e) => sortDashboard(e, 'name')}
+            onClick={(e) => sortDashboard(e, 'name', 'asc')}
           >
             All
           </span>
           <span
-            onClick={(e) => sortDashboard(e, 'rating')}
+            onClick={(e) => sortDashboard(e, 'rating', 'desc')}
           >
             Rating
           </span>
           <span
-            onClick={(e) => sortDashboard(e, 'price')}
+            onClick={(e) => sortDashboard(e, 'price', 'asc')}
           >
             Price
           </span>
@@ -81,7 +89,7 @@ const DashBoard = () => {
             Wine Type
           </span>
           <span
-            onClick={(e) => sortDashboard(e, 'country')}
+            onClick={(e) => sortDashboard(e, 'country', 'asc')}
           >
             Country
           </span>
