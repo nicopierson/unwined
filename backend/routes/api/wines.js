@@ -1,10 +1,12 @@
 const express = require('express');
 const asyncHandler = require('express-async-handler');
 
+const sequelize = require('sequelize')
+const { Op } = sequelize;
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
 const { Wine, Review } = require('../../db/models');
 const { check } = require('express-validator');
-const { handleValidationErrors } = require('../../utils/validation');
+const { handleValidationErrors, searchNotFoundError } = require('../../utils/validation');
 
 const router = express.Router();
 
@@ -162,5 +164,73 @@ router.delete(
     }
   }
 ));
+
+// Search route to get wines by name
+router.get(
+  '/search/:resource/:string',
+  asyncHandler(async (req, res, next) => {
+    const limit = 8; // only grab 8 at a time
+    const resource = req.params.resource;
+    let string = req.params.string;
+
+    const wines = await Wine.findAll({
+      where: {
+        [resource]: {
+          [Op.iLike]: `%${string}%`
+        }
+      },
+      limit: limit,
+      //order: [[resource, 'DESC']],
+    });
+
+    if (wines) {
+      return res.json(wines);
+    } else {
+      next(searchNotFoundError('wine'));
+    }
+  })
+);
+
+// price or rating
+router.get(
+  '/search/order/:resource/:operation/:value(\\d+)',
+  asyncHandler(async (req, res, next) => {
+    const limit = 8; // only grab 8 at a time
+    const resource = req.params.resource;
+    const operation = req.params.operation;
+    const value = req.params.value;
+
+    let wines;
+    if (operation === 'more') { 
+      wines = await Wine.findAll({
+        where: {
+          [resource]: {
+            [Op.gte]: value,
+          },
+        },
+        limit: limit,
+        order: [[resource, 'DESC']],
+        // attributes: ['id', 'name', 'updated_at'] // if only want certain columns
+      });
+    } else if (operation === 'less') {
+      wines = await Wine.findAll({
+        where: {
+          [resource]: {
+            [Op.lte]: value,
+          }
+        },
+        limit: limit,
+        order: [[resource, 'DESC']],
+      });
+    }
+
+    if (wines) {
+      return res.json(wines);
+    } else {
+      next(searchNotFoundError('wine'));
+    }
+  })
+);
+
 
 module.exports = router;
