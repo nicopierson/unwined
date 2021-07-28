@@ -10,6 +10,7 @@ import { getColorTypes } from '../../store/colorType';
 import { getUsers } from '../../store/user';
 
 import WineCard from '../WineCard';
+import SearchBar from '../SearchBar';
 import styles from './Dashboard.module.css';
 
 const DashBoard = () => {
@@ -46,8 +47,10 @@ const DashBoard = () => {
               className='fas fa-plus-circle'
             >
             </i>
-            <span>Add Wine</span>
           </NavLink>
+        </div>
+        <div className={styles.dashboard_inner_container}>
+          <SearchBar />
         </div>
       </div>
       <div className={styles.wine_list}>
