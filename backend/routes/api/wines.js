@@ -1,8 +1,7 @@
 const express = require('express');
 const asyncHandler = require('express-async-handler');
 
-const sequelize = require('sequelize')
-const { Op } = sequelize;
+const { Op } = require('sequelize');
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
 const { Wine, Review } = require('../../db/models');
 const { check } = require('express-validator');
