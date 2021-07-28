@@ -72,7 +72,8 @@ router.get(
   '/',
   // requireAuth,
   asyncHandler(async (req, res, next) => {
-    const wines = await Wine.findAll({ limit: 10 });
+    const limit = 8;
+    const wines = await Wine.findAll({ limit: limit });
 
     if (wines) {
       return res.json(wines);
@@ -190,9 +191,58 @@ router.get(
   })
 );
 
-// price or rating
+// order other attributes
 router.get(
-  '/search/order/:resource/:operation/:value(\\d+)',
+  '/search-order/:resource',
+  asyncHandler(async (req, res, next) => {
+    const limit = 8; // only grab 8 at a time
+    const resource = req.params.resource;
+
+    const wines = await Wine.findAll({
+      limit: limit,
+      order: [[resource]],
+    });
+
+    if (wines) {
+      return res.json(wines);
+    } else {
+      next(searchNotFoundError('wine'));
+    }
+  })
+);
+
+// order resource by asc or desc
+router.get(
+  '/search-order/:resource/:operation',
+  asyncHandler(async (req, res, next) => {
+    const limit = 8; // only grab 8 at a time
+    const resource = req.params.resource;
+    const operation = req.params.operation;
+
+    let wines;
+    if (operation === 'asc') {
+      wines = await Wine.findAll({
+        limit: limit,
+        order: [[resource]],
+      });
+    } else if (operation === 'desc') {
+      wines = await Wine.findAll({
+        limit: limit,
+        order: [[resource, 'DESC']],
+      });
+    }
+
+    if (wines) {
+      return res.json(wines);
+    } else {
+      next(searchNotFoundError('wine'));
+    }
+  })
+);
+
+// order price or rating
+router.get(
+  '/search-order/:resource/:operation/:value(\\d+)',
   asyncHandler(async (req, res, next) => {
     const limit = 8; // only grab 8 at a time
     const resource = req.params.resource;
@@ -218,6 +268,16 @@ router.get(
             [Op.lte]: value,
           }
         },
+        limit: limit,
+        order: [[resource, 'DESC']],
+      });
+    } else if (operation === 'asc') {
+      wines = await Wine.findAll({
+        limit: limit,
+        order: [[resource]],
+      });
+    } else if (operation === 'desc') {
+      wines = await Wine.findAll({
         limit: limit,
         order: [[resource, 'DESC']],
       });

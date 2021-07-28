@@ -20,6 +20,26 @@ export const addOneWine = (wine) => ({
   wine,
 });
 
+export const showSearchWines = (attribute, string) => async dispatch => {
+  const res = await fetch(`/api/wines/search/${attribute}/${string}`);
+
+  const wines = await res.json();
+  if (res.ok) {
+    // dispatch(loadWine(wines)); // to show, don't need to dispatch
+  }
+  return wines;
+};
+
+export const getSortedWines = (attribute) => async dispatch => {
+  const res = await fetch(`/api/wines/search/${attribute}`);
+
+  const wines = await res.json();
+  if (res.ok) {
+    // dispatch(loadWine(wines)); // to show, don't need to dispatch
+  }
+  return wines;
+};
+
 export const getWines = () => async dispatch => {
   const res = await fetch(`/api/wines`);
 
