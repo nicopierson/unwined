@@ -98,7 +98,7 @@ const sortList = (wineries) => {
     return 0;
   });
 
-  return wineries.map(wine => wine.id);
+  return wineries.map(winery => winery.id);
 };
 
 const initialState = { list: [] };

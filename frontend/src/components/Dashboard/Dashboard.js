@@ -19,7 +19,7 @@ const DashBoard = () => {
   useEffect(() => {
     dispatch(getSortedWines('name', 'asc'));
     // dispatch(getWines());
-    dispatch(getWineries());
+    // dispatch(getWineries());
     dispatch(getWineTypes());
     dispatch(getColorTypes());
     dispatch(getUsers());

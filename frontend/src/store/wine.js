@@ -1,5 +1,6 @@
 import { csrfFetch } from './csrf';
 import { LOAD_REVIEW, REMOVE_REVIEW, ADD_REVIEW } from './review';
+import { getOneWinery } from './winery';
 
 const LOAD = 'wines/LOAD';
 const REMOVE_WINE = 'wines/REMOVE_WINE';
@@ -35,6 +36,10 @@ export const getSortedWines = (attribute, order) => async dispatch => {
 
   const wines = await res.json();
   if (res.ok) {
+    wines.forEach(wine => {
+      //TODO need to dynamically add wineries when getting wines
+      dispatch(getOneWinery(wine.wineryId));
+    });
     dispatch(loadWine(wines));
   }
   return wines;
@@ -45,6 +50,10 @@ export const getWines = () => async dispatch => {
 
   const wines = await res.json();
   if (res.ok) {
+    //TODO need to dynamically add wineries when getting wines
+    wines.forEach(wine => {
+      dispatch(getOneWinery(wine.wineryId));
+    });
     dispatch(loadWine(wines));
   }
   return wines;
@@ -55,6 +64,7 @@ export const getOneWine = (id) => async dispatch => {
 
   const wine = await res.json();
   if (res.ok) {
+    dispatch(getOneWinery(wine.wineryId));
     dispatch(addOneWine(wine));
   }
   return wine;
@@ -137,7 +147,8 @@ const wineReducer = (state = initialState, action) => {
       });
       return { 
         ...allWine, 
-        ...state,
+        //? removed state to reset store for every load
+        //...state, // need to reload other instances?
         list: sortList(action.wines),
       };
     }
