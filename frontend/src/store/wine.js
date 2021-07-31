@@ -1,6 +1,6 @@
 import { csrfFetch } from './csrf';
 import { LOAD_REVIEW, REMOVE_REVIEW, ADD_REVIEW } from './review';
-import { resetWinery, getOneWinery } from './winery';
+import { resetWinery, getOneWinery, getWineriesFromWines } from './winery';
 
 const LOAD = 'wines/LOAD';
 const REMOVE_WINE = 'wines/REMOVE_WINE';
@@ -46,8 +46,14 @@ export const getSortedWines = (attribute, order) => async dispatch => {
   return wines;
 };
 
-export const getWines = () => async dispatch => {
-  const res = await fetch(`/api/wines`);
+export const getWines = (query) => async dispatch => {
+  let url;
+  if (query) {
+    url = `/api/wines${query}`;
+  } else {
+    url = `/api/wines`;
+  }
+  const res = await fetch(url);
 
   const { rows: wines, count } = await res.json();
   if (res.ok) {
