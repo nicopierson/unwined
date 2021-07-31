@@ -66,41 +66,54 @@ const DashBoard = () => {
         </div>
         <div className={`${styles.sort_links} ${styles.dashboard_inner_container}`}>
           <span>Sort By:</span>
-          <span
-            // onClick={(e) => handleSort(e, 'all')}
+          <NavLink
+            to={{
+              pathname: `/dashboard`,
+              search: `?attribute=name&order=desc&page=1`
+            }}
+            key={`order_link_name`}
+            className={styles.order_link}
           >
-            All
-          </span>
-          {/* <span
-            onClick={(e) => handleSort(e, 'rating')}
-          >
-            Rating
-          </span> */}
+            Name
+          </NavLink>
           <NavLink
             to={{
               pathname: `/dashboard`,
               search: `?attribute=rating&order=desc&page=1`
             }}
             key={`order_link_rating`}
-            className={styles.order_rating_link}
+            className={styles.order_link}
           >
             Rating
           </NavLink>
-          <span
-            // onClick={(e) => handleSort(e, 'price')}
+                    <NavLink
+            to={{
+              pathname: `/dashboard`,
+              search: `?attribute=price&order=desc&page=1`
+            }}
+            key={`order_link_price`}
+            className={styles.order_link}
           >
             Price
-          </span>
-          <span
+          </NavLink>
+          <NavLink
+            to={{
+              pathname: `/dashboard`,
+              search: `?attribute=country&order=desc&page=1`
+            }}
+            key={`order_link_country`}
+            className={styles.order_link}
+          >
+            Country
+          </NavLink>
+          {/*  */}
+
+          {/* <span
             // onClick={(e) => handleSort(e, 'wineType')}
           >
             Wine Type
-          </span>
-          <span
-            // onClick={(e) => handleSort(e, 'country')}
-          >
-            Country
-          </span>
+          </span> */}
+
         </div>
       </div>
       <div className={styles.wine_list}>

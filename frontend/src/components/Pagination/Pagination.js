@@ -9,7 +9,7 @@ const Pagination = ({ numberOfResults, itemsPerPage, pageLimit }) => {
 
   let numberOfPages = Math.ceil(numberOfResults / itemsPerPage);
   if (numberOfPages > pageLimit) numberOfPages = pageLimit;
-
+  
   const pageNumbers = [...Array(numberOfPages).keys()];
 
   return (
@@ -22,7 +22,7 @@ const Pagination = ({ numberOfResults, itemsPerPage, pageLimit }) => {
                 search: `?${queryString.stringify({
                   attribute,
                   order,
-                  page: number,
+                  page: number + 1,
                 })}`
               }}
               key={`page-${number + 1}`}
