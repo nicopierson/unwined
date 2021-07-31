@@ -174,27 +174,59 @@ router.delete(
   }
 ));
 
+  // create the where and order query options for sequelize
+  const createQueryOptions = (attribute, order) => {
+    if (!attribute || !order) return {};
+
+    let orderObj;
+    if (order === 'desc') {
+      orderObj = {
+        order: [[attribute, 'DESC']]
+      };
+    } else {
+      orderObj = {
+        order: [[attribute, 'ASC']]
+      };
+    }
+    
+    const whereObj =  {
+      where: {
+        [attribute]: {
+          [Op.and]: {
+            [Op.not]: '',
+            [Op.not]: null,
+          }
+        },
+      },
+    }
+
+    return { ...whereObj, ...orderObj};
+  };
 
 // returns wines 8 at a time based on the page
 //TODO change to be dynamic based on results per page variable
 router.get(
   '/',
   asyncHandler(async (req, res, next) => {
-    let { page } = req.query;
+    let { page, attribute, order: orders } = req.query;
     if (!page) page = 1;
     const offset = limitPerPage * (page - 1);
     // if (limit > 50) next(wineLimitError());
 
+    const { where, order } = createQueryOptions(attribute, orders);
+
     const wines = await Wine.findAndCountAll({
       offset: offset,
       limit: limitPerPage,
+      where: where ? where : {},
+      order: order ? order : [],
     });
 
     return res.json({ ...wines, offset })
   })
 );
 
-// Search route to get wines by name
+// Search route to get wines by name for search bar by name
 router.get(
   '/search/:attribute/:string',
   asyncHandler(async (req, res, next) => {
@@ -219,122 +251,51 @@ router.get(
   })
 );
 
-// order other attributes
-router.get(
-  '/search-order/:attribute',
-  asyncHandler(async (req, res, next) => {
-    const attribute = req.params.attribute;
-
-    const wines = await Wine.findAll({
-      where: {
-        [Op.and]: [{
-          [attribute]: { [Op.not]: '' }
-        }, {
-          [attribute]: { [Op.not]: null }
-        }],
-      },
-      limit: limitPerPage,
-      order: [[attribute]],
-    });
-
-    if (wines) {
-      return res.json(wines);
-    } else {
-      next(searchNotFoundError('wine'));
-    }
-  })
-);
-
-// order attribute by asc or desc
-router.get(
-  '/search-order/:attribute/:operation',
-  asyncHandler(async (req, res, next) => {
-    const attribute = req.params.attribute;
-    const operation = req.params.operation;
-    // console.log('===============================');
-    let wines;
-    if (operation === 'asc' && (attribute !== 'price' && attribute !== 'rating')) {
-      wines = await Wine.findAll({
-        // !TODO rating is an empty string but the db doesn't allow this
-        where: {
-          [Op.and]: [{
-            [attribute]: { [Op.not]: null }
-          }, {
-            [attribute]: { [Op.not]: '' }
-          }],
-        },
-        limit: limitPerPage,
-        order: [[attribute]],
-      });
-    } else if (operation === 'asc') {
-      wines = await Wine.findAll({
-        where: {
-            [attribute]: { [Op.not]: null },
-        },
-        limit: limitPerPage,
-        order: [[attribute]],
-      });
-    } else if (operation === 'desc') {
-      wines = await Wine.findAll({
-        limit: limitPerPage,
-        order: [[attribute, 'DESC']],
-      });
-    }
-
-    // console.log('ADDAFASFAFAWFWFWFWEFWE: $$$$$$$', typeof attribute);
-
-    if (wines) {
-      return res.json(wines);
-    } else {
-      next(searchNotFoundError('wine'));
-    }
-  })
-);
-
 // order price or rating
-router.get(
-  '/search-order/:attribute/:operation/:value(\\d+)',
-  asyncHandler(async (req, res, next) => {
-    const attribute = req.params.attribute;
-    const operation = req.params.operation;
-    const value = req.params.value;
+//? Might not need to use, but may change
+// router.get(
+//   '/search-order/:attribute/:operation/:value(\\d+)',
+//   asyncHandler(async (req, res, next) => {
+//     const attribute = req.params.attribute;
+//     const operation = req.params.operation;
+//     const value = req.params.value;
 
-    let wines;
-    if (operation === 'more') { 
-      wines = await Wine.findAll({
-        where: {
-          [Op.and]: [{
-            [attribute]: { [Op.not]: '' }
-          }, {
-            [attribute]: { [Op.not]: null }
-          }],
-        },
-        limit: limitPerPage,
-        order: [[attribute, 'DESC']],
-        // attributes: ['id', 'name', 'updated_at'] // if only want certain columns
-      });
-    } else if (operation === 'less') {
-      wines = await Wine.findAll({
-        where: {
-          [attribute]: {
-            [Op.and]: {
-              [Op.gte]: value,
-              [Op.not]: null,
-            },
-          },
-        },
-        limit: limitPerPage,
-        order: [[attribute, 'DESC']],
-      });
-    }
+//     let wines;
+//     if (operation === 'more') { 
+//       wines = await Wine.findAll({
+//         where: {
+//           [attribute]: {
+//             [Op.and]: {
+//               [Op.gte]: value,
+//               [Op.not]: null,
+//             },
+//           },
+//         },
+//         limit: limitPerPage,
+//         order: [[attribute, 'DESC']],
+//         // attributes: ['id', 'name', 'updated_at'] // if only want certain columns
+//       });
+//     } else if (operation === 'less') {
+//       wines = await Wine.findAll({
+//         where: {
+//           [attribute]: {
+//             [Op.and]: {
+//               [Op.lte]: value,
+//               [Op.not]: null,
+//             },
+//           },
+//         },
+//         limit: limitPerPage,
+//         order: [[attribute, 'DESC']],
+//       });
+//     }
 
-    if (wines) {
-      return res.json(wines);
-    } else {
-      next(searchNotFoundError('wine'));
-    }
-  })
-);
-
+//     if (wines) {
+//       return res.json(wines);
+//     } else {
+//       next(searchNotFoundError('wine'));
+//     }
+//   })
+// );
 
 module.exports = router;

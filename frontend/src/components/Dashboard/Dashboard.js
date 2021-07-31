@@ -3,7 +3,6 @@ import { NavLink, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'; 
 
 import { getWines, getSortedWines } from '../../store/wine';
-import { getWineries } from '../../store/winery';
 import { getWineTypes } from '../../store/wineType';
 import { getColorTypes } from '../../store/colorType';
 // import { getReviews, loadReviews } from '../../store/review';
@@ -28,13 +27,10 @@ const DashBoard = () => {
       setNumberOfResults(count);
     })();
 
-    // dispatch(getWineries());
     dispatch(getWineTypes());
     dispatch(getColorTypes());
     dispatch(getUsers());
   }, [dispatch, queryString]);
-
-  console.log(numberOfResults);
 
   const wines = useSelector((state) => {
     return state.wines.list.map(wineId => state.wines[wineId]);

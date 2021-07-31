@@ -1,6 +1,6 @@
 import { csrfFetch } from './csrf';
 import { LOAD_REVIEW, REMOVE_REVIEW, ADD_REVIEW } from './review';
-import { resetWinery, getOneWinery, getWineriesFromWines } from './winery';
+import { resetWinery, getOneWinery } from './winery';
 
 const LOAD = 'wines/LOAD';
 const REMOVE_WINE = 'wines/REMOVE_WINE';
