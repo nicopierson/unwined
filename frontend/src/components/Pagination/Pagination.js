@@ -5,11 +5,14 @@ import styles from './Pagination.module.css';
 
 const Pagination = ({ numberOfResults, itemsPerPage, pageLimit }) => {
   const { search } = useLocation();
-  const { attribute, order } = queryString.parse(search);
+  let { attribute, order } = queryString.parse(search);
+  if (!attribute) attribute = 'name';
+  if (!order) order = 'desc'; 
 
   let numberOfPages = Math.ceil(numberOfResults / itemsPerPage);
   if (numberOfPages > pageLimit) numberOfPages = pageLimit;
-  
+
+  if (!numberOfPages) return null;
   const pageNumbers = [...Array(numberOfPages).keys()];
 
   return (

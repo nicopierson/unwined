@@ -3,7 +3,7 @@ import { NavLink, useLocation, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'; 
 import queryString from 'query-string';
 
-import { getWines, getSortedWines } from '../../store/wine';
+import { getWines } from '../../store/wine';
 import { getWineTypes } from '../../store/wineType';
 import { getColorTypes } from '../../store/colorType';
 // import { getReviews, loadReviews } from '../../store/review';
@@ -38,7 +38,10 @@ const DashBoard = () => {
   }, [dispatch, query]);
 
   useEffect(() => {
-    history.push(`/dashboard?attribute=${attribute}&order=${sortOrder}&page=${page}`);
+    // console.log('attribute: ', attribute, '\norder: ', order, '\npage: ', page);
+    if (attribute && order && page) {
+      history.push(`/dashboard?attribute=${attribute}&order=${sortOrder}&page=${page}`);
+    }
   }, [sortOrder]);
 
   const wines = useSelector((state) => {
@@ -50,6 +53,8 @@ const DashBoard = () => {
   
     const newOrder = order === 'desc' ? 'asc' : 'desc';
     setSortOrder(newOrder);
+
+    
   };
 
   // get the wine reviews

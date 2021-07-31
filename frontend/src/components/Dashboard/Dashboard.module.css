@@ -61,3 +61,8 @@
   background-color: black;
   color: white;
 }
+
+.active {
+  color: white;
+  background-color: black;
+}
