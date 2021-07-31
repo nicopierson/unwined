@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'; 
 
@@ -12,18 +12,29 @@ import { getUsers } from '../../store/user';
 import WineCard from '../WineCard';
 import SearchBar from '../SearchBar';
 import styles from './Dashboard.module.css';
+import Pagination from '../Pagination';
 
 const DashBoard = () => {
+  const { search: queryString } = useLocation(); 
   const dispatch = useDispatch();
+  const itemsPerPage = 8;
+  const pageLimit = 10;
+  
+  const [numberOfResults, setNumberOfResults] = useState(0);
 
   useEffect(() => {
-    // dispatch(getSortedWines('name', 'asc'));
-    dispatch(getWines());
+    (async () => {
+      const { count } = await dispatch(getWines(queryString));
+      setNumberOfResults(count);
+    })();
+
     // dispatch(getWineries());
     dispatch(getWineTypes());
     dispatch(getColorTypes());
     dispatch(getUsers());
-  }, [dispatch]);
+  }, [dispatch, queryString]);
+
+  console.log(numberOfResults);
 
   const wines = useSelector((state) => {
     return state.wines.list.map(wineId => state.wines[wineId]);
@@ -41,13 +52,6 @@ const DashBoard = () => {
 
     dispatch(getSortedWines(attribute, order))
   };
-
-  // const sortDashboardByScore = (e, attribute) => {
-  //   e.preventDefault();
-    // const operation = ['more', 'less']
-  //   const value = [0, 100];
-  //   dispatch(getSortedWines(attribute, operation, value))
-  // };
 
   return (
     <div className={styles.dashboard_background}>
@@ -103,6 +107,11 @@ const DashBoard = () => {
           </NavLink>
         ))}
       </div>
+      <Pagination 
+        numberOfResults={numberOfResults} 
+        itemsPerPage={itemsPerPage} 
+        pageLimit={pageLimit}
+      />
     </div>
   );
 };

@@ -2,7 +2,7 @@ import { NavLink } from 'react-router-dom';
 
 import styles from './Pagination.module.css';
 
-const Pagination = ({ count: numberOfResults, itemsPerPage, pageLimit }) => {
+const Pagination = ({ numberOfResults, itemsPerPage, pageLimit }) => {
   let numberOfPages = Math.ceil(numberOfResults / itemsPerPage);
   if (numberOfPages > pageLimit) numberOfPages = pageLimit;
 
@@ -11,13 +11,16 @@ const Pagination = ({ count: numberOfResults, itemsPerPage, pageLimit }) => {
   return (
     <nav>
       <div className={styles.pagination}>
-        {pageNumbers.map(number =>
+        {pageNumbers.length > 0 && pageNumbers.map(number =>
             <NavLink
-              to={`/wines/dashboard?page=${number}`}
-              key={`page-${number}`}
+              to={{
+                pathname: `/dashboard`,
+                search: `?page=${number + 1}`
+              }}
+              key={`page-${number + 1}`}
               className={styles.page_link}
             >
-              {number}
+              {number + 1}
             </NavLink>
         )}
       </div>
