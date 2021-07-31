@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLocation, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'; 
+import queryString from 'query-string';
 
 import { getWines, getSortedWines } from '../../store/wine';
 import { getWineTypes } from '../../store/wineType';
@@ -14,29 +15,42 @@ import styles from './Dashboard.module.css';
 import Pagination from '../Pagination';
 
 const DashBoard = () => {
-  const location = useLocation();
-  const { search: queryString } = useLocation(); 
+  const history = useHistory();
+  const { search: query } = useLocation(); 
+  const { attribute, order, page } = queryString.parse(query);
   const dispatch = useDispatch();
   const itemsPerPage = 8;
   const pageLimit = 10;
   
-  const [page, setPage] = useState(1);
+  // const [page, setPage] = useState(1);
   const [numberOfResults, setNumberOfResults] = useState(0);
+  const [sortOrder, setSortOrder] = useState('desc');
 
   useEffect(() => {
     (async () => {
-      const { count } = await dispatch(getWines(queryString));
+      const { count } = await dispatch(getWines(query));
       setNumberOfResults(count);
     })();
 
     dispatch(getWineTypes());
     dispatch(getColorTypes());
     dispatch(getUsers());
-  }, [dispatch, queryString]);
+  }, [dispatch, query]);
+
+  useEffect(() => {
+    history.push(`/dashboard?attribute=${attribute}&order=${sortOrder}&page=${page}`);
+  }, [sortOrder]);
 
   const wines = useSelector((state) => {
     return state.wines.list.map(wineId => state.wines[wineId]);
   });
+
+  const handleOrder = (e) => {
+    e.preventDefault();
+  
+    const newOrder = order === 'desc' ? 'asc' : 'desc';
+    setSortOrder(newOrder);
+  };
 
   // get the wine reviews
   // const wineId = 4;
@@ -44,8 +58,6 @@ const DashBoard = () => {
   //   const reviewIds = state.wine[wineId].reviews;
   //   return reviewIds.map(id => state.review[id])
   // });
-
-  console.log('LOCATION: ', location);
 
   return (
     <div className={styles.dashboard_background}>
@@ -69,7 +81,7 @@ const DashBoard = () => {
           <NavLink
             to={{
               pathname: `/dashboard`,
-              search: `?attribute=name&order=desc&page=1`
+              search: `?attribute=name&order=${sortOrder}&page=1`
             }}
             key={`order_link_name`}
             className={styles.order_link}
@@ -79,7 +91,7 @@ const DashBoard = () => {
           <NavLink
             to={{
               pathname: `/dashboard`,
-              search: `?attribute=rating&order=desc&page=1`
+              search: `?attribute=rating&order=${order}&page=1`
             }}
             key={`order_link_rating`}
             className={styles.order_link}
@@ -89,7 +101,7 @@ const DashBoard = () => {
                     <NavLink
             to={{
               pathname: `/dashboard`,
-              search: `?attribute=price&order=desc&page=1`
+              search: `?attribute=price&order=${sortOrder}&page=1`
             }}
             key={`order_link_price`}
             className={styles.order_link}
@@ -99,21 +111,34 @@ const DashBoard = () => {
           <NavLink
             to={{
               pathname: `/dashboard`,
-              search: `?attribute=country&order=desc&page=1`
+              search: `?attribute=country&order=${sortOrder}&page=1`
             }}
             key={`order_link_country`}
             className={styles.order_link}
           >
             Country
           </NavLink>
-          {/*  */}
-
-          {/* <span
-            // onClick={(e) => handleSort(e, 'wineType')}
+          {/* //TODO Wine Type */}
+          <a
+            href='!#'
+            key={`order_link_order`}
+            className={styles.order_link}
+            onClick={handleOrder}
           >
-            Wine Type
-          </span> */}
-
+            {sortOrder.toUpperCase()} Order
+          </a>
+          {/* //? navlink doesn't start on click event before sending to link */}
+          {/* <NavLink
+            onClick={() => sortOrder === 'desc' ? setSortOrder('asc') : setSortOrder('desc')}
+            to={{
+              pathname: `/dashboard`,
+              search: `?attribute=${attribute}&order=${sortOrder}&page=${page}`
+            }}
+            key={`order_link_order`}
+            className={styles.order_link}
+          >
+            Order: {sortOrder}
+          </NavLink> */}
         </div>
       </div>
       <div className={styles.wine_list}>

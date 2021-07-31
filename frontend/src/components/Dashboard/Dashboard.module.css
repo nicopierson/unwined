@@ -56,7 +56,7 @@
   justify-content: center;
 }
 
-.sort_links span:hover {
+.sort_links a:hover {
   cursor: pointer;
   background-color: black;
   color: white;
