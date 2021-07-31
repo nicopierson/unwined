@@ -14,11 +14,13 @@ import styles from './Dashboard.module.css';
 import Pagination from '../Pagination';
 
 const DashBoard = () => {
+  const location = useLocation();
   const { search: queryString } = useLocation(); 
   const dispatch = useDispatch();
   const itemsPerPage = 8;
   const pageLimit = 10;
   
+  const [page, setPage] = useState(1);
   const [numberOfResults, setNumberOfResults] = useState(0);
 
   useEffect(() => {
@@ -43,11 +45,7 @@ const DashBoard = () => {
   //   return reviewIds.map(id => state.review[id])
   // });
 
-  const sortDashboard = (e, attribute, order) => {
-    e.preventDefault();
-
-    dispatch(getSortedWines(attribute, order))
-  };
+  console.log('LOCATION: ', location);
 
   return (
     <div className={styles.dashboard_background}>
@@ -69,27 +67,37 @@ const DashBoard = () => {
         <div className={`${styles.sort_links} ${styles.dashboard_inner_container}`}>
           <span>Sort By:</span>
           <span
-            onClick={(e) => sortDashboard(e, 'name', 'asc')}
+            // onClick={(e) => handleSort(e, 'all')}
           >
             All
           </span>
-          <span
-            onClick={(e) => sortDashboard(e, 'rating', 'desc')}
+          {/* <span
+            onClick={(e) => handleSort(e, 'rating')}
           >
             Rating
-          </span>
+          </span> */}
+          <NavLink
+            to={{
+              pathname: `/dashboard`,
+              search: `?attribute=rating&order=desc&page=1`
+            }}
+            key={`order_link_rating`}
+            className={styles.order_rating_link}
+          >
+            Rating
+          </NavLink>
           <span
-            onClick={(e) => sortDashboard(e, 'price', 'asc')}
+            // onClick={(e) => handleSort(e, 'price')}
           >
             Price
           </span>
           <span
-            onClick={(e) => sortDashboard(e, 'wineType')}
+            // onClick={(e) => handleSort(e, 'wineType')}
           >
             Wine Type
           </span>
           <span
-            onClick={(e) => sortDashboard(e, 'country', 'asc')}
+            // onClick={(e) => handleSort(e, 'country')}
           >
             Country
           </span>

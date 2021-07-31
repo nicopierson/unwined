@@ -1,8 +1,12 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
+import queryString from 'query-string';
 
 import styles from './Pagination.module.css';
 
 const Pagination = ({ numberOfResults, itemsPerPage, pageLimit }) => {
+  const { search } = useLocation();
+  const { attribute, order } = queryString.parse(search);
+
   let numberOfPages = Math.ceil(numberOfResults / itemsPerPage);
   if (numberOfPages > pageLimit) numberOfPages = pageLimit;
 
@@ -15,7 +19,11 @@ const Pagination = ({ numberOfResults, itemsPerPage, pageLimit }) => {
             <NavLink
               to={{
                 pathname: `/dashboard`,
-                search: `?page=${number + 1}`
+                search: `?${queryString.stringify({
+                  attribute,
+                  order,
+                  page: number,
+                })}`
               }}
               key={`page-${number + 1}`}
               className={styles.page_link}

@@ -252,7 +252,7 @@ router.get(
 );
 
 // order price or rating
-//? Might not need to use, but may change
+//? Might not need route, but may change
 // router.get(
 //   '/search-order/:attribute/:operation/:value(\\d+)',
 //   asyncHandler(async (req, res, next) => {

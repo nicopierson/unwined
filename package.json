@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/nicopierson/unwined#readme",
   "dependencies": {
+    "query-string": "^7.0.1",
     "react-transition-group": "^4.4.2"
   }
 }

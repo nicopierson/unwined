@@ -53,6 +53,7 @@ export const getWines = (query) => async dispatch => {
   } else {
     url = `/api/wines`;
   }
+  console.log(url);
   const res = await fetch(url);
 
   const { rows: wines, count } = await res.json();
