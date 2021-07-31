@@ -271,12 +271,12 @@ router.get(
         where: {
             [attribute]: { [Op.not]: null },
         },
-        limit: limit,
+        limit: limitPerPage,
         order: [[attribute]],
       });
     } else if (operation === 'desc') {
       wines = await Wine.findAll({
-        limit: limit,
+        limit: limitPerPage,
         order: [[attribute, 'DESC']],
       });
     }

@@ -88,17 +88,19 @@ export const deleteWinery = (id) => async dispatch => {
 
 const sortList = (wineries) => {
 
-  wineries.sort((a, b) => {
-    if (a.name > b.name) {
-      return 1;
-    }
-    if (a.name < b.name) {
-      return -1;
-    }
-    return 0;
-  });
+  if (Object.entries(wineries).length > 0) {
+    wineries.sort((a, b) => {
+      if (a.name > b.name) {
+        return 1;
+      }
+      if (a.name < b.name) {
+        return -1;
+      }
+      return 0;
+    });
 
-  return wineries.map(winery => winery.id);
+    return wineries.map(winery => winery.id);
+  } else return [];
 };
 
 const initialState = { list: [] };
@@ -107,12 +109,14 @@ const wineryReducer = (state = initialState, action) => {
   switch(action.type) {
     case LOAD: {
       const allWinery = {};
-      action.wineries.forEach((winery) => {
-        allWinery[winery.id] = winery;
-      });
+      if (Object.entries(action.wineries).length > 0) {
+        action.wineries.forEach((winery) => {
+          allWinery[winery.id] = winery;
+        });
+      }
       return { 
         ...allWinery, 
-        ...state,
+        // ...state,
         list: sortList(action.wineries) 
       };
     }
