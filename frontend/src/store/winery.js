@@ -3,13 +3,17 @@ import { csrfFetch } from './csrf';
 const LOAD = 'wineries/LOAD';
 const REMOVE_WINERY = 'wineries/REMOVE_WINERY';
 const ADD_ONE = 'wineries/ADD_ONE';
+const RESET_WINERY = 'wineries/RESET_WINERY';
+
+export const resetWinery = () => ({
+  type: RESET_WINERY,
+});
 
 export const loadWinery = (wineries) => ({
   type: LOAD,
   wineries
 });
 
-// this does not work - need to fix the associations
 export const removeWinery = (id) => ({
   type: REMOVE_WINERY,
   wineryId: id,
@@ -87,20 +91,17 @@ export const deleteWinery = (id) => async dispatch => {
 
 
 const sortList = (wineries) => {
+  wineries.sort((a, b) => {
+    if (a.name > b.name) {
+      return 1;
+    }
+    if (a.name < b.name) {
+      return -1;
+    }
+    return 0;
+  });
 
-  if (Object.entries(wineries).length > 0) {
-    wineries.sort((a, b) => {
-      if (a.name > b.name) {
-        return 1;
-      }
-      if (a.name < b.name) {
-        return -1;
-      }
-      return 0;
-    });
-
-    return wineries.map(winery => winery.id);
-  } else return [];
+  return wineries.map(winery => winery.id);
 };
 
 const initialState = { list: [] };
@@ -109,17 +110,17 @@ const wineryReducer = (state = initialState, action) => {
   switch(action.type) {
     case LOAD: {
       const allWinery = {};
-      if (Object.entries(action.wineries).length > 0) {
-        action.wineries.forEach((winery) => {
-          allWinery[winery.id] = winery;
-        });
-      }
+      action.wineries.forEach((winery) => {
+        allWinery[winery.id] = winery;
+      });
       return { 
         ...allWinery, 
         // ...state,
         list: sortList(action.wineries) 
       };
     }
+    case RESET_WINERY:
+      return { list: [] }
     case ADD_ONE: {
       if (!state[action.winery.id]) {
         const newState = {

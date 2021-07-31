@@ -1,6 +1,6 @@
 import { csrfFetch } from './csrf';
 import { LOAD_REVIEW, REMOVE_REVIEW, ADD_REVIEW } from './review';
-import { loadWinery, getOneWinery } from './winery';
+import { resetWinery, getOneWinery } from './winery';
 
 const LOAD = 'wines/LOAD';
 const REMOVE_WINE = 'wines/REMOVE_WINE';
@@ -36,7 +36,7 @@ export const getSortedWines = (attribute, order) => async dispatch => {
 
   const wines = await res.json();
   if (res.ok) {
-    dispatch(loadWinery({}));
+    dispatch(resetWinery());
     wines.forEach(wine => {
       //? is there a better way to reset winery state in the store
       dispatch(getOneWinery(wine.wineryId));
@@ -53,7 +53,7 @@ export const getWines = () => async dispatch => {
   if (res.ok) {
     //TODO need to dynamically add wineries when getting wines
     // reset wineries state
-    dispatch(loadWinery({}));
+    dispatch(resetWinery());
 
     // get all wineries
     wines.map(async (wine) => {
