@@ -48,7 +48,7 @@ export const getSortedWines = (attribute, order) => async dispatch => {
 export const getWines = () => async dispatch => {
   const res = await fetch(`/api/wines`);
 
-  const wines = await res.json();
+  const { rows: wines, count } = await res.json();
   if (res.ok) {
     //TODO need to dynamically add wineries when getting wines
     wines.forEach(wine => {
@@ -56,7 +56,7 @@ export const getWines = () => async dispatch => {
     });
     dispatch(loadWine(wines));
   }
-  return wines;
+  return { ...wines, count };
 };
 
 export const getOneWine = (id) => async dispatch => {

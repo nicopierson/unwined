@@ -9,6 +9,7 @@ const { handleValidationErrors, searchNotFoundError } = require('../../utils/val
 
 const router = express.Router();
 
+const limitPerPage = 8;
 
 const wineNotFoundError = (id) => {
   const err = Error("Wine not found");
@@ -26,6 +27,14 @@ const winePostError = () => {
   const err = Error("Wine could not be added");
   err.errors = [`Wine could not be added`];
   err.title = "Wine not added.";
+  err.status = 404;
+  return err;
+};
+
+const wineLimitError = () => {
+  const err = Error("Limit exceeded");
+  err.errors = [`Cannot request more than 50 wines`];
+  err.title = "Request failed.";
   err.status = 404;
   return err;
 };
@@ -68,20 +77,20 @@ const validateWine = [
   handleValidationErrors,
 ];
 
-router.get(
-  '/',
-  // requireAuth,
-  asyncHandler(async (req, res, next) => {
-    const limit = 8;
-    const wines = await Wine.findAll({ limit: limit });
+// Retrieve all wines from the database
+// router.get(
+//   '/',
+//   // requireAuth,
+//   asyncHandler(async (req, res, next) => {
+//     const wines = await Wine.findAll({ limit: limitPerPage });
 
-    if (wines) {
-      return res.json(wines);
-    } else {
-      next(wineNotFoundError());
-    }
-  })
-);
+//     if (wines) {
+//       return res.json(wines);
+//     } else {
+//       next(wineNotFoundError());
+//     }
+//   })
+// );
 
 router.get(
   '/:id(\\d+)',
@@ -165,11 +174,30 @@ router.delete(
   }
 ));
 
+
+// returns wines 8 at a time based on the page
+//TODO change to be dynamic based on results per page variable
+router.get(
+  '/',
+  asyncHandler(async (req, res, next) => {
+    let { page } = req.query;
+    if (!page) page = 1;
+    const offset = limitPerPage * (page - 1);
+    // if (limit > 50) next(wineLimitError());
+
+    const wines = await Wine.findAndCountAll({
+      offset: offset,
+      limit: limitPerPage,
+    });
+
+    return res.json({ ...wines, offset })
+  })
+);
+
 // Search route to get wines by name
 router.get(
   '/search/:attribute/:string',
   asyncHandler(async (req, res, next) => {
-    const limit = 8; // only grab 8 at a time
     const attribute = req.params.attribute;
     let string = req.params.string;
 
@@ -179,7 +207,7 @@ router.get(
           [Op.iLike]: `%${string}%`
         }
       },
-      limit: limit,
+      limit: limitPerPage,
       //order: [[attribute, 'DESC']],
     });
 
@@ -195,7 +223,6 @@ router.get(
 router.get(
   '/search-order/:attribute',
   asyncHandler(async (req, res, next) => {
-    const limit = 8; // only grab 8 at a time
     const attribute = req.params.attribute;
 
     const wines = await Wine.findAll({
@@ -206,7 +233,7 @@ router.get(
           [attribute]: { [Op.not]: null }
         }],
       },
-      limit: limit,
+      limit: limitPerPage,
       order: [[attribute]],
     });
 
@@ -222,7 +249,6 @@ router.get(
 router.get(
   '/search-order/:attribute/:operation',
   asyncHandler(async (req, res, next) => {
-    const limit = 8; // only grab 8 at a time
     const attribute = req.params.attribute;
     const operation = req.params.operation;
     // console.log('===============================');
@@ -237,7 +263,7 @@ router.get(
             [attribute]: { [Op.not]: '' }
           }],
         },
-        limit: limit,
+        limit: limitPerPage,
         order: [[attribute]],
       });
     } else if (operation === 'asc') {
@@ -269,7 +295,6 @@ router.get(
 router.get(
   '/search-order/:attribute/:operation/:value(\\d+)',
   asyncHandler(async (req, res, next) => {
-    const limit = 8; // only grab 8 at a time
     const attribute = req.params.attribute;
     const operation = req.params.operation;
     const value = req.params.value;
@@ -284,7 +309,7 @@ router.get(
             [attribute]: { [Op.not]: null }
           }],
         },
-        limit: limit,
+        limit: limitPerPage,
         order: [[attribute, 'DESC']],
         // attributes: ['id', 'name', 'updated_at'] // if only want certain columns
       });
@@ -298,7 +323,7 @@ router.get(
             },
           },
         },
-        limit: limit,
+        limit: limitPerPage,
         order: [[attribute, 'DESC']],
       });
     }
