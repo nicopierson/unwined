@@ -103,7 +103,7 @@ const DashBoard = () => {
           >
             Rating
           </NavLink>
-                    <NavLink
+          <NavLink
             to={{
               pathname: `/dashboard`,
               search: `?attribute=price&order=${sortOrder}&page=1`
