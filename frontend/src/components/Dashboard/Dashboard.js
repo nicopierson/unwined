@@ -24,7 +24,7 @@ const DashBoard = () => {
   
   // const [page, setPage] = useState(1);
   const [numberOfResults, setNumberOfResults] = useState(0);
-  const [sortOrder, setSortOrder] = useState('desc');
+  const [sortOrder, setSortOrder] = useState('asc');
 
   useEffect(() => {
     (async () => {
@@ -88,6 +88,12 @@ const DashBoard = () => {
               pathname: `/dashboard`,
               search: `?attribute=name&order=${sortOrder}&page=1`
             }}
+            isActive={(match, location) => {
+              if ( !location.search.includes(`?attribute=name&order=${order}&page=`) ) {
+                return false;
+              }
+              return true;
+            }}
             key={`order_link_name`}
             className={styles.order_link}
           >
@@ -97,6 +103,12 @@ const DashBoard = () => {
             to={{
               pathname: `/dashboard`,
               search: `?attribute=rating&order=${order}&page=1`
+            }}
+            isActive={(match, location) => {
+              if ( !location.search.includes(`?attribute=rating&order=${order}&page=`) ) {
+                return false;
+              }
+              return true;
             }}
             key={`order_link_rating`}
             className={styles.order_link}
@@ -108,6 +120,12 @@ const DashBoard = () => {
               pathname: `/dashboard`,
               search: `?attribute=price&order=${sortOrder}&page=1`
             }}
+            isActive={(match, location) => {
+              if ( !location.search.includes(`?attribute=price&order=${order}&page=`) ) {
+                return false;
+              }
+              return true;
+            }}
             key={`order_link_price`}
             className={styles.order_link}
           >
@@ -117,6 +135,12 @@ const DashBoard = () => {
             to={{
               pathname: `/dashboard`,
               search: `?attribute=country&order=${sortOrder}&page=1`
+            }}
+            isActive={(match, location) => {
+              if ( !location.search.includes(`?attribute=country&order=${order}&page=`) ) {
+                return false;
+              }
+              return true;
             }}
             key={`order_link_country`}
             className={styles.order_link}

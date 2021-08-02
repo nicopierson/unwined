@@ -28,6 +28,15 @@ const Pagination = ({ numberOfResults, itemsPerPage, pageLimit }) => {
                   page: number + 1,
                 })}`
               }}
+              isActive={(match, location) => {
+                if (number + 1 === 1 && location.search === '') {
+                  return true;
+                }
+                if ( !location.search.match(`.+(&\\w+=${number + 1})$`) ) {
+                  return false;
+                }
+                return true;
+              }}
               key={`page-${number + 1}`}
               className={styles.page_link}
             >
