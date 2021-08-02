@@ -10,7 +10,8 @@ import { getColorTypes } from '../../store/colorType';
 import { getUsers } from '../../store/user';
 
 import WineCard from '../WineCard';
-import SearchBar from '../SearchBar';
+// import SearchBar from '../SearchBar';
+import ModalSearchBar from '../SearchBar/ModalSearchBar';
 import styles from './Dashboard.module.css';
 import Pagination from '../Pagination';
 
@@ -79,7 +80,7 @@ const DashBoard = () => {
           </NavLink>
         </div>
         <div className={styles.dashboard_inner_container}>
-          <SearchBar />
+          <ModalSearchBar />
         </div>
         <div className={`${styles.sort_links} ${styles.dashboard_inner_container}`}>
           <span>Sort By:</span>

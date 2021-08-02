@@ -61,3 +61,30 @@
   top: 50px;
   right: 10px;
 }
+
+.search_modal__container {
+  position: fixed;
+  top: 25px;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  z-index: 20;
+}
+
+.search_modal__background {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.search_modal_inner__container {
+  position: absolute;
+  background-color:white;
+  overflow: hidden;
+}

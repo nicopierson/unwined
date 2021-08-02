@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState, useEffect } from 'react';
+import React, { useContext, useRef, useState, useEffect, forwardRef } from 'react';
 import ReactDOM from 'react-dom';
 
 import styles from './Modal.module.css';
@@ -54,3 +54,18 @@ export function ModalProfile({ onClose, children }) {
     modalNode
   );
 }
+
+export const ModalSearch = React.forwardRef(({ onClose, children }, ref) => {
+  const modalNode = useContext(ModalContext);
+  if (!modalNode) return null;
+
+  return ReactDOM.createPortal(
+    <div className={styles.search_modal__container}>
+      <div className={styles.search_modal__background} onClick={onClose} />
+      <div className={styles.search_modal_inner__container}>
+        {children}
+      </div>
+    </div>,
+    modalNode
+  );
+});
