@@ -21,10 +21,13 @@ export const addOneWine = (wine) => ({
   wine,
 });
 
-export const showSearchWines = (attribute, string) => async dispatch => {
-  const res = await fetch(`/api/wines/search/${attribute}/${string}`);
+export const showSearchWines = (search) => async dispatch => {
+  if (!search) return [];
 
-  const wines = await res.json();
+  const res = await fetch(`/api/wines/search?search=${search}&attribute=name`);
+
+  const { rows: wines, count } = await res.json();
+
   if (res.ok) {
     // dispatch(loadWine(wines)); // to show, don't need to dispatch
   }
@@ -53,7 +56,7 @@ export const getWines = (query) => async dispatch => {
   } else {
     url = `/api/wines`;
   }
-  console.log(url);
+
   const res = await fetch(url);
 
   const { rows: wines, count } = await res.json();

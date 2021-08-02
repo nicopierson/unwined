@@ -174,34 +174,34 @@ router.delete(
   }
 ));
 
-  // create the where and order query options for sequelize
-  const createQueryOptions = (attribute, order) => {
-    if (!attribute || !order) return {};
+// create the where and order query options for sequelize
+const createQueryOptions = (attribute, order) => {
+  if (!attribute || !order) return {};
 
-    let orderObj;
-    if (order === 'desc') {
-      orderObj = {
-        order: [[attribute, 'DESC']]
-      };
-    } else {
-      orderObj = {
-        order: [[attribute, 'ASC']]
-      };
-    }
-    
-    const whereObj =  {
-      where: {
-        [attribute]: {
-          [Op.and]: {
-            [Op.not]: '',
-            [Op.not]: null,
-          }
-        },
+  let orderObj;
+  if (order === 'desc') {
+    orderObj = {
+      order: [[attribute, 'DESC']]
+    };
+  } else {
+    orderObj = {
+      order: [[attribute, 'ASC']]
+    };
+  }
+  
+  const whereObj =  {
+    where: {
+      [attribute]: {
+        [Op.and]: {
+          [Op.not]: '',
+          [Op.not]: null,
+        }
       },
-    }
+    },
+  }
 
-    return { ...whereObj, ...orderObj};
-  };
+  return { ...whereObj, ...orderObj};
+};
 
 // returns wines 8 at a time based on the page
 //TODO change to be dynamic based on results per page variable
@@ -228,19 +228,31 @@ router.get(
 
 // Search route to get wines by name for search bar by name
 router.get(
-  '/search/:attribute/:string',
+  '/search',
   asyncHandler(async (req, res, next) => {
-    const attribute = req.params.attribute;
-    let string = req.params.string;
+    let { search, page, attribute, order: orders } = req.query;
+    if (!page) page = 1;
+    const offset = limitPerPage * (page - 1);// if (limit > 50) next(wineLimitError());
 
-    const wines = await Wine.findAll({
-      where: {
-        [attribute]: {
-          [Op.iLike]: `%${string}%`
-        }
-      },
+    const { where: whereCopy, order } = createQueryOptions(attribute, orders);
+    // let where = whereCopy ? where : {};
+
+    const where = {
+      ...whereCopy,
+      [attribute]: {
+        [Op.iLike]: `%${search}%`
+      }
+    };
+    // console.log('where: ------------------------------------- ', where);
+
+    // const attribute = req.params.attribute;
+    // let string = req.params.string;
+
+    const wines = await Wine.findAndCountAll({
+      offset: offset,
       limit: limitPerPage,
-      //order: [[attribute, 'DESC']],
+      where: where ? where : {},
+      order: order ? order : [],
     });
 
     if (wines) {

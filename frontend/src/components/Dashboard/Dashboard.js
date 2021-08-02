@@ -54,8 +54,6 @@ const DashBoard = () => {
   
     const newOrder = order === 'desc' ? 'asc' : 'desc';
     setSortOrder(newOrder);
-
-    
   };
 
   // get the wine reviews
