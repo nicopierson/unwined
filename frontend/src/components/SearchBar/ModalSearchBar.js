@@ -37,11 +37,11 @@ const ModalSearchBar = () => {
           <SearchBar setShowModal={setShowModal} />
         </ModalSearch>
       </CSSTransition>
-      <button
+      <i
+        className={`fas fa-search nav_bar_right_link ${styles.search_icon}`}
         onClick={() => setShowModal(!showModal)}
       >
-        Search
-      </button>
+      </i>
     </div>
   );
 };

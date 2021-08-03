@@ -10,8 +10,6 @@ import { getColorTypes } from '../../store/colorType';
 import { getUsers } from '../../store/user';
 
 import WineCard from '../WineCard';
-// import SearchBar from '../SearchBar';
-import ModalSearchBar from '../SearchBar/ModalSearchBar';
 import styles from './Dashboard.module.css';
 import Pagination from '../Pagination';
 
@@ -19,15 +17,12 @@ const DashBoard = () => {
   const history = useHistory();
   const { search: query } = useLocation(); 
   const { search: searchQuery, attribute, order, page } = queryString.parse(query);
-  // console.log(searchQuery);
   const search = searchQuery ? `&search=${searchQuery}` : '';
-  // console.log(query, search)
 
   const dispatch = useDispatch();
   const itemsPerPage = 8;
   const pageLimit = 10;
   
-  // const [page, setPage] = useState(1);
   const [numberOfResults, setNumberOfResults] = useState(0);
   const [sortOrder, setSortOrder] = useState('asc');
 
@@ -78,10 +73,8 @@ const DashBoard = () => {
               className='fas fa-plus-circle'
             >
             </i>
+            Add a Wine
           </NavLink>
-        </div>
-        <div className={styles.dashboard_inner_container}>
-          <ModalSearchBar />
         </div>
         <div className={`${styles.sort_links} ${styles.dashboard_inner_container}`}>
           <span>Sort By:</span>

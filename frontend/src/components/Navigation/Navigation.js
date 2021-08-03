@@ -3,8 +3,10 @@ import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import EnterFormModal from '../EnterFormModal';
+
 import styled from 'styled-components';
 import { ReactComponent as NavLogo } from '../../assets/unwined_logo_nav.svg';
+import ModalSearchBar from '../SearchBar/ModalSearchBar';
 
 import './Navigation.css';
 
@@ -43,7 +45,10 @@ function Navigation({ isLoaded }){
   let sessionLinks;
   if (sessionUser) {
     sessionLinks = (
-      <ProfileButton user={sessionUser} className={`nav_link nav_link__profile_btn`}/>
+      <div className='nav_bar__right_links'>
+        <ModalSearchBar />
+        <ProfileButton user={sessionUser} className={`nav_link nav_link__profile_btn`}/>
+      </div>
     );
   } else {
     sessionLinks = (
@@ -52,12 +57,13 @@ function Navigation({ isLoaded }){
   }
 
   return (
-    <div className='navbar'>
-      
-      <NavLink exact to='/' className={`nav_link nav_link__home`}>
-        <StyledNavLogo />
-      </NavLink>
-      {isLoaded && sessionLinks}
+    <div className='navbar_container'>
+      <div className='navbar'>
+        <NavLink exact to='/' className={`nav_link nav_link__home`}>
+          <StyledNavLogo />
+        </NavLink>
+        {isLoaded && sessionLinks}
+      </div>
     </div>
   );
 }
