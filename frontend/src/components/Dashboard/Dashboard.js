@@ -18,7 +18,11 @@ import Pagination from '../Pagination';
 const DashBoard = () => {
   const history = useHistory();
   const { search: query } = useLocation(); 
-  const { attribute, order, page } = queryString.parse(query);
+  const { search: searchQuery, attribute, order, page } = queryString.parse(query);
+  // console.log(searchQuery);
+  const search = searchQuery ? `&search=${searchQuery}` : '';
+  // console.log(query, search)
+
   const dispatch = useDispatch();
   const itemsPerPage = 8;
   const pageLimit = 10;
@@ -39,9 +43,8 @@ const DashBoard = () => {
   }, [dispatch, query]);
 
   useEffect(() => {
-    // console.log('attribute: ', attribute, '\norder: ', order, '\npage: ', page);
-    if (attribute && order && page) {
-      history.push(`/dashboard?attribute=${attribute}&order=${sortOrder}&page=${page}`);
+    if (attribute && sortOrder && page) {
+      history.push(`/dashboard?attribute=${attribute}&order=${sortOrder}&page=${page}${search}`);
     }
   }, [sortOrder]);
 
@@ -85,10 +88,10 @@ const DashBoard = () => {
           <NavLink
             to={{
               pathname: `/dashboard`,
-              search: `?attribute=name&order=${sortOrder}&page=1`
+              search: `?attribute=name&order=${sortOrder}&page=1${search}`
             }}
             isActive={(match, location) => {
-              if ( !location.search.includes(`?attribute=name&order=${order}&page=`) ) {
+              if ( !location.search.includes(`?attribute=name&`) ) {
                 return false;
               }
               return true;
@@ -101,10 +104,10 @@ const DashBoard = () => {
           <NavLink
             to={{
               pathname: `/dashboard`,
-              search: `?attribute=rating&order=${order}&page=1`
+              search: `?attribute=rating&order=${order}&page=1${search}`
             }}
             isActive={(match, location) => {
-              if ( !location.search.includes(`?attribute=rating&order=${order}&page=`) ) {
+              if ( !location.search.includes(`?attribute=rating&`) ) {
                 return false;
               }
               return true;
@@ -117,10 +120,10 @@ const DashBoard = () => {
           <NavLink
             to={{
               pathname: `/dashboard`,
-              search: `?attribute=price&order=${sortOrder}&page=1`
+              search: `?attribute=price&order=${sortOrder}&page=1${search}`
             }}
             isActive={(match, location) => {
-              if ( !location.search.includes(`?attribute=price&order=${order}&page=`) ) {
+              if ( !location.search.includes(`?attribute=price&`) ) {
                 return false;
               }
               return true;
@@ -133,10 +136,10 @@ const DashBoard = () => {
           <NavLink
             to={{
               pathname: `/dashboard`,
-              search: `?attribute=country&order=${sortOrder}&page=1`
+              search: `?attribute=country&order=${sortOrder}&page=1${search}`
             }}
             isActive={(match, location) => {
-              if ( !location.search.includes(`?attribute=country&order=${order}&page=`) ) {
+              if ( !location.search.includes(`?attribute=country&`) ) {
                 return false;
               }
               return true;

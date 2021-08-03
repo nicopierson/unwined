@@ -34,7 +34,7 @@ const ModalSearchBar = () => {
           onClose={() => setShowModal(false)}
           ref={ref}
           >
-          <SearchBar />
+          <SearchBar setShowModal={setShowModal} />
         </ModalSearch>
       </CSSTransition>
       <button

@@ -208,12 +208,21 @@ const createQueryOptions = (attribute, order) => {
 router.get(
   '/',
   asyncHandler(async (req, res, next) => {
-    let { page, attribute, order: orders } = req.query;
+    let { search, page, attribute, order: orders } = req.query;
     if (!page) page = 1;
     const offset = limitPerPage * (page - 1);
     // if (limit > 50) next(wineLimitError());
+    
+    let { where, order } = createQueryOptions(attribute, orders);
 
-    const { where, order } = createQueryOptions(attribute, orders);
+    if (search) {
+      where = {
+        ...where,
+        [attribute]: {
+          [Op.iLike]: `%${search}%`
+        }
+      };
+    }
 
     const wines = await Wine.findAndCountAll({
       offset: offset,

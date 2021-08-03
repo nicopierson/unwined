@@ -32,8 +32,9 @@ const Pagination = ({ numberOfResults, itemsPerPage, pageLimit }) => {
                 if (number + 1 === 1 && location.search === '') {
                   return true;
                 }
-                if ( !location.search.match(`.+(&\\w+=${number + 1})$`) ) {
-                  return false;
+                if ( !location.search.match(`.+(&\\w+=${number + 1})$`) ||
+                  !location.search.match(`.+(&\\w+=${number + 1})&search`) ) {
+                    return false;
                 }
                 return true;
               }}

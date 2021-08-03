@@ -7,13 +7,29 @@ import { showSearchWines } from '../../store/wine';
 
 import styles from './SearchBar.module.css';
 
-const SearchBar = ({ setShowModal, setRedirectUrl }) => {
+const SearchBar = ({ setShowModal }) => {
   const history = useHistory();
   const dispatch = useDispatch();
   const [search, setSearch] = useState('');
   const [wines, setWines] = useState([]);
 
-  const searchOnChange = (e) => setSearch(e.target.value);
+  const searchOnChange = async (event) => {
+    event.preventDefault();
+
+    setSearch(event.target.value);
+  };
+
+  const enterOnSearch = async (event) => {
+    event.preventDefault();
+
+    if (event.key === 'Enter') {
+      const attribute = 'name';
+      const query = `?attribute=${attribute}&order=asc&page=1&search=${search}`;
+      
+      history.push(`/dashboard${query}`);
+      setShowModal(false);
+    }
+  };
 
   useEffect(() => {
     handleSearch()
@@ -43,6 +59,7 @@ const SearchBar = ({ setShowModal, setRedirectUrl }) => {
         name='search'
         id='search'
         onChange={searchOnChange}
+        onKeyUp={enterOnSearch}
       />
       <label htmlFor='search'></label>
         <ul>
