@@ -218,7 +218,8 @@ router.get(
     if (search) {
       where = {
         ...where,
-        [attribute]: {
+        // the attribute for the search is set to name
+        name: {
           [Op.iLike]: `%${search}%`
         }
       };
