@@ -4,8 +4,8 @@ import queryString from 'query-string';
 import styles from './Pagination.module.css';
 
 const Pagination = ({ numberOfResults, itemsPerPage, pageLimit }) => {
-  const { search } = useLocation();
-  let { attribute, order } = queryString.parse(search);
+  const { search: searchString } = useLocation();
+  let { attribute, order, search } = queryString.parse(searchString);
   if (!attribute) attribute = 'name';
   if (!order) order = 'desc'; 
 
@@ -18,7 +18,7 @@ const Pagination = ({ numberOfResults, itemsPerPage, pageLimit }) => {
   return (
     <nav>
       <div className={styles.pagination}>
-        {pageNumbers.length > 0 && pageNumbers.map(number =>
+        {pageNumbers.length > 1 && pageNumbers.map(number =>
             <NavLink
               to={{
                 pathname: `/dashboard`,
@@ -26,17 +26,18 @@ const Pagination = ({ numberOfResults, itemsPerPage, pageLimit }) => {
                   attribute,
                   order,
                   page: number + 1,
+                  search,
                 })}`
               }}
               isActive={(match, location) => {
                 if (number + 1 === 1 && location.search === '') {
                   return true;
                 }
-                if ( !location.search.match(`.+(&\\w+=${number + 1})$`) ||
-                  !location.search.match(`.+(&\\w+=${number + 1})&search`) ) {
-                    return false;
+                if ( location.search.match(`.+(&page=${number + 1})$`) 
+                  || location.search.match(`.+&page=${number + 1}&search.+`) ) {
+                    return true;
                 }
-                return true;
+                return false;
               }}
               key={`page-${number + 1}`}
               className={styles.page_link}
