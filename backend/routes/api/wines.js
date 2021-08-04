@@ -181,7 +181,9 @@ const createQueryOptions = (attribute, order) => {
   let orderObj;
   if (order === 'desc') {
     orderObj = {
-      order: [[attribute, 'DESC']]
+      order: [[attribute, 'DESC']] 
+      // FAILED trying to make all attributes lowercase
+      // Sequelize.fn('lower', Sequelize.col(attribute)) // try later
     };
   } else {
     orderObj = {
