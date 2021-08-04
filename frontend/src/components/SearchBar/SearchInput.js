@@ -3,6 +3,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 import queryString from 'query-string';
 
 import styles from './SearchBar.module.css';
+import stylesInput from './SearchInput.module.css';
 
 const SearchInput = () => {
   const { search: query } = useLocation(); 
@@ -29,7 +30,7 @@ const SearchInput = () => {
 
   return (
     <div
-      className={styles.search_container}
+      className={`${styles.search_container} ${stylesInput.search_field}`}
     >
       <i className='fas fa-search'></i>
       <input
