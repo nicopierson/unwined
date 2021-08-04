@@ -40,9 +40,11 @@ const Pagination = ({ numberOfResults, itemsPerPage, pageLimit }) => {
                 return false;
               }}
               activeStyle={{
-                backgroundColor: '#672224',
-                color: '#f5f5f5',
-                borderRadius: '50px'
+                color: '#3f3f3f',
+                borderRadius: '50px',
+                border: '3px solid #672224',
+                backgroundColor: '#fff',
+                transition: 'linear 0.2s'
               }}
               key={`page-${number + 1}`}
               className={styles.page_link}
