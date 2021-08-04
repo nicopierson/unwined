@@ -178,7 +178,7 @@ const DashBoard = () => {
                   borderBottom: '3px solid #501B1D',
                 }}
                 key={`order_link_country`}
-                
+                className={styles.order_link}
               >
                 Country
               </NavLink>

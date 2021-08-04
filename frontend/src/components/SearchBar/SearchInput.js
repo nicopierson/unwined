@@ -30,7 +30,7 @@ const SearchInput = () => {
 
   return (
     <div
-      className={`${styles.search_container} ${stylesInput.search_field}`}
+      className={stylesInput.search_field}
     >
       <i className='fas fa-search'></i>
       <input
