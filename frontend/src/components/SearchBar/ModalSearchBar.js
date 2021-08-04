@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
 import { CSSTransition } from 'react-transition-group';
 
 import SearchBar from '.';
@@ -8,7 +7,6 @@ import { ModalSearch } from '../../context/Modal';
 import styles from './ModalSearchBar.module.css';
 
 const ModalSearchBar = ({ setShowNavbar }) => {
-  const history = useHistory();
   const [showModal, setShowModal] = useState(false);
   const [ref, setRef] = useState(React.createRef());
 

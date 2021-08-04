@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import queryString from 'query-string';
 
-import styles from './SearchBar.module.css';
 import stylesInput from './SearchInput.module.css';
 
 const SearchInput = () => {
