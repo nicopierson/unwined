@@ -73,7 +73,7 @@ const DashBoard = () => {
               className='fas fa-plus-circle'
             >
             </i>
-            Add a Wine
+            <span>Add Wine</span>
           </NavLink>
         </div>
         <div className={`${styles.sort_links} ${styles.dashboard_inner_container}`}>

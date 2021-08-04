@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { CSSTransition } from 'react-transition-group';
 import ProfileButton from './ProfileButton';
 import EnterFormModal from '../EnterFormModal';
 
@@ -39,15 +40,22 @@ const StyledNavLogo = styled(NavLogo)`
   }
 `;
 
-function Navigation({ isLoaded }){
-  const sessionUser = useSelector(state => state.session.user);
 
+function Navigation({ isLoaded }){
+  const [ref, setRef] = useState(React.createRef());
+  const [showNavbar, setShowNavbar] = useState(true);
+  const sessionUser = useSelector(state => state.session.user);
+  
   let sessionLinks;
+  
+  useEffect(() => {
+    setRef(React.createRef());
+  }, [showNavbar]);
 
   if (sessionUser) {
     sessionLinks = (
       <div className='nav_bar__right_links'>
-        <ModalSearchBar />
+        <ModalSearchBar setShowNavbar={setShowNavbar} />
         <ProfileButton user={sessionUser} className={`nav_link nav_link__profile_btn`}/>
       </div>
     );
@@ -59,12 +67,19 @@ function Navigation({ isLoaded }){
 
   return (
     <div className='navbar_container'>
-      <div className='navbar'>
-        <NavLink exact to='/' className={`nav_link nav_link__home`}>
-          <StyledNavLogo />
-        </NavLink>
-        {isLoaded && sessionLinks}
-      </div>
+      <CSSTransition
+        in={showNavbar}
+        timeout={800}
+        classNames='navbar'
+        nodeRef={ref}
+      >
+        <div className='navbar'>
+          <NavLink exact to='/' className={`nav_link nav_link__home`}>
+            <StyledNavLogo ref={ref}/>
+          </NavLink>
+          {isLoaded && sessionLinks}
+        </div>
+      </CSSTransition>
     </div>
   );
 }

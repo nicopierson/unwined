@@ -26,8 +26,8 @@ const SearchBar = ({ setShowModal }) => {
       const attribute = 'name';
       const query = `?attribute=${attribute}&order=asc&page=1&search=${search}`;
       
-      history.push(`/dashboard${query}`);
       setShowModal(false);
+      history.push(`/dashboard${query}`);
     }
   };
 
@@ -39,6 +39,7 @@ const SearchBar = ({ setShowModal }) => {
     e.preventDefault();
 
     await dispatch(getOneWine(id));
+    setShowModal(false);
     history.push(url)
   };
 
@@ -55,11 +56,13 @@ const SearchBar = ({ setShowModal }) => {
       <input
         value={search}
         type='text'
-        placeholder='search'
+        placeholder='Search for a Wine'
         name='search'
         id='search'
         onChange={searchOnChange}
         onKeyUp={enterOnSearch}
+        autoComplete='off'
+        autoFocus
       />
       <label htmlFor='search'></label>
         <ul>

@@ -7,20 +7,29 @@ import { ModalSearch } from '../../context/Modal';
 
 import styles from './ModalSearchBar.module.css';
 
-const ModalSearchBar = () => {
+const ModalSearchBar = ({ setShowNavbar }) => {
   const history = useHistory();
   const [showModal, setShowModal] = useState(false);
   const [ref, setRef] = useState(React.createRef());
-  const [redirectUrl, setRedirectUrl] = useState();
 
   useEffect(() => {
-    setRef(React.createRef())
+    setRef(React.createRef());
     document.body.style.overflow = showModal ? 'hidden' : 'unset';
   }, [showModal]);
 
-  useEffect(() => {
-    history.push(redirectUrl);
-  }, [redirectUrl]);
+  const handleModalOpen = (e) => {
+    e.preventDefault();
+
+    setShowNavbar(false);
+    setShowModal(true);
+  };
+
+  const handleModalClose = (e) => {
+    e.preventDefault();
+
+    setShowModal(false);
+    setShowNavbar(true);
+  };
 
   return (
     <div>
@@ -32,7 +41,7 @@ const ModalSearchBar = () => {
         nodeRef={ref}
       >
         <ModalSearch 
-          onClose={() => setShowModal(false)}
+          onClose={handleModalClose}
           ref={ref}
           >
           <SearchBar setShowModal={setShowModal} />
@@ -40,7 +49,7 @@ const ModalSearchBar = () => {
       </CSSTransition>
       <i
         className={`fas fa-search nav_bar_right_link ${styles.search_icon}`}
-        onClick={() => setShowModal(!showModal)}
+        onClick={handleModalOpen}
       >
       </i>
     </div>
