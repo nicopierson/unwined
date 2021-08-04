@@ -12,20 +12,20 @@ import { getUsers } from '../../store/user';
 import WineCard from '../WineCard';
 import styles from './Dashboard.module.css';
 import Pagination from '../Pagination';
+import SearchInput from '../SearchBar/SearchInput';
 
 const DashBoard = () => {
   const history = useHistory();
+  const dispatch = useDispatch();
   let { search: query } = useLocation(); 
   if (query === '') query = '?attribute=name&order=desc&page=1';
   const { search: searchQuery, attribute, order, page } = queryString.parse(query);
   const search = searchQuery ? `&search=${searchQuery}` : '';
 
-  const dispatch = useDispatch();
   const itemsPerPage = 8;
   const pageLimit = 10;
-  
   const [numberOfResults, setNumberOfResults] = useState(0);
-  const [sortOrder, setSortOrder] = useState('desc');
+
 
   useEffect(() => {
     (async () => {
@@ -38,8 +38,6 @@ const DashBoard = () => {
     dispatch(getUsers());
   }, [dispatch, query]);
 
-  console.log('Number of results: ', numberOfResults);
-
   useEffect(() => {
     if (attribute && order && page) {
       history.push(`/dashboard?attribute=${attribute}&order=${order}&page=${page}${search}`);
@@ -49,13 +47,6 @@ const DashBoard = () => {
   const wines = useSelector((state) => {
     return state.wines.list.map(wineId => state.wines[wineId]);
   });
-
-  const handleOrder = (e) => {
-    e.preventDefault();
-  
-    // const newOrder = order === 'desc' ? 'asc' : 'desc';
-    // setSortOrder(newOrder);
-  };
 
   // get the wine reviews
   // const wineId = 4;
@@ -70,7 +61,7 @@ const DashBoard = () => {
         <div className={styles.dashboard_top_container}>
           <div className={styles.header}>
             {/* <h2>Dashboard</h2> */}
-            
+            <SearchInput searchValue={searchQuery}/>
           </div>
           <NavLink to={`/wines/add`} className={styles.dashboard_add}>
             <i
