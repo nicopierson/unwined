@@ -28,7 +28,6 @@ const DashBoard = () => {
   const [sortOrder, setSortOrder] = useState('desc');
 
   useEffect(() => {
-    console.log(query);
     (async () => {
       const { count } = await dispatch(getWines(query));
       setNumberOfResults(count);
@@ -38,6 +37,8 @@ const DashBoard = () => {
     dispatch(getColorTypes());
     dispatch(getUsers());
   }, [dispatch, query]);
+
+  console.log('Number of results: ', numberOfResults);
 
   useEffect(() => {
     if (attribute && order && page) {
@@ -68,7 +69,8 @@ const DashBoard = () => {
       <div className={styles.dashboard_container}>
         <div className={styles.dashboard_top_container}>
           <div className={styles.header}>
-            <h2>Dashboard</h2>
+            {/* <h2>Dashboard</h2> */}
+            
           </div>
           <NavLink to={`/wines/add`} className={styles.dashboard_add}>
             <i
@@ -78,6 +80,7 @@ const DashBoard = () => {
             <span>Add Wine</span>
           </NavLink>
         </div>
+
         <div className={styles.dashboard_inner_container}>
           <div className={styles.sort_links}>
             <div className={styles.order_link}>
@@ -208,6 +211,9 @@ const DashBoard = () => {
           </div>
           </NavLink> */}
           </div>
+        </div>
+        <div className={styles.results_found}>
+          <p>{numberOfResults} results found</p>
         </div>
       </div>
       <div className={styles.wine_list}>
