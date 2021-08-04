@@ -16,7 +16,7 @@ const Pagination = ({ numberOfResults, itemsPerPage, pageLimit }) => {
   const pageNumbers = [...Array(numberOfPages).keys()];
 
   return (
-    <nav>
+    <nav className={styles.pagination_container}>
       <div className={styles.pagination}>
         {pageNumbers.length > 1 && pageNumbers.map(number =>
             <NavLink
@@ -38,6 +38,11 @@ const Pagination = ({ numberOfResults, itemsPerPage, pageLimit }) => {
                     return true;
                 }
                 return false;
+              }}
+              activeStyle={{
+                backgroundColor: '#672224',
+                color: '#f5f5f5',
+                borderRadius: '50px'
               }}
               key={`page-${number + 1}`}
               className={styles.page_link}
