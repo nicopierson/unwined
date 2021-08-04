@@ -1,10 +1,17 @@
+.navbar_container {
+  background-color: #501B1D;
+  height: 68px;
+  display: flex;
+  justify-content: center;
+}
+
 .navbar {
   display: flex;
   justify-content: space-between;
-  background-color: #501B1D;
   padding: 5px;
   color: #fff;
   align-items: center;
+  width: 80%;
 }
 
 .nav_link__home {
@@ -13,7 +20,7 @@
   outline: none;
 }
 
-.nav_bar___right_links {
+.nav_bar__right_links {
   display: flex;
   align-items: center;
   line-height: 1;
@@ -22,7 +29,6 @@
 .nav_bar__dashboard_link {
   font-size: 18px;
   color: #b8b8b8;
-  margin-right: 20px;
 }
 
 .nav_bar__dashboard_link:hover {
@@ -34,11 +40,14 @@
 .nav_bar__profile_modal {
   color: #b8b8b8;
   font-size: 28px;
-  margin-right: 15px;
 }
 
 .nav_bar__profile_modal:hover {
   color: #fff;
   transition: 0.5s linear;
   cursor: pointer;
+}
+
+.nav_bar_right_link {
+  margin-right: 25px;
 }

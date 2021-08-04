@@ -1,5 +1,6 @@
 import { csrfFetch } from './csrf';
 import { LOAD_REVIEW, REMOVE_REVIEW, ADD_REVIEW } from './review';
+import { resetWinery, getOneWinery } from './winery';
 
 const LOAD = 'wines/LOAD';
 const REMOVE_WINE = 'wines/REMOVE_WINE';
@@ -20,14 +21,58 @@ export const addOneWine = (wine) => ({
   wine,
 });
 
-export const getWines = () => async dispatch => {
-  const res = await fetch(`/api/wines`);
+export const showSearchWines = (search) => async dispatch => {
+  if (!search) return [];
+
+  const res = await fetch(`/api/wines/search?search=${search}&attribute=name`);
+
+  const { rows: wines, count } = await res.json();
+
+  if (res.ok) {
+    // dispatch(loadWine(wines)); // to show, don't need to dispatch
+  }
+  return wines;
+};
+
+export const getSortedWines = (attribute, order) => async dispatch => {
+  const res = await fetch(`/api/wines/search-order/${attribute}/${order}`);
 
   const wines = await res.json();
   if (res.ok) {
+    dispatch(resetWinery());
+    wines.forEach(wine => {
+      //? is there a better way to reset winery state in the store
+      dispatch(getOneWinery(wine.wineryId));
+    });
     dispatch(loadWine(wines));
   }
   return wines;
+};
+
+export const getWines = (query) => async dispatch => {
+  let url;
+  if (query) {
+    url = `/api/wines${query}`;
+  } else {
+    url = `/api/wines`;
+  }
+
+  const res = await fetch(url);
+
+  const { rows: wines, count } = await res.json();
+  if (res.ok) {
+    //TODO need to dynamically add wineries when getting wines
+    // reset wineries state
+    dispatch(resetWinery());
+
+    // get all wineries
+    wines.map(async (wine) => {
+      dispatch(getOneWinery(wine.wineryId));
+    });
+
+    dispatch(loadWine(wines));
+  }
+  return { ...wines, count };
 };
 
 export const getOneWine = (id) => async dispatch => {
@@ -35,6 +80,7 @@ export const getOneWine = (id) => async dispatch => {
 
   const wine = await res.json();
   if (res.ok) {
+    dispatch(getOneWinery(wine.wineryId));
     dispatch(addOneWine(wine));
   }
   return wine;
@@ -117,7 +163,8 @@ const wineReducer = (state = initialState, action) => {
       });
       return { 
         ...allWine, 
-        ...state,
+        //? removed state to reset store for every load
+        //...state, // need to reload other instances?
         list: sortList(action.wines),
       };
     }

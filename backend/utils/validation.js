@@ -19,6 +19,19 @@ const handleValidationErrors = (req, _res, next) => {
   next();
 };
 
+const searchNotFoundError = (resource) => {
+  const err = Error(`${resource} not found`);
+  if (id !== undefined) {
+    err.errors = [`${resource} could not be found.`];
+  } else {
+    err.errors = [`${resource} could not be found.`];
+  }
+  err.title = `${resource} not found.`;
+  err.status = 404;
+  return err;
+};
+
 module.exports = {
   handleValidationErrors,
+  searchNotFoundError,
 };

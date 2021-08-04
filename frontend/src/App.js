@@ -29,9 +29,9 @@ function App() {
           <Route exact path='/'> {/* Splash Page */}
             <Splash />
           </Route>
-          <Route path='/dashboard'> {/* After login */}
+          <Route path='/dashboard'> 
             <DashBoard />
-          </Route>
+          </Route> 
           <Route path='/wines/add'>
             <AddWineForm /> 
           </Route>

@@ -1,13 +1,15 @@
 const express = require('express');
 const asyncHandler = require('express-async-handler');
 
+const { Op } = require('sequelize');
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
 const { Wine, Review } = require('../../db/models');
 const { check } = require('express-validator');
-const { handleValidationErrors } = require('../../utils/validation');
+const { handleValidationErrors, searchNotFoundError } = require('../../utils/validation');
 
 const router = express.Router();
 
+const limitPerPage = 8;
 
 const wineNotFoundError = (id) => {
   const err = Error("Wine not found");
@@ -25,6 +27,14 @@ const winePostError = () => {
   const err = Error("Wine could not be added");
   err.errors = [`Wine could not be added`];
   err.title = "Wine not added.";
+  err.status = 404;
+  return err;
+};
+
+const wineLimitError = () => {
+  const err = Error("Limit exceeded");
+  err.errors = [`Cannot request more than 50 wines`];
+  err.title = "Request failed.";
   err.status = 404;
   return err;
 };
@@ -67,19 +77,20 @@ const validateWine = [
   handleValidationErrors,
 ];
 
-router.get(
-  '/',
-  // requireAuth,
-  asyncHandler(async (req, res, next) => {
-    const wines = await Wine.findAll({ limit: 10 });
+// Retrieve all wines from the database
+// router.get(
+//   '/',
+//   // requireAuth,
+//   asyncHandler(async (req, res, next) => {
+//     const wines = await Wine.findAll({ limit: limitPerPage });
 
-    if (wines) {
-      return res.json(wines);
-    } else {
-      next(wineNotFoundError());
-    }
-  })
-);
+//     if (wines) {
+//       return res.json(wines);
+//     } else {
+//       next(wineNotFoundError());
+//     }
+//   })
+// );
 
 router.get(
   '/:id(\\d+)',
@@ -162,5 +173,153 @@ router.delete(
     }
   }
 ));
+
+// create the where and order query options for sequelize
+const createQueryOptions = (attribute, order) => {
+  if (!attribute || !order) return {};
+
+  let orderObj;
+  if (order === 'desc') {
+    orderObj = {
+      order: [[attribute, 'DESC']] 
+      // FAILED trying to make all attributes lowercase
+      // Sequelize.fn('lower', Sequelize.col(attribute)) // try later
+    };
+  } else {
+    orderObj = {
+      order: [[attribute, 'ASC']]
+    };
+  }
+  
+  const whereObj =  {
+    where: {
+      [attribute]: {
+        [Op.and]: {
+          [Op.not]: '',
+          [Op.not]: null,
+        }
+      },
+    },
+  }
+
+  return { ...whereObj, ...orderObj};
+};
+
+// returns wines 8 at a time based on the page
+//TODO change to be dynamic based on results per page variable
+router.get(
+  '/',
+  asyncHandler(async (req, res, next) => {
+    let { search, page, attribute, order: orders } = req.query;
+    if (!page) page = 1;
+    const offset = limitPerPage * (page - 1);
+    // if (limit > 50) next(wineLimitError());
+    
+    let { where, order } = createQueryOptions(attribute, orders);
+
+    if (search) {
+      where = {
+        ...where,
+        // the attribute for the search is set to name
+        name: {
+          [Op.iLike]: `%${search}%`
+        }
+      };
+    }
+
+    const wines = await Wine.findAndCountAll({
+      offset: offset,
+      limit: limitPerPage,
+      where: where ? where : {},
+      order: order ? order : [],
+    });
+
+    return res.json({ ...wines, offset })
+  })
+);
+
+// Search route to get wines by name for search bar by name
+router.get(
+  '/search',
+  asyncHandler(async (req, res, next) => {
+    let { search, page, attribute, order: orders } = req.query;
+    if (!page) page = 1;
+    const offset = limitPerPage * (page - 1);// if (limit > 50) next(wineLimitError());
+
+    const { where: whereCopy, order } = createQueryOptions(attribute, orders);
+    // let where = whereCopy ? where : {};
+
+    const where = {
+      ...whereCopy,
+      [attribute]: {
+        [Op.iLike]: `%${search}%`
+      }
+    };
+    // console.log('where: ------------------------------------- ', where);
+
+    // const attribute = req.params.attribute;
+    // let string = req.params.string;
+
+    const wines = await Wine.findAndCountAll({
+      offset: offset,
+      limit: limitPerPage,
+      where: where ? where : {},
+      order: order ? order : [],
+    });
+
+    if (wines) {
+      return res.json(wines);
+    } else {
+      next(searchNotFoundError('wine'));
+    }
+  })
+);
+
+// order price or rating
+//? Might not need route, but may change
+// router.get(
+//   '/search-order/:attribute/:operation/:value(\\d+)',
+//   asyncHandler(async (req, res, next) => {
+//     const attribute = req.params.attribute;
+//     const operation = req.params.operation;
+//     const value = req.params.value;
+
+//     let wines;
+//     if (operation === 'more') { 
+//       wines = await Wine.findAll({
+//         where: {
+//           [attribute]: {
+//             [Op.and]: {
+//               [Op.gte]: value,
+//               [Op.not]: null,
+//             },
+//           },
+//         },
+//         limit: limitPerPage,
+//         order: [[attribute, 'DESC']],
+//         // attributes: ['id', 'name', 'updated_at'] // if only want certain columns
+//       });
+//     } else if (operation === 'less') {
+//       wines = await Wine.findAll({
+//         where: {
+//           [attribute]: {
+//             [Op.and]: {
+//               [Op.lte]: value,
+//               [Op.not]: null,
+//             },
+//           },
+//         },
+//         limit: limitPerPage,
+//         order: [[attribute, 'DESC']],
+//       });
+//     }
+
+//     if (wines) {
+//       return res.json(wines);
+//     } else {
+//       next(searchNotFoundError('wine'));
+//     }
+//   })
+// );
 
 module.exports = router;
