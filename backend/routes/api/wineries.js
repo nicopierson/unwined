@@ -1,10 +1,11 @@
 const express = require('express');
 const asyncHandler = require('express-async-handler');
 
+const { Op } = require('sequelize');
 const { requireAuth } = require('../../utils/auth');
 const { Winery } = require('../../db/models');
 const { check } = require('express-validator');
-const { handleValidationErrors } = require('../../utils/validation');
+const { handleValidationErrors, searchNotFoundError } = require('../../utils/validation');
 
 const router = express.Router();
 
@@ -122,5 +123,30 @@ router.delete(
     }
   }
 ));
+
+// Search route to get wineries by resource
+router.get(
+  '/search/:resource/:string',
+  asyncHandler(async (req, res, next) => {
+    const limit = 8; // only grab 8 at a time
+    const resource = req.params.resource;
+    let string = req.params.string;
+
+    const wineries = await Winery.findAll({
+      where: {
+        [resource]: {
+          [Op.iLike]: `%${string}%`
+        }
+      },
+      limit: limit,
+    });
+
+    if (wineries) {
+      return res.json(wineries);
+    } else {
+      next(searchNotFoundError('wineries'));
+    }
+  })
+);
 
 module.exports = router;

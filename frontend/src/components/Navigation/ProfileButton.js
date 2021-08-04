@@ -38,12 +38,12 @@ function ProfileButton({ user }) {
   };
 
   return (
-    <div className='nav_bar___right_links'>
-      <NavLink to='/dashboard' className='nav_bar__dashboard_link'>
+    <>
+      <NavLink to='/dashboard' className='nav_bar_right_link nav_bar__dashboard_link'>
         Dashboard
       </NavLink>
       <i 
-      className='fas fa-user-circle nav_bar__profile_modal'
+      className='fas fa-user-circle nav_bar_right_link nav_bar__profile_modal'
       onClick={() => setShowModal(true)}
       >
       </i>
@@ -56,7 +56,7 @@ function ProfileButton({ user }) {
           </div>
         </ModalProfile>
       )}
-    </div>
+    </>
   );
 }
 

@@ -1,6 +1,7 @@
 const express = require('express');
 const asyncHandler = require('express-async-handler');
 
+const { Op } = require('sequelize');
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
 const { User } = require('../../db/models');
 const { check } = require('express-validator');
@@ -145,5 +146,30 @@ router.delete(
     }
   }
 ));
+
+// Search route to get users by name
+router.get(
+  '/search/:resource/:string',
+  asyncHandler(async (req, res, next) => {
+    const limit = 8; // only grab 8 at a time
+    const resource = req.params.resource;
+    let string = req.params.string;
+
+    const users = await User.findAll({
+      where: {
+        [resource]: {
+          [Op.iLike]: `%${string}%`
+        }
+      },
+      limit: limit,
+    });
+
+    if (users) {
+      return res.json(users);
+    } else {
+      next(searchNotFoundError('user'));
+    }
+  })
+);
 
 module.exports = router;

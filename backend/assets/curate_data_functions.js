@@ -128,42 +128,42 @@ function makeWineJSON (objJSON, wineries, wineTypes) {
   return wineObj;
 }
 
-const winesJSON = require('./wine-data-set.json');
-
+// const winesJSON = require('./wine-data-set.json');
+const winesJSON = require('./wine-data-set-short.json');
 
 // normalize wine JSON data
-// const saveFile = './wine-data-normalized.json';
+// const saveFileWineDataNorm = './wine-data-normalized.json';
 // const normalizedWines = normalizeJSON(winesJSON);
-// writeJSONFile(normalizedWines, saveFile);
+// writeJSONFile(normalizedWines, saveFileWineDataNorm);
 
 
 
 // normalize Wineries
-// const saveFile = './winery-normalized.json';
+// const saveFileWineryNorm = './winery-normalized.json';
 const wineriesNormalized = normalizeWineryJSON(winesJSON); // now normalizes
-// writeJSONFile(wineriesNormalized, saveFile);
+// writeJSONFile(wineriesNormalized, saveFileWineryNorm);
 
 // make winery data
-// const saveFile = './winery-data.json';
-// const wineries = makeWineryJSON(winesJSON);
-// writeJSONFile(wineries, saveFile);
+const saveFileWineryData = './winery-data.json';
+const wineries = makeWineryJSON(winesJSON);
+writeJSONFile(wineries, saveFileWineryData);
 
 
 // make Array of Objects for the Type of wines
-// const saveFile = './wine-types-data.json';
-// const wineTypes = makeWineTypesJSON(winesJSON);
-// writeJSONFile(wineTypes, saveFile);
+const saveFileWineType = './wine-types-data.json';
+const wineTypes = makeWineTypesJSON(winesJSON);
+writeJSONFile(wineTypes, saveFileWineType);
 
 // normalize wine types
-// const saveFile = './wine-types-normalized.json';
+// const saveFileWineTypeNorm = './wine-types-normalized.json';
 const wineTypesNormalized = normalizeWineTypesJSON(winesJSON);
-// writeJSONFile(wineTypesNormalized, saveFile);
+// writeJSONFile(wineTypesNormalized, saveFileWineTypeNorm);
 
 
 
 
 // reformat array of wine objects
 // need wineTypesNormalized and wineriesNormalized variables
-const saveFile = './wines-data.json';
+const saveFileWineData = './wines-data.json';
 const wines = makeWineJSON(winesJSON, wineriesNormalized, wineTypesNormalized);
-writeJSONFile(wines, saveFile);
+writeJSONFile(wines, saveFileWineData);

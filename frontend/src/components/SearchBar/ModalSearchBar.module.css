@@ -1,0 +1,9 @@
+.search_icon {
+  color: #b8b8b8;
+}
+
+.search_icon:hover {
+  color: #fff;
+  transition: 0.5s linear;
+  cursor: pointer;
+}
