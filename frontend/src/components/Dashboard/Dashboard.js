@@ -15,7 +15,8 @@ import Pagination from '../Pagination';
 
 const DashBoard = () => {
   const history = useHistory();
-  const { search: query } = useLocation(); 
+  let { search: query } = useLocation(); 
+  if (query === '') query = '?attribute=name&order=desc&page=1';
   const { search: searchQuery, attribute, order, page } = queryString.parse(query);
   const search = searchQuery ? `&search=${searchQuery}` : '';
 
@@ -24,9 +25,10 @@ const DashBoard = () => {
   const pageLimit = 10;
   
   const [numberOfResults, setNumberOfResults] = useState(0);
-  const [sortOrder, setSortOrder] = useState('asc');
+  const [sortOrder, setSortOrder] = useState('desc');
 
   useEffect(() => {
+    console.log(query);
     (async () => {
       const { count } = await dispatch(getWines(query));
       setNumberOfResults(count);
@@ -38,10 +40,10 @@ const DashBoard = () => {
   }, [dispatch, query]);
 
   useEffect(() => {
-    if (attribute && sortOrder && page) {
-      history.push(`/dashboard?attribute=${attribute}&order=${sortOrder}&page=${page}${search}`);
+    if (attribute && order && page) {
+      history.push(`/dashboard?attribute=${attribute}&order=${order}&page=${page}${search}`);
     }
-  }, [sortOrder]);
+  }, [query]);
 
   const wines = useSelector((state) => {
     return state.wines.list.map(wineId => state.wines[wineId]);
@@ -50,8 +52,8 @@ const DashBoard = () => {
   const handleOrder = (e) => {
     e.preventDefault();
   
-    const newOrder = order === 'desc' ? 'asc' : 'desc';
-    setSortOrder(newOrder);
+    // const newOrder = order === 'desc' ? 'asc' : 'desc';
+    // setSortOrder(newOrder);
   };
 
   // get the wine reviews
@@ -64,7 +66,7 @@ const DashBoard = () => {
   return (
     <div className={styles.dashboard_background}>
       <div className={styles.dashboard_container}>
-        <div className={styles.dashboard_inner_container}>
+        <div className={styles.dashboard_top_container}>
           <div className={styles.header}>
             <h2>Dashboard</h2>
           </div>
@@ -76,93 +78,136 @@ const DashBoard = () => {
             <span>Add Wine</span>
           </NavLink>
         </div>
-        <div className={`${styles.sort_links} ${styles.dashboard_inner_container}`}>
-          <span>Sort By:</span>
-          <NavLink
-            to={{
-              pathname: `/dashboard`,
-              search: `?attribute=name&order=${sortOrder}&page=1${search}`
-            }}
-            isActive={(match, location) => {
-              if ( !location.search.includes(`?attribute=name&`) ) {
-                return false;
-              }
-              return true;
-            }}
-            key={`order_link_name`}
-            className={styles.order_link}
-          >
-            Name
-          </NavLink>
-          <NavLink
-            to={{
-              pathname: `/dashboard`,
-              search: `?attribute=rating&order=${order}&page=1${search}`
-            }}
-            isActive={(match, location) => {
-              if ( !location.search.includes(`?attribute=rating&`) ) {
-                return false;
-              }
-              return true;
-            }}
-            key={`order_link_rating`}
-            className={styles.order_link}
-          >
-            Rating
-          </NavLink>
-          <NavLink
-            to={{
-              pathname: `/dashboard`,
-              search: `?attribute=price&order=${sortOrder}&page=1${search}`
-            }}
-            isActive={(match, location) => {
-              if ( !location.search.includes(`?attribute=price&`) ) {
-                return false;
-              }
-              return true;
-            }}
-            key={`order_link_price`}
-            className={styles.order_link}
-          >
-            Price
-          </NavLink>
-          <NavLink
-            to={{
-              pathname: `/dashboard`,
-              search: `?attribute=country&order=${sortOrder}&page=1${search}`
-            }}
-            isActive={(match, location) => {
-              if ( !location.search.includes(`?attribute=country&`) ) {
-                return false;
-              }
-              return true;
-            }}
-            key={`order_link_country`}
-            className={styles.order_link}
-          >
-            Country
-          </NavLink>
-          {/* //TODO Wine Type */}
-          <a
-            href='!#'
-            key={`order_link_order`}
-            className={styles.order_link}
-            onClick={handleOrder}
-          >
-            {sortOrder.toUpperCase()} Order
-          </a>
-          {/* //? navlink doesn't start on click event before sending to link */}
-          {/* <NavLink
-            onClick={() => sortOrder === 'desc' ? setSortOrder('asc') : setSortOrder('desc')}
-            to={{
-              pathname: `/dashboard`,
-              search: `?attribute=${attribute}&order=${sortOrder}&page=${page}`
-            }}
-            key={`order_link_order`}
-            className={styles.order_link}
-          >
-            Order: {sortOrder}
+        <div className={styles.dashboard_inner_container}>
+          <div className={styles.sort_links}>
+            <div className={styles.order_link}>
+              <NavLink
+                to={{
+                  pathname: `/dashboard`,
+                  search: (!query.includes(`?attribute=name`)
+                    || query === `?attribute=name&order=desc&page=${page}${search}`)
+                    ? `?attribute=name&order=asc&page=${page}${search}`
+                    : `?attribute=name&order=desc&page=${page}${search}`
+                }}
+                isActive={(match, location) => {
+                  if ( location.search === '') return true;
+                  if ( !location.search.includes(`?attribute=name&`) ) {
+                    return false;
+                  }
+                  return true;
+                }}
+                activeStyle={{
+                  borderBottom: '3px solid #501B1D',
+                }}
+                key={`order_link_name`}
+                className={styles.order_link}
+              >
+                Name
+              </NavLink>
+            </div>
+            { (attribute === 'name' && order === 'desc') ?
+              <i className='fas fa-sort-up'></i>
+              : <i className='fas fa-sort-down'></i>
+            }
+            <div className={styles.order_link}>
+              <NavLink
+                to={{
+                  pathname: `/dashboard`,
+                  search: (!query.includes(`?attribute=rating`)
+                    || query === `?attribute=rating&order=desc&page=1${search}`)
+                    ? `?attribute=rating&order=asc&page=1${search}`
+                    : `?attribute=rating&order=desc&page=1${search}`
+                }}
+                isActive={(match, location) => {
+                  if ( !location.search.includes(`?attribute=rating&`) ) {
+                    return false;
+                  }
+                  return true;
+                }}
+                activeStyle={{
+                  borderBottom: '3px solid #501B1D',
+                }}
+                key={`order_link_rating`}
+                className={styles.order_link}
+              >
+                Rating
+              </NavLink>     
+            </div>   
+            { (attribute === 'rating' && order === 'desc') ?
+              <i className='fas fa-sort-up'></i>
+              : <i className='fas fa-sort-down'></i>
+            }
+            <div className={styles.order_link}>
+              <NavLink
+                to={{
+                  pathname: `/dashboard`,
+                  search: (!query.includes(`?attribute=price`)
+                    || query === `?attribute=price&order=desc&page=${page}${search}`)
+                    ? `?attribute=price&order=asc&page=${page}${search}`
+                    : `?attribute=price&order=desc&page=${page}${search}`
+                }}
+                isActive={(match, location) => {
+                  if ( !location.search.includes(`?attribute=price&`) ) {
+                    return false;
+                  }
+                  return true;
+                }}
+                activeStyle={{
+                  borderBottom: '3px solid #501B1D',
+                }}
+                key={`order_link_price`}
+                className={styles.order_link}
+              >
+                Price
+              </NavLink>
+            </div>
+            { (attribute === 'price' && order === 'desc') ?
+              <i className='fas fa-sort-up'></i>
+              : <i className='fas fa-sort-down'></i>
+            }
+            <div className={styles.order_link}>
+              <NavLink
+                to={{
+                  pathname: `/dashboard`,
+                  search: (!query.includes(`?attribute=country`)
+                    || query === `?attribute=country&order=desc&page=${page}${search}`)
+                    ? `?attribute=country&order=asc&page=${page}${search}`
+                    : `?attribute=country&order=desc&page=${page}${search}`
+                }}
+                isActive={(match, location) => {
+                  if ( !location.search.includes(`?attribute=country&`) ) {
+                    return false;
+                  }
+                  return true;
+                }}
+                activeStyle={{
+                  borderBottom: '3px solid #501B1D',
+                }}
+                key={`order_link_country`}
+                
+              >
+                Country
+              </NavLink>
+            </div>
+            { (attribute === 'country' && order === 'desc') ?
+              <i className='fas fa-sort-up'></i>
+              : <i className='fas fa-sort-down'></i>
+            }
+            {/* //TODO Wine Type */}
+            {/* //? navlink doesn't start on click event before sending to link */}
+            {/* <NavLink
+              onClick={() => sortOrder === 'desc' ? setSortOrder('asc') : setSortOrder('desc')}
+              to={{
+                pathname: `/dashboard`,
+                search: `?attribute=${attribute}&order=${sortOrder}&page=${page}`
+              }}
+              key={`order_link_order`}
+              className={styles.order_link}
+            >
+              Order: {sortOrder}
+          </div>
           </NavLink> */}
+          </div>
         </div>
       </div>
       <div className={styles.wine_list}>
