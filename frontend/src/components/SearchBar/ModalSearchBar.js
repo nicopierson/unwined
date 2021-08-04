@@ -15,6 +15,7 @@ const ModalSearchBar = () => {
 
   useEffect(() => {
     setRef(React.createRef())
+    document.body.style.overflow = showModal ? 'hidden' : 'unset';
   }, [showModal]);
 
   useEffect(() => {
