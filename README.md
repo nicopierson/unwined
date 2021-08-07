@@ -3,22 +3,22 @@
 </p>
 
 # Unwined
-Unwined is a wine rating App that assists users to discover and rate new wines. It is a fullstack React App made with a Redux state manager and a backend using Node/Express, Sequelize, and Postgres. 
+Unwined is a wine rating App that assists users to discover and rate new wines. It is a fullstack React App made with a Redux state manager and a backend using Node/Express, Sequelize, and PostgresSQL. 
 
-* View the <a href='https://unwined-wine-app.herokuapp.com/'>Unwined App</a> Live
-* It is modeled after the <a href='https://untappd.com/'>Untappd</a>
+* View the <a href='https://unwined-wine-app.herokuapp.com/'>Unwined</a> App Live
+* It is modeled after the <a href='https://untappd.com/'>Untappd</a> App
 * There are over 5k wines, 3k wineries and 300 wine types seeded in the database
 
-* Reference to the <a href='https://www.github.com/nicopierson/unwined/wiki'>Unwined wiki docs</a>
+* Reference to the Unwined <a href='https://www.github.com/nicopierson/unwined/wiki'>Wiki Docs</a>
 
 | Table of Contents |
-| --- |
-| [Features](#features) |
-| [Installation](#installation) |
-| [Future Features](#future-features) |
-| [Technical Implementation Details](#technical-implementation-details) |
-| [Contact](#contact) |
-| [Special Thanks](#special-thanks) |
+| ----------------- |
+| 1. [Features](#features) |
+| 2. [Installation](#installation) |
+| 3. [Future Features](#future-features) |
+| 4. [Technical Implementation Details](#technical-implementation-details) |
+| 5. [Contact](#contact) |
+| 6. [Special Thanks](#special-thanks) |
 
 ## Technologies
 * <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript"><img src="https://img.shields.io/badge/-JavaScript-F7DF1E?logo=JavaScript&logoColor=333333" /></a>
@@ -87,24 +87,58 @@ npm start
 
 ## Future Features
 
-1. __Feed Page__ 
-    * show most recent reviews of wines
-    * redirect user after login
+1. __Feed Page__ - show most recent reviews
 
-2. __Favorite__
-    * like wines
-    * lided wines added to the feed page
+2. __Favorite__ - like wines and add to feed page
 
-3. __Friends__
-    * add friends
-    * display reviews and friends on feed page
+3. __Friends__ - add friends and display their reviews on feed page
+
+4. __Wineries__ - CRUD for wineries
 
 ## Technical Implementation Details
-The search feature was a key MVP because there are more than 5k wines to show. 
+
+### Search
+In order to access all of the wines, the search feature was vital. At first, I created separate routes accepting parameter variables to search based on name, rating, and price. Unfortunately, it became messy and hard to read. As a result, I opted to use a query string from the `useLocation` React hook instead of sending search parameters with `useParams` hook. 
+
+Below the route to query a wine from sequelize, uses the query string to extract variables for the search string, order, attribute, and page number:
+
+```javascript
+router.get(
+  '/',
+  asyncHandler(async (req, res, next) => {
+    let { search, page, attribute, order: orders } = req.query;
+    if (!page) page = 1;
+    const offset = limitPerPage * (page - 1);
+
+    let { where, order } = createQueryOptions(attribute, orders);
+
+    if (search) {
+      where = {
+        ...where,
+        name: {
+          [Op.iLike]: `%${search}%`
+        }
+      };
+    }
+
+    const wines = await Wine.findAndCountAll({
+      offset: offset,
+      limit: limitPerPage,
+      where: where ? where : {},
+      order: order ? order : [],
+    });
+
+    return res.json({ ...wines, offset })
+  })
+);
+```
 
 ### Pagination
+It is also excessive to show more than 5k wines on a page, which can lead to excessive overhead and a slower response time. In response, I created a Pagination component to allow 8 wines per page depending on the search query string.
 
 ### Search Modal and Page
+
+### CSS Transitions
 
 ## Contact
 
