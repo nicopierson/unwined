@@ -15,8 +15,8 @@ Unwined is a wine rating App that assists users to discover and rate new wines. 
 | ----------------- |
 | 1. [Features](#features) |
 | 2. [Installation](#installation) |
-| 3. [Future Features](#future-features) |
-| 4. [Technical Implementation Details](#technical-implementation-details) |
+| 3. [Technical Implementation Details](#technical-implementation-details) |
+| 4. [Future Features](#future-features) |
 | 5. [Contact](#contact) |
 | 6. [Special Thanks](#special-thanks) |
 
@@ -85,17 +85,61 @@ npx dotenv sequelize db:seed:all
 npm start
 ```
 
-## Future Features
-
-1. __Feed Page__ - show most recent reviews
-
-2. __Favorite__ - like wines and add to feed page
-
-3. __Friends__ - add friends and display their reviews on feed page
-
-4. __Wineries__ - CRUD for wineries
-
 ## Technical Implementation Details
+
+### CSS Transitions
+The first goal was to find a method to dynamically unmount a component from an event e.g. click or an input change. After searching and experimenting, I discovered the `CSSTransition` component from the `react-transition-group` package. 
+
+First the state is declared and references are made:
+
+```javascript
+const [toggleForm, setToggleForm] = useState(false);
+const [ref, setRef] = useState(React.createRef());
+
+useEffect(() => {
+  setRef(React.createRef())
+}, [toggleForm]);
+```
+
+Then one `CSSTransition` component holds the `WineDetailPage`, and another the `WineForm` as a child. The `WineDetailPage` unmounts when a user clicks the `Edit` button, and afterwards the `WineForm` component mounts. These components will swap again when a user clicks the `Cancel` button in the `WineForm`. 
+
+Integrating these components with `Transition` components allow dynamic mounting based on a toggle state such as `toggleForm` shown below:
+
+```javascript
+return (
+    <>
+      <CSSTransition
+        in={!toggleForm}
+        timeout={800}
+        classNames='wine_detail'
+        nodeRef={ref}
+        unmountOnExit
+      >
+        <>
+          <WineDetailPage 
+            ref={ref}
+            setToggleForm={setToggleForm}
+          />
+          <CheckIn />
+        </>
+      </CSSTransition>
+      <CSSTransition
+        in={toggleForm}
+        timeout={800}
+        classNames='wine_edit_form'
+        unmountOnExit  
+        nodeRef={ref}
+      >
+        <WineForm 
+          ref={ref} 
+          setToggleForm={setToggleForm}
+          method={'PUT'}
+          title='Edit Wine'
+        />
+      </CSSTransition>
+    </>
+  );
+```
 
 ### Search
 In order to access all of the wines, the search feature was vital. At first, I created separate routes accepting parameter variables to search based on name, rating, and price. Unfortunately, it became messy and hard to read. As a result, I opted to use a query string from the `useLocation` React hook instead of sending search parameters with `useParams` hook. 
@@ -134,11 +178,32 @@ router.get(
 ```
 
 ### Pagination
-It is also excessive to show more than 5k wines on a page, which can lead to excessive overhead and a slower response time. In response, I created a Pagination component to allow 8 wines per page depending on the search query string.
+It is also excessive to show more than 5k wines on a page, which can lead to excessive overhead and a slower response time. 
 
-### Search Modal and Page
+In response, I created a Pagination component to calculate the offset number per page, and passed as a query string to the api route:
 
-### CSS Transitions
+```javascript
+const { search: searchString } = useLocation();
+let { attribute, order, search } = queryString.parse(searchString);
+if (!attribute) attribute = 'name';
+if (!order) order = 'desc'; 
+
+let numberOfPages = Math.ceil(numberOfResults / itemsPerPage);
+if (numberOfPages > pageLimit) numberOfPages = pageLimit;
+
+if (!numberOfPages) return null;
+const pageNumbers = [...Array(numberOfPages).keys()];
+```
+
+## Future Features
+
+1. __Feed Page__ - show most recent reviews
+
+2. __Favorite__ - like wines and add to feed page
+
+3. __Friends__ - add friends and display their reviews on feed page
+
+4. __Wineries__ - CRUD for wineries
 
 ## Contact
 
