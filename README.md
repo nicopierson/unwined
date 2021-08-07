@@ -70,7 +70,7 @@ User has clicked the 7th page link, which is highlighted below
 
 ### Search Modal
 Modal renders search results below as user types input
-![Search Modal](./readme_assets/search_modal.jpg)
+![Search Modal](./readme_assets/search_modal.png)
 
 ## Installation
 To build/run project locally, please follow these steps:
