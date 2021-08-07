@@ -33,26 +33,44 @@ Unwined is a wine rating App that assists users to discover and rate new wines. 
 ## Features
 
 ### Splash Page
-![Splash Page](./readme_assets/splash_page.png)
+Unwined home page invites user and describes features of site
+![Splash Page](./readme_assets/splash_page.jpg)
 
 ### Sign In and Sign Up
-![Sign Up](./readme_assets/sign_up.png)
-![Sign In](./readme_assets/sign_in.png)
+![Sign Up](./readme_assets/sign_up.jpg)
+![Sign In](./readme_assets/sign_in.jpg)
 
-### Add Wine
-![Add Wine](./readme_assets/add_wine.png)
+### Wine Detail
+Shows the details of a single wine and users are able to edit or delete wines or add Reviews
+![Wine Detail](./readme_assets/wine_detail.png)
 
 ### Edit Wine
+Form to edit wine in the database
 ![Edit Wine](./readme_assets/edit_wine.png)
 
+### Review
+Users can add reviews for a wine
+![Review](./readme_assets/review.png)
+
+### Review In Edit and Delete
+Comment to edit is highlighted in blue and options to save or cancel changes
+![Review Edit Delete](./readme_assets/review_edit.png)
+
 ### Dashboard
-![Dashboard](./readme_assets/dashboard.png)
+Page to discover and search for new wines, or add a new one
+![Dashboard](./readme_assets/dashboard.jpg)
 
-### Check In
-![Check In](./readme_assets/check_in.png)
+### Add Wine
+Add a new wine to the database
+![Add Wine](./readme_assets/add_wine.png)
 
-### Check In Edit and Delete
-![Check In Edit Delete](./readme_assets/check_in_edit.png)
+### Pagination
+User has clicked the 7th page link, which is highlighted below
+![Pagination](./readme_assets/pagination.jpg)
+
+### Search Modal
+Modal renders search results below as user types input
+![Search Modal](./readme_assets/search_modal.jpg)
 
 ## Installation
 To build/run project locally, please follow these steps:
