@@ -33,7 +33,7 @@ Unwined is a wine rating App that assists users to discover and rate new wines. 
 ## Features
 
 ### Splash Page
-Unwined home page invites user and describes features of site
+Unwined logo and features of site are shown
 ![Splash Page](./readme_assets/splash_page.jpg)
 
 ### Sign In and Sign Up
@@ -41,11 +41,11 @@ Unwined home page invites user and describes features of site
 ![Sign In](./readme_assets/sign_in.jpg)
 
 ### Wine Detail
-Shows the details of a single wine and users are able to edit or delete wines or add Reviews
+Single wine details of name, wine type, price, review, etc.
 ![Wine Detail](./readme_assets/wine_detail.png)
 
 ### Edit Wine
-Form to edit wine in the database
+Edit a wine in the database
 ![Edit Wine](./readme_assets/edit_wine.png)
 
 ### Review
@@ -53,11 +53,11 @@ Users can add reviews for a wine
 ![Review](./readme_assets/review.png)
 
 ### Review In Edit and Delete
-Comment to edit is highlighted in blue and options to save or cancel changes
+Edited Review is highlighted in blue with options to save or cancel changes 
 ![Review Edit Delete](./readme_assets/review_edit.png)
 
 ### Dashboard
-Page to discover and search for new wines, or add a new one
+Discover and search for new wines, or add a new one
 ![Dashboard](./readme_assets/dashboard.jpg)
 
 ### Add Wine
@@ -65,12 +65,12 @@ Add a new wine to the database
 ![Add Wine](./readme_assets/add_wine.png)
 
 ### Pagination
-User has clicked the 7th page link, which is highlighted below
+Page 7 is highlighted and displays that subset of the wines
 ![Pagination](./readme_assets/pagination.jpg)
 
 ### Search Modal
 Modal renders search results below as user types input
-![Search Modal](./readme_assets/search_modal.jpg)
+![Search Modal](./readme_assets/search_modal.png)
 
 ## Installation
 To build/run project locally, please follow these steps:
