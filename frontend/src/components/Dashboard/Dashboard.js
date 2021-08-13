@@ -33,7 +33,7 @@ const DashBoard = () => {
       setNumberOfResults(count);
     })();
 
-    dispatch(getWineTypes());
+    dispatch(getWineTypes()); // break into components
     dispatch(getColorTypes());
     dispatch(getUsers());
   }, [dispatch, query]);
@@ -160,6 +160,7 @@ const DashBoard = () => {
               : <i className='fas fa-sort-down'></i>
             }
             <div className={styles.order_link}>
+               {/* //TODO Turn whole Navlink into component */}
               <NavLink
                 to={{
                   pathname: `/dashboard`,
@@ -187,7 +188,8 @@ const DashBoard = () => {
               <i className='fas fa-sort-up'></i>
               : <i className='fas fa-sort-down'></i>
             }
-            {/* //TODO Wine Type */}
+            
+            {/* //TODO Wine Type to sort by wine Type - each can be a component and be rendered*/}
             {/* //? navlink doesn't start on click event before sending to link */}
             {/* <NavLink
               onClick={() => sortOrder === 'desc' ? setSortOrder('asc') : setSortOrder('desc')}

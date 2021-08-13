@@ -175,23 +175,24 @@ router.delete(
 ));
 
 // create the where and order query options for sequelize
+//TODO PUT in search search util function if not directly connected to routes
 const createQueryOptions = (attribute, order) => {
   if (!attribute || !order) return {};
 
-  let orderObj;
+  let orderObj; // initialize to empty object = orderObj = { attribute: {}, order: [] }
   if (order === 'desc') {
     orderObj = {
       order: [[attribute, 'DESC']] 
       // FAILED trying to make all attributes lowercase
       // Sequelize.fn('lower', Sequelize.col(attribute)) // try later
     };
-  } else {
+  } else { // would have to return else if
     orderObj = {
       order: [[attribute, 'ASC']]
     };
   }
   
-  const whereObj =  {
+  const whereObj =  { // add conditional
     where: {
       [attribute]: {
         [Op.and]: {
@@ -239,6 +240,7 @@ router.get(
 );
 
 // Search route to get wines by name for search bar by name
+// change limitPerPage to CAPS = constant
 router.get(
   '/search',
   asyncHandler(async (req, res, next) => {
@@ -249,7 +251,7 @@ router.get(
     const { where: whereCopy, order } = createQueryOptions(attribute, orders);
     // let where = whereCopy ? where : {};
 
-    const where = {
+    const where = { // refactor and put inside createQueryOptions
       ...whereCopy,
       [attribute]: {
         [Op.iLike]: `%${search}%`
@@ -263,7 +265,7 @@ router.get(
     const wines = await Wine.findAndCountAll({
       offset: offset,
       limit: limitPerPage,
-      where: where ? where : {},
+      where: where ? where : {}, // can do in createQueryOptions
       order: order ? order : [],
     });
 

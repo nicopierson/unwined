@@ -33,7 +33,10 @@ const CardInfo = ({ wineId }) => {
         </div>
       </div>
       <div className={styles.price_container}>
-        <span className={styles.favorite}>
+        <span 
+          className={styles.favorite}
+          // onClick={(e) => e.stopPropagation()} // change navlink to title
+        >
           <i className={`fab fa-gratipay`}></i>
           Favorite
         </span>
