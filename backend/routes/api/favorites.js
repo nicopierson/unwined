@@ -1,10 +1,11 @@
-const express = require("express");
+const express = require('express');
 const asyncHandler = require('express-async-handler');
 
-const { Favorite } = require("../db/models");
-const { setTokenCookie, requireAuth } = require('../../utils/auth');
+const { Favorite } = require('../../db/models');
+const { requireAuth } = require('../../utils/auth');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
+const { Op } = require('sequelize');
 
 const router = express.Router();
 
@@ -16,14 +17,34 @@ const allFavoritesNotFoundError = () => {
   return err;
 };
 
+const favoriteExistsError = () => {
+  const err = Error("Favorite already exists");
+  err.errors = [`Favorite already exists.`];
+  err.title = "Favorite Exists.";
+  err.status = 404;
+  return err;
+};
+
 router.get("/",
-  // requireAuth,
+  requireAuth,
   asyncHandler(async (req, res, next) => {
     const favorites = await Favorite.findAll();
     if (favorites) {
       res.json({ favorites });
     } else {
       next(allFavoritesNotFoundError());
+    }
+  })
+);
+
+router.get(
+  '/:id(\\d+)',
+  asyncHandler(async (req, res, next) => {
+    const favorite = await Favorite.findByPk(req.params.id);
+    if (favorite) {
+      res.json({ favorite });
+    } else {
+      next(favoriteNotFoundError(req.params.id));
     }
   })
 );
@@ -53,20 +74,41 @@ const validateFavorite = [
 ];
 
 router.post('/',
-  // requireAuth, //! require authentication for production
-  validateFavorite,
+  requireAuth, 
   asyncHandler(async (req, res, next) => {
     const { userId, wineId } = req.body; 
 
-    const favorite = await Favorite.create({
-      userId,
-      wineId,
+    const favDuplicate = await Favorite.findOne({
+        where: {
+            [Op.and]: [
+                {
+                    userId: {
+                        [Op.eq]: userId,
+                    }
+                },
+                {
+                    wineId: {
+                        [Op.eq]: wineId,
+                    }
+                }
+            ]
+        }
     });
 
-    if (favorite) {
-      res.json({ favorite });
+    // favorite duplicate will be null if not found, so throw error
+    if (favDuplicate === null || Object.keys(favDuplicate).length === 0) {
+        const favorite = await Favorite.create({
+          userId,
+          wineId,
+        });
+    
+        if (favorite) {
+          res.json({ favorite });
+        } else {
+          next(favoriteNotFoundError(req.params.id));
+        }
     } else {
-      next(favoriteNotFoundError(req.params.id));
+        next(favoriteExistsError());
     }
 }));
 
