@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         type: DataTypes.INTEGER
       },
-      favoriteId: {
+      wineId: {
         allowNull: false,
         type: DataTypes.INTEGER
       },
