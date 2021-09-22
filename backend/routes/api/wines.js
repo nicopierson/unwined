@@ -141,8 +141,8 @@ router.put(
 
 router.post(
   '/',
-  // requireAuth,
-  // validateWine,
+  requireAuth,
+  validateWine,
   asyncHandler(async (req, res, next) => {
 
     const wine = await Wine.build(req.body);

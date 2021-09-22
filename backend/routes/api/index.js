@@ -10,6 +10,7 @@ const wineriesRouter = require('./wineries');
 const reviewsRouter = require('./reviews');
 const wineTypesRouter = require('./wine-types');
 const colorTypesRouter = require('./color-types');
+const favoritesRouter = require('./favorites');
 
 router.use('/session', sessionRouter);
 router.use('/users', usersRouter);
@@ -18,7 +19,7 @@ router.use('/wineries', wineriesRouter);
 router.use('/reviews', reviewsRouter);
 router.use('/wine-types', wineTypesRouter);
 router.use('/color-types', colorTypesRouter);
-
+router.use('/favorites', favoritesRouter);
 
 router.get(
   '/restore-user',

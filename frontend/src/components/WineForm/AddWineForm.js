@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { CSSTransition } from 'react-transition-group';
+
+import { getWineries } from '../../store/winery';
 
 import WineForm from './WineForm';
 
 const AddWineForm = () => {
+  const dispatch = useDispatch();
   const history = useHistory();
   const [toggleForm, setToggleForm] = useState(true);
   const [ref, setRef] = useState(React.createRef());
@@ -12,6 +16,10 @@ const AddWineForm = () => {
   if (!toggleForm) {
     history.push('/dashboard');
   }
+
+  useEffect(() => {
+    dispatch(getWineries());
+  }, [dispatch]);
 
   return (
       <CSSTransition

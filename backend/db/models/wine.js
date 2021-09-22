@@ -31,6 +31,11 @@ module.exports = (sequelize, DataTypes) => {
       onDelete: 'CASCADE',
       hooks: true,
     });
+    Wine.belongsToMany(models.User, {
+      through: 'Favorites',
+      foreignKey: 'wineId',
+      otherKey: 'userId'
+    });
   };
   return Wine;
 };

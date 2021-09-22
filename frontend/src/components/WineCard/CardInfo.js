@@ -1,5 +1,7 @@
 import { useSelector } from 'react-redux';
 
+import Favorite from '../Favorite';
+
 import styles from './CardInfo.module.css';
 
 const CardInfo = ({ wineId }) => {
@@ -34,8 +36,7 @@ const CardInfo = ({ wineId }) => {
       </div>
       <div className={styles.price_container}>
         <span className={styles.favorite}>
-          <i className={`fab fa-gratipay`}></i>
-          Favorite
+          <Favorite wineId={wineId} />
         </span>
         <div className={styles.price}>
           <i className={`fas fa-dollar-sign`}></i>
