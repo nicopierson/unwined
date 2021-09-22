@@ -6,14 +6,14 @@ import queryString from 'query-string';
 import { getWines } from '../../store/wine';
 import { getWineTypes } from '../../store/wineType';
 import { getColorTypes } from '../../store/colorType';
-// import { getReviews, loadReviews } from '../../store/review';
 import { getUsers } from '../../store/user';
-import { loadFavorites } from '../../store/favorite';
+import { loadFavorites, resetFavorites } from '../../store/favorite';
 
 import WineCard from '../WineCard';
 import styles from './Dashboard.module.css';
 import Pagination from '../Pagination';
 import SearchInput from '../SearchBar/SearchInput';
+import { resetWinery } from '../../store/winery';
 
 const DashBoard = () => {
   const history = useHistory();
@@ -37,6 +37,7 @@ const DashBoard = () => {
       setNumberOfResults(count);
     })();
 
+    dispatch(resetWinery());
     dispatch(getWineTypes());
     dispatch(getColorTypes());
     dispatch(getUsers());
@@ -60,7 +61,6 @@ const DashBoard = () => {
       <div className={styles.dashboard_container}>
         <div className={styles.dashboard_top_container}>
           <div className={styles.header}>
-            {/* <h2>Dashboard</h2> */}
             <SearchInput searchValue={searchQuery}/>
           </div>
           <NavLink to={`/wines/add`} className={styles.dashboard_add}>

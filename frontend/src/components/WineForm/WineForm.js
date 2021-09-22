@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { useHistory, useParams } from 'react-router-dom';
-import { editWine } from '../../store/wine';
-import { createWine } from '../../store/wine';
+import { editWine, createWine } from '../../store/wine';
+import { getWineries } from '../../store/winery';
 
 import styles from './WineForm.module.css';
 
@@ -108,6 +108,10 @@ const WineForm = React.forwardRef(({ setToggleForm, method, title }, ref) => {
     e.preventDefault();
     setToggleForm(false);
   };
+
+  useEffect(() => {
+    dispatch(getWineries());
+  }, [dispatch]);
 
   useEffect(() => {
     const errors = [];
