@@ -2,11 +2,5 @@
     border-style: none;
     cursor: pointer;
     font-size: larger;
-    margin-bottom: 5px;
-    width: 40px;
-    height: 30px;
-    /* box-shadow: 0px, 0px, 0px, rgba(0, 0, 0, 0.466); */
     background-color: #fff;
-    border-bottom: 1px solid rgb(201, 201, 201);
-    border-right: 1px solid rgb(201, 201, 201);
 }

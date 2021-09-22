@@ -8,6 +8,7 @@ import { getWineTypes } from '../../store/wineType';
 import { getColorTypes } from '../../store/colorType';
 // import { getReviews, loadReviews } from '../../store/review';
 import { getUsers } from '../../store/user';
+import { loadFavorites } from '../../store/favorite';
 
 import WineCard from '../WineCard';
 import styles from './Dashboard.module.css';
@@ -17,6 +18,9 @@ import SearchInput from '../SearchBar/SearchInput';
 const DashBoard = () => {
   const history = useHistory();
   const dispatch = useDispatch();
+  
+  const userId = useSelector(state => state.session.user?.id);
+
   let { search: query } = useLocation(); 
   if (query === '') query = '?attribute=name&order=desc&page=1';
   const { search: searchQuery, attribute, order, page } = queryString.parse(query);
@@ -36,7 +40,10 @@ const DashBoard = () => {
     dispatch(getWineTypes());
     dispatch(getColorTypes());
     dispatch(getUsers());
-  }, [dispatch, query]);
+    if (userId) {
+      dispatch(loadFavorites(userId));
+    }
+  }, [dispatch, query, userId]);
 
   useEffect(() => {
     if (attribute && order && page) {
@@ -47,13 +54,6 @@ const DashBoard = () => {
   const wines = useSelector((state) => {
     return state.wines.list.map(wineId => state.wines[wineId]);
   });
-
-  // get the wine reviews
-  // const wineId = 4;
-  // const wineReviews = useSelector((state) => {
-  //   const reviewIds = state.wine[wineId].reviews;
-  //   return reviewIds.map(id => state.review[id])
-  // });
 
   return (
     <div className={styles.dashboard_background}>

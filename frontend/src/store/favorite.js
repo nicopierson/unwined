@@ -24,6 +24,23 @@ const unloadFavorites = () => ({
     type: UNLOAD_FAVORITES,
 });
 
+export const loadFavorite = (id) => async (dispatch) => {
+    const response = await csrfFetch(`/api/favorites/${id}`);
+    
+    if (response.ok) {
+        const favorite = await response.json();
+        dispatch(addFavorite(favorite))
+        return favorite;
+    } else if (response.status < 500) {
+        const data = await response.json();
+        if (data.errors) {
+            return data;
+        }
+    } else {
+        return ['An error occurred. Please try again.']
+    }
+};
+
 export const loadFavorites = (userId) => async (dispatch) => {
     const response = await csrfFetch(`/api/favorites/users/${userId}`);
     

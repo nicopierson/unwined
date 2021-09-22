@@ -100,14 +100,10 @@
 }
 
 .favorite {
-  padding: .7rem .7rem;
-  background-color: red;
+  padding: 5px;
   text-decoration: none;
   color: #FFFFFF;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-weight: 500;
-  font-size: 1rem;
+  font-size: 20px;
   line-height: 1;
   transition: .5s;
 }
@@ -118,7 +114,6 @@
 
 .favorite i {
   margin-right: 5px;
-  color: #ffffff;
 }
 
 .description {

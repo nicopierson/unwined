@@ -1,14 +1,12 @@
 import { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import AddFavorite from './AddFavorite';
 import RemoveFavorite from './RemoveFavorite';
-import { loadFavorites, resetFavorites } from '../../store/favorite';
 
 import './Favorite.css';
 
 const Favorite = ({ wineId }) => {
-    const dispatch = useDispatch();
     const userId = useSelector(state => state.session.user?.id);
 
     /* isFavorite Boolean to check if current user favorites wine */
@@ -20,14 +18,6 @@ const Favorite = ({ wineId }) => {
             setIsFavorite(!!favorite);
         }
     }, [favorite, wineId]);
-
-    useEffect(() => {
-        if (userId) {
-            dispatch(resetFavorites());
-            dispatch(loadFavorites(userId));
-        }
-    }, [dispatch]);
-
     
     return (
         <button className={`wine-util__btn`}>

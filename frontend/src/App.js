@@ -39,9 +39,6 @@ function App() {
           <Route path='/wines/:wineId'>
             <WineDetail />
           </Route>
-          <Route path='/fav'>
-            <Favorite wineId={3941}/>
-          </Route>
         </Switch>
       )}
       <Footer />
