@@ -80,7 +80,7 @@ const validateFavorite = [
   check("wineId")
   .exists({ checkFalsy: true })
   .withMessage("WineId can't be empty."),
-  check("UserId")
+  check("userId")
   .isInt()
   .withMessage("UserId has to be an integer"),
   check("wineId")
@@ -118,9 +118,9 @@ router.post('/',
           userId,
           wineId,
         });
-    
+        
         if (favorite) {
-          res.json({ favorite });
+          return res.json(favorite);
         } else {
           next(favoriteNotFoundError(req.params.id));
         }

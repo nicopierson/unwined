@@ -1,3 +1,5 @@
+import { csrfFetch } from './csrf';
+
 const SET_ALL_FAVORITES = 'favorites/SET_FAVORITES';
 const SET_FAVORITE = 'favorites/ADD_FAVORITE';
 const DELETE_FAVORITE = 'favorites/DELETE_FAVORITE';
@@ -23,7 +25,7 @@ const unloadFavorites = () => ({
 });
 
 export const loadFavorites = (userId) => async (dispatch) => {
-    const response = await fetch(`/api/favorites/users/${userId}`);
+    const response = await csrfFetch(`/api/favorites/users/${userId}`);
     
     if (response.ok) {
         const { favorites } = await response.json();
@@ -40,7 +42,7 @@ export const loadFavorites = (userId) => async (dispatch) => {
 };
 
 export const getAllFavorites = () => async (dispatch) => {
-    const response = await fetch('/api/favorites')
+    const response = await csrfFetch('/api/favorites')
     
     if (response.ok) {
         const favorites = await response.json();
@@ -56,14 +58,14 @@ export const getAllFavorites = () => async (dispatch) => {
 };
 
 export const removeFavorite = (id) => async (dispatch) => {
-    const response = await fetch(`/api/favorites/${id}`, {
+    const response = await csrfFetch(`/api/favorites/${id}`, {
         method: 'DELETE',
     });
 
     if (response.ok) {
-        const { favorite } = await response.json();
+        const favorite = await response.json();
 
-        await dispatch(deleteFavorite(favorite.wine_id))
+        await dispatch(deleteFavorite(favorite.wineId))
         return favorite;
     } else if (response.status < 500) {
         const data = await response.json();
@@ -76,14 +78,14 @@ export const removeFavorite = (id) => async (dispatch) => {
 };
 
 export const createFavorite = (payload) => async (dispatch) => {
-    const response = await fetch(`/api/favorites`, {
+    const response = await csrfFetch(`/api/favorites`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
     });
 
     if (response.ok) {
-        const { favorite } = await response.json();
+        const favorite = await response.json();
 
         await dispatch(addFavorite(favorite));
         return favorite;
@@ -111,7 +113,7 @@ export default function reducer(state = {}, action) {
             });
             return newState;
         case SET_FAVORITE:
-            newState[action.wineId] = action.favorite;
+            newState[action.favorite.wineId] = action.favorite;
             return newState;
         case DELETE_FAVORITE:
             delete newState[action.wineId];
