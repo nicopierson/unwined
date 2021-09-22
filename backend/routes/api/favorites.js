@@ -49,6 +49,22 @@ router.get(
   })
 );
 
+router.get(
+  '/users/:id(\\d+)',
+  asyncHandler(async (req, res, next) => {
+    const favorites = await Favorite.findAll({
+      where: {
+        userId: req.params.id,
+      }
+    });
+    if (favorites) {
+      res.json({ favorites });
+    } else {
+      next(favoriteNotFoundError(req.params.id));
+    }
+  })
+);
+
 const favoriteNotFoundError = (id) => {
   const err = Error("Favorite not found");
   err.errors = [`Favorite with id of ${id} could not be found.`];
@@ -75,6 +91,7 @@ const validateFavorite = [
 
 router.post('/',
   requireAuth, 
+  validateFavorite,
   asyncHandler(async (req, res, next) => {
     const { userId, wineId } = req.body; 
 
