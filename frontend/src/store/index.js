@@ -8,6 +8,7 @@ import reviews from './review';
 import wineTypes from './wineType';
 import colorTypes from './colorType';
 import users from './user';
+import favorites from './favorite';
 
 const rootReducer = combineReducers({
   session,
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   wineTypes,
   colorTypes,
   users,
+  favorites,
 });
 
 let enhancer;
