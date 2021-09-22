@@ -9,7 +9,6 @@ import DashBoard from './components/Dashboard';
 import WineDetail from './components/WineDetail';
 import AddWineForm from './components/WineForm/AddWineForm';
 import Footer from './components/Footer/Footer';
-import Favorite from './components/Favorite/Favorite';
 
 function App() {
   const dispatch = useDispatch();

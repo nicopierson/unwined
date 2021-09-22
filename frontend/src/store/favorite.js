@@ -29,7 +29,7 @@ export const loadFavorite = (id) => async (dispatch) => {
     
     if (response.ok) {
         const favorite = await response.json();
-        dispatch(addFavorite(favorite))
+        dispatch(addFavorite(favorite));
         return favorite;
     } else if (response.status < 500) {
         const data = await response.json();
@@ -62,7 +62,7 @@ export const getAllFavorites = () => async (dispatch) => {
     const response = await csrfFetch('/api/favorites')
     
     if (response.ok) {
-        const favorites = await response.json();
+        const { favorites } = await response.json();
         return favorites;
     } else if (response.status < 500) {
         const data = await response.json();

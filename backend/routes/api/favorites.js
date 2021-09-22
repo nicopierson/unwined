@@ -25,6 +25,14 @@ const favoriteExistsError = () => {
   return err;
 };
 
+const favoriteNotFoundError = (id) => {
+  const err = Error("Favorite not found");
+  err.errors = [`Favorite with id of ${id} could not be found.`];
+  err.title = "Favorite not found.";
+  err.status = 404;
+  return err;
+};
+
 router.get("/",
   requireAuth,
   asyncHandler(async (req, res, next) => {
@@ -42,7 +50,7 @@ router.get(
   asyncHandler(async (req, res, next) => {
     const favorite = await Favorite.findByPk(req.params.id);
     if (favorite) {
-      res.json({ favorite });
+      res.json(favorite);
     } else {
       next(favoriteNotFoundError(req.params.id));
     }
@@ -64,14 +72,6 @@ router.get(
     }
   })
 );
-
-const favoriteNotFoundError = (id) => {
-  const err = Error("Favorite not found");
-  err.errors = [`Favorite with id of ${id} could not be found.`];
-  err.title = "Favorite not found.";
-  err.status = 404;
-  return err;
-};
 
 const validateFavorite = [
   check("userId")

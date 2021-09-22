@@ -1,11 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 
 import Favorite from '../Favorite';
 import { deleteWine } from '../../store/wine';
-
-import { loadFavorite } from '../../store/favorite';
 
 import styles from './WineDetailPage.module.css';
 
@@ -13,6 +11,7 @@ const WineDetailPage = React.forwardRef(({ setToggleForm }, ref) => {
   const history = useHistory();
   const dispatch = useDispatch();
   const { wineId } = useParams();
+
   const wine = useSelector(state => state.wines[wineId]);
 
   if (!wine) {
@@ -33,12 +32,6 @@ const WineDetailPage = React.forwardRef(({ setToggleForm }, ref) => {
     event.preventDefault();
     setToggleForm(true);
   };
-
-  useEffect(() => {
-    if (wineId) {
-      dispatch(loadFavorite(+wineId));
-    }
-  }, [dispatch, wineId])
 
   return (
     <div className={styles.details_container}>
